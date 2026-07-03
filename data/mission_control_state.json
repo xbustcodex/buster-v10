@@ -1,0 +1,11 @@
+{
+  "status": "ready",
+  "confidence": 1.0,
+  "active_agents": [],
+  "running_jobs": [],
+  "plugins_loaded": [],
+  "learning_entries": 0,
+  "last_decision": "auto_execute",
+  "last_strategy": "android_build_verify",
+  "updated_at": "2026-06-29T05:16:44.314872Z"
+}

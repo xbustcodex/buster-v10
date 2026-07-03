@@ -1,0 +1,124 @@
+[
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "planner.created_mission",
+    "source": "Planner",
+    "agent": "Planner",
+    "message": "created mission: Test build",
+    "level": "info",
+    "confidence": 0.95,
+    "risk": "low",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "repository.indexed",
+    "source": "Repository",
+    "agent": "Repository",
+    "message": "indexed project: demo",
+    "level": "info",
+    "confidence": null,
+    "risk": "unknown",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "builder.generated_code",
+    "source": "Builder",
+    "agent": "Builder",
+    "message": "generated code: main.py",
+    "level": "info",
+    "confidence": 0.88,
+    "risk": "low",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "tester.found_failure",
+    "source": "Tester",
+    "agent": "Tester",
+    "message": "found 1 failure",
+    "level": "warning",
+    "confidence": null,
+    "risk": "medium",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "fixer.repaired_issue",
+    "source": "Fixer",
+    "agent": "Fixer",
+    "message": "repaired issue",
+    "level": "info",
+    "confidence": 0.82,
+    "risk": "unknown",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "verifier.approved_build",
+    "source": "Verifier",
+    "agent": "Verifier",
+    "message": "approved build",
+    "level": "info",
+    "confidence": null,
+    "risk": "unknown",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "learning.recorded_pattern",
+    "source": "Learning Engine",
+    "agent": "Learning Engine",
+    "message": "recorded new pattern",
+    "level": "info",
+    "confidence": null,
+    "risk": "unknown",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "experience.updated_skill",
+    "source": "Experience",
+    "agent": "Experience",
+    "message": "updated Python skill (+0.2%)",
+    "level": "info",
+    "confidence": null,
+    "risk": "unknown",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "planner.created_mission",
+    "source": "Planner",
+    "agent": "Planner",
+    "message": "created mission: Planner bridge build",
+    "level": "info",
+    "confidence": 0.91,
+    "risk": "low",
+    "details": {
+      "reason": "test"
+    }
+  },
+  {
+    "timestamp": "2026-06-29T07:09:22+00:00",
+    "mission_id": "default",
+    "event_type": "agent.builder.step",
+    "source": "Builder",
+    "agent": "Builder",
+    "message": "generated code",
+    "level": "info",
+    "confidence": 0.89,
+    "risk": "low",
+    "details": {}
+  }
+]

@@ -1,0 +1,12 @@
+{
+    "overall_score": 100.0,
+    "runtime_score": 100,
+    "imports_score": 100,
+    "config_score": 100,
+    "plugins_score": 100,
+    "database_score": 100,
+    "issues": [],
+    "warnings": [],
+    "recommendations": [],
+    "timestamp": "2026-07-03T16:46:13.233560"
+}

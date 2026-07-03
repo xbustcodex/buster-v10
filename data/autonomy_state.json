@@ -1,0 +1,9 @@
+{
+  "enabled": false,
+  "mode": "manual",
+  "last_decision": null,
+  "active_jobs": [],
+  "completed_jobs": 0,
+  "failed_jobs": 0,
+  "updated_at": null
+}

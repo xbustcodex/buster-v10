@@ -1,0 +1,32 @@
+{
+  "updated_at": "2026-06-29T10:55:55+00:00",
+  "runtime": "running",
+  "tick_count": 1,
+  "mode": "companion",
+  "privacy_mode": "companion",
+  "latest_prediction": {
+    "intent": "android_development",
+    "confidence": 0.88,
+    "suggested_actions": [
+      "prepare_android_plugin",
+      "monitor_logcat",
+      "index_current_project"
+    ],
+    "created_at": "2026-06-29T10:55:55+00:00",
+    "observations": [
+      {
+        "source": "screen",
+        "type": "app_opened",
+        "summary": "Android Studio opened with Pixel connected",
+        "confidence": 0.95
+      },
+      {
+        "source": "hardware",
+        "type": "usb",
+        "summary": "Pixel device detected",
+        "confidence": 0.9
+      }
+    ]
+  },
+  "summary": "Buster runtime heartbeat is active."
+}

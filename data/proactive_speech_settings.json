@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "mode": "jarvis",
+  "quiet_mode": false,
+  "speak_agent_updates": true,
+  "speak_mission_events": true,
+  "speak_decisions": true,
+  "speak_errors": true,
+  "speak_success": true,
+  "min_priority": "low",
+  "cooldown_seconds": 5,
+  "max_items_per_hour": 60,
+  "allow_idle_checkins": true,
+  "idle_checkin_minutes": 30,
+  "updated": "2026-06-29T07:28:48+00:00"
+}
