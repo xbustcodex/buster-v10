@@ -1,8 +1,15 @@
 {
-  "built_at": "2026-07-03T16:46:28",
+  "built_at": "2026-07-07T17:56:50",
   "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
   "files": [
     ".gitignore",
+    "add_v10_1_runtime_registry_jobs.py",
+    "add_v10_2_mission_control_dashboard.py",
+    "add_v10_3_multi_agent_intelligence.py",
+    "add_v10_4_collaborative_intelligence.py",
+    "add_v10_5_runtime_core.py",
+    "add_v10_6_developer_experience.py",
+    "add_v10_sdk_runtime_bridge.py",
     "Buster.spec",
     "main.py",
     "migration_report.json",
@@ -18,6 +25,7 @@
     "config\\lifecycle_config.json",
     "data\\agent_activity_feed.json",
     "data\\agent_conversation.json",
+    "data\\agent_memory.json",
     "data\\ai_os_architecture_state.json",
     "data\\ai_os_state.json",
     "data\\ai_os_status.json",
@@ -350,17 +358,42 @@
     "buster\\repository\\project_model.py",
     "buster\\repository\\semantic_graph.py",
     "buster\\repository\\__init__.py",
+    "buster\\runtime\\agent_memory.py",
+    "buster\\runtime\\agent_orchestrator.py",
+    "buster\\runtime\\blackboard.py",
+    "buster\\runtime\\builder_agent.py",
     "buster\\runtime\\coordinator.py",
+    "buster\\runtime\\core.py",
+    "buster\\runtime\\dev_tools.py",
     "buster\\runtime\\dispatcher.py",
     "buster\\runtime\\engine.py",
+    "buster\\runtime\\fixer_agent.py",
     "buster\\runtime\\heartbeat.py",
     "buster\\runtime\\idle_manager.py",
+    "buster\\runtime\\inspector.py",
     "buster\\runtime\\intent_prediction.py",
+    "buster\\runtime\\job_agent.py",
+    "buster\\runtime\\job_manager.py",
     "buster\\runtime\\lifecycle.py",
+    "buster\\runtime\\lifecycle_sdk_agent.py",
+    "buster\\runtime\\multi_agent_workflow.py",
+    "buster\\runtime\\orchestrator_agent.py",
+    "buster\\runtime\\planner_agent.py",
+    "buster\\runtime\\plugin_api.py",
+    "buster\\runtime\\plugin_inspector.py",
+    "buster\\runtime\\registry_agent.py",
+    "buster\\runtime\\reviewer_agent.py",
+    "buster\\runtime\\runtime_registry.py",
     "buster\\runtime\\scheduler.py",
+    "buster\\runtime\\sdk_agent.py",
+    "buster\\runtime\\sdk_agent_manager.py",
+    "buster\\runtime\\sdk_bootstrap.py",
+    "buster\\runtime\\sdk_runtime.py",
     "buster\\runtime\\storage.py",
+    "buster\\runtime\\tester_agent.py",
     "buster\\runtime\\v6_foundation.py",
     "buster\\runtime\\watchdog.py",
+    "buster\\runtime\\workflow_graph.py",
     "buster\\runtime\\__init__.py",
     "buster\\sdk\\api.py",
     "buster\\sdk\\config.py",
@@ -522,6 +555,7 @@
     "buster\\plugins\\sdk\\__init__.py",
     "buster\\ui\\themes\\dark.py",
     "buster\\ui\\themes\\__init__.py",
+    "buster\\ui\\v10\\runtime_dashboard.py",
     "buster\\ui\\v10\\__init__.py",
     "buster\\ui\\v9\\chat_view.py",
     "buster\\ui\\v9\\command_palette.py",
@@ -1746,9 +1780,39 @@
       "line": 20
     },
     {
+      "name": "AgentMemory",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 9
+    },
+    {
+      "name": "AgentOrchestrator",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 6
+    },
+    {
+      "name": "RuntimeBlackboard",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 7
+    },
+    {
+      "name": "BuilderAgent",
+      "file": "buster\\runtime\\builder_agent.py",
+      "line": 8
+    },
+    {
       "name": "RuntimeCoordinator",
       "file": "buster\\runtime\\coordinator.py",
       "line": 6
+    },
+    {
+      "name": "BusterRuntimeCore",
+      "file": "buster\\runtime\\core.py",
+      "line": 9
+    },
+    {
+      "name": "RuntimeDeveloperTools",
+      "file": "buster\\runtime\\dev_tools.py",
+      "line": 10
     },
     {
       "name": "RuntimeDispatcher",
@@ -1761,6 +1825,11 @@
       "line": 16
     },
     {
+      "name": "FixerAgent",
+      "file": "buster\\runtime\\fixer_agent.py",
+      "line": 8
+    },
+    {
       "name": "RuntimeHeartbeat",
       "file": "buster\\runtime\\heartbeat.py",
       "line": 6
@@ -1771,9 +1840,29 @@
       "line": 6
     },
     {
+      "name": "RuntimeInspector",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 6
+    },
+    {
       "name": "IntentPredictionEngine",
       "file": "buster\\runtime\\intent_prediction.py",
       "line": 6
+    },
+    {
+      "name": "JobAgent",
+      "file": "buster\\runtime\\job_agent.py",
+      "line": 8
+    },
+    {
+      "name": "JobStatus",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 9
+    },
+    {
+      "name": "JobManager",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 17
     },
     {
       "name": "RuntimeLifecycle",
@@ -1781,9 +1870,79 @@
       "line": 6
     },
     {
+      "name": "LifecycleSDKAgent",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 9
+    },
+    {
+      "name": "MultiAgentWorkflowRunner",
+      "file": "buster\\runtime\\multi_agent_workflow.py",
+      "line": 6
+    },
+    {
+      "name": "OrchestratorAgent",
+      "file": "buster\\runtime\\orchestrator_agent.py",
+      "line": 7
+    },
+    {
+      "name": "PlannerAgent",
+      "file": "buster\\runtime\\planner_agent.py",
+      "line": 8
+    },
+    {
+      "name": "BusterPlugin",
+      "file": "buster\\runtime\\plugin_api.py",
+      "line": 6
+    },
+    {
+      "name": "PluginHost",
+      "file": "buster\\runtime\\plugin_api.py",
+      "line": 14
+    },
+    {
+      "name": "PluginInspector",
+      "file": "buster\\runtime\\plugin_inspector.py",
+      "line": 6
+    },
+    {
+      "name": "RegistryAgent",
+      "file": "buster\\runtime\\registry_agent.py",
+      "line": 8
+    },
+    {
+      "name": "ReviewerAgent",
+      "file": "buster\\runtime\\reviewer_agent.py",
+      "line": 9
+    },
+    {
+      "name": "RuntimeRegistry",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 7
+    },
+    {
       "name": "RuntimeScheduler",
       "file": "buster\\runtime\\scheduler.py",
       "line": 4
+    },
+    {
+      "name": "SDKAgent",
+      "file": "buster\\runtime\\sdk_agent.py",
+      "line": 6
+    },
+    {
+      "name": "SDKAgentManager",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 6
+    },
+    {
+      "name": "BusterSDKRuntime",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 10
+    },
+    {
+      "name": "TesterAgent",
+      "file": "buster\\runtime\\tester_agent.py",
+      "line": 10
     },
     {
       "name": "V6FoundationRuntime",
@@ -1793,6 +1952,11 @@
     {
       "name": "RuntimeWatchdog",
       "file": "buster\\runtime\\watchdog.py",
+      "line": 6
+    },
+    {
+      "name": "WorkflowGraphBuilder",
+      "file": "buster\\runtime\\workflow_graph.py",
       "line": 6
     },
     {
@@ -2539,6 +2703,16 @@
       "name": "BusterPlugin",
       "file": "buster\\plugins\\sdk\\base_plugin.py",
       "line": 1
+    },
+    {
+      "name": "MetricCard",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 19
+    },
+    {
+      "name": "MissionControlRuntimeDashboard",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 38
     },
     {
       "name": "ChatCard",
@@ -6959,6 +7133,81 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 10
+    },
+    {
+      "name": "_load",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 15
+    },
+    {
+      "name": "save",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 23
+    },
+    {
+      "name": "record",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 27
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 60
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 7
+    },
+    {
+      "name": "choose_agents",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 15
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 36
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 8
+    },
+    {
+      "name": "set_goal",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 20
+    },
+    {
+      "name": "write",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 26
+    },
+    {
+      "name": "append",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 32
+    },
+    {
+      "name": "read",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 41
+    },
+    {
+      "name": "snapshot",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 44
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\builder_agent.py",
+      "line": 11
+    },
+    {
+      "name": "__init__",
       "file": "buster\\runtime\\coordinator.py",
       "line": 7
     },
@@ -6966,6 +7215,76 @@
       "name": "sync",
       "file": "buster\\runtime\\coordinator.py",
       "line": 10
+    },
+    {
+      "name": "create_runtime_core",
+      "file": "buster\\runtime\\core.py",
+      "line": 100
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\core.py",
+      "line": 10
+    },
+    {
+      "name": "start",
+      "file": "buster\\runtime\\core.py",
+      "line": 35
+    },
+    {
+      "name": "stop",
+      "file": "buster\\runtime\\core.py",
+      "line": 45
+    },
+    {
+      "name": "tick",
+      "file": "buster\\runtime\\core.py",
+      "line": 55
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\core.py",
+      "line": 58
+    },
+    {
+      "name": "run_agent",
+      "file": "buster\\runtime\\core.py",
+      "line": 66
+    },
+    {
+      "name": "create_job",
+      "file": "buster\\runtime\\core.py",
+      "line": 69
+    },
+    {
+      "name": "run_job",
+      "file": "buster\\runtime\\core.py",
+      "line": 72
+    },
+    {
+      "name": "service",
+      "file": "buster\\runtime\\core.py",
+      "line": 75
+    },
+    {
+      "name": "require_service",
+      "file": "buster\\runtime\\core.py",
+      "line": 78
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\core.py",
+      "line": 81
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\dev_tools.py",
+      "line": 11
+    },
+    {
+      "name": "dashboard_payload",
+      "file": "buster\\runtime\\dev_tools.py",
+      "line": 17
     },
     {
       "name": "__init__",
@@ -7023,6 +7342,11 @@
       "line": 63
     },
     {
+      "name": "run",
+      "file": "buster\\runtime\\fixer_agent.py",
+      "line": 11
+    },
+    {
       "name": "beat",
       "file": "buster\\runtime\\heartbeat.py",
       "line": 11
@@ -7043,9 +7367,109 @@
       "line": 10
     },
     {
+      "name": "__init__",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 7
+    },
+    {
+      "name": "runtime_summary",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 10
+    },
+    {
+      "name": "services",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 22
+    },
+    {
+      "name": "agents",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 25
+    },
+    {
+      "name": "jobs",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 28
+    },
+    {
+      "name": "events",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 31
+    },
+    {
+      "name": "blackboard",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 34
+    },
+    {
+      "name": "agent_memory",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 37
+    },
+    {
+      "name": "capabilities",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 40
+    },
+    {
+      "name": "full_report",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 43
+    },
+    {
       "name": "predict",
       "file": "buster\\runtime\\intent_prediction.py",
       "line": 7
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\job_agent.py",
+      "line": 11
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 25
+    },
+    {
+      "name": "register_handler",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 31
+    },
+    {
+      "name": "create_job",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 40
+    },
+    {
+      "name": "update_job",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 69
+    },
+    {
+      "name": "run_job",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 104
+    },
+    {
+      "name": "cancel_job",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 124
+    },
+    {
+      "name": "require",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 127
+    },
+    {
+      "name": "list_jobs",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 132
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 135
     },
     {
       "name": "__init__",
@@ -7069,6 +7493,121 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 12
+    },
+    {
+      "name": "manager",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 18
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 24
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\multi_agent_workflow.py",
+      "line": 7
+    },
+    {
+      "name": "run_request",
+      "file": "buster\\runtime\\multi_agent_workflow.py",
+      "line": 12
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\orchestrator_agent.py",
+      "line": 10
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\planner_agent.py",
+      "line": 11
+    },
+    {
+      "name": "register",
+      "file": "buster\\runtime\\plugin_api.py",
+      "line": 10
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\plugin_api.py",
+      "line": 15
+    },
+    {
+      "name": "register_plugin",
+      "file": "buster\\runtime\\plugin_api.py",
+      "line": 19
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\plugin_api.py",
+      "line": 40
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\plugin_inspector.py",
+      "line": 7
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\plugin_inspector.py",
+      "line": 10
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\registry_agent.py",
+      "line": 11
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\reviewer_agent.py",
+      "line": 12
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 20
+    },
+    {
+      "name": "register_service",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 29
+    },
+    {
+      "name": "register_agent",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 53
+    },
+    {
+      "name": "register_module",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 72
+    },
+    {
+      "name": "register_job",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 85
+    },
+    {
+      "name": "update_job",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 98
+    },
+    {
+      "name": "services_for_capability",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 114
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 117
+    },
+    {
+      "name": "__init__",
       "file": "buster\\runtime\\scheduler.py",
       "line": 5
     },
@@ -7086,6 +7625,176 @@
       "name": "run_due",
       "file": "buster\\runtime\\scheduler.py",
       "line": 13
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\sdk_agent.py",
+      "line": 9
+    },
+    {
+      "name": "publish",
+      "file": "buster\\runtime\\sdk_agent.py",
+      "line": 12
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\sdk_agent.py",
+      "line": 15
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\sdk_agent.py",
+      "line": 21
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 7
+    },
+    {
+      "name": "register",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 11
+    },
+    {
+      "name": "get",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 17
+    },
+    {
+      "name": "require",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 20
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 25
+    },
+    {
+      "name": "names",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 32
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 35
+    },
+    {
+      "name": "build_sdk_runtime",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 24
+    },
+    {
+      "name": "lifecycle_health_job",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 83
+    },
+    {
+      "name": "lifecycle_verify_job",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 86
+    },
+    {
+      "name": "agent_build_job",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 89
+    },
+    {
+      "name": "agent_test_job",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 92
+    },
+    {
+      "name": "agent_review_job",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 95
+    },
+    {
+      "name": "agent_fix_job",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 98
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 20
+    },
+    {
+      "name": "events",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 30
+    },
+    {
+      "name": "registry",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 34
+    },
+    {
+      "name": "lifecycle",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 38
+    },
+    {
+      "name": "register_core_services",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 41
+    },
+    {
+      "name": "register_core_modules",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 53
+    },
+    {
+      "name": "wire_runtime_events",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 56
+    },
+    {
+      "name": "start",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 70
+    },
+    {
+      "name": "stop",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 79
+    },
+    {
+      "name": "tick_once",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 88
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 93
+    },
+    {
+      "name": "service",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 101
+    },
+    {
+      "name": "require_service",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 104
+    },
+    {
+      "name": "publish",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 107
+    },
+    {
+      "name": "subscribe",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 110
+    },
+    {
+      "name": "mirror_runtime_tick",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 57
     },
     {
       "name": "now",
@@ -7106,6 +7815,11 @@
       "name": "append_json",
       "file": "buster\\runtime\\storage.py",
       "line": 16
+    },
+    {
+      "name": "run",
+      "file": "buster\\runtime\\tester_agent.py",
+      "line": 13
     },
     {
       "name": "__init__",
@@ -7136,6 +7850,21 @@
       "name": "check",
       "file": "buster\\runtime\\watchdog.py",
       "line": 10
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\workflow_graph.py",
+      "line": 7
+    },
+    {
+      "name": "from_jobs",
+      "file": "buster\\runtime\\workflow_graph.py",
+      "line": 10
+    },
+    {
+      "name": "from_recent_events",
+      "file": "buster\\runtime\\workflow_graph.py",
+      "line": 46
     },
     {
       "name": "__init__",
@@ -9579,6 +10308,51 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 20
+    },
+    {
+      "name": "set_value",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 34
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 39
+    },
+    {
+      "name": "pretty",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 130
+    },
+    {
+      "name": "refresh",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 133
+    },
+    {
+      "name": "tick_runtime",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 163
+    },
+    {
+      "name": "run_health_job",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 170
+    },
+    {
+      "name": "run_verify_job",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 183
+    },
+    {
+      "name": "run_backup",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 196
+    },
+    {
+      "name": "__init__",
       "file": "buster\\ui\\v9\\chat_view.py",
       "line": 5
     },
@@ -10224,6 +10998,41 @@
     }
   ],
   "imports": [
+    {
+      "name": "pathlib",
+      "file": "add_v10_1_runtime_registry_jobs.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "add_v10_2_mission_control_dashboard.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "add_v10_3_multi_agent_intelligence.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "add_v10_4_collaborative_intelligence.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "add_v10_5_runtime_core.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "add_v10_6_developer_experience.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "add_v10_sdk_runtime_bridge.py",
+      "line": 1
+    },
     {
       "name": "buster.core.runtime",
       "file": "main.py",
@@ -14371,6 +15180,71 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 3
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 5
+    },
+    {
+      "name": "buster.runtime.storage",
+      "file": "buster\\runtime\\agent_memory.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 3
+    },
+    {
+      "name": "buster.runtime.storage",
+      "file": "buster\\runtime\\blackboard.py",
+      "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\builder_agent.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\builder_agent.py",
+      "line": 3
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\builder_agent.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
       "file": "buster\\runtime\\coordinator.py",
       "line": 1
     },
@@ -14388,6 +15262,56 @@
       "name": "storage",
       "file": "buster\\runtime\\coordinator.py",
       "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\core.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\runtime\\core.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\core.py",
+      "line": 4
+    },
+    {
+      "name": "sdk_bootstrap",
+      "file": "buster\\runtime\\core.py",
+      "line": 6
+    },
+    {
+      "name": "dev_tools",
+      "file": "buster\\runtime\\core.py",
+      "line": 30
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\dev_tools.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\dev_tools.py",
+      "line": 3
+    },
+    {
+      "name": "inspector",
+      "file": "buster\\runtime\\dev_tools.py",
+      "line": 5
+    },
+    {
+      "name": "plugin_inspector",
+      "file": "buster\\runtime\\dev_tools.py",
+      "line": 6
+    },
+    {
+      "name": "workflow_graph",
+      "file": "buster\\runtime\\dev_tools.py",
+      "line": 7
     },
     {
       "name": "__future__",
@@ -14471,6 +15395,21 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\runtime\\fixer_agent.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\fixer_agent.py",
+      "line": 3
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\fixer_agent.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
       "file": "buster\\runtime\\heartbeat.py",
       "line": 1
     },
@@ -14511,6 +15450,16 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\inspector.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
       "file": "buster\\runtime\\intent_prediction.py",
       "line": 1
     },
@@ -14528,6 +15477,41 @@
       "name": "pathlib",
       "file": "buster\\runtime\\intent_prediction.py",
       "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\job_agent.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\job_agent.py",
+      "line": 3
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\job_agent.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 3
+    },
+    {
+      "name": "uuid",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 4
+    },
+    {
+      "name": "buster.runtime.storage",
+      "file": "buster\\runtime\\job_manager.py",
+      "line": 6
     },
     {
       "name": "__future__",
@@ -14551,6 +15535,141 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 4
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 6
+    },
+    {
+      "name": "buster.lifecycle.manager",
+      "file": "buster\\runtime\\lifecycle_sdk_agent.py",
+      "line": 20
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\multi_agent_workflow.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\multi_agent_workflow.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\orchestrator_agent.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\orchestrator_agent.py",
+      "line": 3
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\orchestrator_agent.py",
+      "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\planner_agent.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\planner_agent.py",
+      "line": 3
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\planner_agent.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\plugin_api.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\plugin_api.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\plugin_inspector.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\plugin_inspector.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\registry_agent.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\registry_agent.py",
+      "line": 3
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\registry_agent.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\reviewer_agent.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\runtime\\reviewer_agent.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\reviewer_agent.py",
+      "line": 4
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\reviewer_agent.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 3
+    },
+    {
+      "name": "buster.runtime.storage",
+      "file": "buster\\runtime\\runtime_registry.py",
+      "line": 4
+    },
+    {
+      "name": "__future__",
       "file": "buster\\runtime\\scheduler.py",
       "line": 1
     },
@@ -14563,6 +15682,146 @@
       "name": "storage",
       "file": "buster\\runtime\\scheduler.py",
       "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\sdk_agent.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\sdk_agent.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\sdk_agent_manager.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 3
+    },
+    {
+      "name": "agent_memory",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 5
+    },
+    {
+      "name": "agent_orchestrator",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 6
+    },
+    {
+      "name": "blackboard",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 7
+    },
+    {
+      "name": "builder_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 8
+    },
+    {
+      "name": "fixer_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 9
+    },
+    {
+      "name": "job_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 10
+    },
+    {
+      "name": "job_manager",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 11
+    },
+    {
+      "name": "lifecycle_sdk_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 12
+    },
+    {
+      "name": "multi_agent_workflow",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 13
+    },
+    {
+      "name": "orchestrator_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 14
+    },
+    {
+      "name": "planner_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 15
+    },
+    {
+      "name": "registry_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 16
+    },
+    {
+      "name": "reviewer_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 17
+    },
+    {
+      "name": "runtime_registry",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 18
+    },
+    {
+      "name": "sdk_agent_manager",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 19
+    },
+    {
+      "name": "sdk_runtime",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 20
+    },
+    {
+      "name": "tester_agent",
+      "file": "buster\\runtime\\sdk_bootstrap.py",
+      "line": 21
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 4
+    },
+    {
+      "name": "buster.sdk",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 6
+    },
+    {
+      "name": "buster.runtime.engine",
+      "file": "buster\\runtime\\sdk_runtime.py",
+      "line": 7
     },
     {
       "name": "__future__",
@@ -14588,6 +15847,31 @@
       "name": "typing",
       "file": "buster\\runtime\\storage.py",
       "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\tester_agent.py",
+      "line": 1
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\runtime\\tester_agent.py",
+      "line": 3
+    },
+    {
+      "name": "sys",
+      "file": "buster\\runtime\\tester_agent.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\tester_agent.py",
+      "line": 5
+    },
+    {
+      "name": "sdk_agent",
+      "file": "buster\\runtime\\tester_agent.py",
+      "line": 7
     },
     {
       "name": "__future__",
@@ -14628,6 +15912,16 @@
       "name": "storage",
       "file": "buster\\runtime\\watchdog.py",
       "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\workflow_graph.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\workflow_graph.py",
+      "line": 3
     },
     {
       "name": "engine",
@@ -14673,6 +15967,111 @@
       "name": "intent_prediction",
       "file": "buster\\runtime\\__init__.py",
       "line": 9
+    },
+    {
+      "name": "sdk_runtime",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 11
+    },
+    {
+      "name": "sdk_bootstrap",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 12
+    },
+    {
+      "name": "sdk_agent_manager",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 13
+    },
+    {
+      "name": "lifecycle_sdk_agent",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 14
+    },
+    {
+      "name": "runtime_registry",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 15
+    },
+    {
+      "name": "job_manager",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 16
+    },
+    {
+      "name": "planner_agent",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 17
+    },
+    {
+      "name": "builder_agent",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 18
+    },
+    {
+      "name": "tester_agent",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 19
+    },
+    {
+      "name": "reviewer_agent",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 20
+    },
+    {
+      "name": "fixer_agent",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 21
+    },
+    {
+      "name": "multi_agent_workflow",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 22
+    },
+    {
+      "name": "blackboard",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 23
+    },
+    {
+      "name": "agent_memory",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 24
+    },
+    {
+      "name": "agent_orchestrator",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 25
+    },
+    {
+      "name": "orchestrator_agent",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 26
+    },
+    {
+      "name": "core",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 27
+    },
+    {
+      "name": "inspector",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 28
+    },
+    {
+      "name": "workflow_graph",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 29
+    },
+    {
+      "name": "plugin_inspector",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 30
+    },
+    {
+      "name": "dev_tools",
+      "file": "buster\\runtime\\__init__.py",
+      "line": 31
     },
     {
       "name": "__future__",
@@ -17073,6 +18472,31 @@
       "name": "buster.plugins.sdk.base_plugin",
       "file": "buster\\plugins\\builtin\\weather_plugin.py",
       "line": 1
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 3
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 5
+    },
+    {
+      "name": "buster.runtime.sdk_bootstrap",
+      "file": "buster\\ui\\v10\\runtime_dashboard.py",
+      "line": 16
     },
     {
       "name": "PySide6.QtCore",

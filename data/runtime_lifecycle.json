@@ -1,6 +1,6 @@
 {
-  "status": "stopped",
-  "started_at": "2026-06-29T10:55:55+00:00",
-  "stopped_at": "2026-06-29T10:55:55+00:00",
-  "starts": 1
+  "status": "running",
+  "started_at": "2026-07-07T08:19:26+00:00",
+  "stopped_at": null,
+  "starts": 9
 }
