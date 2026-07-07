@@ -7,23 +7,6 @@ from .sdk_bootstrap import build_sdk_runtime
 
 
 class BusterRuntimeCore:
-    """
-    Buster v10.5 Runtime Core.
-
-    One central access point for:
-
-    - SDK
-    - Event API
-    - Runtime Engine
-    - Runtime Registry
-    - Job Manager
-    - Agent Manager
-    - Blackboard
-    - Agent Memory
-    - Orchestrator
-    - Workflow Runner
-    """
-
     def __init__(self, root: str | Path = ".", observation_provider=None):
         self.root = Path(root).resolve()
         self.system = build_sdk_runtime(
@@ -43,6 +26,9 @@ class BusterRuntimeCore:
         self.blackboard = self.system["blackboard"]
         self.agent_memory = self.system["agent_memory"]
         self.orchestrator = self.system["orchestrator"]
+
+        from .dev_tools import RuntimeDeveloperTools
+        self.devtools = RuntimeDeveloperTools(self)
 
         self.started = False
 
