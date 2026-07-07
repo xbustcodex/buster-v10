@@ -2,13 +2,19 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from .builder_agent import BuilderAgent
+from .fixer_agent import FixerAgent
 from .job_agent import JobAgent
 from .job_manager import JobManager
 from .lifecycle_sdk_agent import LifecycleSDKAgent
+from .multi_agent_workflow import MultiAgentWorkflowRunner
+from .planner_agent import PlannerAgent
 from .registry_agent import RegistryAgent
+from .reviewer_agent import ReviewerAgent
 from .runtime_registry import RuntimeRegistry
 from .sdk_agent_manager import SDKAgentManager
 from .sdk_runtime import BusterSDKRuntime
+from .tester_agent import TesterAgent
 
 
 def build_sdk_runtime(root: str | Path = ".", observation_provider=None):
@@ -25,8 +31,16 @@ def build_sdk_runtime(root: str | Path = ".", observation_provider=None):
     agents.register("lifecycle", LifecycleSDKAgent(sdk, root=root))
     agents.register("registry", RegistryAgent(sdk))
     agents.register("jobs", JobAgent(sdk))
+    agents.register("planner", PlannerAgent(sdk))
+    agents.register("builder", BuilderAgent(sdk))
+    agents.register("tester", TesterAgent(sdk))
+    agents.register("reviewer", ReviewerAgent(sdk))
+    agents.register("fixer", FixerAgent(sdk))
+
+    workflow = MultiAgentWorkflowRunner(sdk, agents, job_manager)
 
     sdk.register_service("agent_manager", agents)
+    sdk.register_service("workflow_runner", workflow)
 
     registry.register_service("sdk", sdk, capabilities=["events", "config", "registry", "lifecycle"])
     registry.register_service("runtime_engine", runtime.engine, capabilities=["runtime", "tick", "status"])
@@ -37,10 +51,16 @@ def build_sdk_runtime(root: str | Path = ".", observation_provider=None):
     registry.register_service("intent_prediction", runtime.engine.predictor, capabilities=["intent", "prediction"])
     registry.register_service("runtime_registry", registry, capabilities=["registry", "capabilities"])
     registry.register_service("job_manager", job_manager, capabilities=["jobs", "queue", "tasks"])
+    registry.register_service("workflow_runner", workflow, capabilities=["workflow", "multi_agent"])
 
     registry.register_agent("lifecycle", agents.require("lifecycle"), capabilities=["lifecycle", "health", "backup", "verify"])
     registry.register_agent("registry", agents.require("registry"), capabilities=["registry", "capabilities"])
     registry.register_agent("jobs", agents.require("jobs"), capabilities=["jobs", "tasks"])
+    registry.register_agent("planner", agents.require("planner"), capabilities=["planning", "workflow"])
+    registry.register_agent("builder", agents.require("builder"), capabilities=["build", "implementation"])
+    registry.register_agent("tester", agents.require("tester"), capabilities=["test", "pytest", "validation"])
+    registry.register_agent("reviewer", agents.require("reviewer"), capabilities=["review", "quality"])
+    registry.register_agent("fixer", agents.require("fixer"), capabilities=["fix", "repair"])
 
     registry.register_module("runtime_engine", runtime.engine)
 
@@ -50,8 +70,24 @@ def build_sdk_runtime(root: str | Path = ".", observation_provider=None):
     def lifecycle_verify_job(job):
         return agents.run("lifecycle", "verify")
 
+    def agent_build_job(job):
+        return agents.run("builder", job.get("payload", {}))
+
+    def agent_test_job(job):
+        return agents.run("tester", job.get("payload", {}))
+
+    def agent_review_job(job):
+        return agents.run("reviewer", job.get("payload", {}))
+
+    def agent_fix_job(job):
+        return agents.run("fixer", job.get("payload", {}))
+
     job_manager.register_handler("lifecycle.health", lifecycle_health_job)
     job_manager.register_handler("lifecycle.verify", lifecycle_verify_job)
+    job_manager.register_handler("agent.build", agent_build_job)
+    job_manager.register_handler("agent.test", agent_test_job)
+    job_manager.register_handler("agent.review", agent_review_job)
+    job_manager.register_handler("agent.fix", agent_fix_job)
 
     sdk.publish(
         "runtime.bootstrap.completed",
@@ -69,4 +105,5 @@ def build_sdk_runtime(root: str | Path = ".", observation_provider=None):
         "agents": agents,
         "registry": registry,
         "jobs": job_manager,
+        "workflow": workflow,
     }

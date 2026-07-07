@@ -14,6 +14,12 @@ from .sdk_agent_manager import SDKAgentManager
 from .lifecycle_sdk_agent import LifecycleSDKAgent
 from .runtime_registry import RuntimeRegistry
 from .job_manager import JobManager, JobStatus
+from .planner_agent import PlannerAgent
+from .builder_agent import BuilderAgent
+from .tester_agent import TesterAgent
+from .reviewer_agent import ReviewerAgent
+from .fixer_agent import FixerAgent
+from .multi_agent_workflow import MultiAgentWorkflowRunner
 
 __all__ = [
     "BusterRuntimeEngine",
@@ -32,4 +38,10 @@ __all__ = [
     "RuntimeRegistry",
     "JobManager",
     "JobStatus",
+    "PlannerAgent",
+    "BuilderAgent",
+    "TesterAgent",
+    "ReviewerAgent",
+    "FixerAgent",
+    "MultiAgentWorkflowRunner",
 ]
