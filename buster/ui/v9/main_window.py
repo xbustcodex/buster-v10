@@ -70,6 +70,20 @@ class V9MainWindow(QMainWindow):
 
     def refresh_live(self):
         self.sidebar.refresh()
+        
+    def show_agents(self):
+        try:
+            from buster.ui.v9.panels.agent_panel import AgentPanel
+
+            self._show_tool_window(
+                "Agent OS",
+                lambda: AgentPanel(self.live),
+                1300,
+                850,
+            )
+
+        except Exception as e:
+            self._show_message_tool("Agents", f"Agent OS panel error:\n{e}")
 
     def show_face(self):
         if self.face_window is None:
@@ -142,13 +156,17 @@ class V9MainWindow(QMainWindow):
 
     def show_vision(self):
         try:
-            from buster.ui.widgets.vision_window import VisionWindow
-            self._show_tool_window("Vision", VisionWindow, 900, 650)
-        except Exception as e:
-            self._show_message_tool(
-                "Vision",
-                f"Vision tools are available but the panel failed to open:\n{e}"
+            from buster.ui.v9.panels.vision_panel import VisionPanel
+
+            self._show_tool_window(
+                "Buster Vision",
+                lambda: VisionPanel(self.live),
+                1000,
+                760,
             )
+
+        except Exception as e:
+            self._show_message_tool("Vision", f"Vision panel error:\n{e}")
 
 
     def show_voice(self):
@@ -157,14 +175,6 @@ class V9MainWindow(QMainWindow):
             "Voice service not connected."
         )
         self._show_message_tool("Voice", f"Voice status:\n\n{status}")
-
-
-    def show_agents(self):
-        status = self.live.safe(
-            lambda: self.live.services.get("agents").status(),
-            "Agent service not connected."
-        )
-        self._show_message_tool("Agents", f"Agents status:\n\n{status}")
 
 
     def show_terminal(self):
