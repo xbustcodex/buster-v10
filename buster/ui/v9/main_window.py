@@ -170,11 +170,18 @@ class V9MainWindow(QMainWindow):
 
 
     def show_voice(self):
-        status = self.live.safe(
-            lambda: self.live.services.get("voice").status(),
-            "Voice service not connected."
-        )
-        self._show_message_tool("Voice", f"Voice status:\n\n{status}")
+        try:
+            from buster.ui.v9.panels.voice_panel import VoicePanel
+
+            self._show_tool_window(
+                "Buster Voice",
+                lambda: VoicePanel(self.live),
+                1000,
+                800,
+            )
+
+        except Exception as e:
+            self._show_message_tool("Voice", f"Voice panel error:\n{e}")
 
 
     def show_terminal(self):
