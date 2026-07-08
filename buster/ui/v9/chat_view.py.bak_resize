@@ -67,7 +67,7 @@ class ChatView(QWidget):
         self.input.setPlaceholderText("Type a command or message...")
         self.input.returnPressed.connect(self.send)
         send = QPushButton("Send")
-        send.setMinimumWidth(110)
+        send.setFixedWidth(110)
         send.clicked.connect(self.send)
         row.addWidget(self.input, 1)
         row.addWidget(send)
