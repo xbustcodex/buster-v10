@@ -118,7 +118,16 @@ class V9MainWindow(QMainWindow):
     def show_projects(self):
         try:
             from buster.ui.v9.panels.project_panel import ProjectPanel
-            self._show_tool_window("Projects", lambda: ProjectPanel(self.live), 900, 650)
+
+            window = ProjectPanel(self.live)
+            window.setWindowTitle("Projects")
+            window.resize(900, 650)
+            window.show()
+            window.raise_()
+
+            self.tool_windows = getattr(self, "tool_windows", [])
+            self.tool_windows.append(window)
+
         except Exception as e:
             self._show_message_tool("Projects", f"Projects panel error:\n{e}")
 
@@ -159,10 +168,16 @@ class V9MainWindow(QMainWindow):
 
 
     def show_terminal(self):
-        self._show_message_tool(
-            "Terminal",
-            "Terminal panel placeholder.\n\nNext step: connect this to the runtime command console."
-        )
+        try:
+            from buster.ui.v9.panels.terminal_panel import TerminalPanel
+            self._show_tool_window(
+                "Runtime Terminal",
+                lambda: TerminalPanel(self.live),
+                1100,
+                720,
+            )
+        except Exception as e:
+            self._show_message_tool("Terminal", f"Terminal panel error:\n{e}")
 
 
     def show_settings(self):
