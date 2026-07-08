@@ -182,11 +182,15 @@ class V9MainWindow(QMainWindow):
 
     def show_settings(self):
         try:
-            from buster.ui.settings_dialog import SettingsDialog
-            dlg = SettingsDialog(self)
-            dlg.exec()
+            from buster.ui.v9.panels.settings_panel import SettingsPanel
+            self._show_tool_window(
+                "Settings",
+                lambda: SettingsPanel(self.live),
+                820,
+                640,
+            )
         except Exception as e:
-            self._show_message_tool("Settings", f"Settings dialog error:\n{e}")    
+            self._show_message_tool("Settings", f"Settings panel error:\n{e}")  
 
     def set_face_state(self, state):
         print("FACE STATE:", state)
