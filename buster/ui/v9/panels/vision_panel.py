@@ -251,7 +251,7 @@ class VisionEngine(QThread):
 class VisionPanel(QWidget):
     """Main vision panel widget"""
     
-    def __init__(self, live=None, parent=None):
+    def __init__(self, live=None, parent=None, runtime_core=None):
         super().__init__(parent)
         self.live = live
 

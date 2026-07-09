@@ -11,9 +11,10 @@ from PySide6.QtWidgets import (
 
 
 class TerminalPanel(QWidget):
-    def __init__(self, live=None):
+    def __init__(self, live=None, runtime_core=None):
         super().__init__()
         self.live = live
+        self.runtime_core = runtime_core
         self.current_dir = os.getcwd()
         self.history = []
         self.history_index = -1
@@ -37,6 +38,7 @@ class TerminalPanel(QWidget):
             "agent": self.cmd_agent,
             "git": self.cmd_git,
             "python": self.cmd_python,
+            "runtime": self.cmd_runtime,
             "pip": self.cmd_pip,
             "echo": self.cmd_echo,
             "exit": lambda args: self.close(),
@@ -180,6 +182,31 @@ class TerminalPanel(QWidget):
             self.status.setText("● Ready")
             self.status.setStyleSheet("color:#4ec9b0;font-weight:bold;")
             self.dir_label.setText(f"📁 {self.current_dir}")
+            
+    def cmd_runtime(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        if args and args[0] == "status":
+            import json
+            self.write(json.dumps(self.runtime_core.status(), indent=2, default=str), "info")
+            return
+
+        if args and args[0] == "tick":
+            import json
+            result = self.runtime_core.tick()
+            self.write(json.dumps(result, indent=2, default=str), "success")
+            return
+
+        if args and args[0] == "test":
+            import json
+            result = self.runtime_core.run_agent("tester", {"request": "Run project tests"})
+            self.write(json.dumps(result, indent=2, default=str), "success")
+            return
+
+        self.write("Usage: runtime status | runtime tick | runtime test", "info")        
+            
 
     def run_system(self, command):
         result = subprocess.run(

@@ -438,7 +438,7 @@ class VoicePanel(QWidget):
     error_signal = Signal(str)
     voice_finished_signal = Signal()
 
-    def __init__(self, live=None, parent=None):
+    def __init__(self, live=None, parent=None, runtime_core=None):
         super().__init__(parent)
 
         self.live = live

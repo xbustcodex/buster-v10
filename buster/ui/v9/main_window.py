@@ -7,6 +7,7 @@ from buster.ui.v9.chat_view import ChatView
 from buster.ui.v9.face_window import FaceWindow
 from buster.ui.v9.dashboard import DashboardWindow
 from buster.ui.v9.command_palette import CommandPalette
+from buster.runtime.core import create_runtime_core
 
 class V9MainWindow(QMainWindow):
     def __init__(self, services=None, settings=None):
@@ -14,6 +15,7 @@ class V9MainWindow(QMainWindow):
         self.services = services
         self.settings = settings
         self.live = V9LiveServices(services, settings)
+        self.runtime_core = create_runtime_core(".")
         self.face_window = None
         self.current_face_state = 'idle'
         self.dashboard_window = None
@@ -77,7 +79,7 @@ class V9MainWindow(QMainWindow):
 
             self._show_tool_window(
                 "Agent OS",
-                lambda: AgentPanel(self.live),
+                lambda: AgentPanel(self.live, self.runtime_core),
                 1300,
                 850,
             )
@@ -149,7 +151,7 @@ class V9MainWindow(QMainWindow):
     def show_workspace(self):
         try:
             from buster.ui.v9.panels.workspace_panel import WorkspacePanel
-            self._show_tool_window("Workspace", lambda: WorkspacePanel(self.live), 900, 650)
+            self._show_tool_window("Workspace", lambda: WorkspacePanel(self.live, self.runtime_core), 900, 650)
         except Exception as e:
             self._show_message_tool("Workspace", f"Workspace panel error:\n{e}")
 
@@ -160,7 +162,7 @@ class V9MainWindow(QMainWindow):
 
             self._show_tool_window(
                 "Buster Vision",
-                lambda: VisionPanel(self.live),
+                lambda: VisionPanel(self.live, self.runtime_core),
                 1000,
                 760,
             )
@@ -175,7 +177,7 @@ class V9MainWindow(QMainWindow):
 
             self._show_tool_window(
                 "Buster Voice",
-                lambda: VoicePanel(self.live),
+                lambda: VoicePanel(self.live, self.runtime_core),
                 1000,
                 800,
             )
@@ -189,7 +191,7 @@ class V9MainWindow(QMainWindow):
             from buster.ui.v9.panels.terminal_panel import TerminalPanel
             self._show_tool_window(
                 "Runtime Terminal",
-                lambda: TerminalPanel(self.live),
+                lambda: TerminalPanel(self.live, self.runtime_core),
                 1100,
                 720,
             )
