@@ -25,21 +25,43 @@ class TerminalPanel(QWidget):
             "help": self.cmd_help,
             "clear": self.cmd_clear,
             "history": self.cmd_history,
+
+            # Filesystem
             "cd": self.cmd_cd,
             "ls": self.cmd_ls,
             "pwd": self.cmd_pwd,
+
+            # Project
             "project": self.cmd_project,
             "workspace": self.cmd_workspace,
-            "test": self.cmd_test,
-            "build": self.cmd_build,
-            "run": self.cmd_run,
-            "fix": self.cmd_fix,
-            "review": self.cmd_review,
-            "agent": self.cmd_agent,
-            "git": self.cmd_git,
-            "python": self.cmd_python,
+
+            # Runtime
             "runtime": self.cmd_runtime,
+
+            # Agents
+            "plan": self.cmd_plan,
+            "build": self.cmd_build,
+            "test": self.cmd_test,
+            "review": self.cmd_review,
+            "fix": self.cmd_fix,
+            "agent": self.cmd_agent,
+            "status": self.cmd_status,
+            "jobs": self.cmd_jobs,
+            "events": self.cmd_events,
+            "memory": self.cmd_memory,
+            "blackboard": self.cmd_blackboard,
+            "registry": self.cmd_registry,
+            "services": self.cmd_services,
+
+            # Orchestrator (NEW)
+            "task": self.cmd_task,
+            "workflow": self.cmd_workflow,
+
+            # Tools
+            "python": self.cmd_python,
             "pip": self.cmd_pip,
+            "git": self.cmd_git,
+
             "echo": self.cmd_echo,
             "exit": lambda args: self.close(),
         }
@@ -229,7 +251,7 @@ class TerminalPanel(QWidget):
     def cmd_help(self, args):
         self.write("""
 Commands:
-help, clear, history, cd, ls, pwd
+help, clear, history, cd, ls, pwd, status, jobs, events, memory, blackboard, registry, services,
 project, workspace, build, run, test, fix, review, agent
 git <args>, python <args>, pip <args>
 Any unknown command runs in the system shell.
@@ -268,25 +290,252 @@ Any unknown command runs in the system shell.
         ws = Path.cwd() / "buster_workspace" / "ai_builds"
         ws.mkdir(parents=True, exist_ok=True)
         self.write(f"AI Build Workspace: {ws}", "info")
+        
+    def cmd_workflow(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        import json
+
+        result = self.runtime_core.workflow.run_request(
+            " ".join(args) or "Build project"
+        )
+
+        self.write(
+            json.dumps(result, indent=2, default=str),
+            "success",
+        )   
 
     def cmd_test(self, args):
         self.run_system("pytest -q")
+        
+    def cmd_plan(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        import json
+
+        request = " ".join(args).strip()
+
+        if not request:
+            self.write("Usage: plan <request>", "warning")
+            return
+
+        try:
+            result = self.runtime_core.run_agent(
+                "planner",
+                {"request": request},
+            )
+
+            self.write(
+                json.dumps(result, indent=2, default=str),
+                "success",
+            )
+
+        except Exception as e:
+            self.write(f"Planner Agent failed: {e}", "error")    
 
     def cmd_build(self, args):
-        self.write("Build command ready. Later this will call Builder Agent jobs.", "warning")
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        import json
+
+        request = " ".join(args).strip() or "Build project"
+
+        try:
+            result = self.runtime_core.run_agent(
+                "builder",
+                {"request": request},
+            )
+
+            self.write(
+                json.dumps(result, indent=2, default=str),
+                "success",
+            )
+
+        except Exception as e:
+            self.write(f"Builder Agent failed: {e}", "error")
 
     def cmd_run(self, args):
         self.run_system("python main.py")
 
     def cmd_fix(self, args):
-        self.write("Fix Agent placeholder. Later this will create a Fixer Agent job.", "warning")
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        import json
+
+        request = " ".join(args).strip() or "Fix current project"
+
+        try:
+            result = self.runtime_core.run_agent(
+                "fixer",
+                {"request": request},
+            )
+
+            self.write(
+                json.dumps(result, indent=2, default=str),
+                "success",
+            )
+
+        except Exception as e:
+            self.write(f"Fixer Agent failed: {e}", "error")
 
     def cmd_review(self, args):
-        self.write("Reviewer Agent placeholder. Later this will create a Reviewer Agent job.", "warning")
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        import json
+
+        request = " ".join(args).strip() or "Review project code"
+
+        try:
+            result = self.runtime_core.run_agent(
+                "reviewer",
+                {"request": request},
+            )
+
+            self.write(
+                json.dumps(result, indent=2, default=str),
+                "success",
+            )
+
+        except Exception as e:
+            self.write(f"Reviewer Agent failed: {e}", "error")
+            
+    def cmd_task(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        import json
+
+        request = " ".join(args).strip()
+
+        if not request:
+            self.write("Usage: task <request>", "warning")
+            return
+
+        result = self.runtime_core.run(request)
+
+        self.write(
+            json.dumps(result, indent=2, default=str),
+            "success",
+        )        
 
     def cmd_agent(self, args):
-        msg = " ".join(args) if args else "Agent ready."
-        self.write(f"Agent request: {msg}", "info")
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        import json
+
+        if not args:
+            self.write(
+                json.dumps(
+                    self.runtime_core.agents.status(),
+                    indent=2,
+                    default=str,
+                ),
+                "info",
+            )
+            return
+
+        name = args[0]
+        request = " ".join(args[1:]) or "Run"
+
+        try:
+            result = self.runtime_core.run_agent(
+                name,
+                {"request": request},
+            )
+
+            self.write(
+                json.dumps(result, indent=2, default=str),
+                "success",
+            )
+
+        except Exception as e:
+            self.write(str(e), "error")
+            
+    def _runtime_json(self, data, kind="info"):
+        import json
+        self.write(json.dumps(data, indent=2, default=str), kind)
+
+
+    def cmd_status(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        self._runtime_json(self.runtime_core.status(), "info")
+
+
+    def cmd_jobs(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        self._runtime_json(self.runtime_core.jobs.status(), "info")
+
+
+    def cmd_events(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        limit = 25
+        if args:
+            try:
+                limit = int(args[0])
+            except ValueError:
+                pass
+
+        self._runtime_json(self.runtime_core.events.recent(limit), "info")
+
+
+    def cmd_memory(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        self._runtime_json(self.runtime_core.agent_memory.status(), "info")
+
+
+    def cmd_blackboard(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        self._runtime_json(self.runtime_core.blackboard.snapshot(), "info")
+
+
+    def cmd_registry(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        self._runtime_json(self.runtime_core.registry.status(), "info")
+
+
+    def cmd_services(self, args):
+        if not self.runtime_core:
+            self.write("Runtime core not connected.", "error")
+            return
+
+        self._runtime_json(
+            {
+                "services": self.runtime_core.sdk.registry.names(),
+                "agents": self.runtime_core.agents.names(),
+            },
+            "info",
+        )       
 
     def cmd_git(self, args):
         self.run_system("git " + " ".join(args) if args else "git status")
