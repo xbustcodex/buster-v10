@@ -11,12 +11,14 @@ from buster.runtime import create_runtime_core
 
 
 class MissionControlV12(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, runtime_core=None, parent=None):
         super().__init__(parent)
 
-        self.core = create_runtime_core(".")
-        self.core.start()
-
+        self.core = runtime_core
+        
+        if self.core is None:
+            self.core = create_runtime_core(".")
+        
         root = QVBoxLayout(self)
 
         header = QHBoxLayout()
@@ -70,9 +72,34 @@ class MissionControlV12(QWidget):
         return json.dumps(data, indent=4, default=str)
 
     def payload(self):
-        return self.core.devtools.dashboard_payload()
+        if not self.core:
+            return {}
+
+        try:
+            return self.core.devtools.dashboard_payload()
+        except Exception as e:
+            return {
+                "runtime": {
+                    "error": str(e),
+                    "services": [],
+                    "agents": [],
+                    "event_count": 0,
+                },
+                "jobs": {"count": 0, "counts": {}},
+                "events": [],
+                "plugins": {},
+                "services": {},
+                "agents": {},
+                "workflow_graph": {},
+                "event_graph": {},
+            }
 
     def refresh(self):
+        if not self.core:
+            self.main.setPlainText("Mission Control runtime core not connected.")
+            self.inspector.setPlainText("{}")
+            return
+            
         item = self.nav.currentItem()
         section = item.text() if item else "Dashboard"
         payload = self.payload()
@@ -110,10 +137,18 @@ class MissionControlV12(QWidget):
         }))
 
     def run_workflow(self):
+        if not self.core:
+            return
         self.core.run("Review architecture quality and validate with tests")
         self.refresh()
 
     def run_health(self):
-        job = self.core.create_job("Mission Control Health", "lifecycle.health", {"requested_by": "mission_control_v12"})
+        if not self.core:
+            return
+        job = self.core.create_job(
+            "Mission Control Health",
+            "lifecycle.health",
+            {"requested_by": "mission_control_v12"},
+        )
         self.core.run_job(job["job_id"])
         self.refresh()

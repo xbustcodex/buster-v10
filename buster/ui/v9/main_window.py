@@ -8,6 +8,8 @@ from buster.ui.v9.face_window import FaceWindow
 from buster.ui.v9.dashboard import DashboardWindow
 from buster.ui.v9.command_palette import CommandPalette
 from buster.runtime.core import create_runtime_core
+from buster.ui.v9.runtime_monitor import RuntimeMonitor
+from pathlib import Path
 
 class V9MainWindow(QMainWindow):
     def __init__(self, services=None, settings=None):
@@ -16,6 +18,7 @@ class V9MainWindow(QMainWindow):
         self.settings = settings
         self.live = V9LiveServices(services, settings)
         self.runtime_core = create_runtime_core(".")
+        self.runtime_monitor = RuntimeMonitor(self.runtime_core, interval_ms=1000)
         self.face_window = None
         self.current_face_state = 'idle'
         self.dashboard_window = None
@@ -291,7 +294,11 @@ class V9MainWindow(QMainWindow):
                     module = __import__(module_name, fromlist=[class_name])
                     cls = getattr(module, class_name)
 
-                    window = cls()
+                    if class_name == "MissionControlV12":
+                        window = cls(self.runtime_core)
+                    else:
+                        window = cls()
+                    
                     window.setWindowTitle(title)
                     window.resize(1200, 750)
                     window.setAttribute(Qt.WA_DeleteOnClose, True)
