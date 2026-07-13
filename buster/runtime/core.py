@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any, Dict
+from .dispatcher import RuntimeDispatcher
+from .state_store import RuntimeStateStore
 
 from .sdk_bootstrap import build_sdk_runtime
 
@@ -29,48 +31,146 @@ class BusterRuntimeCore:
 
         from .dev_tools import RuntimeDeveloperTools
         self.devtools = RuntimeDeveloperTools(self)
+        
+        self.state = RuntimeStateStore()
+        self.dispatcher = RuntimeDispatcher(self.state)
 
         self.started = False
+        self.dispatcher = RuntimeDispatcher()
 
     def start(self) -> Dict[str, Any]:
         result = self.runtime.start()
         self.started = True
+        event = {
+            "root": str(self.root),
+            "started": True,
+        }
+
         self.events.publish(
             "runtime.core.started",
-            {"root": str(self.root)},
+            event,
+            source="runtime_core",
+        )
+
+        self.dispatcher.publish(
+            "runtime.started",
+            event,
             source="runtime_core",
         )
         return result
+        self.refresh_state()
 
     def stop(self) -> Dict[str, Any]:
         result = self.runtime.stop()
         self.started = False
+        event = {
+            "root": str(self.root),
+            "started": False,
+        }
+
         self.events.publish(
             "runtime.core.stopped",
-            {"root": str(self.root)},
+            event,
+            source="runtime_core",
+        )
+
+        self.dispatcher.publish(
+            "runtime.stopped",
+            event,
             source="runtime_core",
         )
         return result
 
     def tick(self, observations=None) -> Dict[str, Any]:
-        return self.runtime.tick_once(observations)
+
+        result = self.runtime.tick_once(observations)
+
+        self.dispatcher.publish(
+            "runtime.tick",
+            result,
+            source="runtime_core",
+        )
+        self.refresh_state()
+        return result
+        
 
     def run(self, request: str) -> Dict[str, Any]:
+        event = {
+            "request": request,
+        }
+
         self.events.publish(
             "runtime.core.request.received",
-            {"request": request},
+            event,
+            source="runtime_core",
+        )
+
+        self.dispatcher.publish(
+            "runtime.request",
+            event,
             source="runtime_core",
         )
         return self.orchestrator.run(request)
 
-    def run_agent(self, name: str, task: Any = None) -> Any:
-        return self.agents.run(name, task)
+    def run_agent(self, name, task=None):
 
-    def create_job(self, title: str, job_type: str = "generic", payload=None):
-        return self.jobs.create_job(title=title, job_type=job_type, payload=payload or {})
+        self.dispatcher.publish(
+            "agent.started",
+            {
+                "agent": name,
+            },
+            source="runtime_core",
+        )
 
-    def run_job(self, job_id: str):
-        return self.jobs.run_job(job_id)
+        result = self.agents.run(name, task)
+
+        self.dispatcher.publish(
+            "agent.finished",
+            {
+                "agent": name,
+                "result": result,
+            },
+            source="runtime_core",
+        )
+        self.refresh_state()
+        return result
+
+    def create_job(self, title, job_type="generic", payload=None):
+
+        job = self.jobs.create_job(
+            title=title,
+            job_type=job_type,
+            payload=payload or {},
+        )
+
+        self.dispatcher.publish(
+            "job.created",
+            job,
+            source="runtime_core",
+        )
+
+        return job
+        
+    def run_job(self, job_id):
+
+        self.dispatcher.publish(
+            "job.started",
+            {"job_id": job_id},
+            source="runtime_core",
+        )
+
+        result = self.jobs.run_job(job_id)
+
+        self.dispatcher.publish(
+            "job.finished",
+            {
+                "job_id": job_id,
+                "result": result,
+            },
+            source="runtime_core",
+        )
+        self.refresh_state()
+        return result
 
     def service(self, name: str, default=None):
         return self.sdk.service(name, default)
@@ -94,7 +194,43 @@ class BusterRuntimeCore:
             "blackboard": self.blackboard.snapshot(),
             "agent_memory": memory_status,
             "recent_events": self.events.recent(20),
+            "state": self.state.snapshot(),
+            "dispatcher": self.dispatcher.status(),
         }
+        
+    def notify(self, title, message, level="info"):
+
+        self.dispatcher.publish(
+            "notification",
+            {
+                "title": title,
+                "message": message,
+                "level": level,
+            },
+            source="runtime_core",
+        )    
+        
+        
+    def refresh_state(self) -> Dict[str, Any]:
+        snapshot = {
+            "runtime": {
+                "started": self.started,
+                "status": "running" if self.started else "ready",
+                "root": str(self.root),
+                "details": self.runtime.status(),
+            },
+            "jobs": self.jobs.status(),
+            "agents": self.agents.status(),
+            "memory": self.agent_memory.status(),
+            "blackboard": self.blackboard.snapshot(),
+            "registry": self.registry.status(),
+            "services": self.sdk.status(),
+        }
+
+        for key, value in snapshot.items():
+            self.state.set(key, value)
+
+        return self.state.snapshot()    
 
 
 def create_runtime_core(root: str | Path = ".", observation_provider=None) -> BusterRuntimeCore:
