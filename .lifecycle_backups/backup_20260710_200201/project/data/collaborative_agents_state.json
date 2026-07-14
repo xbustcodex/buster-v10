@@ -1,0 +1,77 @@
+{
+  "agents": {
+    "Planner": {
+      "name": "Planner",
+      "role": "creates missions and chooses strategies",
+      "status": "planning",
+      "message": "Mission created.",
+      "confidence": 0.92,
+      "risk": "low",
+      "updated": "2026-06-29T07:22:43+00:00"
+    },
+    "Builder": {
+      "name": "Builder",
+      "role": "builds files and project structure",
+      "status": "building",
+      "message": "Generating project structure.",
+      "confidence": 0.88,
+      "risk": "medium",
+      "updated": "2026-06-29T07:22:43+00:00"
+    },
+    "Tester": {
+      "name": "Tester",
+      "role": "runs tests and finds failures",
+      "status": "testing",
+      "message": "Running tests.",
+      "confidence": 0.84,
+      "risk": "medium",
+      "updated": "2026-06-29T07:22:43+00:00"
+    },
+    "Fixer": {
+      "name": "Fixer",
+      "role": "repairs errors and failed tests",
+      "status": "fixing",
+      "message": "Applying previous solution from Experience Engine.",
+      "confidence": 0.91,
+      "risk": "low",
+      "updated": "2026-06-29T07:22:43+00:00"
+    },
+    "Reviewer": {
+      "name": "Reviewer",
+      "role": "checks quality and design",
+      "status": "idle",
+      "message": "",
+      "confidence": 0.0,
+      "risk": "unknown",
+      "updated": "2026-06-29T07:22:43+00:00"
+    },
+    "Verifier": {
+      "name": "Verifier",
+      "role": "confirms the mission is complete",
+      "status": "verifying",
+      "message": "Mission verified successfully.",
+      "confidence": 0.97,
+      "risk": "low",
+      "updated": "2026-06-29T07:22:43+00:00"
+    },
+    "Learning": {
+      "name": "Learning",
+      "role": "records reusable lessons",
+      "status": "learning",
+      "message": "Recorded a reusable success pattern.",
+      "confidence": 0.95,
+      "risk": "low",
+      "updated": "2026-06-29T07:22:43+00:00"
+    },
+    "Experience": {
+      "name": "Experience",
+      "role": "updates skills and project knowledge",
+      "status": "learning",
+      "message": "Updated skill profile for this project type.",
+      "confidence": 0.93,
+      "risk": "low",
+      "updated": "2026-06-29T07:22:43+00:00"
+    }
+  },
+  "active_count": 7
+}

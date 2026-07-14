@@ -1,0 +1,30 @@
+{
+  "mode": "companion",
+  "updated": "2026-06-29T09:50:13+00:00",
+  "last_observation": {
+    "source": "camera",
+    "objects": [
+      "person",
+      "laptop",
+      "esp32"
+    ],
+    "scene": "development",
+    "confidence": 0.9,
+    "importance": 0.86,
+    "timestamp": "2026-06-29T09:50:13+00:00"
+  },
+  "attention": {
+    "focus": "speech",
+    "reason": "Wake word detected",
+    "importance": 0.975,
+    "observation": {
+      "source": "microphone",
+      "sound_type": "speech",
+      "confidence": 0.95,
+      "text": "Buster can you hear me",
+      "speaker": "Adam",
+      "importance": 0.975,
+      "timestamp": "2026-06-29T09:50:13+00:00"
+    }
+  }
+}

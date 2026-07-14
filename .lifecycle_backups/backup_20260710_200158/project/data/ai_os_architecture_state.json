@@ -1,0 +1,18 @@
+{
+  "version": "3.9",
+  "architecture": "Buster AI OS",
+  "updated": "2026-06-29T05:27:48",
+  "subsystems": [
+    "brain",
+    "memory",
+    "learning",
+    "experience",
+    "intelligence",
+    "autonomy",
+    "plugins",
+    "repository",
+    "vision",
+    "voice",
+    "mission_control"
+  ]
+}

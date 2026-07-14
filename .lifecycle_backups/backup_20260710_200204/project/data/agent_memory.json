@@ -1,0 +1,95 @@
+{
+  "agents": {
+    "planner": {
+      "runs": 3,
+      "successes": 3,
+      "failures": 0,
+      "last_action": "plan",
+      "last_result": {
+        "status": "completed",
+        "plan": {
+          "request": "Review architecture quality and validate with tests",
+          "steps": [
+            {
+              "title": "Run project tests",
+              "job_type": "agent.test",
+              "agent": "tester",
+              "payload": {
+                "request": "Review architecture quality and validate with tests"
+              }
+            }
+          ],
+          "step_count": 1
+        }
+      }
+    },
+    "reviewer": {
+      "runs": 1,
+      "successes": 1,
+      "failures": 0,
+      "last_action": "agent.review",
+      "last_result": {
+        "agent": "reviewer_agent",
+        "status": "completed",
+        "request": "Build a safe runtime feature, validate it, review architecture quality",
+        "runtime_files": 31,
+        "test_files": 21,
+        "findings": [
+          "Runtime event state file exists; ensure generated data is not committed unless intentional."
+        ],
+        "recommendation": "Architecture looks valid. Keep generated data out of commits."
+      }
+    },
+    "tester": {
+      "runs": 2,
+      "successes": 2,
+      "failures": 0,
+      "last_action": "agent.test",
+      "last_result": {
+        "agent": "tester_agent",
+        "status": "passed",
+        "returncode": 0,
+        "request": "Review architecture quality and validate with tests",
+        "output_tail": "........................................................                 [100%]\n56 passed in 8.37s\n\\n"
+      }
+    }
+  },
+  "events": [
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-07T07:25:57+00:00"
+    },
+    {
+      "agent": "reviewer",
+      "action": "agent.review",
+      "result_status": "completed",
+      "timestamp": "2026-07-07T07:25:57+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-07T07:36:00+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "passed",
+      "timestamp": "2026-07-07T07:36:09+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-07T07:56:25+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "passed",
+      "timestamp": "2026-07-07T07:56:35+00:00"
+    }
+  ]
+}

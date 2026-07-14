@@ -1,0 +1,16 @@
+{
+  "app_name": "Buster Companion",
+  "version": "8.0",
+  "wake_word": "hey buster",
+  "data_dir": "data",
+  "logs_dir": "logs",
+  "screenshots_dir": "screenshots",
+  "memory_db": "data\\buster_memory.db",
+  "app_cache_file": "data\\apps_cache.json",
+  "ai_config_file": "data\\ai_provider_config.json",
+  "always_on_top": true,
+  "main_width": 1320,
+  "main_height": 900,
+  "compact_width": 420,
+  "compact_height": 620
+}

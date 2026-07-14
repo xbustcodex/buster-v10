@@ -1,0 +1,47 @@
+[
+  {
+    "timestamp": "2026-06-29T07:00:08+00:00",
+    "title": "Mission created",
+    "message": "Test Jarvis mission",
+    "reason": "Test planner decision.",
+    "confidence": 0.93,
+    "risk": "low",
+    "action": "mission_created"
+  },
+  {
+    "timestamp": "2026-06-29T07:00:08+00:00",
+    "title": "Task complete",
+    "message": "approved build",
+    "reason": "Verifier approved the result.",
+    "confidence": 0.93,
+    "risk": "low",
+    "action": ""
+  },
+  {
+    "timestamp": "2026-06-29T07:00:08+00:00",
+    "title": "Mission created",
+    "message": "Example build",
+    "reason": "Planner selected best available strategy.",
+    "confidence": 0.91,
+    "risk": "low",
+    "action": "mission_created"
+  },
+  {
+    "timestamp": "2026-06-29T07:00:08+00:00",
+    "title": "Task complete",
+    "message": "approved build",
+    "reason": "Verifier approved the result.",
+    "confidence": 0.9,
+    "risk": "low",
+    "action": ""
+  },
+  {
+    "timestamp": "2026-06-29T07:00:08+00:00",
+    "title": "Mission created",
+    "message": "Bridge test",
+    "reason": "Bridge integration test.",
+    "confidence": 0.88,
+    "risk": "low",
+    "action": "mission_created"
+  }
+]

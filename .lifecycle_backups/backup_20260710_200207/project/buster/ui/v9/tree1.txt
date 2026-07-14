@@ -1,0 +1,56 @@
+Folder PATH listing for volume Windows
+Volume serial number is 0000005C F6BF:F600
+C:.
+¦   chat_view.py
+¦   command_palette.py
+¦   dashboard.py
+¦   face_window.py
+¦   live_services.py
+¦   main_window.py
+¦   sidebar.py
+¦   theme.py
+¦   tree1.txt
+¦   v9_shell.py
+¦   __init__.py
+¦   
++---assets
+¦   +---avatar
+¦   +---icons
++---panels
+¦       face_panel.py
+¦       lifecycle_panel.py
+¦       live_runtime_ui.py
+¦       mission_control.py
+¦       project_panel.py
+¦       runtime_console.py
+¦       runtime_dashboard.py
+¦       workspace_panel.py
+¦       __init__.py
+¦       
++---widgets
+¦   ¦   animated_avatar.py
+¦   ¦   avatar_canvas.py
+¦   ¦   message_card.py
+¦   ¦   metric_card.py
+¦   ¦   mission_control.py
+¦   ¦   status_card.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---__pycache__
+¦           animated_avatar.cpython-312.pyc
+¦           avatar_canvas.cpython-312.pyc
+¦           mission_control.cpython-312.pyc
+¦           __init__.cpython-312.pyc
+¦           
++---__pycache__
+        chat_view.cpython-312.pyc
+        command_palette.cpython-312.pyc
+        dashboard.cpython-312.pyc
+        face_window.cpython-312.pyc
+        live_services.cpython-312.pyc
+        main_window.cpython-312.pyc
+        sidebar.cpython-312.pyc
+        theme.cpython-312.pyc
+        v9_shell.cpython-312.pyc
+        __init__.cpython-312.pyc
+        

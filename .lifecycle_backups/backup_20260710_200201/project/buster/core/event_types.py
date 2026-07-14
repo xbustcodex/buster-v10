@@ -1,0 +1,22 @@
+from __future__ import annotations
+
+class EventTypes:
+    SYSTEM_STARTED = "system.started"
+    SYSTEM_STOPPED = "system.stopped"
+    PLAN_CREATED = "planner.plan_created"
+    CONFIDENCE_SCORED = "intelligence.confidence_scored"
+    RISK_ANALYZED = "intelligence.risk_analyzed"
+    AGENT_STARTED = "agent.started"
+    AGENT_FINISHED = "agent.finished"
+    AGENT_FAILED = "agent.failed"
+    BUILD_STARTED = "build.started"
+    BUILD_COMPLETED = "build.completed"
+    BUILD_FAILED = "build.failed"
+    TESTS_STARTED = "tests.started"
+    TESTS_PASSED = "tests.passed"
+    TESTS_FAILED = "tests.failed"
+    LEARNING_RECORDED = "learning.recorded"
+    PLUGIN_LOADED = "plugin.loaded"
+    REPOSITORY_INDEXED = "repository.indexed"
+    AUTONOMY_NEXT_ACTION = "autonomy.next_action"
+    MISSION_CONTROL_UPDATED = "mission_control.updated"

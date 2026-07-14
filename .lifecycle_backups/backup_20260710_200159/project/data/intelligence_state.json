@@ -1,0 +1,9 @@
+{
+  "version": "3.7",
+  "confidence_thresholds": {
+    "auto_execute": 0.85,
+    "prepare_plan": 0.6,
+    "ask_user": 0.0
+  },
+  "last_reasoning": null
+}

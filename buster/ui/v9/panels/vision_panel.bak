@@ -1,0 +1,1931 @@
+#!/usr/bin/env python3
+"""
+vision_panel.py - Buster Vision Panel with PySide6
+A comprehensive vision processing panel with camera control, face detection, QR scanning, and more.
+"""
+import json
+import time
+import sys
+import cv2
+import numpy as np
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
+from dataclasses import dataclass
+from typing import List, Optional, Tuple
+from enum import Enum
+from buster.runtime.core import BusterRuntimeCore  # or wherever it's defined
+import uuid
+from collections import defaultdict
+
+# ==================== Data Models ====================
+
+@dataclass
+class VisionResult:
+    """Vision processing result"""
+    fps: float = 0.0
+    faces: List[Tuple[int, int, int, int]] = None
+    objects: List[Tuple[str, float, int, int, int, int]] = None
+    qr_codes: List[str] = None
+    barcodes: List[str] = None
+    text_detected: List[str] = None
+    
+    def __post_init__(self):
+        self.faces = self.faces or []
+        self.objects = self.objects or []
+        self.qr_codes = self.qr_codes or []
+        self.barcodes = self.barcodes or []
+        self.text_detected = self.text_detected or []
+        
+# ==================== Advanced Tracker Classes ====================
+
+class TrackedObject:
+    """Represents a tracked object with history"""
+    def __init__(self, tracker, bbox, label="Object", confidence=1.0):
+        self.id = str(uuid.uuid4())[:8]
+        self.tracker = tracker
+        self.bbox = bbox  # (x, y, w, h)
+        self.label = label
+        self.confidence = confidence
+        self.trail = []  # Position history
+        self.frames_since_update = 0
+        self.max_trail_length = 30
+        self.color = (np.random.randint(50, 255), 
+                      np.random.randint(50, 255), 
+                      np.random.randint(50, 255))
+        self.last_seen = time.time()
+        self.predicted_bbox = bbox
+        
+    def update(self, bbox, confidence=1.0):
+        """Update object position"""
+        self.bbox = bbox
+        self.confidence = confidence
+        self.frames_since_update = 0
+        self.last_seen = time.time()
+        
+        # Update trail
+        center_x = bbox[0] + bbox[2] // 2
+        center_y = bbox[1] + bbox[3] // 2
+        self.trail.append((center_x, center_y))
+        if len(self.trail) > self.max_trail_length:
+            self.trail.pop(0)
+    
+    def predict_next_position(self):
+        """Predict next position using linear extrapolation"""
+        if len(self.trail) >= 3:
+            dx = self.trail[-1][0] - self.trail[-2][0]
+            dy = self.trail[-1][1] - self.trail[-2][1]
+            next_x = self.trail[-1][0] + dx
+            next_y = self.trail[-1][1] + dy
+            self.predicted_bbox = (
+                next_x - self.bbox[2]//2,
+                next_y - self.bbox[3]//2,
+                self.bbox[2],
+                self.bbox[3]
+            )
+        return self.predicted_bbox
+
+class AdvancedTracker:
+    """Advanced object tracking with multiple algorithms - OpenCV 5.0 compatible"""
+    
+    # Don't define TRACKER_TYPES as a class variable!
+    # We'll check for trackers dynamically when needed
+    
+    def __init__(self, tracker_type='auto', max_objects=10, min_confidence=0.3):
+        self.max_objects = max_objects
+        self.min_confidence = min_confidence
+        self.tracked_objects = []
+        self.frame_width = 640
+        self.frame_height = 480
+        self.next_id = 0
+        self.mutex = QMutex()
+        
+        # Auto-detect best available tracker
+        if tracker_type == 'auto':
+            self.tracker_type = self._get_best_available_tracker()
+        else:
+            self.tracker_type = tracker_type
+        
+        # Log which tracker we're using
+        if self.tracker_type:
+            print(f"✅ AdvancedTracker initialized with: {self.tracker_type}")
+        else:
+            print("⚠️ AdvancedTracker: No real tracker available - using dummy")
+    
+    def _get_best_available_tracker(self):
+        """Get the best available tracker type - OpenCV 5.0 compatible"""
+        # Check for CSRT first (best accuracy) - available in OpenCV 4.5+
+        if hasattr(cv2, 'TrackerCSRT_create'):
+            print("✅ Using CSRT tracker (best accuracy)")
+            return 'CSRT'
+        # Check for KCF (good speed/accuracy)
+        elif hasattr(cv2, 'TrackerKCF_create'):
+            print("✅ Using KCF tracker (good speed/accuracy)")
+            return 'KCF'
+        # Check for MedianFlow (good for small movements)
+        elif hasattr(cv2, 'TrackerMedianFlow_create'):
+            print("✅ Using MedianFlow tracker")
+            return 'MEDIANFLOW'
+        # Check for legacy trackers (older OpenCV versions)
+        elif hasattr(cv2, 'legacy'):
+            if hasattr(cv2.legacy, 'TrackerCSRT_create'):
+                print("✅ Using legacy CSRT tracker")
+                return 'legacy_CSRT'
+            elif hasattr(cv2.legacy, 'TrackerKCF_create'):
+                print("✅ Using legacy KCF tracker")
+                return 'legacy_KCF'
+        # Try to use the generic tracker
+        elif hasattr(cv2, 'Tracker_create'):
+            print("✅ Using generic tracker")
+            return 'GENERIC'
+        else:
+            print("⚠️ No tracker available - using dummy tracker")
+            return None
+    
+    def create_tracker(self, tracker_type=None):
+        """Create a new tracker instance - OpenCV 5.0 compatible"""
+        tracker_type = tracker_type or self.tracker_type
+        
+        try:
+            # OpenCV 5.0+ trackers (MOSSE removed)
+            if tracker_type == 'CSRT' and hasattr(cv2, 'TrackerCSRT_create'):
+                return cv2.TrackerCSRT_create()
+            elif tracker_type == 'KCF' and hasattr(cv2, 'TrackerKCF_create'):
+                return cv2.TrackerKCF_create()
+            elif tracker_type == 'MEDIANFLOW' and hasattr(cv2, 'TrackerMedianFlow_create'):
+                return cv2.TrackerMedianFlow_create()
+            
+            # Legacy trackers (older OpenCV versions)
+            elif hasattr(cv2, 'legacy'):
+                if tracker_type == 'legacy_CSRT' and hasattr(cv2.legacy, 'TrackerCSRT_create'):
+                    return cv2.legacy.TrackerCSRT_create()
+                elif tracker_type == 'legacy_KCF' and hasattr(cv2.legacy, 'TrackerKCF_create'):
+                    return cv2.legacy.TrackerKCF_create()
+            
+            # Generic tracker
+            elif hasattr(cv2, 'Tracker_create'):
+                return cv2.Tracker_create()
+                
+        except Exception as e:
+            print(f"Error creating tracker: {e}")
+        
+        # If no tracker available, create a dummy tracker
+        class DummyTracker:
+            def __init__(self):
+                self.bbox = None
+            def init(self, frame, bbox):
+                self.bbox = bbox
+                return True
+            def update(self, frame):
+                return True, self.bbox if self.bbox else (0, 0, 100, 100)
+        
+        return DummyTracker()
+    
+    def init_tracker(self, frame, bbox, label="Object", confidence=1.0):
+        """Initialize a new tracker for an object"""
+        tracker = self.create_tracker()
+        try:
+            if tracker and tracker.init(frame, bbox):
+                obj = TrackedObject(tracker, bbox, label, confidence)
+                self.tracked_objects.append(obj)
+                return obj
+        except Exception as e:
+            print(f"Error initializing tracker: {e}")
+        return None
+    
+    def update(self, frame):
+        """Update all tracked objects"""
+        if not self.tracked_objects:
+            return []
+        
+        updated_objects = []
+        objects_to_remove = []
+        
+        self.mutex.lock()
+        try:
+            for obj in self.tracked_objects:
+                try:
+                    success, bbox = obj.tracker.update(frame)
+                    if success:
+                        # Convert to tuple of ints
+                        bbox = tuple(map(int, bbox))
+                        obj.update(bbox)
+                        updated_objects.append(obj)
+                        obj.frames_since_update = 0
+                    else:
+                        obj.frames_since_update += 1
+                        # Remove if lost for too long
+                        if obj.frames_since_update > 30:  # ~1 second at 30fps
+                            objects_to_remove.append(obj)
+                except Exception as e:
+                    # If tracker fails, remove it
+                    objects_to_remove.append(obj)
+            
+            # Remove lost objects
+            for obj in objects_to_remove:
+                if obj in self.tracked_objects:
+                    self.tracked_objects.remove(obj)
+            
+        finally:
+            self.mutex.unlock()
+        
+        return updated_objects
+    
+    def get_object_at_position(self, x, y, threshold=50):
+        """Find tracked object near position"""
+        for obj in self.tracked_objects:
+            bbox = obj.bbox
+            center_x = bbox[0] + bbox[2] // 2
+            center_y = bbox[1] + bbox[3] // 2
+            distance = ((center_x - x) ** 2 + (center_y - y) ** 2) ** 0.5
+            if distance < threshold:
+                return obj
+        return None
+    
+    def draw_tracks(self, frame, show_trail=True, show_bbox=True, show_label=True):
+        """Draw tracked objects on frame"""
+        for obj in self.tracked_objects:
+            bbox = obj.bbox
+            x, y, w, h = bbox
+            
+            # Draw bounding box
+            if show_bbox:
+                cv2.rectangle(frame, (x, y), (x+w, y+h), obj.color, 2)
+                
+                # Draw confidence
+                if obj.confidence > 0.5:
+                    cv2.rectangle(frame, (x, y-20), (x+80, y-5), obj.color, -1)
+                    cv2.putText(frame, f"{obj.label} {obj.confidence:.2f}", 
+                               (x+5, y-8), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255,255,255), 1)
+            
+            # Draw trail
+            if show_trail and len(obj.trail) > 1:
+                points = np.array(obj.trail, dtype=np.int32).reshape((-1, 1, 2))
+                cv2.polylines(frame, [points], False, obj.color, 2)
+                
+                # Draw predicted position
+                predicted = obj.predict_next_position()
+                px, py, pw, ph = map(int, predicted)
+                cv2.rectangle(frame, (px, py), (px+pw, py+ph), obj.color, 1, cv2.LINE_DASHED)
+            
+            # Draw ID
+            if show_label:
+                cv2.putText(frame, f"ID:{obj.id}", (x, y+h+15), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.4, obj.color, 1)
+    
+    def clear(self):
+        """Clear all tracked objects"""
+        self.tracked_objects = []
+        self.next_id = 0
+
+class FaceTracker(AdvancedTracker):
+    """Specialized face tracker with recognition capabilities"""
+    
+    def __init__(self, max_faces=10, recognition_model=None):
+        super().__init__(tracker_type='auto', max_objects=max_faces)  # Changed to 'auto'
+        self.face_encodings = {}
+        self.face_names = {}
+        self.recognition_model = recognition_model
+        self.face_detector = cv2.CascadeClassifier(
+            cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+        )
+        self.eye_detector = cv2.CascadeClassifier(
+            cv2.data.haarcascades + 'haarcascade_eye.xml'
+        )
+        
+    def detect_faces(self, frame):
+        """Detect faces in frame"""
+        try:
+            gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+            faces = self.face_detector.detectMultiScale(gray, 1.1, 5, 
+                                                        minSize=(60, 60))
+            
+            # Detect eyes for each face
+            detected_faces = []
+            for (x, y, w, h) in faces:
+                roi_gray = gray[y:y+h, x:x+w]
+                eyes = self.eye_detector.detectMultiScale(roi_gray)
+                
+                # Only consider faces with eyes
+                if len(eyes) >= 1:
+                    confidence = min(1.0, len(eyes) / 2.0)
+                    detected_faces.append((x, y, w, h, confidence))
+            
+            return detected_faces
+        except Exception as e:
+            print(f"Error detecting faces: {e}")
+            return []
+    
+    def update_faces(self, frame, detected_faces):
+        """Update tracked faces with new detections"""
+        # Track existing faces
+        self.update(frame)
+        
+        # Match new detections to existing objects
+        for (x, y, w, h, confidence) in detected_faces:
+            bbox = (x, y, w, h)
+            
+            # Check if this face is already tracked
+            matched = False
+            for obj in self.tracked_objects:
+                if self._iou(bbox, obj.bbox) > 0.3:
+                    # Re-initialize tracker for better tracking
+                    new_tracker = self.create_tracker()
+                    if new_tracker and new_tracker.init(frame, bbox):
+                        obj.tracker = new_tracker
+                        obj.update(bbox, confidence)
+                        matched = True
+                        break
+            
+            # New face
+            if not matched and len(self.tracked_objects) < self.max_objects:
+                self.init_tracker(frame, bbox, "Face", confidence)
+    
+    def _iou(self, bbox1, bbox2):
+        """Calculate Intersection over Union"""
+        x1, y1, w1, h1 = bbox1
+        x2, y2, w2, h2 = bbox2
+        
+        x_left = max(x1, x2)
+        y_top = max(y1, y2)
+        x_right = min(x1 + w1, x2 + w2)
+        y_bottom = min(y1 + h1, y2 + h2)
+        
+        if x_right < x_left or y_bottom < y_top:
+            return 0.0
+        
+        intersection = (x_right - x_left) * (y_bottom - y_top)
+        area1 = w1 * h1
+        area2 = w2 * h2
+        union = area1 + area2 - intersection
+        
+        return intersection / union if union > 0 else 0        
+
+class VisionMode(Enum):
+    """Vision processing modes"""
+    NORMAL = "normal"
+    FACES = "faces"
+    OBJECTS = "objects"
+    QR = "qr"
+    TEXT = "text"
+    EDGE = "edge"
+    SEGMENT = "segment"
+
+# ==================== Vision Processing Engine ====================
+
+class VisionEngine(QThread):
+    """Background thread for vision processing"""
+    
+    frame_ready = Signal(QImage)
+    result_ready = Signal(VisionResult)
+    status_changed = Signal(str)
+    frame_with_tracking_ready = Signal(QImage, object)  # New signal for tracking
+    
+    
+    def __init__(self):
+        super().__init__()
+        self.camera = None
+        self.running = False
+        self.mode = VisionMode.NORMAL
+        self.mutex = QMutex()
+        self.face_cascade = None
+        self.object_detector = None
+        self.qr_detector = None
+        
+        # Performance tracking
+        self.frame_count = 0
+        self.fps_timer = QElapsedTimer()
+        self.fps = 0.0
+        
+        # Tracking data
+        self.tracking_active = False
+        self.face_tracker = None
+        self.advanced_tracker = None
+        self.tracking_frame = None
+        
+        # Initialize detectors
+        self._init_detectors()
+        
+    def set_tracking_data(self, face_tracker, advanced_tracker, tracking_active):
+        """Set tracking data from UI"""
+        self.face_tracker = face_tracker
+        self.advanced_tracker = advanced_tracker
+        self.tracking_active = tracking_active    
+        
+    def _init_detectors(self):
+        """Initialize computer vision detectors"""
+        try:
+            # Face detection
+            face_cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+            self.face_cascade = cv2.CascadeClassifier(face_cascade_path)
+            
+            # QR code detector
+            self.qr_detector = cv2.QRCodeDetector()
+            
+            # Initialize object detector (using pre-trained MobileNet SSD)
+            self.object_detector = None  # Would load model here
+            self.status_changed.emit("Vision engine initialized")
+            
+        except Exception as e:
+            self.status_changed.emit(f"Error initializing detectors: {str(e)}")
+    
+    def start_camera(self, camera_id: int = 0):
+        """Start the camera"""
+        self.mutex.lock()
+        try:
+            if self.camera is not None:
+                self.camera.release()
+            
+            self.camera = cv2.VideoCapture(camera_id)
+            self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+            self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+            self.camera.set(cv2.CAP_PROP_FPS, 30)
+            
+            self.running = True
+            self.fps_timer.start()
+            self.frame_count = 0
+            
+            if not self.isRunning():
+                self.start()
+                
+            self.status_changed.emit(f"Camera {camera_id} started")
+            
+        except Exception as e:
+            self.status_changed.emit(f"Error starting camera: {str(e)}")
+        finally:
+            self.mutex.unlock()
+    
+    def stop_camera(self):
+        """Stop the camera"""
+        self.mutex.lock()
+        self.running = False
+        if self.camera:
+            self.camera.release()
+            self.camera = None
+        self.mutex.unlock()
+        self.status_changed.emit("Camera stopped")
+    
+    def set_mode(self, mode: VisionMode):
+        """Set vision processing mode"""
+        self.mode = mode
+        self.status_changed.emit(f"Mode: {mode.value}")
+    
+    def run(self):
+        """Main processing loop"""
+        while self.running:
+            self.mutex.lock()
+            if self.camera is None or not self.camera.isOpened():
+                self.mutex.unlock()
+                self.msleep(10)
+                continue
+        
+            ret, frame = self.camera.read()
+            self.mutex.unlock()
+        
+            if not ret:
+                continue
+        
+            # Process frame
+            processed_frame, result = self._process_frame(frame)
+        
+            # Update FPS
+            self.frame_count += 1
+            if self.fps_timer.elapsed() >= 1000:
+                self.fps = self.frame_count * 1000 / self.fps_timer.elapsed()
+                self.frame_count = 0
+                self.fps_timer.restart()
+            result.fps = self.fps
+        
+            # Convert to QImage
+            height, width, channel = processed_frame.shape
+            bytes_per_line = 3 * width
+            qimage = QImage(processed_frame.data, width, height, bytes_per_line, QImage.Format_RGB888)
+        
+            # Emit signals
+            self.frame_ready.emit(qimage)
+            self.result_ready.emit(result)
+        
+            # Process tracking in the background thread
+            if self.tracking_active and self.face_tracker and self.advanced_tracker:
+                try:
+                    # Clone frame for tracking
+                    tracking_frame = processed_frame.copy()
+                
+                    # Run tracking
+                    face_count = 0
+                    obj_count = 0
+                
+                    # Face tracking
+                    if self.face_tracker:
+                        detected_faces = self.face_tracker.detect_faces(tracking_frame)
+                        if detected_faces:
+                            self.face_tracker.update_faces(tracking_frame, detected_faces)
+                        else:
+                            self.face_tracker.update(tracking_frame)
+                        face_count = len(self.face_tracker.tracked_objects)
+                    
+                        if face_count > 0:
+                            self.face_tracker.draw_tracks(tracking_frame, show_trail=True, show_bbox=True)
+                
+                    # Object tracking
+                    if self.advanced_tracker:
+                        self.advanced_tracker.update(tracking_frame)
+                        obj_count = len(self.advanced_tracker.tracked_objects)
+                    
+                        if obj_count > 0:
+                            self.advanced_tracker.draw_tracks(tracking_frame, show_trail=True, show_bbox=True)
+                
+                    # Emit tracking frame
+                    if face_count > 0 or obj_count > 0:
+                        tracking_qimage = QImage(tracking_frame.data, width, height, bytes_per_line, QImage.Format_RGB888)
+                        self.frame_with_tracking_ready.emit(tracking_qimage, (face_count, obj_count))
+                    
+                except Exception as e:
+                    print(f"Tracking error in engine: {e}")
+        
+            self.msleep(10)  # Control frame rate
+    
+    def _process_frame(self, frame: np.ndarray) -> Tuple[np.ndarray, VisionResult]:
+        """Process a single frame based on current mode"""
+        result = VisionResult()
+        processed = frame.copy()
+        
+        # Convert to RGB for display
+        processed = cv2.cvtColor(processed, cv2.COLOR_BGR2RGB)
+        
+        # Apply different processing modes
+        if self.mode == VisionMode.FACES:
+            processed, result.faces = self._detect_faces(processed)
+        elif self.mode == VisionMode.QR:
+            processed, result.qr_codes = self._scan_qr(processed)
+        elif self.mode == VisionMode.EDGE:
+            processed = self._detect_edges(processed)
+        elif self.mode == VisionMode.TEXT:
+            processed, result.text_detected = self._detect_text(processed)
+        elif self.mode == VisionMode.NORMAL:
+            # Just pass through
+            pass
+        
+        return processed, result
+    
+    def _detect_faces(self, frame: np.ndarray) -> Tuple[np.ndarray, List[Tuple[int, int, int, int]]]:
+        """Detect faces in the frame"""
+        if self.face_cascade is None:
+            return frame, []
+        
+        gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+        faces = self.face_cascade.detectMultiScale(gray, 1.1, 4)
+        
+        for (x, y, w, h) in faces:
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            cv2.putText(frame, f"Face", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        
+        return frame, [(x, y, w, h) for (x, y, w, h) in faces]
+    
+    def _scan_qr(self, frame: np.ndarray) -> Tuple[np.ndarray, List[str]]:
+        """Scan for QR codes and barcodes"""
+        qr_codes = []
+        try:
+            # QR Code detection
+            data, bbox, _ = self.qr_detector.detectAndDecode(frame)
+            if data:
+                qr_codes.append(data)
+                if bbox is not None:
+                    bbox = bbox.astype(int)
+                    cv2.polylines(frame, [bbox], True, (0, 255, 0), 2)
+                    cv2.putText(frame, f"QR: {data}", (bbox[0][0][0], bbox[0][0][1]-10),
+                              cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+            
+            # Barcode detection (using pyzbar if available)
+            try:
+                from pyzbar.pyzbar import decode
+                decoded = decode(cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY))
+                for obj in decoded:
+                    barcode_data = obj.data.decode('utf-8')
+                    qr_codes.append(f"Barcode: {barcode_data}")
+                    points = obj.polygon
+                    if len(points) == 4:
+                        pts = [(p.x, p.y) for p in points]
+                        cv2.polylines(frame, [np.array(pts, dtype=int)], True, (0, 255, 0), 2)
+            except ImportError:
+                pass  # pyzbar not installed
+                
+        except Exception as e:
+            pass
+        
+        return frame, qr_codes
+    
+    def _detect_edges(self, frame: np.ndarray) -> np.ndarray:
+        """Detect edges using Canny"""
+        gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+        edges = cv2.Canny(gray, 50, 150)
+        return cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB)
+    
+    def _detect_text(self, frame: np.ndarray) -> Tuple[np.ndarray, List[str]]:
+        """Detect text in the frame (placeholder)"""
+        # This would use Tesseract or similar
+        return frame, ["Text detection placeholder"]
+
+# ==================== Vision Panel Widget ====================
+
+class VisionPanel(QWidget):
+    """Main vision panel widget"""
+    
+    def __init__(self, live=None, parent=None, runtime_core=None):
+        """
+        Initialize the VisionPanel
+    
+        Args:
+            live: Live instance (optional)
+            parent: QWidget parent (must be a QWidget or None)
+            runtime_core: BusterRuntimeCore instance (optional)
+        """
+        # FIXED: Handle case where runtime_core is passed as live
+        if live is not None and not isinstance(live, QWidget):
+            # If live is not a QWidget, it might be runtime_core
+            if isinstance(live, BusterRuntimeCore):
+                if runtime_core is None:
+                    runtime_core = live
+                live = None
+            else:
+                # Could be some other object, keep it as live
+                pass
+    
+        # Validate parent
+        if parent is not None and not isinstance(parent, QWidget):
+            # If parent is not a QWidget, it might be runtime_core passed incorrectly
+            if runtime_core is None and isinstance(parent, BusterRuntimeCore):
+                runtime_core = parent
+            parent = None
+    
+        # Now safely call QWidget.__init__ with a valid parent
+        super().__init__(parent)
+    
+        self.live = live
+        self.runtime_core = runtime_core
+    
+        self.vision = VisionEngine()
+        self.current_result = VisionResult()
+        
+        # Initialize new tracking features
+        self.tracking_active = False
+        self.motion_detection_active = False
+        self.face_recognition_active = False
+        self.recording_active = False
+        self.prev_frame = None
+        self.motion_threshold = 5000
+        self.known_faces = {}
+        self.video_writer = None
+        self.recording_filename = ""
+        
+        # Initialize advanced trackers
+        self.advanced_tracker = None
+        self.face_tracker = None
+        self._prev_gray = None
+    
+        self.setup_ui()
+        self.connect_signals()
+        self.apply_dark_theme()
+        
+        # Add enhanced tracking controls
+        self.add_tracking_controls()
+        
+        # Replace frame update with tracking version
+        self.vision.frame_ready.connect(self.update_frame_with_tracking)
+        
+    def connect_signals(self):
+        """Connect signals to slots"""
+        self.start_btn.clicked.connect(self.start_camera)
+        self.stop_btn.clicked.connect(self.stop_camera)
+        self.photo_btn.clicked.connect(self.take_photo)
+    
+        self.vision.result_ready.connect(self.update_info)
+        self.vision.status_changed.connect(self.update_status)
+        # Connect tracking frame signal
+        self.vision.frame_with_tracking_ready.connect(self.update_frame_with_tracking)
+
+    def update_frame_with_tracking(self, qimage: QImage, tracking_data: tuple):
+        """Update frame with tracking data from background thread"""
+        # Update the image display
+        pixmap = QPixmap.fromImage(qimage)
+        scaled = pixmap.scaled(
+            self.image_label.size(),
+            Qt.KeepAspectRatio,
+            Qt.SmoothTransformation
+        )
+        self.image_label.setPixmap(scaled)
+    
+        # Update tracking stats
+        face_count, obj_count = tracking_data
+        self.stats_labels["faces"].setText(f"Faces: {face_count}")
+        self.stats_labels["objects"].setText(f"Objects: {obj_count}")
+    
+        total_objects = face_count + obj_count
+        if total_objects > 0:
+            self.status_label.setText(f"🎯 Tracking {total_objects} objects ({face_count} faces, {obj_count} objects)")
+            self.status_label.setStyleSheet("color: #4ec9b0; font-weight: bold;")
+        else:
+            self.status_label.setText("🔍 No objects detected")
+            self.status_label.setStyleSheet("color: #dcdcaa; font-weight: bold;")    
+        
+    def setup_ui(self):
+        """Setup the user interface"""
+        layout = QVBoxLayout(self)
+        layout.setSpacing(10)
+        layout.setContentsMargins(10, 10, 10, 10)
+        
+        # ===== Header =====
+        header_widget = QWidget()
+        header_layout = QHBoxLayout(header_widget)
+        header_layout.setContentsMargins(0, 0, 0, 0)
+        
+        title_label = QLabel("👁️ Buster Vision")
+        title_label.setStyleSheet("font-size: 16pt; font-weight: bold; color: #ffffff;")
+        header_layout.addWidget(title_label)
+        
+        header_layout.addStretch()
+        
+        # Status indicator
+        self.status_indicator = QLabel("● Ready")
+        self.status_indicator.setStyleSheet("color: #4ec9b0; font-weight: bold;")
+        header_layout.addWidget(self.status_indicator)
+        
+        # FPS display
+        self.fps_label = QLabel("FPS: 0.0")
+        self.fps_label.setStyleSheet("color: #569cd6; font-weight: bold;")
+        header_layout.addWidget(self.fps_label)
+        
+        layout.addWidget(header_widget)
+        
+        # ===== Main Content =====
+        content_splitter = QSplitter(Qt.Vertical)
+        layout.addWidget(content_splitter, 1)
+        
+        # Image display
+        self.image_label = QLabel("Camera not started")
+        self.image_label.setAlignment(Qt.AlignCenter)
+        self.image_label.setMinimumSize(640, 480)
+        self.image_label.setStyleSheet("""
+            QLabel {
+                background-color: #1a1a1a;
+                border: 2px solid #333333;
+                border-radius: 8px;
+                color: #666666;
+            }
+        """)
+        content_splitter.addWidget(self.image_label)
+        
+        # Bottom section with controls and info
+        bottom_widget = QWidget()
+        bottom_layout = QVBoxLayout(bottom_widget)
+        bottom_layout.setSpacing(8)
+        bottom_layout.setContentsMargins(0, 0, 0, 0)
+        
+        # Control buttons
+        button_layout = QHBoxLayout()
+        
+        # Camera controls
+        self.start_btn = QPushButton("▶ Start")
+        self.start_btn.setStyleSheet(self.get_button_style("#4ec9b0"))
+        button_layout.addWidget(self.start_btn)
+        
+        self.stop_btn = QPushButton("⏹ Stop")
+        self.stop_btn.setStyleSheet(self.get_button_style("#f44747"))
+        button_layout.addWidget(self.stop_btn)
+        
+        self.photo_btn = QPushButton("📸 Photo")
+        self.photo_btn.setStyleSheet(self.get_button_style("#569cd6"))
+        button_layout.addWidget(self.photo_btn)
+        
+        separator = QFrame()
+        separator.setFrameShape(QFrame.VLine)
+        separator.setFrameShadow(QFrame.Sunken)
+        separator.setStyleSheet("background-color: #333333;")
+        button_layout.addWidget(separator)
+        
+        # Mode buttons
+        modes = [
+            ("👤 Faces", VisionMode.FACES),
+            ("📦 Objects", VisionMode.OBJECTS),
+            ("📱 QR", VisionMode.QR),
+            ("📝 Text", VisionMode.TEXT),
+            ("⚡ Edge", VisionMode.EDGE),
+            ("🔄 Normal", VisionMode.NORMAL),
+        ]
+        
+        for label, mode in modes:
+            btn = QPushButton(label)
+            btn.setCheckable(True)
+            btn.setStyleSheet("""
+                QPushButton {
+                    background-color: #2d2d2d;
+                    color: #cccccc;
+                    border: 2px solid transparent;
+                    padding: 6px 12px;
+                    border-radius: 4px;
+                }
+                QPushButton:hover {
+                    background-color: #3d3d3d;
+                }
+                QPushButton:checked {
+                    border-color: #4ec9b0;
+                    background-color: #2d4a3b;
+                }
+            """)
+            btn.clicked.connect(lambda checked, m=mode: self.set_vision_mode(m))
+            button_layout.addWidget(btn)
+            setattr(self, f"mode_{mode.value}_btn", btn)
+        
+        button_layout.addStretch()
+        bottom_layout.addLayout(button_layout)
+        
+        # Info display
+        info_widget = QWidget()
+        info_layout = QHBoxLayout(info_widget)
+        info_layout.setSpacing(10)
+        info_layout.setContentsMargins(0, 0, 0, 0)
+        
+        # Info text
+        self.info_text = QTextEdit()
+        self.info_text.setReadOnly(True)
+        self.info_text.setMaximumHeight(100)
+        self.info_text.setStyleSheet("""
+            QTextEdit {
+                background-color: #1a1a1a;
+                color: #d4d4d4;
+                border: 1px solid #333333;
+                border-radius: 4px;
+                font-family: 'Consolas', monospace;
+                font-size: 9pt;
+            }
+        """)
+        info_layout.addWidget(self.info_text)
+        
+        # Stats panel
+        stats_widget = QWidget()
+        stats_layout = QVBoxLayout(stats_widget)
+        stats_layout.setSpacing(2)
+        stats_layout.setContentsMargins(0, 0, 0, 0)
+        
+        self.stats_labels = {}
+        stats_items = [
+            ("Faces", "faces", "0"),
+            ("Objects", "objects", "0"),
+            ("QR Codes", "qr_codes", "0"),
+            ("Barcodes", "barcodes", "0"),
+        ]
+        
+        for label, key, default in stats_items:
+            item_label = QLabel(f"{label}: {default}")
+            item_label.setStyleSheet("color: #888888; font-size: 9pt;")
+            stats_layout.addWidget(item_label)
+            self.stats_labels[key] = item_label
+        
+        info_layout.addWidget(stats_widget)
+        bottom_layout.addWidget(info_widget)
+        
+        content_splitter.addWidget(bottom_widget)
+        content_splitter.setSizes([500, 200])
+        
+        # Status bar
+        status_bar = QStatusBar()
+        status_bar.setStyleSheet("""
+            QStatusBar {
+                background-color: #252525;
+                color: #888888;
+                border-top: 1px solid #333333;
+                padding: 2px 5px;
+            }
+        """)
+        self.status_label = QLabel("Ready")
+        status_bar.addWidget(self.status_label)
+        status_bar.addPermanentWidget(QLabel("✨ Vision v1.0"))
+        layout.addWidget(status_bar)
+        
+    def connect_signals(self):
+        """Connect signals to slots"""
+        self.start_btn.clicked.connect(self.start_camera)
+        self.stop_btn.clicked.connect(self.stop_camera)
+        self.photo_btn.clicked.connect(self.take_photo)
+    
+        # Only connect result and status - frame is handled separately
+        self.vision.result_ready.connect(self.update_info)
+        self.vision.status_changed.connect(self.update_status)
+        
+    def apply_dark_theme(self):
+        """Apply dark theme to the widget"""
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #1e1e1e;
+                color: #d4d4d4;
+                font-family: 'Segoe UI', 'Consolas', monospace;
+            }
+            QPushButton {
+                background-color: #2d2d2d;
+                color: #cccccc;
+                border: none;
+                padding: 6px 14px;
+                border-radius: 4px;
+                font-size: 9pt;
+            }
+            QPushButton:hover {
+                background-color: #3d3d3d;
+            }
+            QPushButton:pressed {
+                background-color: #4d4d4d;
+            }
+            QSplitter::handle {
+                background-color: #333333;
+            }
+            QSplitter::handle:hover {
+                background-color: #4ec9b0;
+            }
+        """)
+    
+    def get_button_style(self, color: str) -> str:
+        """Get style for colored buttons"""
+        return f"""
+            QPushButton {{
+                background-color: {color};
+                color: #1e1e1e;
+                padding: 6px 14px;
+                border-radius: 4px;
+                font-weight: bold;
+            }}
+            QPushButton:hover {{
+                background-color: {color}cc;
+            }}
+        """
+        
+    def closeEvent(self, event):
+        """Handle close event - properly cleanup threads"""
+        # Stop camera
+        if hasattr(self, 'vision') and self.vision is not None:
+            self.vision.stop_camera()
+            self.vision.running = False
+            self.vision.quit()
+            self.vision.wait()
+            self.vision = None
+
+        # Stop recording
+        if hasattr(self, 'recording_active') and self.recording_active:
+            self.stop_recording()
+
+        # Clear trackers
+        if hasattr(self, 'advanced_tracker') and self.advanced_tracker:
+            self.advanced_tracker.clear()
+        if hasattr(self, 'face_tracker') and self.face_tracker:
+            self.face_tracker.clear()
+
+        # Save settings
+        self.save_settings()
+        if hasattr(self, 'recording_timer'):
+            self.recording_timer.stop()
+
+        event.accept() 
+
+    def save_settings(self):
+        """Save current settings"""
+        settings = {
+            'speed': getattr(self, 'speed_slider', QSlider()).value() if hasattr(self, 'speed_slider') else 180,
+            'volume': getattr(self, 'volume_slider', QSlider()).value() if hasattr(self, 'volume_slider') else 80,
+            'motion_threshold': self.motion_threshold if hasattr(self, 'motion_threshold') else 5000,
+        }
+    
+        try:
+            with open("vision_settings.json", 'w') as f:
+                json.dump(settings, f, indent=2)
+        except Exception as e:
+            print(f"Error saving settings: {e}")        
+    
+    
+    @Slot(VisionResult)
+    def update_info(self, result: VisionResult):
+        """Update the info display"""
+        self.current_result = result
+        
+        # Update text info
+        info_text = []
+        if result.faces:
+            info_text.append(f"👤 Faces: {len(result.faces)}")
+        if result.objects:
+            info_text.append(f"📦 Objects: {len(result.objects)}")
+        if result.qr_codes:
+            info_text.append(f"📱 QR Codes: {len(result.qr_codes)}")
+        if result.barcodes:
+            info_text.append(f"📊 Barcodes: {len(result.barcodes)}")
+        if result.text_detected:
+            info_text.append(f"📝 Text: {len(result.text_detected)}")
+        
+        if info_text:
+            self.info_text.setText("\n".join(info_text))
+        
+        # Update stats
+        self.stats_labels["faces"].setText(f"Faces: {len(result.faces)}")
+        self.stats_labels["objects"].setText(f"Objects: {len(result.objects)}")
+        self.stats_labels["qr_codes"].setText(f"QR Codes: {len(result.qr_codes)}")
+        self.stats_labels["barcodes"].setText(f"Barcodes: {len(result.barcodes)}")
+    
+    @Slot(str)
+    def update_status(self, status: str):
+        """Update status display"""
+        self.status_label.setText(status)
+        
+        if "error" in status.lower():
+            self.status_indicator.setText("● Error")
+            self.status_indicator.setStyleSheet("color: #f44747; font-weight: bold;")
+        elif "started" in status.lower() or "running" in status.lower():
+            self.status_indicator.setText("● Running")
+            self.status_indicator.setStyleSheet("color: #4ec9b0; font-weight: bold;")
+        else:
+            self.status_indicator.setText("● Ready")
+            self.status_indicator.setStyleSheet("color: #4ec9b0; font-weight: bold;")
+    
+    @Slot()
+    def start_camera(self):
+        """Start the camera"""
+        # Recreate vision engine if it was destroyed
+        if self.vision is None:
+            self.vision = VisionEngine()
+            self.vision.frame_ready.connect(self.update_frame_with_tracking)
+            self.vision.result_ready.connect(self.update_info)
+            self.vision.status_changed.connect(self.update_status)
+    
+        self.vision.start_camera(0)
+        self.start_btn.setEnabled(False)
+        self.stop_btn.setEnabled(True)
+    
+    @Slot()
+    def stop_camera(self):
+        """Stop the camera"""
+        self.vision.stop_camera()
+        self.start_btn.setEnabled(True)
+        self.stop_btn.setEnabled(False)
+        self.image_label.setText("Camera stopped")
+        self.image_label.setStyleSheet("""
+            QLabel {
+                background-color: #1a1a1a;
+                border: 2px solid #333333;
+                border-radius: 8px;
+                color: #666666;
+            }
+        """)
+    
+        # Stop the thread properly
+        if hasattr(self, 'vision'):
+            self.vision.running = False
+            self.vision.quit()
+            self.vision.wait()
+            self.vision = None
+    
+    @Slot()
+    def take_photo(self):
+        """Take a photo"""
+        if self.vision.running:
+            import os
+            screenshots_dir = self._get_screenshots_dir()
+        
+            self.vision.mutex.lock()
+            if self.vision.camera and self.vision.camera.isOpened():
+                ret, frame = self.vision.camera.read()
+                if ret:
+                    timestamp = QDateTime.currentDateTime().toString("yyyy-MM-dd_hh-mm-ss")
+                    filename = f"vision_photo_{timestamp}.jpg"
+                    full_path = os.path.join(screenshots_dir, filename)
+                    cv2.imwrite(full_path, cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
+                    self.status_label.setText(f"Photo saved: {full_path}")
+                    self.info_text.append(f"📸 Photo: {full_path}")
+            self.vision.mutex.unlock()
+    
+    @Slot()
+    def set_vision_mode(self, mode: VisionMode):
+        """Set the vision processing mode"""
+        self.vision.set_mode(mode)
+        
+        # Update button states
+        for mode_enum in VisionMode:
+            btn = getattr(self, f"mode_{mode_enum.value}_btn", None)
+            if btn:
+                btn.setChecked(mode == mode_enum)
+                
+        # ==================== NEW: Live Tracking Features ====================
+    
+    @Slot()
+    def start_live_tracking(self):
+        """Start live object tracking"""
+        if not self.vision.running:
+            self.start_camera()
+        
+        self.set_vision_mode(VisionMode.OBJECTS)
+        self.update_status("Live tracking started")
+        self.info_text.append("🎯 Live tracking activated")
+        
+        if hasattr(self, 'tracking_status_label'):
+            self.tracking_status_label.setText("● Tracking")
+            self.tracking_status_label.setStyleSheet("color: #4ec9b0; font-weight: bold;")
+    
+    @Slot()
+    def stop_live_tracking(self):
+        """Stop live object tracking"""
+        self.set_vision_mode(VisionMode.NORMAL)
+        self.update_status("Live tracking stopped")
+        self.info_text.append("⏹ Live tracking stopped")
+        
+        if hasattr(self, 'tracking_status_label'):
+            self.tracking_status_label.setText("● Idle")
+            self.tracking_status_label.setStyleSheet("color: #888888; font-weight: bold;")
+    
+    @Slot()
+    def toggle_tracking(self):
+        """Toggle live tracking on/off"""
+        if hasattr(self, 'tracking_active') and self.tracking_active:
+            self.stop_live_tracking()
+            self.tracking_active = False
+            if hasattr(self, 'track_btn'):
+                self.track_btn.setText("🎯 Start Tracking")
+        else:
+            self.start_live_tracking()
+            self.tracking_active = True
+            if hasattr(self, 'track_btn'):
+                self.track_btn.setText("⏹ Stop Tracking")
+    
+    # ==================== NEW: Motion Detection ====================
+    
+    @Slot()
+    def start_motion_detection(self):
+        """Start motion detection"""
+        self.motion_detection_active = True
+        self.update_status("Motion detection active")
+        self.info_text.append("🚨 Motion detection started")
+        self.prev_frame = None
+    
+    @Slot()
+    def stop_motion_detection(self):
+        """Stop motion detection"""
+        self.motion_detection_active = False
+        self.update_status("Motion detection stopped")
+        self.info_text.append("⏹ Motion detection stopped")
+    
+    # ==================== NEW: Face Recognition ====================
+    
+    @Slot()
+    def start_face_recognition(self):
+        """Start face recognition with known faces"""
+        self.face_recognition_active = True
+        self.update_status("Face recognition active")
+        self.info_text.append("👤 Face recognition started")
+        self.known_faces = {}
+    
+    @Slot()
+    def stop_face_recognition(self):
+        """Stop face recognition"""
+        self.face_recognition_active = False
+        self.update_status("Face recognition stopped")
+        self.info_text.append("⏹ Face recognition stopped")
+    
+    # ==================== NEW: Recording and Export ====================
+    
+    
+    @Slot()
+    def start_recording(self):
+        """Start recording video"""
+        if not self.vision.running:
+            self.start_camera()
+    
+        import os
+        recordings_dir = self._get_recordings_dir()
+        timestamp = QDateTime.currentDateTime().toString("yyyy-MM-dd_hh-mm-ss")
+        filename = f"vision_recording_{timestamp}.avi"
+        self.recording_filename = os.path.join(recordings_dir, filename)
+    
+        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        self.video_writer = cv2.VideoWriter(
+            self.recording_filename,
+            fourcc,
+            30.0,
+            (640, 480)
+        )
+    
+        self.recording_active = True
+        if hasattr(self, 'record_btn'):
+            self.record_btn.setText("⏹ Stop Recording")
+        self.update_status(f"Recording: {self.recording_filename}")
+        self.info_text.append(f"🎥 Recording started: {self.recording_filename}")
+    
+    @Slot()
+    def stop_recording(self):
+        """Stop recording video"""
+        self.recording_active = False
+        if hasattr(self, 'video_writer') and self.video_writer:
+            self.video_writer.release()
+            self.video_writer = None
+        
+        if hasattr(self, 'record_btn'):
+            self.record_btn.setText("📹 Record")
+        self.update_status(f"Recording saved: {self.recording_filename}")
+        self.info_text.append(f"💾 Recording saved: {self.recording_filename}")
+    
+    @Slot()
+    def toggle_recording(self):
+        """Toggle video recording on/off"""
+        if hasattr(self, 'recording_active') and self.recording_active:
+            self.stop_recording()
+        else:
+            self.start_recording()
+    
+    # ==================== NEW: Screen Capture ====================
+    
+    
+    @Slot()
+    def capture_screenshot(self):
+        """Capture and save screenshot"""
+        if self.vision.running and self.current_result:
+            import os
+            screenshots_dir = self._get_screenshots_dir()
+        
+            timestamp = QDateTime.currentDateTime().toString("yyyy-MM-dd_hh-mm-ss")
+            filename = f"vision_screenshot_{timestamp}.png"
+            full_path = os.path.join(screenshots_dir, filename)
+        
+            self.vision.mutex.lock()
+            if self.vision.camera and self.vision.camera.isOpened():
+                ret, frame = self.vision.camera.read()
+                if ret:
+                    cv2.imwrite(full_path, cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
+                    self.update_status(f"Screenshot saved: {full_path}")
+                    self.info_text.append(f"📸 Screenshot: {full_path}")
+            self.vision.mutex.unlock()
+
+    @Slot()
+    def open_recordings_folder(self):
+        """Open the recordings folder in file explorer"""
+        import os
+        import subprocess
+        folder = self._get_recordings_dir()
+        if os.name == 'nt':  # Windows
+            subprocess.Popen(f'explorer "{folder}"')
+        else:  # Mac/Linux
+            subprocess.Popen(f'open "{folder}"' if os.name == 'darwin' else f'xdg-open "{folder}"', shell=True)
+
+    @Slot()
+    def open_screenshots_folder(self):
+        """Open the screenshots folder in file explorer"""
+        import os
+        import subprocess
+        folder = self._get_screenshots_dir()
+        if os.name == 'nt':  # Windows
+            subprocess.Popen(f'explorer "{folder}"')
+        else:  # Mac/Linux
+            subprocess.Popen(f'open "{folder}"' if os.name == 'darwin' else f'xdg-open "{folder}"', shell=True)
+
+        # ==================== HELPER METHODS ====================
+    
+    def detect_motion(self, frame: np.ndarray) -> bool:
+        """Detect motion in frame - called internally"""
+        if not hasattr(self, 'motion_detection_active') or not self.motion_detection_active:
+            return False
+        
+        # Convert to grayscale and blur
+        gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+        gray = cv2.GaussianBlur(gray, (21, 21), 0)
+        
+        if self.prev_frame is None:
+            self.prev_frame = gray
+            return False
+        
+        # Compute difference
+        diff = cv2.absdiff(self.prev_frame, gray)
+        thresh = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)[1]
+        
+        # Dilate to fill gaps
+        thresh = cv2.dilate(thresh, None, iterations=2)
+        
+        # Find contours
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        
+        motion_detected = False
+        for contour in contours:
+            if cv2.contourArea(contour) > self.motion_threshold:
+                motion_detected = True
+                (x, y, w, h) = cv2.boundingRect(contour)
+                cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+                cv2.putText(frame, "Motion!", (x, y-10), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+        
+        self.prev_frame = gray
+        return motion_detected
+    
+    def recognize_faces(self, frame: np.ndarray) -> List[str]:
+        """Recognize faces in frame - called internally"""
+        if not hasattr(self, 'face_recognition_active') or not self.face_recognition_active:
+            return []
+        
+        # Placeholder - would use face_recognition library
+        # For now, just return detected face count
+        if hasattr(self.current_result, 'faces') and self.current_result.faces:
+            # In a real implementation, you'd compare encodings here
+            # For now, return "Unknown" for each detected face
+            return ["Unknown"] * len(self.current_result.faces)
+        return []
+    
+    def update_performance_stats(self):
+        """Update performance statistics - called internally"""
+        if hasattr(self.vision, 'fps'):
+            fps = self.vision.fps
+            self.fps_label.setText(f"FPS: {fps:.1f}")
+            
+            # Color code based on performance
+            if fps > 25:
+                self.fps_label.setStyleSheet("color: #4ec9b0; font-weight: bold;")
+            elif fps > 15:
+                self.fps_label.setStyleSheet("color: #dcdcaa; font-weight: bold;")
+            else:
+                self.fps_label.setStyleSheet("color: #f44747; font-weight: bold;")
+    
+    def add_tracking_controls(self):
+        """Add tracking controls to UI - called internally"""
+        try:
+            # Find the button layout (navigate through layout hierarchy)
+            # Get the main layout's bottom widget
+            main_layout = self.layout()
+            content_splitter = main_layout.itemAt(1).widget()
+            bottom_widget = content_splitter.widget(1)
+            bottom_layout = bottom_widget.layout()
+            button_layout = bottom_layout.itemAt(0).layout()
+            
+            # Find the index to insert at (before the stretch)
+            insert_index = button_layout.count() - 1  # Before stretch
+            
+            # Add tracking button
+            self.track_btn = QPushButton("🎯 Advanced Tracking")
+            self.track_btn.setStyleSheet(self.get_button_style("#dcdcaa"))
+            self.track_btn.clicked.connect(self.toggle_advanced_tracking)
+            button_layout.insertWidget(insert_index, self.track_btn)
+            insert_index += 1
+            
+            # Add recording button
+            self.record_btn = QPushButton("📹 Record")
+            self.record_btn.setStyleSheet(self.get_button_style("#f44747"))
+            self.record_btn.clicked.connect(self.toggle_recording)
+            button_layout.insertWidget(insert_index, self.record_btn)
+            insert_index += 1
+            
+            # Add screenshot button
+            self.screenshot_btn = QPushButton("🖼️ Screenshot")
+            self.screenshot_btn.setStyleSheet(self.get_button_style("#569cd6"))
+            self.screenshot_btn.clicked.connect(self.capture_screenshot)
+            button_layout.insertWidget(insert_index, self.screenshot_btn)
+            
+            # Recordings folder button
+            self.open_recordings_btn = QPushButton("📁 Recordings")
+            self.open_recordings_btn.setStyleSheet("""
+                QPushButton {
+                    background-color: #2d2d2d;
+                    color: #4ec9b0;
+                    padding: 6px 12px;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    font-size: 9pt;
+                }
+                QPushButton:hover {
+                    background-color: #3d3d3d;
+                }
+            """)
+            self.open_recordings_btn.clicked.connect(self.open_recordings_folder)
+            button_layout.insertWidget(insert_index, self.open_recordings_btn)
+            insert_index += 1
+        
+            # Screenshots folder button
+            self.open_screenshots_btn = QPushButton("📸 Screenshots")
+            self.open_screenshots_btn.setStyleSheet("""
+                QPushButton {
+                    background-color: #2d2d2d;
+                    color: #dcdcaa;
+                    padding: 6px 12px;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    font-size: 9pt;
+                }
+                QPushButton:hover {
+                    background-color: #3d3d3d;
+                }
+            """)
+            self.open_screenshots_btn.clicked.connect(self.open_screenshots_folder)
+            button_layout.insertWidget(insert_index, self.open_screenshots_btn)
+            insert_index += 1
+            
+            # Add tracking status label
+            self.tracking_status_label = QLabel("● Idle")
+            self.tracking_status_label.setStyleSheet("color: #888888; font-weight: bold;")
+            button_layout.addWidget(self.tracking_status_label)
+            
+            self.info_text.append("🎯 Advanced tracking controls added")
+            
+        except Exception as e:
+            print(f"Error adding tracking controls: {e}")
+            self.info_text.append(f"⚠️ Error adding tracking controls: {e}")
+            
+        # ==================== ADVANCED TRACKING METHODS ====================
+    
+    @Slot()
+    def start_advanced_tracking(self):
+        """Start advanced object tracking with KCF/CSRT - AUTO DETECTS FACES AND OBJECTS"""
+        if not self.vision.running:
+            self.start_camera()
+            # Wait for camera to initialize
+            QTimer.singleShot(500, self._init_advanced_tracker)
+        else:
+            self._init_advanced_tracker()
+            
+        self.tracking_active = True
+
+        # Set tracking data in the vision engine
+        if self.vision:
+            self.vision.tracking_active = True
+            self.vision.face_tracker = self.face_tracker
+            self.vision.advanced_tracker = self.advanced_tracker
+    
+        
+        self.update_status("Advanced tracking started - Auto detecting faces and objects")
+        self.info_text.append("🎯 Advanced object tracking activated")
+        self.info_text.append("👤 Auto face detection enabled - show your face!")
+        self.info_text.append("📦 Auto object detection enabled")
+    
+        if hasattr(self, 'tracking_status_label'):
+            self.tracking_status_label.setText("● Advanced Tracking")
+            self.tracking_status_label.setStyleSheet("color: #4ec9b0; font-weight: bold;")
+    
+        if hasattr(self, 'track_btn'):
+            self.track_btn.setText("⏹ Stop Tracking")
+    
+        # Force initial detection after a short delay
+        QTimer.singleShot(200, self._force_face_detection)
+        QTimer.singleShot(300, self._force_initial_detection)
+    
+    def _init_advanced_tracker(self):
+        """Initialize the advanced tracker with proper face and object detection"""
+        try:
+            self.vision.mutex.lock()
+            if self.vision.camera and self.vision.camera.isOpened():
+                ret, frame = self.vision.camera.read()
+                if ret:
+                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                
+                    # Initialize trackers with auto-detection
+                    self.advanced_tracker = AdvancedTracker(
+                        tracker_type='auto',
+                        max_objects=10
+                    )
+                    self.face_tracker = FaceTracker(max_faces=10)
+                
+                    # DETECT AND TRACK FACES IMMEDIATELY
+                    faces = self.face_tracker.detect_faces(frame_rgb)
+                    if faces:
+                        for (x, y, w, h, conf) in faces:
+                            self.face_tracker.init_tracker(frame_rgb, (x, y, w, h), "Face", conf)
+                        self.info_text.append(f"👤 Found {len(faces)} faces")
+                    else:
+                        self.info_text.append("👤 No faces detected - move closer to camera")
+                
+                    # DETECT AND TRACK OBJECTS IMMEDIATELY
+                    objects = self._detect_new_objects(frame_rgb)
+                    if objects:
+                        for obj in objects:
+                            self.advanced_tracker.init_tracker(
+                                frame_rgb, 
+                                obj['bbox'], 
+                                obj['label'], 
+                                obj['confidence']
+                            )
+                        self.info_text.append(f"📦 Found {len(objects)} objects")
+                    else:
+                        self.info_text.append("📦 No objects detected - try moving something")
+                
+                    self.info_text.append("✅ Advanced trackers initialized - look for colored boxes!")
+            self.vision.mutex.unlock()
+        except Exception as e:
+            self.info_text.append(f"⚠️ Tracker init error: {str(e)}")
+    
+    def _detect_initial_objects(self, frame):
+        """Detect initial objects to track"""
+        try:
+            # Use face detection
+            faces = self.face_tracker.detect_faces(frame)
+            for (x, y, w, h, conf) in faces:
+                self.face_tracker.init_tracker(frame, (x, y, w, h), "Face", conf)
+            
+            # Use object detection (placeholder - would use YOLO or similar)
+            # For now, add some dummy objects for demonstration
+            if not faces:
+                # Create a few dummy trackers at center positions
+                h, w = frame.shape[:2]
+                dummy_positions = [
+                    (w//4, h//4, 50, 50),
+                    (w//2, h//2, 60, 60),
+                    (3*w//4, 3*h//4, 50, 50)
+                ]
+                for pos in dummy_positions:
+                    self.advanced_tracker.init_tracker(
+                        frame, pos, "Object", 0.7
+                    )
+            
+            self.info_text.append(f"📊 Found {len(faces)} initial objects")
+            
+        except Exception as e:
+            self.info_text.append(f"⚠️ Detection error: {str(e)}")
+    
+    @Slot()
+    def stop_advanced_tracking(self):
+        """Stop advanced tracking"""
+        self.tracking_active = False
+        
+        # Clear tracking in the vision engine
+        if self.vision:
+            self.vision.tracking_active = False
+            self.vision.face_tracker = None
+            self.vision.advanced_tracker = None
+        
+        
+        
+        if hasattr(self, 'advanced_tracker'):
+            self.advanced_tracker.clear()
+        if hasattr(self, 'face_tracker'):
+            self.face_tracker.clear()
+        
+        self.update_status("Advanced tracking stopped")
+        self.info_text.append("⏹ Advanced tracking stopped")
+        
+        if hasattr(self, 'tracking_status_label'):
+            self.tracking_status_label.setText("● Idle")
+            self.tracking_status_label.setStyleSheet("color: #888888; font-weight: bold;")
+        
+        if hasattr(self, 'track_btn'):
+            self.track_btn.setText("🎯 Start Tracking")
+    
+    @Slot()
+    def toggle_advanced_tracking(self):
+        """Toggle advanced tracking on/off"""
+        if hasattr(self, 'tracking_active') and self.tracking_active:
+            self.stop_advanced_tracking()
+        else:
+            self.start_advanced_tracking()
+    
+    # ==================== ENHANCED UPDATE FRAME WITH TRACKING ====================
+    
+    
+    @Slot(QImage)
+    def update_frame_with_tracking(self, qimage: QImage):
+        """Enhanced frame update with advanced tracking - AUTO DETECTS FACES AND OBJECTS"""
+        # Update the image display
+        pixmap = QPixmap.fromImage(qimage)
+        scaled = pixmap.scaled(
+            self.image_label.size(),
+            Qt.KeepAspectRatio,
+            Qt.SmoothTransformation
+        )
+        self.image_label.setPixmap(scaled)
+
+        # Update FPS
+        if self.current_result:
+            self.fps_label.setText(f"FPS: {self.current_result.fps:.1f}")
+
+        # Convert QImage to numpy for processing - FIXED
+        try:
+            width = qimage.width()
+            height = qimage.height()
+        
+            # Get the image data as a memoryview and convert to numpy array
+            ptr = qimage.bits()
+        
+            # Determine the correct number of channels
+            bytes_per_line = qimage.bytesPerLine()
+            expected_size = bytes_per_line * height
+        
+            # Read the data
+            arr = np.frombuffer(ptr, dtype=np.uint8)
+        
+            # Check the format and reshape accordingly
+            if qimage.format() == QImage.Format_RGB888:
+                # RGB format - 3 channels
+                arr = arr.reshape(height, width, 3)
+                frame = cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)  # OpenCV uses BGR
+                frame_rgb = cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)  # For tracking, we need RGB
+                frame_rgb = cv2.cvtColor(frame_rgb, cv2.COLOR_BGR2RGB)
+            elif qimage.format() == QImage.Format_RGBA8888:
+                # RGBA format - 4 channels
+                arr = arr.reshape(height, width, 4)
+                frame = cv2.cvtColor(arr, cv2.COLOR_RGBA2RGB)
+                frame_rgb = frame
+            else:
+                # Try to detect format from size
+                if len(arr) == height * width * 3:
+                    arr = arr.reshape(height, width, 3)
+                    frame = cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)
+                    frame_rgb = cv2.cvtColor(arr, cv2.COLOR_RGB2BGR)
+                    frame_rgb = cv2.cvtColor(frame_rgb, cv2.COLOR_BGR2RGB)
+                elif len(arr) == height * width * 4:
+                    arr = arr.reshape(height, width, 4)
+                    frame = cv2.cvtColor(arr, cv2.COLOR_RGBA2RGB)
+                    frame_rgb = frame
+                else:
+                    raise ValueError(f"Unexpected image data size: {len(arr)} bytes for {width}x{height}")
+        
+            # Use frame_rgb for tracking (RGB format)
+            frame = frame_rgb
+        
+        except Exception as e:
+            print(f"Error converting QImage: {e}")
+            return
+    
+        # Handle motion detection
+        if hasattr(self, 'motion_detection_active') and self.motion_detection_active:
+            motion = self.detect_motion(frame.copy())
+            if motion:
+                self.status_label.setText("⚠️ Motion detected!")
+                self.status_label.setStyleSheet("color: #f44747; font-weight: bold;")
+            else:
+                self.status_label.setStyleSheet("color: #888888;")
+    
+        # Handle advanced tracking - CONTINUOUS AUTO DETECTION
+        if hasattr(self, 'tracking_active') and self.tracking_active:
+            try:
+                face_count = 0
+                obj_count = 0
+            
+                # 1. FACE TRACKING - Auto detect and track faces in EVERY frame
+                if hasattr(self, 'face_tracker') and self.face_tracker:
+                    # Detect faces in EVERY frame
+                    detected_faces = self.face_tracker.detect_faces(frame)
+                
+                    # Update trackers with new detections
+                    if detected_faces:
+                        self.face_tracker.update_faces(frame, detected_faces)
+                        face_count = len(self.face_tracker.tracked_objects)
+                    else:
+                        # Still update existing trackers even if no new faces detected
+                        self.face_tracker.update(frame)
+                        face_count = len(self.face_tracker.tracked_objects)
+                
+                    # Draw face tracks with COLORED BOXES
+                    if face_count > 0:
+                        self.face_tracker.draw_tracks(frame, show_trail=True, show_bbox=True)
+                        self.stats_labels["faces"].setText(f"Faces: {face_count}")
+                    else:
+                        self.stats_labels["faces"].setText("Faces: 0")
+            
+                # 2. OBJECT TRACKING - Auto detect and track objects in EVERY frame
+                if hasattr(self, 'advanced_tracker') and self.advanced_tracker:
+                    # Try to detect new objects
+                    new_objects = self._detect_new_objects(frame)
+                
+                    # Add new objects if not already tracked
+                    for obj_data in new_objects:
+                        already_tracked = False
+                        for tracked_obj in self.advanced_tracker.tracked_objects:
+                            if self._iou(obj_data['bbox'], tracked_obj.bbox) > 0.3:
+                                already_tracked = True
+                                break
+                        if not already_tracked and len(self.advanced_tracker.tracked_objects) < 10:
+                            # Start tracking new object with COLORED BOX
+                            self.advanced_tracker.init_tracker(
+                                frame, 
+                                obj_data['bbox'], 
+                                obj_data['label'], 
+                                obj_data['confidence']
+                            )
+                
+                    # Update all trackers
+                    self.advanced_tracker.update(frame)
+                    obj_count = len(self.advanced_tracker.tracked_objects)
+                
+                    # Draw object tracks with COLORED BOXES
+                    if obj_count > 0:
+                        self.advanced_tracker.draw_tracks(frame, show_trail=True, show_bbox=True)
+                        self.stats_labels["objects"].setText(f"Objects: {obj_count}")
+                    else:
+                        self.stats_labels["objects"].setText("Objects: 0")
+            
+                # Update status with tracking info
+                total_objects = face_count + obj_count
+            
+                if total_objects > 0:
+                    self.status_label.setText(f"🎯 Tracking {total_objects} objects ({face_count} faces, {obj_count} objects)")
+                    self.status_label.setStyleSheet("color: #4ec9b0; font-weight: bold;")
+                else:
+                    # If no objects tracked, try to force detection
+                    if self.face_tracker and not face_count:
+                        # Try to detect faces again
+                        detected_faces = self.face_tracker.detect_faces(frame)
+                        if detected_faces:
+                            for (x, y, w, h, conf) in detected_faces:
+                                self.face_tracker.init_tracker(frame, (x, y, w, h), "Face", conf)
+                            self.info_text.append("👤 Found faces!")
+                    self.status_label.setText("🔍 No objects detected - show a face or object")
+                    self.status_label.setStyleSheet("color: #dcdcaa; font-weight: bold;")
+            
+            except Exception as e:
+                print(f"Tracking error: {e}")
+                pass
+    
+        # Handle recording
+        if hasattr(self, 'recording_active') and self.recording_active:
+            if hasattr(self, 'video_writer') and self.video_writer:
+                # Convert back to BGR for writing
+                frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+                self.video_writer.write(frame_bgr)
+
+        # Update performance stats
+        self.update_performance_stats()
+    
+    # ==================== OBJECT DETECTION HELPER ====================
+    
+    def _force_face_detection(self):
+        """Force immediate face detection"""
+        if hasattr(self, 'face_tracker') and self.face_tracker and self.vision.running:
+            self.vision.mutex.lock()
+            if self.vision.camera and self.vision.camera.isOpened():
+                ret, frame = self.vision.camera.read()
+                if ret:
+                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    faces = self.face_tracker.detect_faces(frame_rgb)
+                    for (x, y, w, h, conf) in faces:
+                        self.face_tracker.init_tracker(frame_rgb, (x, y, w, h), "Face", conf)
+                    if faces:
+                        self.info_text.append(f"👤 Forced detection: Found {len(faces)} faces")
+            self.vision.mutex.unlock()
+    
+    
+    def detect_objects(self, frame):
+        """Detect objects using basic methods (placeholder for YOLO)"""
+        detected = []
+        
+        # Detect faces
+        if hasattr(self, 'face_tracker'):
+            faces = self.face_tracker.detect_faces(frame)
+            for (x, y, w, h, conf) in faces:
+                detected.append({
+                    'bbox': (x, y, w, h),
+                    'label': 'Face',
+                    'confidence': conf,
+                    'type': 'face'
+                })
+        
+        # Simple motion-based object detection
+        if hasattr(self, 'motion_detection_active') and self.motion_detection_active:
+            gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+            gray = cv2.GaussianBlur(gray, (21, 21), 0)
+            
+            if hasattr(self, '_prev_gray'):
+                diff = cv2.absdiff(self._prev_gray, gray)
+                thresh = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)[1]
+                thresh = cv2.dilate(thresh, None, iterations=2)
+                contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                
+                for contour in contours:
+                    area = cv2.contourArea(contour)
+                    if area > 1000:  # Minimum area threshold
+                        x, y, w, h = cv2.boundingRect(contour)
+                        detected.append({
+                            'bbox': (x, y, w, h),
+                            'label': 'Moving Object',
+                            'confidence': min(1.0, area / 5000),
+                            'type': 'motion'
+                        })
+            self._prev_gray = gray
+        
+        return detected   
+
+    def _detect_new_objects(self, frame):
+        """Detect new objects to track using multiple methods"""
+        detected_objects = []
+    
+        # Method 1: Detect faces (if not already handled by face_tracker)
+        if hasattr(self, 'face_tracker') and self.face_tracker:
+            faces = self.face_tracker.detect_faces(frame)
+            for (x, y, w, h, conf) in faces:
+                detected_objects.append({
+                    'bbox': (x, y, w, h),
+                    'label': 'Face',
+                    'confidence': conf,
+                    'type': 'face'
+                })
+    
+        # Method 2: Motion-based detection
+        if hasattr(self, 'motion_detection_active') and self.motion_detection_active:
+            gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+            gray = cv2.GaussianBlur(gray, (21, 21), 0)
+        
+            if not hasattr(self, '_prev_gray'):
+                self._prev_gray = gray
+            else:
+                diff = cv2.absdiff(self._prev_gray, gray)
+                thresh = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)[1]
+                thresh = cv2.dilate(thresh, None, iterations=2)
+                contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            
+                for contour in contours:
+                    area = cv2.contourArea(contour)
+                    if area > 1000:  # Minimum area threshold
+                        x, y, w, h = cv2.boundingRect(contour)
+                        # Check if this is likely a person (aspect ratio check)
+                        aspect_ratio = w / h if h > 0 else 0
+                        if 0.3 < aspect_ratio < 1.0:  # Person-like aspect ratio
+                            detected_objects.append({
+                                'bbox': (x, y, w, h),
+                                'label': 'Person',
+                                'confidence': min(1.0, area / 5000),
+                                'type': 'motion'
+                            })
+                self._prev_gray = gray
+    
+        # Method 3: Color-based detection (for specific colors)
+        # This is a simple example - you can add more sophisticated detection
+        if not detected_objects:
+            # If no objects detected, create a few tracker points for demonstration
+            # This ensures there's always something to track
+            h, w = frame.shape[:2]
+            # Only add dummy objects if we have less than 3 tracked objects
+            if hasattr(self, 'advanced_tracker') and len(self.advanced_tracker.tracked_objects) < 3:
+                dummy_positions = [
+                    (w//4, h//4, 50, 50),
+                    (3*w//4, 3*h//4, 50, 50)
+                ]
+                for pos in dummy_positions:
+                    detected_objects.append({
+                        'bbox': pos,
+                        'label': 'Object',
+                        'confidence': 0.5,
+                        'type': 'dummy'
+                    })
+    
+        return detected_objects
+
+    def _iou(self, bbox1, bbox2):
+        """Calculate Intersection over Union for two bounding boxes"""
+        x1, y1, w1, h1 = bbox1
+        x2, y2, w2, h2 = bbox2
+    
+        # Calculate intersection
+        x_left = max(x1, x2)
+        y_top = max(y1, y2)
+        x_right = min(x1 + w1, x2 + w2)
+        y_bottom = min(y1 + h1, y2 + h2)
+    
+        if x_right < x_left or y_bottom < y_top:
+            return 0.0
+    
+        intersection = (x_right - x_left) * (y_bottom - y_top)
+        area1 = w1 * h1
+        area2 = w2 * h2
+        union = area1 + area2 - intersection
+    
+        return intersection / union if union > 0 else 0 
+
+    def _force_initial_detection(self):
+        """Force initial detection of objects"""
+        if hasattr(self, 'vision') and self.vision.running:
+            self.vision.mutex.lock()
+            if self.vision.camera and self.vision.camera.isOpened():
+                ret, frame = self.vision.camera.read()
+                if ret:
+                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    # Detect faces
+                    if hasattr(self, 'face_tracker') and self.face_tracker:
+                        faces = self.face_tracker.detect_faces(frame_rgb)
+                        for (x, y, w, h, conf) in faces:
+                            self.face_tracker.init_tracker(frame_rgb, (x, y, w, h), "Face", conf)
+                        if faces:
+                            self.info_text.append(f"👤 Found {len(faces)} faces")
+                
+                    # Detect objects
+                    if hasattr(self, 'advanced_tracker') and self.advanced_tracker:
+                        objects = self._detect_new_objects(frame_rgb)
+                        for obj in objects:
+                            self.advanced_tracker.init_tracker(
+                                frame_rgb, 
+                                obj['bbox'], 
+                                obj['label'], 
+                                obj['confidence']
+                            )
+                        if objects:
+                            self.info_text.append(f"📦 Found {len(objects)} objects")
+            self.vision.mutex.unlock()   
+            
+    def _get_recordings_dir(self):
+        """Get the recordings directory path"""
+        import os
+        recordings_dir = r"C:\Users\xkali\new_ai\buster-v10\recordings"
+        if not os.path.exists(recordings_dir):
+            os.makedirs(recordings_dir)
+        return recordings_dir
+
+    def _get_screenshots_dir(self):
+        """Get the screenshots directory path"""
+        import os
+        screenshots_dir = r"C:\Users\xkali\new_ai\buster-v10\screenshots"
+        if not os.path.exists(screenshots_dir):
+            os.makedirs(screenshots_dir)
+        return screenshots_dir            
+            
+
+

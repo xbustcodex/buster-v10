@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "updated": "2026-06-29T07:09:09+00:00",
+  "description": "Live mission timeline state for Mission Control.",
+  "connected_sources": [
+    "planner",
+    "repository",
+    "builder",
+    "tester",
+    "fixer",
+    "verifier",
+    "learning",
+    "experience"
+  ]
+}

@@ -148,6 +148,9 @@ class BusterDoctor:
             "buster/voice/voice_pipeline.py",
             "data/web_cache.json",
             "data/web_knowledge_cache.json",
+            "buster/ui/v9/face_window.py",
+            "buster/core/runtime.py",
+            "buster/ui/v9/main_window.py",
         ]
         for rel in required:
             path = ROOT / rel

@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import base64
 from collections import defaultdict, Counter
+from dataclasses import asdict, is_dataclass
+from datetime import date, datetime, time
 from pathlib import Path
 from typing import Any, Callable, Dict, List
+from enum import Enum
 import traceback
 from PySide6.QtCore import QTimer
 from .state_store import RuntimeStateStore
@@ -14,6 +18,118 @@ from .storage import append_json, now
 
 EVENTS_PATH = Path("data/runtime_events.json")
 
+try:
+    import numpy as np
+except ImportError:
+    np = None
+
+def make_json_safe(value: Any) -> Any:
+    """
+    Recursively convert values into JSON-safe Python types.
+
+    Supports:
+    - NumPy scalars and arrays
+    - pathlib.Path
+    - datetime/date/time
+    - Enum
+    - dataclasses
+    - dictionaries
+    - lists, tuples and sets
+    - bytes
+    - objects exposing to_dict()
+    """
+
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
+
+    # NumPy values
+    if np is not None:
+        if isinstance(value, np.ndarray):
+            return make_json_safe(value.tolist())
+
+        if isinstance(value, np.integer):
+            return int(value)
+
+        if isinstance(value, np.floating):
+            numeric_value = float(value)
+
+            # Avoid writing invalid JSON values such as NaN or Infinity.
+            if np.isnan(numeric_value) or np.isinf(numeric_value):
+                return None
+
+            return numeric_value
+
+        if isinstance(value, np.bool_):
+            return bool(value)
+
+        if isinstance(value, np.generic):
+            return make_json_safe(value.item())
+
+    # Paths
+    if isinstance(value, Path):
+        return str(value)
+
+    # Date and time values
+    if isinstance(value, (datetime, date, time)):
+        return value.isoformat()
+
+    # Enum members
+    if isinstance(value, Enum):
+        return make_json_safe(value.value)
+
+    # Dataclasses
+    if is_dataclass(value) and not isinstance(value, type):
+        return make_json_safe(asdict(value))
+
+    # Dictionaries
+    if isinstance(value, dict):
+        return {
+            str(make_json_safe(key)): make_json_safe(item)
+            for key, item in value.items()
+        }
+
+    # Lists and tuples
+    if isinstance(value, (list, tuple)):
+        return [
+            make_json_safe(item)
+            for item in value
+        ]
+
+    # Sets
+    if isinstance(value, (set, frozenset)):
+        return [
+            make_json_safe(item)
+            for item in value
+        ]
+
+    # Binary data
+    if isinstance(value, (bytes, bytearray, memoryview)):
+        return {
+            "__type__": "bytes",
+            "encoding": "base64",
+            "data": base64.b64encode(bytes(value)).decode("ascii"),
+        }
+
+    # Objects that provide their own dictionary representation
+    to_dict = getattr(value, "to_dict", None)
+
+    if callable(to_dict):
+        try:
+            return make_json_safe(to_dict())
+        except Exception:
+            pass
+
+    # Plain Python objects
+    object_dict = getattr(value, "__dict__", None)
+
+    if isinstance(object_dict, dict):
+        try:
+            return make_json_safe(object_dict)
+        except Exception:
+            pass
+
+    # Final safe fallback
+    return str(value)
 
 class RuntimeDispatcher:
     """
@@ -282,18 +398,32 @@ class RuntimeDispatcher:
         payload: Dict[str, Any] | None = None,
         source: str = "runtime",
     ):
-
+        safe_payload = make_json_safe(payload or {})
         event = {
             "id": len(self._history) + 1,
-            "type": event_type,
-            "source": source,
-            "payload": payload or {},
-            "created_at": now(),
+            "type": str(event_type),
+            "source": str(source),
+            "payload": safe_payload,
+            "created_at": make_json_safe(now()),
         }
        
         self._update_state(event)
         self._stats[event_type] += 1
+        
+        try:
+            append_json(
+                EVENTS_PATH,
+                event,
+                limit=1000,
+            )
+        except Exception as exc:
+            print(
+                f"[Dispatcher] Could not persist "
+                f"event '{event_type}': {exc}"
+            )
+            
         self._history.append(event)
+       
 
         if len(self._history) > 500:
             self._history.pop(0)

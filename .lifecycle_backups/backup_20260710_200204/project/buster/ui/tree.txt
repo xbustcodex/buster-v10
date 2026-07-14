@@ -1,0 +1,136 @@
+Folder PATH listing for volume Windows
+Volume serial number is 0000008F F6BF:F600
+C:.
+¦   main_window.py
+¦   settings_dialog.py
+¦   tree.txt
+¦   
++---os1
+¦   ¦   main_window.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---__pycache__
+¦           main_window.cpython-312.pyc
+¦           __init__.cpython-312.pyc
+¦           
++---themes
+¦   ¦   dark.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---__pycache__
+¦           dark.cpython-312.pyc
+¦           __init__.cpython-312.pyc
+¦           
++---v10
+¦   ¦   runtime_dashboard.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---__pycache__
+¦           runtime_dashboard.cpython-312.pyc
+¦           __init__.cpython-312.pyc
+¦           
++---v11
+¦   ¦   live_runtime_ui.py
+¦   ¦   runtime_console.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---__pycache__
+¦           live_runtime_ui.cpython-312.pyc
+¦           runtime_console.cpython-312.pyc
+¦           __init__.cpython-312.pyc
+¦           
++---v12
+¦   ¦   mission_control.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---__pycache__
+¦           mission_control.cpython-312.pyc
+¦           __init__.cpython-312.pyc
+¦           
++---v9
+¦   ¦   chat_view.py
+¦   ¦   command_palette.py
+¦   ¦   dashboard.py
+¦   ¦   face_window.py
+¦   ¦   live_services.py
+¦   ¦   main_window.py
+¦   ¦   sidebar.py
+¦   ¦   theme.py
+¦   ¦   v9_shell.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---assets
+¦   ¦   +---avatar
+¦   ¦   +---icons
+¦   +---panels
+¦   ¦       face_panel.py
+¦   ¦       lifecycle_panel.py
+¦   ¦       project_panel.py
+¦   ¦       workspace_panel.py
+¦   ¦       __init__.py
+¦   ¦       
+¦   +---widgets
+¦   ¦   ¦   animated_avatar.py
+¦   ¦   ¦   avatar_canvas.py
+¦   ¦   ¦   message_card.py
+¦   ¦   ¦   metric_card.py
+¦   ¦   ¦   mission_control.py
+¦   ¦   ¦   status_card.py
+¦   ¦   ¦   __init__.py
+¦   ¦   ¦   
+¦   ¦   +---__pycache__
+¦   ¦           animated_avatar.cpython-312.pyc
+¦   ¦           avatar_canvas.cpython-312.pyc
+¦   ¦           mission_control.cpython-312.pyc
+¦   ¦           __init__.cpython-312.pyc
+¦   ¦           
+¦   +---__pycache__
+¦           chat_view.cpython-312.pyc
+¦           command_palette.cpython-312.pyc
+¦           dashboard.cpython-312.pyc
+¦           face_window.cpython-312.pyc
+¦           live_services.cpython-312.pyc
+¦           main_window.cpython-312.pyc
+¦           sidebar.cpython-312.pyc
+¦           theme.cpython-312.pyc
+¦           v9_shell.cpython-312.pyc
+¦           __init__.cpython-312.pyc
+¦           
++---widgets
+¦   ¦   agent_collaboration_widget.py
+¦   ¦   agent_os_widget.py
+¦   ¦   ai_os_dashboard.py
+¦   ¦   autonomous_mission_widget.py
+¦   ¦   cognitive_loop_widget.py
+¦   ¦   face.py
+¦   ¦   intent_widget.py
+¦   ¦   live_mission_timeline_widget.py
+¦   ¦   living_companion_widget.py
+¦   ¦   living_os_widget.py
+¦   ¦   mind_widget.py
+¦   ¦   mission_control_widget.py
+¦   ¦   multi_agent_widget.py
+¦   ¦   panel.py
+¦   ¦   perception_loop_widget.py
+¦   ¦   perception_os_widget.py
+¦   ¦   presence_widget.py
+¦   ¦   proactive_speech_widget.py
+¦   ¦   runtime_widget.py
+¦   ¦   service_card.py
+¦   ¦   vision_window.py
+¦   ¦   working_memory_goal_widget.py
+¦   ¦   workspace_awareness_widget.py
+¦   ¦   world_model_widget.py
+¦   ¦   __init__.py
+¦   ¦   
+¦   +---__pycache__
+¦           face.cpython-312.pyc
+¦           panel.cpython-312.pyc
+¦           service_card.cpython-312.pyc
+¦           vision_window.cpython-312.pyc
+¦           __init__.cpython-312.pyc
+¦           
++---__pycache__
+        main_window.cpython-312.pyc
+        settings_dialog.cpython-312.pyc
+        

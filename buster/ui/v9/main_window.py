@@ -16,9 +16,17 @@ class V9MainWindow(QMainWindow):
         super().__init__()
         self.services = services
         self.settings = settings
+        
         self.live = V9LiveServices(services, settings)
+        
         self.runtime_core = create_runtime_core(".")
-        self.runtime_monitor = RuntimeMonitor(self.runtime_core, interval_ms=1000)
+        self.runtime_core.start()
+        
+        self.runtime_monitor = RuntimeMonitor(
+            self.runtime_core,
+            interval_ms=1000,
+        )
+        
         self.face_window = None
         self.current_face_state = 'idle'
         self.dashboard_window = None
@@ -92,10 +100,29 @@ class V9MainWindow(QMainWindow):
 
     def show_face(self):
         if self.face_window is None:
-            self.face_window = FaceWindow()
-        self.face_window.set_state(self.current_face_state)
+            self.face_window = FaceWindow(
+                runtime_core=self.runtime_core
+            )
+
+            self.face_window.destroyed.connect(
+                lambda: setattr(self, "face_window", None)
+            )
+
+        self.face_window.set_state(
+            self.current_face_state
+        )
+
         self.face_window.show()
         self.face_window.raise_()
+        self.face_window.activateWindow()
+        
+        # Refresh after the window has entered the Qt event loop.
+        QTimer.singleShot(
+            100,
+            self.face_window.refresh_runtime
+        )
+        
+        
         
     def _show_tool_window(self, title, widget_cls, width=900, height=650):
         window = widget_cls()
@@ -218,13 +245,12 @@ class V9MainWindow(QMainWindow):
         print("FACE STATE:", state)
         self.current_face_state = state
 
-        if self.face_window is None:
-            self.face_window = FaceWindow()
-            self.face_window.show()
-
-        self.face_window.set_state(state)
-        self.face_window.raise_()
-        QApplication.processEvents()
+        # Do not create the Face window during startup.
+        # Only update it when the user has already opened it.
+        if self.face_window is not None:
+            self.face_window.set_state(state)
+            self.face_window.raise_()
+            QApplication.processEvents()
 
     def show_dashboard(self):
         if self.dashboard_window is None:

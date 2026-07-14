@@ -1,0 +1,30 @@
+[
+  {
+    "created_at": "2026-06-29T10:19:57+00:00",
+    "summary": "Dream mode reviewed recent activity and prepared knowledge for tomorrow.",
+    "patterns_reviewed": 3,
+    "goals_reviewed": 1,
+    "recommendations": [
+      "Promote repeated patterns into reusable knowledge.",
+      "Review open goals at next startup."
+    ],
+    "context": {
+      "patterns": [
+        {
+          "name": "tkinter_layout"
+        },
+        {
+          "name": "tkinter_layout"
+        },
+        {
+          "name": "tkinter_layout"
+        }
+      ],
+      "goals": [
+        {
+          "title": "Improve UI"
+        }
+      ]
+    }
+  }
+]

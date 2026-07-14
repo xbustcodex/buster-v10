@@ -1,0 +1,92 @@
+[
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "test",
+    "speaker": "Builder",
+    "text": "Builder is generating project structure.",
+    "reason": "Agent state changed to building.",
+    "confidence": 0.91,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "test",
+    "speaker": "Tester",
+    "text": "Tester found one failure.",
+    "reason": "Agent state changed to error.",
+    "confidence": 0.72,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "Build Android app",
+    "speaker": "Planner",
+    "text": "Mission created: Build Android app",
+    "reason": "Agent state changed to planning.",
+    "confidence": 0.88,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "speaker": "Planner",
+    "text": "Mission created.",
+    "reason": "Agent state changed to planning.",
+    "confidence": 0.92,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "speaker": "Builder",
+    "text": "Generating project structure.",
+    "reason": "Agent state changed to building.",
+    "confidence": 0.88,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "speaker": "Tester",
+    "text": "Running tests.",
+    "reason": "Agent state changed to testing.",
+    "confidence": 0.84,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "speaker": "Fixer",
+    "text": "Applying previous solution from Experience Engine.",
+    "reason": "Agent state changed to fixing.",
+    "confidence": 0.91,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "speaker": "Verifier",
+    "text": "Mission verified successfully.",
+    "reason": "Agent state changed to verifying.",
+    "confidence": 0.97,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "speaker": "Learning",
+    "text": "Recorded a reusable success pattern.",
+    "reason": "Agent state changed to learning.",
+    "confidence": 0.95,
+    "visible_to_user": true
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "speaker": "Experience",
+    "text": "Updated skill profile for this project type.",
+    "reason": "Agent state changed to learning.",
+    "confidence": 0.93,
+    "visible_to_user": true
+  }
+]

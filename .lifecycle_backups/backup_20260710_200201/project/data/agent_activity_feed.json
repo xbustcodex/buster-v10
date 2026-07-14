@@ -1,0 +1,92 @@
+[
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "test",
+    "agent": "Builder",
+    "status": "building",
+    "message": "Builder is generating project structure.",
+    "confidence": 0.91,
+    "risk": "low"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "test",
+    "agent": "Tester",
+    "status": "error",
+    "message": "Tester found one failure.",
+    "confidence": 0.72,
+    "risk": "medium"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "Build Android app",
+    "agent": "Planner",
+    "status": "planning",
+    "message": "Mission created: Build Android app",
+    "confidence": 0.88,
+    "risk": "medium"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "agent": "Planner",
+    "status": "planning",
+    "message": "Mission created.",
+    "confidence": 0.92,
+    "risk": "low"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "agent": "Builder",
+    "status": "building",
+    "message": "Generating project structure.",
+    "confidence": 0.88,
+    "risk": "medium"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "agent": "Tester",
+    "status": "testing",
+    "message": "Running tests.",
+    "confidence": 0.84,
+    "risk": "medium"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "agent": "Fixer",
+    "status": "fixing",
+    "message": "Applying previous solution from Experience Engine.",
+    "confidence": 0.91,
+    "risk": "low"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "agent": "Verifier",
+    "status": "verifying",
+    "message": "Mission verified successfully.",
+    "confidence": 0.97,
+    "risk": "low"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "agent": "Learning",
+    "status": "learning",
+    "message": "Recorded a reusable success pattern.",
+    "confidence": 0.95,
+    "risk": "low"
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "mission_id": "story-test",
+    "agent": "Experience",
+    "status": "learning",
+    "message": "Updated skill profile for this project type.",
+    "confidence": 0.93,
+    "risk": "low"
+  }
+]

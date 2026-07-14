@@ -1,0 +1,222 @@
+{
+  "items": [
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-03T06:05:05+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-03T06:05:05+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-03T03:28:19+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-03T03:28:19+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-03T02:18:51+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-03T02:18:51+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-03T01:45:38+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-03T01:45:38+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-03T01:39:55+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-03T01:39:55+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-03T01:09:20+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-03T01:09:20+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-02T07:54:40+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-02T07:54:40+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-02T07:10:07+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-02T07:10:07+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-02T06:43:11+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-02T06:43:11+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-02T05:34:48+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-02T05:34:48+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-02T05:08:10+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-02T05:08:10+00:00"
+    },
+    {
+      "type": "attention_event",
+      "title": "Adam said Buster",
+      "data": {
+        "source": "ears",
+        "kind": "wake_word",
+        "title": "Adam said Buster",
+        "details": "Wake word detected by microphone",
+        "importance": 0.9,
+        "urgency": 0.85,
+        "confidence": 0.95,
+        "timestamp": "2026-07-02T04:36:58+00:00",
+        "priority": 1.0,
+        "focused": true
+      },
+      "priority": 1.0,
+      "timestamp": "2026-07-02T04:36:58+00:00"
+    }
+  ],
+  "current_mission": "2026-06-29T10:02:14+00:00",
+  "updated": "2026-07-03T06:05:05+00:00"
+}

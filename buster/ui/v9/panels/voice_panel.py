@@ -438,18 +438,22 @@ class VoicePanel(QWidget):
     error_signal = Signal(str)
     voice_finished_signal = Signal()
 
-    def __init__(self, live=None, parent=None, runtime_core=None):
+    def __init__(self, live=None, runtime_core=None, parent=None):
+        """
+        Initialize the VoicePanel
+        
+        Args:
+            parent: QWidget parent (must be a QWidget or None)
+            live: Live instance (optional)
+            runtime_core: BusterRuntimeCore instance (optional)
+        """
+        
+        
+        # Now safely call QWidget.__init__ with a valid parent
         super().__init__(parent)
-
+        
         self.live = live
-        
-        # FIXED: Connect signals to slots for thread-safe GUI updates
-        self.status_update_signal.connect(self.update_status)
-        self.info_append_signal.connect(self._append_info)
-        self.text_set_signal.connect(self._set_text)
-        self.error_signal.connect(self._show_error_dialog)
-        
-        self.voice_finished_signal.connect(self.voice_finished)
+        self.runtime_core = runtime_core
         
         # Initialize audio engine
         try:
@@ -461,6 +465,7 @@ class VoicePanel(QWidget):
                 f"Voice engine unavailable:\n\n{e}"
             )
             self.audio_engine = None
+        
         self.voice_profile = VoiceProfile()
         self.current_state = VoiceState.IDLE
         self.recording_timer = QTimer()
@@ -705,6 +710,13 @@ class VoicePanel(QWidget):
             self.show_error
         )
     
+        self.status_update_signal.connect(self.update_status)
+        self.info_append_signal.connect(self.info_text.append)
+        self.text_set_signal.connect(self.text_input.setPlainText)
+        self.error_signal.connect(self.show_error)
+        self.voice_finished_signal.connect(self.voice_finished) 
+ 
+    
     def apply_dark_theme(self):
         """Apply dark theme to the widget"""
         self.setStyleSheet("""
@@ -791,6 +803,32 @@ class VoicePanel(QWidget):
                 color: #888888;
             }}
         """
+        
+    def publish_voice_status(self, status: str, **extra):
+        if not self.runtime_core:
+            return
+
+        payload = {
+            "status": status,
+            **extra,
+        }
+
+        self.runtime_core.dispatcher.publish(
+            "voice.status",
+            payload,
+            source="voice_panel",
+        )
+
+
+    def publish_face_state(self, state: str, message: str):
+        if not self.runtime_core:
+            return
+
+        self.runtime_core.dispatcher.face(
+            state,
+            message,
+        )    
+        
     
     @Slot()
     def toggle_recording(self):
@@ -818,6 +856,16 @@ class VoicePanel(QWidget):
         self.recording_duration = 0
         self.recording_timer.start(1000)
         
+        self.publish_voice_status(
+            "recording",
+            device="default",
+        )
+
+        self.publish_face_state(
+            "listening",
+            "Listening for your voice command.",
+        )
+        
         self.update_status("Recording...")
         self.info_text.append("🎙️ Recording started...")
     
@@ -833,6 +881,13 @@ class VoicePanel(QWidget):
         self.stop_btn.setEnabled(False)
         self.recording_timer.stop()
         self.recording_time_label.setText("00:00")
+        
+        self.publish_voice_status("ready")
+
+        self.publish_face_state(
+            "idle",
+            "Voice recording stopped.",
+        )
 
         self.update_status("Recording stopped")
         self.info_text.append("⏹ Recording stopped")
@@ -870,6 +925,16 @@ class VoicePanel(QWidget):
         self.current_state = VoiceState.PLAYING
         self.update_status("Speaking...")
         
+        self.publish_voice_status(
+            "speaking",
+            text=text[:120],
+        )
+
+        self.publish_face_state(
+            "speaking",
+            "Buster is speaking.",
+        )
+        
         # Run TTS in background
         threading.Thread(target=self._speak_thread, args=(text,), daemon=True).start()
     
@@ -900,13 +965,26 @@ class VoicePanel(QWidget):
     def voice_finished(self):
         self.tts_btn.setEnabled(True)
         self.record_btn.setEnabled(True)
-        self.stt_btn.setEnabled(True)        
+        self.stt_btn.setEnabled(True) 
+        self.publish_voice_status("ready")
+
+        self.publish_face_state(
+            "idle",
+            "Buster is ready.",
+        )        
     
     @Slot()
     def transcribe_audio(self, audio_file: str = None):
         """Transcribe audio to text"""
         self.current_state = VoiceState.PROCESSING
         self.update_status("Transcribing...")
+        
+        self.publish_voice_status("processing")
+
+        self.publish_face_state(
+            "thinking",
+            "Transcribing recorded speech.",
+        )
         
         # Run STT in background
         threading.Thread(target=self._transcribe_thread, args=(audio_file,), daemon=True).start()
@@ -926,7 +1004,22 @@ class VoicePanel(QWidget):
                 else:
                     self.error_signal.emit("No audio file to transcribe")
                     return
-            
+            if self.runtime_core:
+                self.runtime_core.dispatcher.publish(
+                    "voice.transcribed",
+                    {
+                        "text": text,
+                        "audio_file": audio_file,
+                    },
+                    source="voice_panel",
+                )
+
+                self.runtime_core.dispatcher.notify(
+                    "Voice",
+                    "Speech transcription completed.",
+                    "success",
+                )
+               
             text = self.audio_engine.recognize_speech(audio_file)
             if text:
                 # FIXED: Use signals instead of direct GUI calls
@@ -1013,6 +1106,16 @@ class VoicePanel(QWidget):
             "color:#f44747;font-weight:bold;"
         )
         self.current_state = VoiceState.ERROR
+        
+        self.publish_voice_status(
+            "error",
+            message=message,
+        )
+
+        self.publish_face_state(
+            "error",
+            message,
+        )
 
         self._show_error_dialog(error)
     
@@ -1050,7 +1153,8 @@ class VoicePanel(QWidget):
         self.save_settings()
         self.recording_timer.stop()
         if self.audio_engine:
+            self.audio_engine.requestInterruption()
             self.audio_engine.stop_recording()
             self.audio_engine.quit()
-            self.audio_engine.wait()
+            self.audio_engine.wait(2000)
         event.accept()

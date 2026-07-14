@@ -1,0 +1,62 @@
+[
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "text": "Builder is generating project structure.",
+    "reason": "Builder changed state to building.",
+    "priority": "normal",
+    "confidence": 0.91,
+    "interrupt": false,
+    "enabled": true,
+    "spoken": false
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "text": "Tester found one failure.",
+    "reason": "Tester changed state to error.",
+    "priority": "normal",
+    "confidence": 0.72,
+    "interrupt": false,
+    "enabled": true,
+    "spoken": false
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "text": "Mission created: Build Android app",
+    "reason": "Planner changed state to planning.",
+    "priority": "normal",
+    "confidence": 0.88,
+    "interrupt": false,
+    "enabled": true,
+    "spoken": false
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "text": "Mission created.",
+    "reason": "Planner changed state to planning.",
+    "priority": "normal",
+    "confidence": 0.92,
+    "interrupt": false,
+    "enabled": true,
+    "spoken": false
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "text": "Applying previous solution from Experience Engine.",
+    "reason": "Fixer changed state to fixing.",
+    "priority": "normal",
+    "confidence": 0.91,
+    "interrupt": false,
+    "enabled": true,
+    "spoken": false
+  },
+  {
+    "time": "2026-06-29T07:22:43+00:00",
+    "text": "Mission verified successfully.",
+    "reason": "Verifier changed state to verifying.",
+    "priority": "normal",
+    "confidence": 0.97,
+    "interrupt": false,
+    "enabled": true,
+    "spoken": false
+  }
+]

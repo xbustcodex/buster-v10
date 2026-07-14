@@ -1,0 +1,53 @@
+{
+    "version_file": "version.json",
+    "backup_directory": ".lifecycle_backups",
+    "cache_directory": ".lifecycle_cache",
+    "log_directory": ".lifecycle_logs",
+    "history_file": "data/lifecycle_history.json",
+    "health_file": "data/lifecycle_health.json",
+    "manifest_file": "data/upgrade_manifest.json",
+    "max_backups": 5,
+    "verify_after_upgrade": true,
+    "auto_rollback_on_failure": true,
+    "exclude_patterns": [
+        ".git",
+        "__pycache__",
+        "*.pyc",
+        ".env",
+        "venv",
+        ".venv",
+		"dist",
+        "build",
+		"build/*",
+        "*.spec",
+        ".lifecycle_backups",
+        ".lifecycle_cache",
+        ".lifecycle_logs",
+		"buster_workspace",
+        "backups",
+		"dist/*"
+    ],
+    "components": {
+        "core": {
+            "critical": true
+        },
+        "ui": {
+            "critical": false
+        },
+        "memory": {
+            "critical": true
+        },
+        "agents": {
+            "critical": true
+        },
+        "plugins": {
+            "critical": false
+        },
+        "themes": {
+            "critical": false
+        },
+        "assets": {
+            "critical": false
+        }
+    }
+}

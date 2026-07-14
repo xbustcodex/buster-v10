@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual env
+.venv/
+venv/
+
+# PyInstaller / builds
+build/
+dist/
+
+# Large binaries
+*.exe
+*.dll
+*.pyd
+*.pkg
+*.pyz
+
+# Logs
+*.log
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
