@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from PySide6.QtCore import QTimer, Qt
+
+from PySide6.QtCore import QTimer, Qt, Slot, Signal
 from PySide6.QtWidgets import (
     QFrame, QGridLayout, QHBoxLayout, QLabel, QPushButton,
     QVBoxLayout, QWidget,
@@ -32,11 +33,14 @@ class StatusRow(QFrame):
 
 
 class FaceWindow(QWidget):
+    runtime_event_signal = Signal(dict)
     def __init__(self, runtime_core=None, parent=None):
         super().__init__(parent)
         self.runtime_core = runtime_core
         self.manual_state = False
         self.current_state = "idle"
+        self._dispatcher_subscriptions = []
+        self.runtime_event_signal.connect(self._handle_runtime_event)
 
         self.setWindowTitle("Buster Face — Enhanced")
         self.resize(1180, 820)
@@ -58,10 +62,18 @@ class FaceWindow(QWidget):
         self._build_body(root)
         self._build_message(root)
         self._build_footer(root)
+        
+        self.runtime_event_signal.connect(
+            self._handle_runtime_event
+        )
+
+        self._connect_runtime_dispatcher()
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.refresh_runtime)
-        self.timer.start(500)
+        
+        self.timer.start(5000)
+        
         self.refresh_runtime()
 
     def _panel(self):
@@ -178,3 +190,443 @@ class FaceWindow(QWidget):
 
     def closeEvent(self, event):
         self.hide(); event.ignore()
+        
+    def shutdown(self) -> None:
+        self._disconnect_runtime_dispatcher()
+
+        if self.timer.isActive():
+            self.timer.stop()
+
+        self.setAttribute(Qt.WA_DeleteOnClose, True)
+        self.close()    
+        
+    def _connect_runtime_dispatcher(self) -> None:
+        if not self.runtime_core:
+            return
+
+        dispatcher = getattr(
+            self.runtime_core,
+            "dispatcher",
+            None,
+        )
+
+        if dispatcher is None:
+            return
+
+        event_types = [
+            "runtime.*",
+            "job.*",
+            "agent.*",
+            "voice.*",
+            "vision.*",
+            "face.state",
+            "notification",
+        ]
+
+        for event_type in event_types:
+            dispatcher.subscribe(
+                event_type,
+                self._receive_runtime_event,
+            )
+
+            self._dispatcher_subscriptions.append(
+                event_type
+            )
+
+
+    def _disconnect_runtime_dispatcher(self) -> None:
+        if not self.runtime_core:
+            return
+
+        dispatcher = getattr(
+            self.runtime_core,
+            "dispatcher",
+            None,
+        )
+
+        if dispatcher is None:
+            return
+
+        for event_type in self._dispatcher_subscriptions:
+            dispatcher.unsubscribe(
+                event_type,
+                self._receive_runtime_event,
+            )
+
+        self._dispatcher_subscriptions.clear()
+
+
+    def _receive_runtime_event(self, event: dict) -> None:
+        """
+        May be called from a runtime or worker thread.
+        Forward the event safely to Qt's GUI thread.
+        """
+        self.runtime_event_signal.emit(event)    
+        
+    @Slot(dict)
+    def _handle_runtime_event(self, event: dict) -> None:
+        event_type = str(
+            event.get("type", "")
+        )
+
+        payload = event.get("payload", {})
+
+        if not isinstance(payload, dict):
+            payload = {}
+
+        if event_type in {
+            "runtime.started",
+            "runtime.core.started",
+        }:
+            self.set_state(
+                "success",
+                "Buster runtime connected.",
+            )
+
+        elif event_type in {
+            "runtime.stopped",
+            "runtime.core.stopped",
+        }:
+            self.set_state(
+                "sleeping",
+                "Buster runtime stopped.",
+            )
+
+        elif event_type == "runtime.request":
+            request = payload.get(
+                "request",
+                "Processing your request.",
+            )
+
+            self.set_state(
+                "thinking",
+                str(request),
+            )
+
+        elif event_type == "job.created":
+            title = (
+                payload.get("title")
+                or payload.get("name")
+                or payload.get("job_type")
+                or "Runtime job"
+            )
+
+            self.set_state(
+                "thinking",
+                f"Preparing: {title}",
+            )
+
+        elif event_type == "job.started":
+            title = (
+                payload.get("title")
+                or payload.get("job")
+                or payload.get("job_id")
+                or "Runtime job"
+            )
+
+            self.set_state(
+                "working",
+                f"Running: {title}",
+            )
+
+        elif event_type == "job.progress":
+            title = (
+                payload.get("title")
+                or payload.get("job")
+                or "Runtime job"
+            )
+
+            progress = payload.get("progress")
+
+            if progress is None:
+                message = f"Working on: {title}"
+            else:
+                message = (
+                    f"{title}: {progress}% complete"
+                )
+
+            self.set_state(
+                "working",
+                message,
+            )
+
+        elif event_type == "job.finished":
+            self.set_state(
+                "success",
+                "Runtime job completed successfully.",
+            )
+
+            QTimer.singleShot(
+                2500,
+                self._return_to_runtime_state,
+            )
+
+        elif event_type == "job.failed":
+            error = payload.get(
+                "error",
+                "A runtime job failed.",
+            )
+
+            self.set_state(
+                "error",
+                str(error),
+            )
+
+        elif event_type == "agent.started":
+            agent = str(
+                payload.get("agent", "Agent")
+            )
+
+            state = (
+                "thinking"
+                if agent.lower() == "planner"
+                else "working"
+            )
+
+            self.set_state(
+                state,
+                f"{agent.title()} Agent is running.",
+            )
+
+        elif event_type == "agent.finished":
+            agent = str(
+                payload.get("agent", "Agent")
+            )
+
+            self.set_state(
+                "success",
+                f"{agent.title()} Agent completed.",
+            )
+
+            QTimer.singleShot(
+                2000,
+                self._return_to_runtime_state,
+            )
+
+        elif event_type == "agent.failed":
+            agent = str(
+                payload.get("agent", "Agent")
+            )
+
+            error = payload.get(
+                "error",
+                "Agent execution failed.",
+            )
+
+            self.set_state(
+                "error",
+                f"{agent.title()}: {error}",
+            )
+
+        elif event_type == "voice.status":
+            self._handle_voice_event(payload)
+
+        elif event_type == "voice.transcribed":
+            text = str(
+                payload.get("text", "")
+            )
+
+            self.set_state(
+                "success",
+                f'Heard: "{text[:120]}"',
+            )
+
+        elif event_type == "vision.status":
+            self._handle_vision_event(payload)
+
+        elif event_type == "vision.face.detected":
+            count = int(
+                payload.get("count", 0)
+            )
+
+            self.set_state(
+                "excited",
+                f"Vision detected {count} face"
+                f"{'' if count == 1 else 's'}.",
+            )
+
+        elif event_type == "vision.qr.detected":
+            count = int(
+                payload.get("count", 0)
+            )
+
+            self.set_state(
+                "success",
+                f"Vision detected {count} QR code"
+                f"{'' if count == 1 else 's'}.",
+            )
+
+        elif event_type == "face.state":
+            state = str(
+                payload.get("state", "idle")
+            )
+
+            message = str(
+                payload.get("message", "")
+            )
+ 
+            self.set_state(
+                state,
+                message or None,
+            )
+
+        elif event_type == "notification":
+            level = str(
+                payload.get("level", "info")
+            ).lower()
+
+            title = str(
+                payload.get("title", "Buster")
+            )
+
+            message = str(
+                payload.get("message", "")
+            )
+
+            state_map = {
+                "success": "success",
+                "warning": "warning",
+                "error": "error",
+                "danger": "error",
+                "info": "speaking",
+            }
+
+            self.set_state(
+                state_map.get(level, "speaking"),
+                f"{title}: {message}",
+            )
+
+        self.refresh_runtime()   
+
+
+    def _handle_voice_event(
+        self,
+        payload: dict,
+    ) -> None:
+        status = str(
+             payload.get("status", "ready")
+        ).lower()
+
+        if status in {
+            "recording",
+            "listening",
+        }:
+            self.set_state(
+                "listening",
+                "Listening for your voice command.",
+            )
+
+        elif status == "speaking":
+            self.set_state(
+                "speaking",
+                "Buster is speaking.",
+            )
+
+        elif status in {
+            "processing",
+            "transcribing",
+        }:
+            self.set_state(
+                "thinking",
+                "Processing recorded speech.",
+            )
+
+        elif status == "error":
+            self.set_state(
+                "error",
+                str(
+                    payload.get(
+                        "message",
+                        "Voice service error.",
+                    )
+                ),
+            )
+
+        elif status in {
+            "ready",
+            "idle",
+            "stopped",
+        }:
+            self._return_to_runtime_state()
+
+
+    def _handle_vision_event(
+        self,
+        payload: dict,
+    ) -> None:
+        status = str(
+            payload.get("status", "ready")
+        ).lower()
+
+        if status in {
+            "running",
+            "active",
+        }:
+            self.set_state(
+                "working",
+                "Vision camera is active.",
+            )
+
+        elif status == "tracking":
+            self.set_state(
+                "thinking",
+                "Vision is tracking activity.",
+            )
+
+        elif status == "error":
+            self.set_state(
+                "error",
+                str(
+                    payload.get(
+                        "message",
+                        "Vision service error.",
+                    )
+                ),
+            )
+
+        elif status in {
+            "ready",
+            "idle",
+            "stopped",
+        }:
+            self._return_to_runtime_state()   
+
+
+    def _return_to_runtime_state(self) -> None:
+        if self.manual_state:
+            return
+
+        if not self.runtime_core:
+            self.set_state(
+                "idle",
+                "Buster is ready.",
+            )
+            return
+
+        state_store = getattr(
+            self.runtime_core,
+            "state",
+            None,
+        )
+
+        if state_store is None:
+            self.set_state(
+                "idle",
+                "Buster is ready.",
+            )
+            return
+
+        face_state = state_store.get(
+            "face",
+            {},
+        )
+
+        self.set_state(
+            face_state.get("state", "idle"),
+            face_state.get(
+                "message",
+                "Buster is ready.",
+            ),
+        )      
+
+        

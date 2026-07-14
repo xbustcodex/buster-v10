@@ -17,11 +17,15 @@ class V9MainWindow(QMainWindow):
         self.services = services
         self.settings = settings
         
-        self.live = V9LiveServices(services, settings)
         
         self.runtime_core = create_runtime_core(".")
         self.runtime_core.start()
         
+        self.live = V9LiveServices(
+            services=services,
+            settings=settings,
+            runtime_core=self.runtime_core,
+)  
         self.runtime_monitor = RuntimeMonitor(
             self.runtime_core,
             interval_ms=1000,
@@ -61,6 +65,8 @@ class V9MainWindow(QMainWindow):
             on_terminal=self.show_terminal,
             on_settings=self.show_settings,
             on_developer_checklist=self.show_developer_checklist,
+            on_notifications=self.show_notifications,
+            on_runtime_timeline=self.show_runtime_timeline,
         )
 
         main = QWidget()
@@ -353,7 +359,50 @@ class V9MainWindow(QMainWindow):
             lambda: DeveloperChecklistPanel(self.live),
             720,
             620,
-        )    
+        ) 
+
+    def closeEvent(self, event):
+        if self.timer.isActive():
+            self.timer.stop()
+
+        if self.runtime_monitor:
+            try:
+                self.runtime_monitor.stop()
+            except Exception:
+                pass
+
+        if self.face_window is not None:
+            try:
+                self.face_window.shutdown()
+            except Exception:
+                pass
+
+        if self.dashboard_window is not None:
+            try:
+                self.dashboard_window.close()
+            except Exception:
+                pass
+
+        for window in getattr(self, "tool_windows", []):
+            try:
+                window.close()
+            except Exception:
+                pass
+
+        for window in getattr(self, "backend_windows", []):
+            try:
+                window.close()
+            except Exception:
+                pass
+
+        if self.runtime_core is not None:
+            try:
+                self.runtime_core.stop()
+            except Exception as exc:
+                print(f"Runtime shutdown error: {exc}")
+
+        event.accept()
+    
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_K and event.modifiers() & Qt.ControlModifier:
@@ -366,3 +415,51 @@ class V9MainWindow(QMainWindow):
             return
 
         super().keyPressEvent(event)
+        
+        
+    def show_notifications(self):
+        try:
+            from buster.ui.v9.panels.notification_center_panel import (
+                NotificationCenterPanel,
+            )
+
+            self._show_tool_window(
+                "Notification Center",
+                lambda: NotificationCenterPanel(
+                    self.live,
+                    self.runtime_core,
+                ),
+                780,
+                720,
+            )
+
+        except Exception as exc:
+            self._show_message_tool(
+                "Notification Center",
+                f"Notification Center error:\n{exc}",
+            )   
+
+    def show_runtime_timeline(self):
+        try:
+            from buster.ui.v9.panels.runtime_timeline_panel import (
+                RuntimeTimelinePanel,
+            )
+
+            self._show_tool_window(
+                "Runtime Timeline",
+                lambda: RuntimeTimelinePanel(
+                    self.live,
+                    self.runtime_core,
+                ),
+                920,
+                760,
+            )
+
+        except Exception as exc:
+            self._show_message_tool(
+                "Runtime Timeline",
+                f"Runtime Timeline error:\n{exc}",
+            )
+            
+            
+            

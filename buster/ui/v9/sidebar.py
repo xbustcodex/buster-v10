@@ -17,6 +17,8 @@ class Sidebar(QFrame):
         on_terminal=None,
         on_settings=None,
         on_developer_checklist=None,
+        on_notifications=None,
+        on_runtime_timeline=None,
     ):
         super().__init__()
         self.live = live
@@ -31,6 +33,8 @@ class Sidebar(QFrame):
         self.on_terminal = on_terminal
         self.on_settings = on_settings
         self.on_developer_checklist = on_developer_checklist
+        self.on_notifications = on_notifications
+        self.on_runtime_timeline = on_runtime_timeline
         self.setObjectName("Sidebar")
         self.setMinimumWidth(270)
         self.setMaximumWidth(360)
@@ -61,6 +65,8 @@ class Sidebar(QFrame):
             ("🔊  Voice", self.on_voice),
             ("🤖  Agents", self.on_agents),
             ("🖥  Terminal", self.on_terminal),
+            ("🔔  Notifications", self.on_notifications),
+            ("📜  Runtime Timeline", self.on_runtime_timeline),
             ("🛠  Developer Tools", self.on_backend_tools),
             ("🛠  Developer Checklist", self.on_developer_checklist),
             ("⚙  Settings", self.on_settings),

@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-07-11T17:54:58",
+  "built_at": "2026-07-14T17:35:17",
   "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
   "files": [
     ".gitignore",
@@ -31,6 +31,9 @@
     "run_v11_live_runtime_ui.py",
     "run_v9_ui_preview.py",
     "version.json",
+    "vision_recording_2026-07-12_13-45-05.avi",
+    "vision_recording_2026-07-12_14-56-08.avi",
+    "vision_settings.json",
     "voice_settings.json",
     ".github\\pull_request_template.md",
     "buster\\version.py",
@@ -133,6 +136,7 @@
     "data\\world_model_mind_state.json",
     "data\\world_model_state.json",
     "installer\\BusterSetup.iss",
+    "screenshots\\vision_screenshot_2026-07-12_16-00-32.png",
     "scripts\\benchmark.bat",
     "scripts\\build.bat",
     "scripts\\build_exe.bat",
@@ -3732,8 +3736,10 @@
     "buster\\runtime\\sdk_agent_manager.py",
     "buster\\runtime\\sdk_bootstrap.py",
     "buster\\runtime\\sdk_runtime.py",
+    "buster\\runtime\\state_store.py",
     "buster\\runtime\\storage.py",
     "buster\\runtime\\tester_agent.py",
+    "buster\\runtime\\tree.txt",
     "buster\\runtime\\v6_foundation.py",
     "buster\\runtime\\watchdog.py",
     "buster\\runtime\\workflow_graph.py",
@@ -3901,9 +3907,12 @@
     "buster\\ui\\themes\\dark.py",
     "buster\\ui\\themes\\__init__.py",
     "buster\\ui\\v10\\runtime_dashboard.py",
+    "buster\\ui\\v10\\__init__.py",
     "buster\\ui\\v11\\live_runtime_ui.py",
     "buster\\ui\\v11\\runtime_console.py",
+    "buster\\ui\\v11\\__init__.py",
     "buster\\ui\\v12\\mission_control.py",
+    "buster\\ui\\v12\\__init__.py",
     "buster\\ui\\v9\\chat_view.py",
     "buster\\ui\\v9\\command_palette.py",
     "buster\\ui\\v9\\dashboard.py",
@@ -3947,9 +3956,12 @@
     "buster\\ui\\v9\\panels\\lifecycle_panel.py",
     "buster\\ui\\v9\\panels\\live_runtime_ui.py",
     "buster\\ui\\v9\\panels\\mission_control_panel.py",
+    "buster\\ui\\v9\\panels\\notification_center_panel.py",
     "buster\\ui\\v9\\panels\\project_panel.py",
+    "buster\\ui\\v9\\panels\\python main.py",
     "buster\\ui\\v9\\panels\\runtime_console_panel.py",
     "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
+    "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
     "buster\\ui\\v9\\panels\\settings_panel.py",
     "buster\\ui\\v9\\panels\\simple_status_panel.py",
     "buster\\ui\\v9\\panels\\terminal_panel.py",
@@ -16590,7 +16602,7 @@
     {
       "name": "BusterRuntime",
       "file": "buster\\core\\runtime.py",
-      "line": 16
+      "line": 17
     },
     {
       "name": "SettingsStore",
@@ -17370,7 +17382,7 @@
     {
       "name": "BusterRuntimeCore",
       "file": "buster\\runtime\\core.py",
-      "line": 9
+      "line": 11
     },
     {
       "name": "RuntimeDeveloperTools",
@@ -17380,7 +17392,7 @@
     {
       "name": "RuntimeDispatcher",
       "file": "buster\\runtime\\dispatcher.py",
-      "line": 6
+      "line": 134
     },
     {
       "name": "BusterRuntimeEngine",
@@ -17506,6 +17518,11 @@
       "name": "BusterSDKRuntime",
       "file": "buster\\runtime\\sdk_runtime.py",
       "line": 10
+    },
+    {
+      "name": "RuntimeStateStore",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 8
     },
     {
       "name": "TesterAgent",
@@ -18273,41 +18290,6 @@
       "line": 30
     },
     {
-      "name": "MetricCard",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 19
-    },
-    {
-      "name": "MissionControlRuntimeDashboard",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 38
-    },
-    {
-      "name": "RuntimeMetricCard",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 20
-    },
-    {
-      "name": "BusterLiveRuntimeUI",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 41
-    },
-    {
-      "name": "Card",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 14
-    },
-    {
-      "name": "RuntimeConsole",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 30
-    },
-    {
-      "name": "MissionControlV12",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 13
-    },
-    {
       "name": "ChatCard",
       "file": "buster\\ui\\v9\\chat_view.py",
       "line": 4
@@ -18330,17 +18312,17 @@
     {
       "name": "StatusRow",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 14
+      "line": 15
     },
     {
       "name": "FaceWindow",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 34
+      "line": 35
     },
     {
       "name": "V9LiveServices",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 5
+      "line": 10
     },
     {
       "name": "V9MainWindow",
@@ -18543,6 +18525,16 @@
       "line": 13
     },
     {
+      "name": "NotificationCard",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 19
+    },
+    {
+      "name": "NotificationCenterPanel",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 101
+    },
+    {
       "name": "ProjectPanel",
       "file": "buster\\ui\\v9\\panels\\project_panel.py",
       "line": 16
@@ -18568,6 +18560,16 @@
       "line": 38
     },
     {
+      "name": "TimelineEventCard",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 20
+    },
+    {
+      "name": "RuntimeTimelinePanel",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 307
+    },
+    {
       "name": "SettingsPanel",
       "file": "buster\\ui\\v9\\panels\\settings_panel.py",
       "line": 18
@@ -18585,22 +18587,42 @@
     {
       "name": "VisionResult",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 20
+      "line": 25
+    },
+    {
+      "name": "TrackedObject",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 43
+    },
+    {
+      "name": "AdvancedTracker",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 85
+    },
+    {
+      "name": "FaceTracker",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 284
     },
     {
       "name": "VisionMode",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 36
+      "line": 372
     },
     {
       "name": "VisionEngine",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 48
+      "line": 383
     },
     {
       "name": "VisionPanel",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 251
+      "line": 621
+    },
+    {
+      "name": "DummyTracker",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 141
     },
     {
       "name": "VoiceState",
@@ -66157,17 +66179,17 @@
     {
       "name": "main",
       "file": "buster\\core\\runtime.py",
-      "line": 57
+      "line": 51
     },
     {
       "name": "__init__",
       "file": "buster\\core\\runtime.py",
-      "line": 17
+      "line": 18
     },
     {
       "name": "run",
       "file": "buster\\core\\runtime.py",
-      "line": 37
+      "line": 38
     },
     {
       "name": "app_base_dir",
@@ -69042,17 +69064,47 @@
     {
       "name": "__init__",
       "file": "buster\\runtime\\agent_orchestrator.py",
-      "line": 7
+      "line": 17
     },
     {
       "name": "choose_agents",
       "file": "buster\\runtime\\agent_orchestrator.py",
-      "line": 15
+      "line": 33
     },
     {
       "name": "run",
       "file": "buster\\runtime\\agent_orchestrator.py",
-      "line": 36
+      "line": 95
+    },
+    {
+      "name": "_is_failed_result",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 349
+    },
+    {
+      "name": "_final_status",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 370
+    },
+    {
+      "name": "_build_user_message",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 388
+    },
+    {
+      "name": "_summarize_job",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 450
+    },
+    {
+      "name": "_extract_result_text",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 502
+    },
+    {
+      "name": "_failure_response",
+      "file": "buster\\runtime\\agent_orchestrator.py",
+      "line": 535
     },
     {
       "name": "__init__",
@@ -69102,62 +69154,72 @@
     {
       "name": "create_runtime_core",
       "file": "buster\\runtime\\core.py",
-      "line": 100
+      "line": 236
     },
     {
       "name": "__init__",
       "file": "buster\\runtime\\core.py",
-      "line": 10
+      "line": 12
     },
     {
       "name": "start",
       "file": "buster\\runtime\\core.py",
-      "line": 35
+      "line": 41
     },
     {
       "name": "stop",
       "file": "buster\\runtime\\core.py",
-      "line": 45
+      "line": 63
     },
     {
       "name": "tick",
       "file": "buster\\runtime\\core.py",
-      "line": 55
+      "line": 84
     },
     {
       "name": "run",
       "file": "buster\\runtime\\core.py",
-      "line": 58
+      "line": 97
     },
     {
       "name": "run_agent",
       "file": "buster\\runtime\\core.py",
-      "line": 66
+      "line": 115
     },
     {
       "name": "create_job",
       "file": "buster\\runtime\\core.py",
-      "line": 69
+      "line": 138
     },
     {
       "name": "run_job",
       "file": "buster\\runtime\\core.py",
-      "line": 72
+      "line": 154
     },
     {
       "name": "service",
       "file": "buster\\runtime\\core.py",
-      "line": 75
+      "line": 175
     },
     {
       "name": "require_service",
       "file": "buster\\runtime\\core.py",
-      "line": 78
+      "line": 178
     },
     {
       "name": "status",
       "file": "buster\\runtime\\core.py",
-      "line": 81
+      "line": 181
+    },
+    {
+      "name": "notify",
+      "file": "buster\\runtime\\core.py",
+      "line": 201
+    },
+    {
+      "name": "refresh_state",
+      "file": "buster\\runtime\\core.py",
+      "line": 214
     },
     {
       "name": "__init__",
@@ -69170,19 +69232,94 @@
       "line": 17
     },
     {
+      "name": "make_json_safe",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 26
+    },
+    {
       "name": "__init__",
       "file": "buster\\runtime\\dispatcher.py",
-      "line": 7
+      "line": 163
+    },
+    {
+      "name": "_update_state",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 171
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 345
     },
     {
       "name": "subscribe",
       "file": "buster\\runtime\\dispatcher.py",
-      "line": 9
+      "line": 359
+    },
+    {
+      "name": "unsubscribe",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 366
+    },
+    {
+      "name": "once",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 378
     },
     {
       "name": "publish",
       "file": "buster\\runtime\\dispatcher.py",
-      "line": 11
+      "line": 395
+    },
+    {
+      "name": "notify",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 489
+    },
+    {
+      "name": "face",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 507
+    },
+    {
+      "name": "job_progress",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 523
+    },
+    {
+      "name": "history",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 539
+    },
+    {
+      "name": "clear_history",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 545
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 551
+    },
+    {
+      "name": "statistics",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 561
+    },
+    {
+      "name": "wait_for",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 565
+    },
+    {
+      "name": "wrapper",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 380
+    },
+    {
+      "name": "listener",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 571
     },
     {
       "name": "__init__",
@@ -69708,6 +69845,46 @@
       "name": "mirror_runtime_tick",
       "file": "buster\\runtime\\sdk_runtime.py",
       "line": 57
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 16
+    },
+    {
+      "name": "get",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 53
+    },
+    {
+      "name": "set",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 57
+    },
+    {
+      "name": "update",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 61
+    },
+    {
+      "name": "remove",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 71
+    },
+    {
+      "name": "snapshot",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 75
+    },
+    {
+      "name": "clear",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 79
+    },
+    {
+      "name": "status",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 83
     },
     {
       "name": "now",
@@ -72196,186 +72373,6 @@
     },
     {
       "name": "__init__",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 20
-    },
-    {
-      "name": "set_value",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 34
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 39
-    },
-    {
-      "name": "pretty",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 130
-    },
-    {
-      "name": "refresh",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 133
-    },
-    {
-      "name": "tick_runtime",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 163
-    },
-    {
-      "name": "run_health_job",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 170
-    },
-    {
-      "name": "run_verify_job",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 183
-    },
-    {
-      "name": "run_backup",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 196
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 21
-    },
-    {
-      "name": "set_value",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 37
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 42
-    },
-    {
-      "name": "pretty",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 139
-    },
-    {
-      "name": "refresh",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 142
-    },
-    {
-      "name": "tick",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 170
-    },
-    {
-      "name": "run_demo_workflow",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 177
-    },
-    {
-      "name": "run_health_job",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 181
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 15
-    },
-    {
-      "name": "set_value",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 26
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 31
-    },
-    {
-      "name": "pretty",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 132
-    },
-    {
-      "name": "refresh",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 135
-    },
-    {
-      "name": "populate_lists",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 175
-    },
-    {
-      "name": "show_service",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 198
-    },
-    {
-      "name": "show_agent",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 202
-    },
-    {
-      "name": "performance_snapshot",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 206
-    },
-    {
-      "name": "tick",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 217
-    },
-    {
-      "name": "run_workflow",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 221
-    },
-    {
-      "name": "run_health_job",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 225
-    },
-    {
-      "name": "run_verify_job",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 230
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 14
-    },
-    {
-      "name": "pretty",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 69
-    },
-    {
-      "name": "payload",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 72
-    },
-    {
-      "name": "refresh",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 75
-    },
-    {
-      "name": "run_workflow",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 112
-    },
-    {
-      "name": "run_health",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 116
-    },
-    {
-      "name": "__init__",
       "file": "buster\\ui\\v9\\chat_view.py",
       "line": 5
     },
@@ -72432,92 +72429,142 @@
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 15
+      "line": 16
     },
     {
       "name": "set_value",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 28
+      "line": 29
     },
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 35
+      "line": 37
     },
     {
       "name": "_panel",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 67
+      "line": 79
     },
     {
       "name": "_build_header",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 70
+      "line": 82
     },
     {
       "name": "_build_body",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 83
+      "line": 95
     },
     {
       "name": "_build_message",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 113
+      "line": 125
     },
     {
       "name": "_build_footer",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 122
+      "line": 134
     },
     {
       "name": "set_state",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 129
+      "line": 141
     },
     {
       "name": "enable_auto_state",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 147
+      "line": 159
     },
     {
       "name": "refresh_runtime",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 151
+      "line": 163
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 179
+      "line": 191
+    },
+    {
+      "name": "shutdown",
+      "file": "buster\\ui\\v9\\face_window.py",
+      "line": 194
+    },
+    {
+      "name": "_connect_runtime_dispatcher",
+      "file": "buster\\ui\\v9\\face_window.py",
+      "line": 203
+    },
+    {
+      "name": "_disconnect_runtime_dispatcher",
+      "file": "buster\\ui\\v9\\face_window.py",
+      "line": 237
+    },
+    {
+      "name": "_receive_runtime_event",
+      "file": "buster\\ui\\v9\\face_window.py",
+      "line": 259
+    },
+    {
+      "name": "_handle_runtime_event",
+      "file": "buster\\ui\\v9\\face_window.py",
+      "line": 267
+    },
+    {
+      "name": "_handle_voice_event",
+      "file": "buster\\ui\\v9\\face_window.py",
+      "line": 502
+    },
+    {
+      "name": "_handle_vision_event",
+      "file": "buster\\ui\\v9\\face_window.py",
+      "line": 553
+    },
+    {
+      "name": "_return_to_runtime_state",
+      "file": "buster\\ui\\v9\\face_window.py",
+      "line": 595
     },
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 6
+      "line": 11
     },
     {
       "name": "safe",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 10
+      "line": 21
     },
     {
       "name": "brain",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 16
+      "line": 27
+    },
+    {
+      "name": "_legacy_service",
+      "file": "buster\\ui\\v9\\live_services.py",
+      "line": 88
+    },
+    {
+      "name": "_format_runtime_result",
+      "file": "buster\\ui\\v9\\live_services.py",
+      "line": 97
     },
     {
       "name": "git_branch",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 21
+      "line": 148
     },
     {
       "name": "python_version",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 25
+      "line": 157
     },
     {
       "name": "quick_info",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 28
+      "line": 160
     },
     {
       "name": "__init__",
@@ -72527,92 +72574,107 @@
     {
       "name": "build",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 43
+      "line": 47
     },
     {
       "name": "refresh_live",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 84
+      "line": 90
     },
     {
       "name": "show_agents",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 87
+      "line": 93
     },
     {
       "name": "show_face",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 101
+      "line": 107
     },
     {
       "name": "_show_tool_window",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 127
+      "line": 133
     },
     {
       "name": "_show_message_tool",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 139
+      "line": 145
     },
     {
       "name": "show_projects",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 164
+      "line": 170
     },
     {
       "name": "show_workspace",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 181
+      "line": 187
     },
     {
       "name": "show_vision",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 189
+      "line": 195
     },
     {
       "name": "show_voice",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 204
+      "line": 210
     },
     {
       "name": "show_terminal",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 219
+      "line": 225
     },
     {
       "name": "show_settings",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 232
+      "line": 238
     },
     {
       "name": "set_face_state",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 244
+      "line": 250
     },
     {
       "name": "show_dashboard",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 255
+      "line": 261
     },
     {
       "name": "show_backend_tools",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 261
+      "line": 267
     },
     {
       "name": "show_developer_checklist",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 349
+      "line": 355
+    },
+    {
+      "name": "closeEvent",
+      "file": "buster\\ui\\v9\\main_window.py",
+      "line": 364
     },
     {
       "name": "keyPressEvent",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 358
+      "line": 407
+    },
+    {
+      "name": "show_notifications",
+      "file": "buster\\ui\\v9\\main_window.py",
+      "line": 420
+    },
+    {
+      "name": "show_runtime_timeline",
+      "file": "buster\\ui\\v9\\main_window.py",
+      "line": 442
     },
     {
       "name": "open_tool",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 318
+      "line": 324
     },
     {
       "name": "__init__",
@@ -72632,12 +72694,12 @@
     {
       "name": "build",
       "file": "buster\\ui\\v9\\sidebar.py",
-      "line": 40
+      "line": 44
     },
     {
       "name": "refresh",
       "file": "buster\\ui\\v9\\sidebar.py",
-      "line": 98
+      "line": 104
     },
     {
       "name": "render_model",
@@ -73261,6 +73323,66 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 28
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 104
+    },
+    {
+      "name": "_build_ui",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 164
+    },
+    {
+      "name": "_connect_dispatcher",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 213
+    },
+    {
+      "name": "_disconnect_dispatcher",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 233
+    },
+    {
+      "name": "_receive_runtime_event",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 251
+    },
+    {
+      "name": "_handle_runtime_event",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 258
+    },
+    {
+      "name": "add_notification",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 290
+    },
+    {
+      "name": "_load_dispatcher_history",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 312
+    },
+    {
+      "name": "clear_notifications",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 361
+    },
+    {
+      "name": "_update_count",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 366
+    },
+    {
+      "name": "closeEvent",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 374
+    },
+    {
+      "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\project_panel.py",
       "line": 17
     },
@@ -73418,6 +73540,91 @@
       "name": "run_backup",
       "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
       "line": 196
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 49
+    },
+    {
+      "name": "_format_event_type",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 135
+    },
+    {
+      "name": "_format_time",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 138
+    },
+    {
+      "name": "_event_message",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 149
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 310
+    },
+    {
+      "name": "_build_ui",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 380
+    },
+    {
+      "name": "_connect_dispatcher",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 452
+    },
+    {
+      "name": "_disconnect_dispatcher",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 472
+    },
+    {
+      "name": "_receive_runtime_event",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 490
+    },
+    {
+      "name": "_handle_runtime_event",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 497
+    },
+    {
+      "name": "_insert_event",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 513
+    },
+    {
+      "name": "reload_history",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 528
+    },
+    {
+      "name": "clear_view",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 556
+    },
+    {
+      "name": "apply_filter",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 561
+    },
+    {
+      "name": "_event_matches_filter",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 570
+    },
+    {
+      "name": "_update_count",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 603
+    },
+    {
+      "name": "closeEvent",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 611
     },
     {
       "name": "__init__",
@@ -73672,122 +73879,317 @@
     {
       "name": "__post_init__",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 29
+      "line": 34
     },
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 55
+      "line": 45
+    },
+    {
+      "name": "update",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 60
+    },
+    {
+      "name": "predict_next_position",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 71
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 88
+    },
+    {
+      "name": "_get_best_available_tracker",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 105
+    },
+    {
+      "name": "create_tracker",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 122
+    },
+    {
+      "name": "init_tracker",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 151
+    },
+    {
+      "name": "update",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 162
+    },
+    {
+      "name": "draw_tracks",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 199
+    },
+    {
+      "name": "clear",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 280
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 287
+    },
+    {
+      "name": "detect_faces",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 307
+    },
+    {
+      "name": "update_faces",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 341
+    },
+    {
+      "name": "_iou",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 357
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 390
     },
     {
       "name": "_init_detectors",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 73
+      "line": 412
     },
     {
       "name": "start_camera",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 90
+      "line": 422
     },
     {
       "name": "stop_camera",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 116
+      "line": 464
     },
     {
       "name": "set_mode",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 126
+      "line": 479
     },
     {
       "name": "run",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 131
+      "line": 483
     },
     {
       "name": "_process_frame",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 168
+      "line": 570
     },
     {
       "name": "_detect_faces",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 191
+      "line": 586
     },
     {
       "name": "_scan_qr",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 205
+      "line": 596
     },
     {
       "name": "_detect_edges",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 238
+      "line": 611
     },
     {
       "name": "_detect_text",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 244
+      "line": 616
     },
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 254
+      "line": 624
     },
     {
       "name": "setup_ui",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 265
+      "line": 666
     },
     {
       "name": "connect_signals",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 439
+      "line": 824
     },
     {
       "name": "apply_dark_theme",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 449
+      "line": 832
     },
     {
       "name": "get_button_style",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 479
+      "line": 861
+    },
+    {
+      "name": "closeEvent",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 875
     },
     {
       "name": "update_frame",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 495
+      "line": 893
     },
     {
       "name": "update_info",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 510
+      "line": 908
     },
     {
       "name": "update_status",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 537
+      "line": 987
     },
     {
       "name": "start_camera",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 552
+      "line": 1000
     },
     {
       "name": "stop_camera",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 559
+      "line": 1034
     },
     {
       "name": "take_photo",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 575
+      "line": 1061
     },
     {
       "name": "set_vision_mode",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 590
+      "line": 1092
+    },
+    {
+      "name": "add_tracking_controls",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1112
+    },
+    {
+      "name": "start_advanced_tracking",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1186
+    },
+    {
+      "name": "_init_advanced_tracker",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1223
+    },
+    {
+      "name": "_force_face_detection",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1252
+    },
+    {
+      "name": "stop_advanced_tracking",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1267
+    },
+    {
+      "name": "toggle_advanced_tracking",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1305
+    },
+    {
+      "name": "start_recording",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1314
+    },
+    {
+      "name": "stop_recording",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1331
+    },
+    {
+      "name": "toggle_recording",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1342
+    },
+    {
+      "name": "capture_screenshot",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1349
+    },
+    {
+      "name": "open_recordings_folder",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1366
+    },
+    {
+      "name": "open_screenshots_folder",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1376
+    },
+    {
+      "name": "detect_motion",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1387
+    },
+    {
+      "name": "update_performance_stats",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1409
+    },
+    {
+      "name": "_detect_new_objects",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1420
+    },
+    {
+      "name": "_iou",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1433
+    },
+    {
+      "name": "_get_recordings_dir",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1448
+    },
+    {
+      "name": "_get_screenshots_dir",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1455
+    },
+    {
+      "name": "save_settings",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1462
+    },
+    {
+      "name": "publish_vision_status",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1472
+    },
+    {
+      "name": "publish_face_state",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1486
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 142
+    },
+    {
+      "name": "init",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 144
+    },
+    {
+      "name": "update",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 147
     },
     {
       "name": "__init__",
@@ -73887,122 +74289,132 @@
     {
       "name": "setup_ui",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 478
+      "line": 483
     },
     {
       "name": "connect_signals",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 688
+      "line": 693
     },
     {
       "name": "apply_dark_theme",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 708
+      "line": 720
     },
     {
       "name": "get_button_style",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 775
+      "line": 787
+    },
+    {
+      "name": "publish_voice_status",
+      "file": "buster\\ui\\v9\\panels\\voice_panel.py",
+      "line": 807
+    },
+    {
+      "name": "publish_face_state",
+      "file": "buster\\ui\\v9\\panels\\voice_panel.py",
+      "line": 823
     },
     {
       "name": "toggle_recording",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 796
+      "line": 834
     },
     {
       "name": "start_recording",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 803
+      "line": 841
     },
     {
       "name": "stop_recording",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 825
+      "line": 873
     },
     {
       "name": "on_recording_finished",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 840
+      "line": 895
     },
     {
       "name": "update_recording_time",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 850
+      "line": 905
     },
     {
       "name": "speak_text",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 858
+      "line": 913
     },
     {
       "name": "_speak_thread",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 876
+      "line": 941
     },
     {
       "name": "voice_finished",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 900
+      "line": 965
     },
     {
       "name": "transcribe_audio",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 906
+      "line": 977
     },
     {
       "name": "_transcribe_thread",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 914
+      "line": 992
     },
     {
       "name": "update_voice_settings",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 947
+      "line": 1040
     },
     {
       "name": "change_visualization_mode",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 961
+      "line": 1054
     },
     {
       "name": "update_status",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 972
+      "line": 1065
     },
     {
       "name": "_append_info",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 991
+      "line": 1084
     },
     {
       "name": "_set_text",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 997
+      "line": 1090
     },
     {
       "name": "_show_error_dialog",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 1003
+      "line": 1096
     },
     {
       "name": "show_error",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 1008
+      "line": 1101
     },
     {
       "name": "load_settings",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 1019
+      "line": 1122
     },
     {
       "name": "save_settings",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 1035
+      "line": 1138
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\panels\\voice_panel.py",
-      "line": 1048
+      "line": 1151
     },
     {
       "name": "__init__",
@@ -119352,9 +119764,9 @@
       "line": 11
     },
     {
-      "name": "buster.ui.v9.v9_shell",
+      "name": "buster.ui.v9.main_window",
       "file": "buster\\core\\runtime.py",
-      "line": 13
+      "line": 12
     },
     {
       "name": "json",
@@ -122012,14 +122424,24 @@
       "line": 4
     },
     {
-      "name": "sdk_bootstrap",
+      "name": "dispatcher",
+      "file": "buster\\runtime\\core.py",
+      "line": 5
+    },
+    {
+      "name": "state_store",
       "file": "buster\\runtime\\core.py",
       "line": 6
     },
     {
+      "name": "sdk_bootstrap",
+      "file": "buster\\runtime\\core.py",
+      "line": 8
+    },
+    {
       "name": "dev_tools",
       "file": "buster\\runtime\\core.py",
-      "line": 30
+      "line": 32
     },
     {
       "name": "__future__",
@@ -122052,19 +122474,69 @@
       "line": 1
     },
     {
-      "name": "typing",
-      "file": "buster\\runtime\\dispatcher.py",
-      "line": 2
-    },
-    {
-      "name": "storage",
+      "name": "base64",
       "file": "buster\\runtime\\dispatcher.py",
       "line": 3
     },
     {
-      "name": "pathlib",
+      "name": "collections",
       "file": "buster\\runtime\\dispatcher.py",
       "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 8
+    },
+    {
+      "name": "enum",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 9
+    },
+    {
+      "name": "traceback",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 10
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 11
+    },
+    {
+      "name": "state_store",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 12
+    },
+    {
+      "name": "threading",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 13
+    },
+    {
+      "name": "storage",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 17
+    },
+    {
+      "name": "numpy",
+      "file": "buster\\runtime\\dispatcher.py",
+      "line": 22
     },
     {
       "name": "__future__",
@@ -122590,6 +123062,26 @@
       "name": "buster.runtime.engine",
       "file": "buster\\runtime\\sdk_runtime.py",
       "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 1
+    },
+    {
+      "name": "copy",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 3
+    },
+    {
+      "name": "threading",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\state_store.py",
+      "line": 5
     },
     {
       "name": "__future__",
@@ -125222,104 +125714,24 @@
       "line": 11
     },
     {
-      "name": "__future__",
+      "name": "buster.ui.v9.panels.runtime_overview_panel",
       "file": "buster\\ui\\v10\\runtime_dashboard.py",
       "line": 1
     },
     {
-      "name": "json",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 3
-    },
-    {
-      "name": "PySide6.QtCore",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 4
-    },
-    {
-      "name": "PySide6.QtWidgets",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 5
-    },
-    {
-      "name": "buster.runtime.sdk_bootstrap",
-      "file": "buster\\ui\\v10\\runtime_dashboard.py",
-      "line": 16
-    },
-    {
-      "name": "__future__",
+      "name": "buster.ui.v9.panels.live_runtime_ui",
       "file": "buster\\ui\\v11\\live_runtime_ui.py",
       "line": 1
     },
     {
-      "name": "json",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 3
-    },
-    {
-      "name": "PySide6.QtCore",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 4
-    },
-    {
-      "name": "PySide6.QtWidgets",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 5
-    },
-    {
-      "name": "buster.runtime",
-      "file": "buster\\ui\\v11\\live_runtime_ui.py",
-      "line": 17
-    },
-    {
-      "name": "__future__",
+      "name": "buster.ui.v9.panels.runtime_console_panel",
       "file": "buster\\ui\\v11\\runtime_console.py",
       "line": 1
     },
     {
-      "name": "json",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 3
-    },
-    {
-      "name": "PySide6.QtCore",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 4
-    },
-    {
-      "name": "PySide6.QtWidgets",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 5
-    },
-    {
-      "name": "buster.runtime",
-      "file": "buster\\ui\\v11\\runtime_console.py",
-      "line": 11
-    },
-    {
-      "name": "__future__",
+      "name": "buster.ui.v9.panels.mission_control_panel",
       "file": "buster\\ui\\v12\\mission_control.py",
       "line": 1
-    },
-    {
-      "name": "json",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 3
-    },
-    {
-      "name": "PySide6.QtCore",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 4
-    },
-    {
-      "name": "PySide6.QtWidgets",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 5
-    },
-    {
-      "name": "buster.runtime",
-      "file": "buster\\ui\\v12\\mission_control.py",
-      "line": 10
     },
     {
       "name": "PySide6.QtCore",
@@ -125379,32 +125791,47 @@
     {
       "name": "PySide6.QtCore",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 5
+      "line": 6
     },
     {
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 6
+      "line": 7
     },
     {
       "name": "buster.ui.v9.widgets.animated_avatar",
       "file": "buster\\ui\\v9\\face_window.py",
-      "line": 11
+      "line": 12
     },
     {
-      "name": "pathlib",
+      "name": "__future__",
       "file": "buster\\ui\\v9\\live_services.py",
       "line": 1
     },
     {
+      "name": "pathlib",
+      "file": "buster\\ui\\v9\\live_services.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\live_services.py",
+      "line": 4
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\live_services.py",
+      "line": 5
+    },
+    {
       "name": "subprocess",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 2
+      "line": 6
     },
     {
       "name": "sys",
       "file": "buster\\ui\\v9\\live_services.py",
-      "line": 3
+      "line": 7
     },
     {
       "name": "PySide6.QtCore",
@@ -125469,52 +125896,62 @@
     {
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 140
+      "line": 146
     },
     {
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 262
+      "line": 268
     },
     {
       "name": "buster.ui.v9.panels.developer_checklist_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 350
+      "line": 356
     },
     {
       "name": "buster.ui.v9.panels.agent_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 89
+      "line": 95
     },
     {
       "name": "buster.ui.v9.panels.project_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 166
+      "line": 172
     },
     {
       "name": "buster.ui.v9.panels.workspace_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 183
+      "line": 189
     },
     {
       "name": "buster.ui.v9.panels.vision_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 191
+      "line": 197
     },
     {
       "name": "buster.ui.v9.panels.voice_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 206
+      "line": 212
     },
     {
       "name": "buster.ui.v9.panels.terminal_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 221
+      "line": 227
     },
     {
       "name": "buster.ui.v9.panels.settings_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 234
+      "line": 240
+    },
+    {
+      "name": "buster.ui.v9.panels.notification_center_panel",
+      "file": "buster\\ui\\v9\\main_window.py",
+      "line": 422
+    },
+    {
+      "name": "buster.ui.v9.panels.runtime_timeline_panel",
+      "file": "buster\\ui\\v9\\main_window.py",
+      "line": 444
     },
     {
       "name": "PySide6.QtCore",
@@ -126027,6 +126464,31 @@
       "line": 10
     },
     {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 1
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 6
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
+      "line": 7
+    },
+    {
       "name": "pathlib",
       "file": "buster\\ui\\v9\\panels\\project_panel.py",
       "line": 1
@@ -126095,6 +126557,31 @@
       "name": "buster.runtime.sdk_bootstrap",
       "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
       "line": 16
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 1
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 6
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
+      "line": 7
     },
     {
       "name": "json",
@@ -126217,39 +126704,104 @@
       "line": 9
     },
     {
-      "name": "PySide6.QtCore",
+      "name": "json",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
       "line": 10
     },
     {
-      "name": "PySide6.QtGui",
+      "name": "time",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
       "line": 11
     },
     {
-      "name": "PySide6.QtWidgets",
+      "name": "PySide6.QtCore",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
       "line": 12
     },
     {
-      "name": "dataclasses",
+      "name": "PySide6.QtGui",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
       "line": 13
     },
     {
-      "name": "typing",
+      "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
       "line": 14
     },
     {
-      "name": "enum",
+      "name": "dataclasses",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
       "line": 15
     },
     {
-      "name": "pyzbar.pyzbar",
+      "name": "typing",
       "file": "buster\\ui\\v9\\panels\\vision_panel.py",
-      "line": 221
+      "line": 16
+    },
+    {
+      "name": "enum",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 17
+    },
+    {
+      "name": "buster.runtime.core",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 18
+    },
+    {
+      "name": "uuid",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 19
+    },
+    {
+      "name": "collections",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 20
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1317
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1367
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1368
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1377
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1378
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1449
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1456
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1063
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+      "line": 1351
     },
     {
       "name": "sys",

@@ -20,13 +20,37 @@ class TesterAgent(SDKAgent):
             timeout=120,
         )
 
-        output = (result.stdout + "\\n" + result.stderr).strip()
+        status = "passed" if result.returncode == 0 else "failed"
+
+        output = (result.stdout + "\n" + result.stderr).strip()
+
+        summary = (
+            output.splitlines()[-1]
+            if output
+            else (
+                "All tests passed."
+                if status == "passed"
+                else "Tests failed."
+            )
+        )
 
         data = {
             "agent": self.agent_name,
-            "status": "passed" if result.returncode == 0 else "failed",
+
+            "status": status,
+
             "returncode": result.returncode,
+
             "request": payload.get("request", ""),
+  
+            "summary": summary,
+
+            "message": summary,
+
+            "output": output,
+
+            "error": output if status == "failed" else "",
+
             "output_tail": output[-4000:],
         }
 

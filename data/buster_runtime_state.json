@@ -1,10 +1,10 @@
 {
   "enabled": true,
-  "runtime_status": "running",
+  "runtime_status": "stopped",
   "tick_count": 2,
   "mode": "companion",
   "privacy_mode": "companion",
-  "started_at": "2026-07-14T02:53:25+00:00",
+  "started_at": "2026-07-14T07:35:10+00:00",
   "last_tick": "2026-07-09T06:02:36+00:00",
   "latest_prediction": {
     "intent": "idle",
@@ -139,5 +139,5 @@
     },
     "observation_count": 0
   },
-  "stopped_at": "2026-06-29T10:55:55+00:00"
+  "stopped_at": "2026-07-14T07:36:25+00:00"
 }

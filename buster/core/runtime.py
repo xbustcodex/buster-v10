@@ -9,8 +9,9 @@ from buster.core.container import ServiceContainer
 
 from buster.services.thread_pool import ThreadPool
 from buster.services.task_scheduler import TaskScheduler
+from buster.ui.v9.main_window import V9MainWindow
 
-from buster.ui.v9.v9_shell import V9MainWindow, FaceWindow
+
 
 
 class BusterRuntime:
@@ -41,15 +42,8 @@ class BusterRuntime:
         window = V9MainWindow(
             services=self.services,
             settings=self.settings,
-            
         )
         window.show()
-
-        try:
-            face = FaceWindow()
-            face.show()
-        except Exception as e:
-            print(f"Face window skipped: {e}")
 
         sys.exit(app.exec())
 

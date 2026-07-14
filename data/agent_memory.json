@@ -1,39 +1,55 @@
 {
   "agents": {
     "planner": {
-      "runs": 3,
-      "successes": 3,
+      "runs": 7,
+      "successes": 7,
       "failures": 0,
       "last_action": "plan",
       "last_result": {
         "status": "completed",
         "plan": {
-          "request": "Review architecture quality and validate with tests",
+          "request": "workspace snapshot",
           "steps": [
             {
-              "title": "Run project tests",
+              "title": "Plan build task",
+              "job_type": "agent.build",
+              "agent": "builder",
+              "payload": {
+                "request": "workspace snapshot"
+              }
+            },
+            {
+              "title": "Run validation tests",
               "job_type": "agent.test",
               "agent": "tester",
               "payload": {
-                "request": "Review architecture quality and validate with tests"
+                "request": "workspace snapshot"
+              }
+            },
+            {
+              "title": "Review final result",
+              "job_type": "agent.review",
+              "agent": "reviewer",
+              "payload": {
+                "request": "workspace snapshot"
               }
             }
           ],
-          "step_count": 1
+          "step_count": 3
         }
       }
     },
     "reviewer": {
-      "runs": 1,
-      "successes": 1,
+      "runs": 2,
+      "successes": 2,
       "failures": 0,
       "last_action": "agent.review",
       "last_result": {
         "agent": "reviewer_agent",
         "status": "completed",
-        "request": "Build a safe runtime feature, validate it, review architecture quality",
-        "runtime_files": 31,
-        "test_files": 21,
+        "request": "workspace snapshot",
+        "runtime_files": 39,
+        "test_files": 32,
         "findings": [
           "Runtime event state file exists; ensure generated data is not committed unless intentional."
         ],
@@ -41,16 +57,37 @@
       }
     },
     "tester": {
-      "runs": 2,
-      "successes": 2,
-      "failures": 0,
+      "runs": 6,
+      "successes": 3,
+      "failures": 3,
       "last_action": "agent.test",
       "last_result": {
         "agent": "tester_agent",
         "status": "passed",
         "returncode": 0,
-        "request": "Review architecture quality and validate with tests",
-        "output_tail": "........................................................                 [100%]\n56 passed in 8.37s\n\\n"
+        "request": "workspace snapshot",
+        "summary": "60 passed in 18.80s",
+        "message": "60 passed in 18.80s",
+        "output": "............................................................             [100%]\n60 passed in 18.80s",
+        "error": "",
+        "output_tail": "............................................................             [100%]\n60 passed in 18.80s"
+      }
+    },
+    "builder": {
+      "runs": 4,
+      "successes": 4,
+      "failures": 0,
+      "last_action": "agent.build",
+      "last_result": {
+        "agent": "builder_agent",
+        "status": "completed",
+        "summary": "Builder Agent prepared the implementation plan.",
+        "request": "workspace snapshot",
+        "actions": [
+          "checked requested build scope",
+          "prepared implementation placeholder",
+          "recommended validation through tester agent"
+        ]
       }
     }
   },
@@ -90,6 +127,84 @@
       "action": "agent.test",
       "result_status": "passed",
       "timestamp": "2026-07-07T07:56:35+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T06:46:47+00:00"
+    },
+    {
+      "agent": "builder",
+      "action": "agent.build",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T06:46:47+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "failed",
+      "timestamp": "2026-07-14T06:46:54+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T07:12:52+00:00"
+    },
+    {
+      "agent": "builder",
+      "action": "agent.build",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T07:12:52+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "failed",
+      "timestamp": "2026-07-14T07:12:59+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T07:20:42+00:00"
+    },
+    {
+      "agent": "builder",
+      "action": "agent.build",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T07:20:42+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "failed",
+      "timestamp": "2026-07-14T07:20:49+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T07:35:11+00:00"
+    },
+    {
+      "agent": "builder",
+      "action": "agent.build",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T07:35:11+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "passed",
+      "timestamp": "2026-07-14T07:35:30+00:00"
+    },
+    {
+      "agent": "reviewer",
+      "action": "agent.review",
+      "result_status": "completed",
+      "timestamp": "2026-07-14T07:35:30+00:00"
     }
   ]
 }

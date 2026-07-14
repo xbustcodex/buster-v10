@@ -1,1841 +1,5 @@
 [
   {
-    "id": 73,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          228,
-          87,
-          87
-        ],
-        [
-          264,
-          181,
-          191,
-          191
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 73,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          228,
-          87,
-          87
-        ],
-        [
-          264,
-          181,
-          191,
-          191
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 74,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          265,
-          179,
-          189,
-          189
-        ],
-        [
-          414,
-          225,
-          90,
-          90
-        ],
-        [
-          145,
-          286,
-          79,
-          79
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 74,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          265,
-          179,
-          189,
-          189
-        ],
-        [
-          414,
-          225,
-          90,
-          90
-        ],
-        [
-          145,
-          286,
-          79,
-          79
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 75,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          265,
-          179,
-          189,
-          189
-        ],
-        [
-          414,
-          225,
-          90,
-          90
-        ],
-        [
-          145,
-          286,
-          79,
-          79
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 75,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          265,
-          179,
-          189,
-          189
-        ],
-        [
-          414,
-          225,
-          90,
-          90
-        ],
-        [
-          145,
-          286,
-          79,
-          79
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 76,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          226,
-          87,
-          87
-        ],
-        [
-          268,
-          180,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 76,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          226,
-          87,
-          87
-        ],
-        [
-          268,
-          180,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 77,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          187,
-          76,
-          76
-        ],
-        [
-          412,
-          225,
-          88,
-          88
-        ],
-        [
-          269,
-          179,
-          182,
-          182
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 77,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          187,
-          76,
-          76
-        ],
-        [
-          412,
-          225,
-          88,
-          88
-        ],
-        [
-          269,
-          179,
-          182,
-          182
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 78,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          187,
-          76,
-          76
-        ],
-        [
-          412,
-          225,
-          88,
-          88
-        ],
-        [
-          269,
-          179,
-          182,
-          182
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 78,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          187,
-          76,
-          76
-        ],
-        [
-          412,
-          225,
-          88,
-          88
-        ],
-        [
-          269,
-          179,
-          182,
-          182
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 79,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          232,
-          187,
-          78,
-          78
-        ],
-        [
-          410,
-          227,
-          87,
-          87
-        ],
-        [
-          270,
-          180,
-          180,
-          180
-        ],
-        [
-          147,
-          285,
-          80,
-          80
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 79,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          232,
-          187,
-          78,
-          78
-        ],
-        [
-          410,
-          227,
-          87,
-          87
-        ],
-        [
-          270,
-          180,
-          180,
-          180
-        ],
-        [
-          147,
-          285,
-          80,
-          80
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 80,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          231,
-          186,
-          78,
-          78
-        ],
-        [
-          406,
-          225,
-          90,
-          90
-        ],
-        [
-          147,
-          286,
-          78,
-          78
-        ],
-        [
-          272,
-          182,
-          175,
-          175
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 80,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          231,
-          186,
-          78,
-          78
-        ],
-        [
-          406,
-          225,
-          90,
-          90
-        ],
-        [
-          147,
-          286,
-          78,
-          78
-        ],
-        [
-          272,
-          182,
-          175,
-          175
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 81,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          404,
-          226,
-          89,
-          89
-        ],
-        [
-          147,
-          287,
-          76,
-          76
-        ],
-        [
-          268,
-          181,
-          174,
-          174
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 81,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          404,
-          226,
-          89,
-          89
-        ],
-        [
-          147,
-          287,
-          76,
-          76
-        ],
-        [
-          268,
-          181,
-          174,
-          174
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 82,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          147,
-          287,
-          76,
-          76
-        ],
-        [
-          404,
-          226,
-          89,
-          89
-        ],
-        [
-          268,
-          181,
-          174,
-          174
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 82,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          147,
-          287,
-          76,
-          76
-        ],
-        [
-          404,
-          226,
-          89,
-          89
-        ],
-        [
-          268,
-          181,
-          174,
-          174
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 83,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          147,
-          287,
-          76,
-          76
-        ],
-        [
-          407,
-          227,
-          89,
-          89
-        ],
-        [
-          268,
-          183,
-          173,
-          173
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 83,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          147,
-          287,
-          76,
-          76
-        ],
-        [
-          407,
-          227,
-          89,
-          89
-        ],
-        [
-          268,
-          183,
-          173,
-          173
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 84,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          234,
-          188,
-          74,
-          74
-        ],
-        [
-          147,
-          287,
-          75,
-          75
-        ],
-        [
-          406,
-          224,
-          90,
-          90
-        ],
-        [
-          271,
-          186,
-          166,
-          166
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 84,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          234,
-          188,
-          74,
-          74
-        ],
-        [
-          147,
-          287,
-          75,
-          75
-        ],
-        [
-          406,
-          224,
-          90,
-          90
-        ],
-        [
-          271,
-          186,
-          166,
-          166
-        ]
-      ],
-      "fps": 13.34604385128694
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 85,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          232,
-          189,
-          73,
-          73
-        ],
-        [
-          401,
-          225,
-          92,
-          92
-        ],
-        [
-          269,
-          185,
-          169,
-          169
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 85,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          232,
-          189,
-          73,
-          73
-        ],
-        [
-          401,
-          225,
-          92,
-          92
-        ],
-        [
-          269,
-          185,
-          169,
-          169
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 86,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          232,
-          189,
-          73,
-          73
-        ],
-        [
-          401,
-          225,
-          92,
-          92
-        ],
-        [
-          269,
-          185,
-          169,
-          169
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 86,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          232,
-          189,
-          73,
-          73
-        ],
-        [
-          401,
-          225,
-          92,
-          92
-        ],
-        [
-          269,
-          185,
-          169,
-          169
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 87,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          401,
-          225,
-          91,
-          91
-        ],
-        [
-          148,
-          287,
-          75,
-          75
-        ],
-        [
-          267,
-          185,
-          172,
-          172
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 87,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          401,
-          225,
-          91,
-          91
-        ],
-        [
-          148,
-          287,
-          75,
-          75
-        ],
-        [
-          267,
-          185,
-          172,
-          172
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:22:59+00:00"
-  },
-  {
-    "id": 88,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          228,
-          187,
-          77,
-          77
-        ],
-        [
-          404,
-          225,
-          91,
-          91
-        ],
-        [
-          268,
-          187,
-          171,
-          171
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 88,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          228,
-          187,
-          77,
-          77
-        ],
-        [
-          404,
-          225,
-          91,
-          91
-        ],
-        [
-          268,
-          187,
-          171,
-          171
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 89,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 5,
-      "faces": [
-        [
-          228,
-          186,
-          79,
-          79
-        ],
-        [
-          150,
-          286,
-          76,
-          76
-        ],
-        [
-          404,
-          226,
-          87,
-          87
-        ],
-        [
-          153,
-          251,
-          85,
-          85
-        ],
-        [
-          266,
-          187,
-          175,
-          175
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 89,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 5,
-      "faces": [
-        [
-          228,
-          186,
-          79,
-          79
-        ],
-        [
-          150,
-          286,
-          76,
-          76
-        ],
-        [
-          404,
-          226,
-          87,
-          87
-        ],
-        [
-          153,
-          251,
-          85,
-          85
-        ],
-        [
-          266,
-          187,
-          175,
-          175
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 90,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 5,
-      "faces": [
-        [
-          228,
-          186,
-          79,
-          79
-        ],
-        [
-          150,
-          286,
-          76,
-          76
-        ],
-        [
-          404,
-          226,
-          87,
-          87
-        ],
-        [
-          153,
-          251,
-          85,
-          85
-        ],
-        [
-          266,
-          187,
-          175,
-          175
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 90,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 5,
-      "faces": [
-        [
-          228,
-          186,
-          79,
-          79
-        ],
-        [
-          150,
-          286,
-          76,
-          76
-        ],
-        [
-          404,
-          226,
-          87,
-          87
-        ],
-        [
-          153,
-          251,
-          85,
-          85
-        ],
-        [
-          266,
-          187,
-          175,
-          175
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 91,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          268,
-          188,
-          175,
-          175
-        ],
-        [
-          409,
-          225,
-          90,
-          90
-        ],
-        [
-          232,
-          187,
-          74,
-          74
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 91,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          268,
-          188,
-          175,
-          175
-        ],
-        [
-          409,
-          225,
-          90,
-          90
-        ],
-        [
-          232,
-          187,
-          74,
-          74
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 92,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          406,
-          225,
-          90,
-          90
-        ],
-        [
-          266,
-          187,
-          178,
-          178
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 92,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          406,
-          225,
-          90,
-          90
-        ],
-        [
-          266,
-          187,
-          178,
-          178
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 93,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          406,
-          225,
-          90,
-          90
-        ],
-        [
-          266,
-          187,
-          178,
-          178
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 93,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          406,
-          225,
-          90,
-          90
-        ],
-        [
-          266,
-          187,
-          178,
-          178
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 94,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          410,
-          224,
-          90,
-          90
-        ],
-        [
-          266,
-          186,
-          180,
-          180
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 94,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          410,
-          224,
-          90,
-          90
-        ],
-        [
-          266,
-          186,
-          180,
-          180
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 95,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          223,
-          90,
-          90
-        ],
-        [
-          269,
-          186,
-          181,
-          181
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 95,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          223,
-          90,
-          90
-        ],
-        [
-          269,
-          186,
-          181,
-          181
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 96,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          232,
-          186,
-          78,
-          78
-        ],
-        [
-          416,
-          223,
-          89,
-          89
-        ],
-        [
-          270,
-          186,
-          182,
-          182
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 96,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          232,
-          186,
-          78,
-          78
-        ],
-        [
-          416,
-          223,
-          89,
-          89
-        ],
-        [
-          270,
-          186,
-          182,
-          182
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 97,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          185,
-          81,
-          81
-        ],
-        [
-          414,
-          221,
-          94,
-          94
-        ],
-        [
-          269,
-          186,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 97,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          185,
-          81,
-          81
-        ],
-        [
-          414,
-          221,
-          94,
-          94
-        ],
-        [
-          269,
-          186,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 98,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          415,
-          223,
-          91,
-          91
-        ],
-        [
-          269,
-          187,
-          185,
-          185
-        ],
-        [
-          148,
-          288,
-          74,
-          74
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 98,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          415,
-          223,
-          91,
-          91
-        ],
-        [
-          269,
-          187,
-          185,
-          185
-        ],
-        [
-          148,
-          288,
-          74,
-          74
-        ]
-      ],
-      "fps": 13.08411214953271
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 99,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          231,
-          186,
-          81,
-          81
-        ],
-        [
-          415,
-          223,
-          91,
-          91
-        ],
-        [
-          147,
-          289,
-          72,
-          72
-        ],
-        [
-          270,
-          187,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 99,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          231,
-          186,
-          81,
-          81
-        ],
-        [
-          415,
-          223,
-          91,
-          91
-        ],
-        [
-          147,
-          289,
-          72,
-          72
-        ],
-        [
-          270,
-          187,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 100,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          232,
-          186,
-          80,
-          80
-        ],
-        [
-          415,
-          224,
-          91,
-          91
-        ],
-        [
-          270,
-          188,
-          183,
-          183
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 100,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          232,
-          186,
-          80,
-          80
-        ],
-        [
-          415,
-          224,
-          91,
-          91
-        ],
-        [
-          270,
-          188,
-          183,
-          183
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:00+00:00"
-  },
-  {
-    "id": 101,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          232,
-          185,
-          81,
-          81
-        ],
-        [
-          416,
-          224,
-          89,
-          89
-        ],
-        [
-          270,
-          188,
-          183,
-          183
-        ],
-        [
-          149,
-          284,
-          82,
-          82
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 101,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          232,
-          185,
-          81,
-          81
-        ],
-        [
-          416,
-          224,
-          89,
-          89
-        ],
-        [
-          270,
-          188,
-          183,
-          183
-        ],
-        [
-          149,
-          284,
-          82,
-          82
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 102,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          186,
-          81,
-          81
-        ],
-        [
-          415,
-          224,
-          91,
-          91
-        ],
-        [
-          269,
-          188,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 102,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          186,
-          81,
-          81
-        ],
-        [
-          415,
-          224,
-          91,
-          91
-        ],
-        [
-          269,
-          188,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
     "id": 103,
     "type": "vision.face.detected",
     "source": "vision_panel",
@@ -19312,5 +17476,605 @@
       "message": "Buster is ready."
     },
     "created_at": "2026-07-14T02:57:24+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T05:26:02+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T05:26:02+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T05:27:37+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T05:27:37+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T05:46:06+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T05:46:06+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T05:46:30+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T05:46:30+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T05:58:18+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T05:58:18+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T06:00:29+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T06:00:29+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T06:16:56+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T06:16:56+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T06:19:34+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T06:19:34+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T06:20:33+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T06:20:33+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T06:23:10+00:00"
+  },
+  {
+    "id": 2,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T06:23:10+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T06:46:47+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T06:46:47+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T06:46:47+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T06:46:47+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T06:46:47+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T06:46:47+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "{\n  \"request\": \"workspace snapshot\",\n  \"selected_agents\": [\n    \"planner\"\n  ],\n  \"plan\": {\n    \"request\": \"workspace snapshot\",\n    \"steps\": [\n      {\n        \"title\": \"Plan build task\",\n        \"job_type\": \"agent.build\",\n        \"agent\": \"builder\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        }\n      },\n      {\n        \"title\": \"Run validation tests\",\n        \"job_type\": \"agent.test\",\n        \"agent\": \"tester\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        }\n      },\n      {\n        \"title\": \"Review final result\",\n        \"job_type\": \"agent.review\",\n        \"agent\": \"reviewer\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        }\n      }\n    ],\n    \"step_count\": 3\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"04aa4d53-75bb-4ff9-8055-25a427c7cd36\",\n      \"title\": \"Plan build task\",\n      \"type\": \"agent.build\",\n      \"payload\": {\n        \"request\": \"workspace snapshot\"\n      },\n      \"status\": \"completed\",\n      \"result\": {\n        \"agent\": \"builder_agent\",\n        \"status\": \"completed\",\n        \"summary\": \"Builder Agent prepared the implementation plan.\",\n        \"request\": \"workspace snapshot\",\n        \"actions\": [\n          \"checked requested build scope\",\n          \"prepared implementation placeholder\",\n          \"recommended validation through tester agent\"\n        ]\n      },\n      \"error\": null,\n      \"created_at\": \"2026-07-14T06:46:47+00:00\",\n      \"updated_at\": \"2026-07-14T06:46:47+00:00\",\n      \"events\": [\n        {\n          \"status\": \"running\",\n          \"result\": null,\n          \"error\": null,\n          \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n        },\n        {\n          \"status\": \"completed\",\n          \"result\": {\n            \"agent\": \"builder_agent\",\n            \"status\": \"completed\",\n            \"summary\": \"Builder Agent prepared the implementation plan.\",\n            \"request\": \"workspace snapshot\",\n            \"actions\": [\n              \"checked requested build scope\",\n              \"prepared implementation placeholder\",\n              \"recommended validation through tester agent\"\n            ]\n          },\n          \"error\": null,\n          \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n        }\n      ]\n    },\n    {\n      \"job_id\": \"9903d4b2-ba72-454d-929b-660422748cb3\",\n      \"title\": \"Run validation tests\",\n      \"type\": \"agent.test\",\n      \"payload\": {\n        \"request\": \"workspace snapshot\"\n      },\n      \"status\": \"completed\",\n      \"result\": {\n        \"agent\": \"tester_agent\",\n        \"status\": \"failed\",\n        \"returncode\": 2,\n        \"request\": \"workspace snapshot\",\n        \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n      },\n      \"error\": null,\n      \"created_at\": \"2026-07-14T06:46:47+00:00\",\n      \"updated_at\": \"2026-07-14T06:46:54+00:00\",\n      \"events\": [\n        {\n          \"status\": \"running\",\n          \"result\": null,\n          \"error\": null,\n          \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n        },\n        {\n          \"status\": \"completed\",\n          \"result\": {\n            \"agent\": \"tester_agent\",\n            \"status\": \"failed\",\n            \"returncode\": 2,\n            \"request\": \"workspace snapshot\",\n            \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n          },\n          \"error\": null,\n          \"timestamp\": \"2026-07-14T06:46:54+00:00\"\n        }\n      ]\n    }\n  ],\n  \"status\": \"failed\",\n  \"blackboard\": {\n    \"goal\": \"workspace snapshot\",\n    \"workspace\": {},\n    \"problems\": [\n      {\n        \"agent\": \"tester_agent\",\n        \"status\": \"failed\",\n        \"returncode\": 2,\n        \"request\": \"workspace snapshot\",\n        \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n      }\n    ],\n    \"decisions\": [],\n    \"artifacts\": [\n      {\n        \"job_id\": \"04aa4d53-75bb-4ff9-8055-25a427c7cd36\",\n        \"title\": \"Plan build task\",\n        \"type\": \"agent.build\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        },\n        \"status\": \"completed\",\n        \"result\": {\n          \"agent\": \"builder_agent\",\n          \"status\": \"completed\",\n          \"summary\": \"Builder Agent prepared the implementation plan.\",\n          \"request\": \"workspace snapshot\",\n          \"actions\": [\n            \"checked requested build scope\",\n            \"prepared implementation placeholder\",\n            \"recommended validation through tester agent\"\n          ]\n        },\n        \"error\": null,\n        \"created_at\": \"2026-07-14T06:46:47+00:00\",\n        \"updated_at\": \"2026-07-14T06:46:47+00:00\",\n        \"events\": [\n          {\n            \"status\": \"running\",\n            \"result\": null,\n            \"error\": null,\n            \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n          },\n          {\n            \"status\": \"completed\",\n            \"result\": {\n              \"agent\": \"builder_agent\",\n              \"status\": \"completed\",\n              \"summary\": \"Builder Agent prepared the implementation plan.\",\n              \"request\": \"workspace snapshot\",\n              \"actions\": [\n                \"checked requested build scope\",\n                \"prepared implementation placeholder\",\n                \"recommended validation through tester agent\"\n              ]\n            },\n            \"error\": null,\n            \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n          }\n        ]\n      },\n      {\n        \"job_id\": \"9903d4b2-ba72-454d-929b-660422748cb3\",\n        \"title\": \"Run validation tests\",\n        \"type\": \"agent.test\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        },\n        \"status\": \"completed\",\n        \"result\": {\n          \"agent\": \"tester_agent\",\n          \"status\": \"failed\",\n          \"returncode\": 2,\n          \"request\": \"workspace snapshot\",\n          \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n        },\n        \"error\": null,\n        \"created_at\": \"2026-07-14T06:46:47+00:00\",\n        \"updated_at\": \"2026-07-14T06:46:54+00:00\",\n        \"events\": [\n          {\n            \"status\": \"running\",\n            \"result\": null,\n            \"error\": null,\n            \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n          },\n          {\n            \"status\": \"completed\",\n            \"result\": {\n              \"agent\": \"tester_agent\",\n              \"status\": \"failed\",\n              \"returncode\": 2,\n              \"request\": \"workspace snapshot\",\n              \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n            },\n            \"error\": null,\n            \"timestamp\": \"2026-07-14T06:46:54+00:00\"\n          }\n        ]\n      }\n    ],\n    \"notes\": [],\n    \"updated_at\": \"2026-07-14T06:46:54+00:00\",\n    \"plan\": {\n      \"request\": \"workspace snapshot\",\n      \"steps\": [\n        {\n          \"title\": \"Plan build task\",\n          \"job_type\": \"agent.build\",\n          \"agent\": \"builder\",\n          \"payload\": {\n            \"request\": \"workspace snapshot\"\n          }\n        },\n        {\n          \"title\": \"Run validation tests\",\n          \"job_type\": \"agent.test\",\n          \"agent\": \"tester\",\n          \"payload\": {\n            \"request\": \"workspace snapshot\"\n          }\n        },\n        {\n          \"title\": \"Review final result\",\n          \"job_type\": \"agent.review\",\n          \"agent\": \"reviewer\",\n          \"payload\": {\n            \"request\": \"workspace snapshot\"\n          }\n        }\n      ],\n      \"step_count\": 3\n    }\n  },\n  \"agent_memory\": {\n    \"agents\": {\n      \"planner\": {\n        \"runs\": 4,\n        \"successes\": 4,\n        \"failures\": 0,\n        \"last_action\": \"plan\",\n        \"last_result\": {\n          \"status\": \"completed\",\n          \"plan\": {\n            \"request\": \"workspace snapshot\",\n            \"steps\": [\n              {\n                \"title\": \"Plan build task\",\n                \"job_type\": \"agent.build\",\n                \"agent\": \"builder\",\n                \"payload\": {\n                  \"request\": \"workspace snapshot\"\n                }\n              },\n              {\n                \"title\": \"Run validation tests\",\n                \"job_type\": \"agent.test\",\n                \"agent\": \"tester\",\n                \"payload\": {\n                  \"request\": \"workspace snapshot\"\n                }\n              },\n              {\n                \"title\": \"Review final result\",\n                \"job_type\": \"agent.review\",\n                \"agent\": \"reviewer\",\n                \"payload\": {\n                  \"request\": \"workspace snapshot\"\n                }\n              }\n            ],\n            \"step_count\": 3\n          }\n        }\n      },\n      \"reviewer\": {\n        \"runs\": 1,\n        \"successes\": 1,\n        \"failures\": 0,\n        \"last_action\": \"agent.review\",\n        \"last_result\": {\n          \"agent\": \"reviewer_agent\",\n          \"status\": \"completed\",\n          \"request\": \"Build a safe runtime feature, validate it, review architecture quality\",\n          \"runtime_files\": 31,\n          \"test_files\": 21,\n          \"findings\": [\n            \"Runtime event state file exists; ensure generated data is not committed unless intentional.\"\n          ],\n          \"recommendation\": \"Architecture looks valid. Keep generated data out of commits.\"\n        }\n      },\n      \"tester\": {\n        \"runs\": 3,\n        \"successes\": 2,\n        \"failures\": 1,\n        \"last_action\": \"agent.test\",\n        \"last_result\": {\n          \"agent\": \"tester_agent\",\n          \"status\": \"failed\",\n          \"returncode\": 2,\n          \"request\": \"workspace snapshot\",\n          \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n        }\n      },\n      \"builder\": {\n        \"runs\": 1,\n        \"successes\": 1,\n        \"failures\": 0,\n        \"last_action\": \"agent.build\",\n        \"last_result\": {\n          \"agent\": \"builder_agent\",\n          \"status\": \"completed\",\n          \"summary\": \"Builder Agent prepared the implementation plan.\",\n          \"request\": \"workspace snapshot\",\n          \"actions\": [\n            \"checked requested build scope\",\n            \"prepared implementation placeholder\",\n            \"recommended validation through tester agent\"\n          ]\n        }\n      }\n    },\n    \"events\": [\n      {\n        \"agent\": \"planner\",\n        \"action\": \"plan\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-07T07:25:57+00:00\"\n      },\n      {\n        \"agent\": \"reviewer\",\n        \"action\": \"agent.review\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-07T07:25:57+00:00\"\n      },\n      {\n        \"agent\": \"planner\",\n        \"action\": \"plan\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-07T07:36:00+00:00\"\n      },\n      {\n        \"agent\": \"tester\",\n        \"action\": \"agent.test\",\n        \"result_status\": \"passed\",\n        \"timestamp\": \"2026-07-07T07:36:09+00:00\"\n      },\n      {\n        \"agent\": \"planner\",\n        \"action\": \"plan\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-07T07:56:25+00:00\"\n      },\n      {\n        \"agent\": \"tester\",\n        \"action\": \"agent.test\",\n        \"result_status\": \"passed\",\n        \"timestamp\": \"2026-07-07T07:56:35+00:00\"\n      },\n      {\n        \"agent\": \"planner\",\n        \"action\": \"plan\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n      },\n      {\n        \"agent\": \"builder\",\n        \"action\": \"agent.build\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n      },\n      {\n        \"agent\": \"tester\",\n        \"action\": \"agent.test\",\n        \"result_status\": \"failed\",\n        \"timestamp\": \"2026-07-14T06:46:54+00:00\"\n      }\n    ]\n  }\n}"
+    },
+    "created_at": "2026-07-14T06:46:54+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "{\n  \"request\": \"workspace snapshot\",\n  \"selected_agents\": [\n    \"planner\"\n  ],\n  \"plan\": {\n    \"request\": \"workspace snapshot\",\n    \"steps\": [\n      {\n        \"title\": \"Plan build task\",\n        \"job_type\": \"agent.build\",\n        \"agent\": \"builder\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        }\n      },\n      {\n        \"title\": \"Run validation tests\",\n        \"job_type\": \"agent.test\",\n        \"agent\": \"tester\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        }\n      },\n      {\n        \"title\": \"Review final result\",\n        \"job_type\": \"agent.review\",\n        \"agent\": \"reviewer\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        }\n      }\n    ],\n    \"step_count\": 3\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"04aa4d53-75bb-4ff9-8055-25a427c7cd36\",\n      \"title\": \"Plan build task\",\n      \"type\": \"agent.build\",\n      \"payload\": {\n        \"request\": \"workspace snapshot\"\n      },\n      \"status\": \"completed\",\n      \"result\": {\n        \"agent\": \"builder_agent\",\n        \"status\": \"completed\",\n        \"summary\": \"Builder Agent prepared the implementation plan.\",\n        \"request\": \"workspace snapshot\",\n        \"actions\": [\n          \"checked requested build scope\",\n          \"prepared implementation placeholder\",\n          \"recommended validation through tester agent\"\n        ]\n      },\n      \"error\": null,\n      \"created_at\": \"2026-07-14T06:46:47+00:00\",\n      \"updated_at\": \"2026-07-14T06:46:47+00:00\",\n      \"events\": [\n        {\n          \"status\": \"running\",\n          \"result\": null,\n          \"error\": null,\n          \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n        },\n        {\n          \"status\": \"completed\",\n          \"result\": {\n            \"agent\": \"builder_agent\",\n            \"status\": \"completed\",\n            \"summary\": \"Builder Agent prepared the implementation plan.\",\n            \"request\": \"workspace snapshot\",\n            \"actions\": [\n              \"checked requested build scope\",\n              \"prepared implementation placeholder\",\n              \"recommended validation through tester agent\"\n            ]\n          },\n          \"error\": null,\n          \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n        }\n      ]\n    },\n    {\n      \"job_id\": \"9903d4b2-ba72-454d-929b-660422748cb3\",\n      \"title\": \"Run validation tests\",\n      \"type\": \"agent.test\",\n      \"payload\": {\n        \"request\": \"workspace snapshot\"\n      },\n      \"status\": \"completed\",\n      \"result\": {\n        \"agent\": \"tester_agent\",\n        \"status\": \"failed\",\n        \"returncode\": 2,\n        \"request\": \"workspace snapshot\",\n        \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n      },\n      \"error\": null,\n      \"created_at\": \"2026-07-14T06:46:47+00:00\",\n      \"updated_at\": \"2026-07-14T06:46:54+00:00\",\n      \"events\": [\n        {\n          \"status\": \"running\",\n          \"result\": null,\n          \"error\": null,\n          \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n        },\n        {\n          \"status\": \"completed\",\n          \"result\": {\n            \"agent\": \"tester_agent\",\n            \"status\": \"failed\",\n            \"returncode\": 2,\n            \"request\": \"workspace snapshot\",\n            \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n          },\n          \"error\": null,\n          \"timestamp\": \"2026-07-14T06:46:54+00:00\"\n        }\n      ]\n    }\n  ],\n  \"status\": \"failed\",\n  \"blackboard\": {\n    \"goal\": \"workspace snapshot\",\n    \"workspace\": {},\n    \"problems\": [\n      {\n        \"agent\": \"tester_agent\",\n        \"status\": \"failed\",\n        \"returncode\": 2,\n        \"request\": \"workspace snapshot\",\n        \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n      }\n    ],\n    \"decisions\": [],\n    \"artifacts\": [\n      {\n        \"job_id\": \"04aa4d53-75bb-4ff9-8055-25a427c7cd36\",\n        \"title\": \"Plan build task\",\n        \"type\": \"agent.build\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        },\n        \"status\": \"completed\",\n        \"result\": {\n          \"agent\": \"builder_agent\",\n          \"status\": \"completed\",\n          \"summary\": \"Builder Agent prepared the implementation plan.\",\n          \"request\": \"workspace snapshot\",\n          \"actions\": [\n            \"checked requested build scope\",\n            \"prepared implementation placeholder\",\n            \"recommended validation through tester agent\"\n          ]\n        },\n        \"error\": null,\n        \"created_at\": \"2026-07-14T06:46:47+00:00\",\n        \"updated_at\": \"2026-07-14T06:46:47+00:00\",\n        \"events\": [\n          {\n            \"status\": \"running\",\n            \"result\": null,\n            \"error\": null,\n            \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n          },\n          {\n            \"status\": \"completed\",\n            \"result\": {\n              \"agent\": \"builder_agent\",\n              \"status\": \"completed\",\n              \"summary\": \"Builder Agent prepared the implementation plan.\",\n              \"request\": \"workspace snapshot\",\n              \"actions\": [\n                \"checked requested build scope\",\n                \"prepared implementation placeholder\",\n                \"recommended validation through tester agent\"\n              ]\n            },\n            \"error\": null,\n            \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n          }\n        ]\n      },\n      {\n        \"job_id\": \"9903d4b2-ba72-454d-929b-660422748cb3\",\n        \"title\": \"Run validation tests\",\n        \"type\": \"agent.test\",\n        \"payload\": {\n          \"request\": \"workspace snapshot\"\n        },\n        \"status\": \"completed\",\n        \"result\": {\n          \"agent\": \"tester_agent\",\n          \"status\": \"failed\",\n          \"returncode\": 2,\n          \"request\": \"workspace snapshot\",\n          \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n        },\n        \"error\": null,\n        \"created_at\": \"2026-07-14T06:46:47+00:00\",\n        \"updated_at\": \"2026-07-14T06:46:54+00:00\",\n        \"events\": [\n          {\n            \"status\": \"running\",\n            \"result\": null,\n            \"error\": null,\n            \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n          },\n          {\n            \"status\": \"completed\",\n            \"result\": {\n              \"agent\": \"tester_agent\",\n              \"status\": \"failed\",\n              \"returncode\": 2,\n              \"request\": \"workspace snapshot\",\n              \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n            },\n            \"error\": null,\n            \"timestamp\": \"2026-07-14T06:46:54+00:00\"\n          }\n        ]\n      }\n    ],\n    \"notes\": [],\n    \"updated_at\": \"2026-07-14T06:46:54+00:00\",\n    \"plan\": {\n      \"request\": \"workspace snapshot\",\n      \"steps\": [\n        {\n          \"title\": \"Plan build task\",\n          \"job_type\": \"agent.build\",\n          \"agent\": \"builder\",\n          \"payload\": {\n            \"request\": \"workspace snapshot\"\n          }\n        },\n        {\n          \"title\": \"Run validation tests\",\n          \"job_type\": \"agent.test\",\n          \"agent\": \"tester\",\n          \"payload\": {\n            \"request\": \"workspace snapshot\"\n          }\n        },\n        {\n          \"title\": \"Review final result\",\n          \"job_type\": \"agent.review\",\n          \"agent\": \"reviewer\",\n          \"payload\": {\n            \"request\": \"workspace snapshot\"\n          }\n        }\n      ],\n      \"step_count\": 3\n    }\n  },\n  \"agent_memory\": {\n    \"agents\": {\n      \"planner\": {\n        \"runs\": 4,\n        \"successes\": 4,\n        \"failures\": 0,\n        \"last_action\": \"plan\",\n        \"last_result\": {\n          \"status\": \"completed\",\n          \"plan\": {\n            \"request\": \"workspace snapshot\",\n            \"steps\": [\n              {\n                \"title\": \"Plan build task\",\n                \"job_type\": \"agent.build\",\n                \"agent\": \"builder\",\n                \"payload\": {\n                  \"request\": \"workspace snapshot\"\n                }\n              },\n              {\n                \"title\": \"Run validation tests\",\n                \"job_type\": \"agent.test\",\n                \"agent\": \"tester\",\n                \"payload\": {\n                  \"request\": \"workspace snapshot\"\n                }\n              },\n              {\n                \"title\": \"Review final result\",\n                \"job_type\": \"agent.review\",\n                \"agent\": \"reviewer\",\n                \"payload\": {\n                  \"request\": \"workspace snapshot\"\n                }\n              }\n            ],\n            \"step_count\": 3\n          }\n        }\n      },\n      \"reviewer\": {\n        \"runs\": 1,\n        \"successes\": 1,\n        \"failures\": 0,\n        \"last_action\": \"agent.review\",\n        \"last_result\": {\n          \"agent\": \"reviewer_agent\",\n          \"status\": \"completed\",\n          \"request\": \"Build a safe runtime feature, validate it, review architecture quality\",\n          \"runtime_files\": 31,\n          \"test_files\": 21,\n          \"findings\": [\n            \"Runtime event state file exists; ensure generated data is not committed unless intentional.\"\n          ],\n          \"recommendation\": \"Architecture looks valid. Keep generated data out of commits.\"\n        }\n      },\n      \"tester\": {\n        \"runs\": 3,\n        \"successes\": 2,\n        \"failures\": 1,\n        \"last_action\": \"agent.test\",\n        \"last_result\": {\n          \"agent\": \"tester_agent\",\n          \"status\": \"failed\",\n          \"returncode\": 2,\n          \"request\": \"workspace snapshot\",\n          \"output_tail\": \"=================================== ERRORS ====================================\\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v10_2_mission_control_dashboard.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v10_2_mission_control_dashboard.py:4: in <module>\\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\\nImportError while importing test module 'C:\\\\Users\\\\xkali\\\\new_ai\\\\buster-v10\\\\tests\\\\test_v11_live_runtime_ui.py'.\\nHint: make sure your test modules/packages have valid Python names.\\nTraceback:\\nC:\\\\Program Files\\\\WindowsApps\\\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\\\Lib\\\\importlib\\\\__init__.py:90: in import_module\\n    return _bootstrap._gcd_import(name[level:], package, level)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\ntests\\\\test_v11_live_runtime_ui.py:4: in <module>\\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\\n=========================== short test summary info ===========================\\nERROR tests/test_v10_2_mission_control_dashboard.py\\nERROR tests/test_v11_live_runtime_ui.py\\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\\n2 errors in 5.51s\\n\\\\n\"\n        }\n      },\n      \"builder\": {\n        \"runs\": 1,\n        \"successes\": 1,\n        \"failures\": 0,\n        \"last_action\": \"agent.build\",\n        \"last_result\": {\n          \"agent\": \"builder_agent\",\n          \"status\": \"completed\",\n          \"summary\": \"Builder Agent prepared the implementation plan.\",\n          \"request\": \"workspace snapshot\",\n          \"actions\": [\n            \"checked requested build scope\",\n            \"prepared implementation placeholder\",\n            \"recommended validation through tester agent\"\n          ]\n        }\n      }\n    },\n    \"events\": [\n      {\n        \"agent\": \"planner\",\n        \"action\": \"plan\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-07T07:25:57+00:00\"\n      },\n      {\n        \"agent\": \"reviewer\",\n        \"action\": \"agent.review\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-07T07:25:57+00:00\"\n      },\n      {\n        \"agent\": \"planner\",\n        \"action\": \"plan\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-07T07:36:00+00:00\"\n      },\n      {\n        \"agent\": \"tester\",\n        \"action\": \"agent.test\",\n        \"result_status\": \"passed\",\n        \"timestamp\": \"2026-07-07T07:36:09+00:00\"\n      },\n      {\n        \"agent\": \"planner\",\n        \"action\": \"plan\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-07T07:56:25+00:00\"\n      },\n      {\n        \"agent\": \"tester\",\n        \"action\": \"agent.test\",\n        \"result_status\": \"passed\",\n        \"timestamp\": \"2026-07-07T07:56:35+00:00\"\n      },\n      {\n        \"agent\": \"planner\",\n        \"action\": \"plan\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n      },\n      {\n        \"agent\": \"builder\",\n        \"action\": \"agent.build\",\n        \"result_status\": \"completed\",\n        \"timestamp\": \"2026-07-14T06:46:47+00:00\"\n      },\n      {\n        \"agent\": \"tester\",\n        \"action\": \"agent.test\",\n        \"result_status\": \"failed\",\n        \"timestamp\": \"2026-07-14T06:46:54+00:00\"\n      }\n    ]\n  }\n}"
+    },
+    "created_at": "2026-07-14T06:46:54+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T06:50:05+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T06:50:05+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T07:12:52+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T07:12:52+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:12:52+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:12:52+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:12:52+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:12:52+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow encountered a problem.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: Failed \u2014 Unknown error"
+    },
+    "created_at": "2026-07-14T07:12:59+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow encountered a problem.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: Failed \u2014 Unknown error"
+    },
+    "created_at": "2026-07-14T07:12:59+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T07:13:40+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T07:13:40+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T07:20:42+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T07:20:42+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:20:42+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:20:42+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:20:42+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:20:42+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow encountered a problem.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: Failed \u2014 =================================== ERRORS ====================================\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\nImportError while importing test module 'C:\\Users\\xkali\\new_ai\\buster-v10\\tests\\test_v10_2_mission_control_dashboard.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nC:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\importlib\\__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\test_v10_2_mission_control_dashboard.py:4: in <module>\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\nImportError while importing test module 'C:\\Users\\xkali\\new_ai\\buster-v10\\tests\\test_v11_live_runtime_ui.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nC:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\importlib\\__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\test_v11_live_runtime_ui.py:4: in <module>\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\n=========================== short test summary info ===========================\nERROR tests/test_v10_2_mission_control_dashboard.py\nERROR tests/test_v11_live_runtime_ui.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\n2 errors in 5.67s"
+    },
+    "created_at": "2026-07-14T07:20:49+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow encountered a problem.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: Failed \u2014 =================================== ERRORS ====================================\n_______ ERROR collecting tests/test_v10_2_mission_control_dashboard.py ________\nImportError while importing test module 'C:\\Users\\xkali\\new_ai\\buster-v10\\tests\\test_v10_2_mission_control_dashboard.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nC:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\importlib\\__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\test_v10_2_mission_control_dashboard.py:4: in <module>\n    from buster.ui.v10.runtime_dashboard import MissionControlRuntimeDashboard\nE   ModuleNotFoundError: No module named 'buster.ui.v10'\n_____________ ERROR collecting tests/test_v11_live_runtime_ui.py ______________\nImportError while importing test module 'C:\\Users\\xkali\\new_ai\\buster-v10\\tests\\test_v11_live_runtime_ui.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nC:\\Program Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\\Lib\\importlib\\__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests\\test_v11_live_runtime_ui.py:4: in <module>\n    from buster.ui.v11.live_runtime_ui import BusterLiveRuntimeUI\nE   ModuleNotFoundError: No module named 'buster.ui.v11'\n=========================== short test summary info ===========================\nERROR tests/test_v10_2_mission_control_dashboard.py\nERROR tests/test_v11_live_runtime_ui.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!\n2 errors in 5.67s"
+    },
+    "created_at": "2026-07-14T07:20:49+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T07:25:34+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T07:25:34+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T07:35:10+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-14T07:35:10+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:35:11+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:35:11+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:35:11+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-14T07:35:11+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow completed successfully.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: 60 passed in 18.80s\n\u2022 Review final result: Architecture looks valid. Keep generated data out of commits."
+    },
+    "created_at": "2026-07-14T07:35:30+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow completed successfully.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: 60 passed in 18.80s\n\u2022 Review final result: Architecture looks valid. Keep generated data out of commits."
+    },
+    "created_at": "2026-07-14T07:35:30+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T07:36:25+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-14T07:36:25+00:00"
   }
 ]
