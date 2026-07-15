@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-07-14T17:35:23",
+  "built_at": "2026-07-15T12:36:39",
   "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
   "files": [
     ".gitignore",
@@ -39,6 +39,7 @@
     "buster\\version.py",
     "buster\\__init__.py",
     "config\\lifecycle_config.json",
+    "config\\ui_settings.json",
     "data\\agent_activity_feed.json",
     "data\\agent_conversation.json",
     "data\\agent_memory.json",
@@ -3954,14 +3955,10 @@
     "buster\\ui\\v9\\panels\\developer_checklist_panel.py",
     "buster\\ui\\v9\\panels\\face_panel.py",
     "buster\\ui\\v9\\panels\\lifecycle_panel.py",
-    "buster\\ui\\v9\\panels\\live_runtime_ui.py",
     "buster\\ui\\v9\\panels\\mission_control_panel.py",
     "buster\\ui\\v9\\panels\\notification_center_panel.py",
     "buster\\ui\\v9\\panels\\project_panel.py",
     "buster\\ui\\v9\\panels\\python main.py",
-    "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-    "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-    "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
     "buster\\ui\\v9\\panels\\settings_panel.py",
     "buster\\ui\\v9\\panels\\simple_status_panel.py",
     "buster\\ui\\v9\\panels\\terminal_panel.py",
@@ -3976,6 +3973,17 @@
     "buster\\ui\\v9\\widgets\\mission_control.py",
     "buster\\ui\\v9\\widgets\\status_card.py",
     "buster\\ui\\v9\\widgets\\__init__.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\event_model.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+    "buster\\ui\\v9\\panels\\runtime_panel\\tree.txt",
+    "buster\\ui\\v9\\panels\\runtime_panel\\__init__.py",
     "docs\\architecture\\PLUGIN_API.md",
     "docs\\architecture\\ROADMAP.md",
     "docs\\architecture\\RUNTIME_API.md",
@@ -18327,7 +18335,7 @@
     {
       "name": "V9MainWindow",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 14
+      "line": 21
     },
     {
       "name": "RuntimeMonitor",
@@ -18510,16 +18518,6 @@
       "line": 15
     },
     {
-      "name": "RuntimeMetricCard",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 20
-    },
-    {
-      "name": "BusterLiveRuntimeUI",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 41
-    },
-    {
       "name": "MissionControlV12",
       "file": "buster\\ui\\v9\\panels\\mission_control_panel.py",
       "line": 13
@@ -18538,36 +18536,6 @@
       "name": "ProjectPanel",
       "file": "buster\\ui\\v9\\panels\\project_panel.py",
       "line": 16
-    },
-    {
-      "name": "Card",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 14
-    },
-    {
-      "name": "RuntimeConsole",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 30
-    },
-    {
-      "name": "MetricCard",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 19
-    },
-    {
-      "name": "MissionControlRuntimeDashboard",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 38
-    },
-    {
-      "name": "TimelineEventCard",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 20
-    },
-    {
-      "name": "RuntimeTimelinePanel",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 307
     },
     {
       "name": "SettingsPanel",
@@ -18683,6 +18651,71 @@
       "name": "StatusCard",
       "file": "buster\\ui\\v9\\widgets\\status_card.py",
       "line": 3
+    },
+    {
+      "name": "Card",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 15
+    },
+    {
+      "name": "RuntimeConsole",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 31
+    },
+    {
+      "name": "RuntimeEventCard",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 17
+    },
+    {
+      "name": "RuntimeEvent",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_model.py",
+      "line": 5
+    },
+    {
+      "name": "RuntimeFilterBar",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 16
+    },
+    {
+      "name": "RuntimeMetricCard",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 20
+    },
+    {
+      "name": "BusterLiveRuntimeUI",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 41
+    },
+    {
+      "name": "MetricCard",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 19
+    },
+    {
+      "name": "MissionControlRuntimeDashboard",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 38
+    },
+    {
+      "name": "TimelineEventCard",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 20
+    },
+    {
+      "name": "RuntimeTimelinePanel",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 307
+    },
+    {
+      "name": "RuntimeStatsBar",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 11
+    },
+    {
+      "name": "RuntimeTimelinePanel",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 20
     }
   ],
   "functions": [
@@ -72569,112 +72602,112 @@
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 15
+      "line": 22
     },
     {
       "name": "build",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 47
+      "line": 58
     },
     {
       "name": "refresh_live",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 90
+      "line": 101
     },
     {
       "name": "show_agents",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 93
+      "line": 104
     },
     {
       "name": "show_face",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 107
+      "line": 118
     },
     {
       "name": "_show_tool_window",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 133
+      "line": 144
     },
     {
       "name": "_show_message_tool",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 145
+      "line": 156
     },
     {
       "name": "show_projects",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 170
+      "line": 181
     },
     {
       "name": "show_workspace",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 187
+      "line": 198
     },
     {
       "name": "show_vision",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 195
+      "line": 206
     },
     {
       "name": "show_voice",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 210
+      "line": 221
     },
     {
       "name": "show_terminal",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 225
+      "line": 236
     },
     {
       "name": "show_settings",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 238
+      "line": 249
     },
     {
       "name": "set_face_state",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 250
+      "line": 261
     },
     {
       "name": "show_dashboard",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 261
+      "line": 272
     },
     {
       "name": "show_backend_tools",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 267
+      "line": 278
     },
     {
       "name": "show_developer_checklist",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 355
+      "line": 366
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 364
+      "line": 375
     },
     {
       "name": "keyPressEvent",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 407
+      "line": 418
     },
     {
       "name": "show_notifications",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 420
+      "line": 431
     },
     {
       "name": "show_runtime_timeline",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 442
+      "line": 453
     },
     {
       "name": "open_tool",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 324
+      "line": 335
     },
     {
       "name": "__init__",
@@ -73253,46 +73286,6 @@
     },
     {
       "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 21
-    },
-    {
-      "name": "set_value",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 37
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 42
-    },
-    {
-      "name": "pretty",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 139
-    },
-    {
-      "name": "refresh",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 142
-    },
-    {
-      "name": "tick",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 170
-    },
-    {
-      "name": "run_demo_workflow",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 177
-    },
-    {
-      "name": "run_health_job",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 181
-    },
-    {
-      "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\mission_control_panel.py",
       "line": 14
     },
@@ -73430,201 +73423,6 @@
       "name": "run_tests",
       "file": "buster\\ui\\v9\\panels\\project_panel.py",
       "line": 194
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 15
-    },
-    {
-      "name": "set_value",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 26
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 31
-    },
-    {
-      "name": "pretty",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 132
-    },
-    {
-      "name": "refresh",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 135
-    },
-    {
-      "name": "populate_lists",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 175
-    },
-    {
-      "name": "show_service",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 198
-    },
-    {
-      "name": "show_agent",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 202
-    },
-    {
-      "name": "performance_snapshot",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 206
-    },
-    {
-      "name": "tick",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 217
-    },
-    {
-      "name": "run_workflow",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 221
-    },
-    {
-      "name": "run_health_job",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 225
-    },
-    {
-      "name": "run_verify_job",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 230
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 20
-    },
-    {
-      "name": "set_value",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 34
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 39
-    },
-    {
-      "name": "pretty",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 130
-    },
-    {
-      "name": "refresh",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 133
-    },
-    {
-      "name": "tick_runtime",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 163
-    },
-    {
-      "name": "run_health_job",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 170
-    },
-    {
-      "name": "run_verify_job",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 183
-    },
-    {
-      "name": "run_backup",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 196
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 49
-    },
-    {
-      "name": "_format_event_type",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 135
-    },
-    {
-      "name": "_format_time",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 138
-    },
-    {
-      "name": "_event_message",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 149
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 310
-    },
-    {
-      "name": "_build_ui",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 380
-    },
-    {
-      "name": "_connect_dispatcher",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 452
-    },
-    {
-      "name": "_disconnect_dispatcher",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 472
-    },
-    {
-      "name": "_receive_runtime_event",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 490
-    },
-    {
-      "name": "_handle_runtime_event",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 497
-    },
-    {
-      "name": "_insert_event",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 513
-    },
-    {
-      "name": "reload_history",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 528
-    },
-    {
-      "name": "clear_view",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 556
-    },
-    {
-      "name": "apply_filter",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 561
-    },
-    {
-      "name": "_event_matches_filter",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 570
-    },
-    {
-      "name": "_update_count",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 603
-    },
-    {
-      "name": "closeEvent",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 611
     },
     {
       "name": "__init__",
@@ -74535,6 +74333,431 @@
       "name": "set_value",
       "file": "buster\\ui\\v9\\widgets\\status_card.py",
       "line": 15
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 16
+    },
+    {
+      "name": "set_value",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 27
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 32
+    },
+    {
+      "name": "pretty",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 133
+    },
+    {
+      "name": "refresh",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 136
+    },
+    {
+      "name": "populate_lists",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 176
+    },
+    {
+      "name": "show_service",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 199
+    },
+    {
+      "name": "show_agent",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 203
+    },
+    {
+      "name": "performance_snapshot",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 207
+    },
+    {
+      "name": "tick",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 218
+    },
+    {
+      "name": "run_workflow",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 222
+    },
+    {
+      "name": "run_health_job",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 226
+    },
+    {
+      "name": "run_verify_job",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 231
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 78
+    },
+    {
+      "name": "_build_ui",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 159
+    },
+    {
+      "name": "toggle_details",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 267
+    },
+    {
+      "name": "_detect_category",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 278
+    },
+    {
+      "name": "_format_event_type",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 299
+    },
+    {
+      "name": "_format_time",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 311
+    },
+    {
+      "name": "_build_summary",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 341
+    },
+    {
+      "name": "_generic_summary",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 702
+    },
+    {
+      "name": "_compact_value",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 745
+    },
+    {
+      "name": "_format_payload",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 759
+    },
+    {
+      "name": "_safe_int",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 776
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 46
+    },
+    {
+      "name": "_build",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 97
+    },
+    {
+      "name": "toggle_pause",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 182
+    },
+    {
+      "name": "filters",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 198
+    },
+    {
+      "name": "search_text",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 207
+    },
+    {
+      "name": "set_search",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 213
+    },
+    {
+      "name": "clear_search",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 219
+    },
+    {
+      "name": "set_filter",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 225
+    },
+    {
+      "name": "enable_all",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 236
+    },
+    {
+      "name": "disable_all",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 243
+    },
+    {
+      "name": "paused",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 250
+    },
+    {
+      "name": "_emit_filters",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 256
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 21
+    },
+    {
+      "name": "set_value",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 37
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 42
+    },
+    {
+      "name": "pretty",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 139
+    },
+    {
+      "name": "refresh",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 142
+    },
+    {
+      "name": "tick",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 170
+    },
+    {
+      "name": "run_demo_workflow",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 177
+    },
+    {
+      "name": "run_health_job",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 181
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 20
+    },
+    {
+      "name": "set_value",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 34
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 39
+    },
+    {
+      "name": "pretty",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 130
+    },
+    {
+      "name": "refresh",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 133
+    },
+    {
+      "name": "tick_runtime",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 163
+    },
+    {
+      "name": "run_health_job",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 170
+    },
+    {
+      "name": "run_verify_job",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 183
+    },
+    {
+      "name": "run_backup",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 196
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 49
+    },
+    {
+      "name": "_format_event_type",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 135
+    },
+    {
+      "name": "_format_time",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 138
+    },
+    {
+      "name": "_event_message",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 149
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 310
+    },
+    {
+      "name": "_build_ui",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 380
+    },
+    {
+      "name": "_connect_dispatcher",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 452
+    },
+    {
+      "name": "_disconnect_dispatcher",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 472
+    },
+    {
+      "name": "_receive_runtime_event",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 490
+    },
+    {
+      "name": "_handle_runtime_event",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 497
+    },
+    {
+      "name": "_insert_event",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 513
+    },
+    {
+      "name": "reload_history",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 528
+    },
+    {
+      "name": "clear_view",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 556
+    },
+    {
+      "name": "apply_filter",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 561
+    },
+    {
+      "name": "_event_matches_filter",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 570
+    },
+    {
+      "name": "_update_count",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 603
+    },
+    {
+      "name": "closeEvent",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 611
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 22
+    },
+    {
+      "name": "_build",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 56
+    },
+    {
+      "name": "_cell",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 115
+    },
+    {
+      "name": "update_stats",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 146
+    },
+    {
+      "name": "reset",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 180
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 24
+    },
+    {
+      "name": "build_ui",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 48
+    },
+    {
+      "name": "connect_runtime",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 92
+    },
+    {
+      "name": "_handle_runtime_event",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 125
+    },
+    {
+      "name": "add_event",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 142
+    },
+    {
+      "name": "refresh_stats",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 171
+    },
+    {
+      "name": "apply_filters",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 213
+    },
+    {
+      "name": "set_paused",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 246
+    },
+    {
+      "name": "clear",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 267
+    },
+    {
+      "name": "export_json",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 279
     }
   ],
   "imports": [
@@ -125714,17 +125937,17 @@
       "line": 11
     },
     {
-      "name": "buster.ui.v9.panels.runtime_overview_panel",
+      "name": "buster.ui.v9.panels.runtime_panel.overview_panel",
       "file": "buster\\ui\\v10\\runtime_dashboard.py",
       "line": 1
     },
     {
-      "name": "buster.ui.v9.panels.live_runtime_ui",
+      "name": "buster.ui.v9.panels.runtime_panel.live_panel",
       "file": "buster\\ui\\v11\\live_runtime_ui.py",
       "line": 1
     },
     {
-      "name": "buster.ui.v9.panels.runtime_console_panel",
+      "name": "buster.ui.v9.panels.runtime_panel.console_panel",
       "file": "buster\\ui\\v11\\runtime_console.py",
       "line": 1
     },
@@ -125894,64 +126117,69 @@
       "line": 12
     },
     {
-      "name": "PySide6.QtWidgets",
+      "name": "buster.ui.v9.panels.runtime_panel.runtime_timeline_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 146
+      "line": 13
     },
     {
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 268
+      "line": 157
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\main_window.py",
+      "line": 279
     },
     {
       "name": "buster.ui.v9.panels.developer_checklist_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 356
+      "line": 367
     },
     {
       "name": "buster.ui.v9.panels.agent_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 95
+      "line": 106
     },
     {
       "name": "buster.ui.v9.panels.project_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 172
+      "line": 183
     },
     {
       "name": "buster.ui.v9.panels.workspace_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 189
+      "line": 200
     },
     {
       "name": "buster.ui.v9.panels.vision_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 197
+      "line": 208
     },
     {
       "name": "buster.ui.v9.panels.voice_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 212
+      "line": 223
     },
     {
       "name": "buster.ui.v9.panels.terminal_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 227
+      "line": 238
     },
     {
       "name": "buster.ui.v9.panels.settings_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 240
+      "line": 251
     },
     {
       "name": "buster.ui.v9.panels.notification_center_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 422
+      "line": 433
     },
     {
-      "name": "buster.ui.v9.panels.runtime_timeline_panel",
+      "name": "buster.ui.v9.panels.runtime_panel.runtime_timeline_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 444
+      "line": 455
     },
     {
       "name": "PySide6.QtCore",
@@ -126415,31 +126643,6 @@
     },
     {
       "name": "__future__",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 1
-    },
-    {
-      "name": "json",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 3
-    },
-    {
-      "name": "PySide6.QtCore",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 4
-    },
-    {
-      "name": "PySide6.QtWidgets",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 5
-    },
-    {
-      "name": "buster.runtime",
-      "file": "buster\\ui\\v9\\panels\\live_runtime_ui.py",
-      "line": 17
-    },
-    {
-      "name": "__future__",
       "file": "buster\\ui\\v9\\panels\\mission_control_panel.py",
       "line": 1
     },
@@ -126507,81 +126710,6 @@
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\panels\\project_panel.py",
       "line": 5
-    },
-    {
-      "name": "__future__",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 1
-    },
-    {
-      "name": "json",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 3
-    },
-    {
-      "name": "PySide6.QtCore",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 4
-    },
-    {
-      "name": "PySide6.QtWidgets",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 5
-    },
-    {
-      "name": "buster.runtime",
-      "file": "buster\\ui\\v9\\panels\\runtime_console_panel.py",
-      "line": 11
-    },
-    {
-      "name": "__future__",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 1
-    },
-    {
-      "name": "json",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 3
-    },
-    {
-      "name": "PySide6.QtCore",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 4
-    },
-    {
-      "name": "PySide6.QtWidgets",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 5
-    },
-    {
-      "name": "buster.runtime.sdk_bootstrap",
-      "file": "buster\\ui\\v9\\panels\\runtime_overview_panel.py",
-      "line": 16
-    },
-    {
-      "name": "__future__",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 1
-    },
-    {
-      "name": "datetime",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 3
-    },
-    {
-      "name": "typing",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 4
-    },
-    {
-      "name": "PySide6.QtCore",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 6
-    },
-    {
-      "name": "PySide6.QtWidgets",
-      "file": "buster\\ui\\v9\\panels\\runtime_timeline_panel.py",
-      "line": 7
     },
     {
       "name": "json",
@@ -127007,6 +127135,216 @@
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\widgets\\status_card.py",
       "line": 1
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 3
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 5
+    },
+    {
+      "name": "buster.runtime",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
+      "line": 11
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 1
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 6
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 7
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
+      "line": 764
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_model.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\event_model.py",
+      "line": 2
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 1
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 3
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\filter_bar.py",
+      "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 3
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 5
+    },
+    {
+      "name": "buster.runtime",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\live_panel.py",
+      "line": 17
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 3
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 5
+    },
+    {
+      "name": "buster.runtime.sdk_bootstrap",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\overview_panel.py",
+      "line": 16
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 1
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 6
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_timeline_panel.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 1
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 3
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\stats_bar.py",
+      "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 1
+    },
+    {
+      "name": "collections",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 4
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 6
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 7
+    },
+    {
+      "name": "filter_bar",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 15
+    },
+    {
+      "name": "stats_bar",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 16
+    },
+    {
+      "name": "event_card",
+      "file": "buster\\ui\\v9\\panels\\runtime_panel\\timeline_panel.py",
+      "line": 17
     },
     {
       "name": "pathlib",

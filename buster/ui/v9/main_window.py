@@ -10,6 +10,13 @@ from buster.ui.v9.command_palette import CommandPalette
 from buster.runtime.core import create_runtime_core
 from buster.ui.v9.runtime_monitor import RuntimeMonitor
 from pathlib import Path
+from buster.ui.v9.panels.runtime_panel.runtime_timeline_panel import (
+    RuntimeTimelinePanel,
+)
+
+
+
+
 
 class V9MainWindow(QMainWindow):
     def __init__(self, services=None, settings=None):
@@ -29,6 +36,10 @@ class V9MainWindow(QMainWindow):
         self.runtime_monitor = RuntimeMonitor(
             self.runtime_core,
             interval_ms=1000,
+        )
+        
+        self.runtime_timeline = RuntimeTimelinePanel(
+            runtime_core=self.runtime_core
         )
         
         self.face_window = None
@@ -296,12 +307,12 @@ class V9MainWindow(QMainWindow):
         tools = [
             (
                 "Runtime Dashboard",
-                "buster.ui.v9.panels.runtime_overview_panel",
+                "buster.ui.v9.panels.runtime_panel.overview_panel",
                 "MissionControlRuntimeDashboard",
             ),
             (
                 "Runtime Console",
-                "buster.ui.v9.panels.runtime_console_panel",
+                "buster.ui.v9.panels.runtime_panel.console_panel",
                 "RuntimeConsole",
             ),
             (
@@ -311,7 +322,7 @@ class V9MainWindow(QMainWindow):
             ),
             (
                 "Live Runtime UI",
-                "buster.ui.v9.panels.live_runtime_ui",
+                "buster.ui.v9.panels.runtime_panel.live_panel",
                 "BusterLiveRuntimeUI",
             ),
         ]
@@ -441,7 +452,7 @@ class V9MainWindow(QMainWindow):
 
     def show_runtime_timeline(self):
         try:
-            from buster.ui.v9.panels.runtime_timeline_panel import (
+            from buster.ui.v9.panels.runtime_panel.runtime_timeline_panel import (
                 RuntimeTimelinePanel,
             )
 

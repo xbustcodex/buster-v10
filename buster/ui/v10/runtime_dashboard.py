@@ -1,4 +1,4 @@
-from buster.ui.v9.panels.runtime_overview_panel import (
+from buster.ui.v9.panels.runtime_panel.overview_panel import (
     MissionControlRuntimeDashboard,
 )
 

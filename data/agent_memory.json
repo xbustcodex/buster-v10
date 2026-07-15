@@ -1,8 +1,8 @@
 {
   "agents": {
     "planner": {
-      "runs": 7,
-      "successes": 7,
+      "runs": 10,
+      "successes": 10,
       "failures": 0,
       "last_action": "plan",
       "last_result": {
@@ -40,8 +40,8 @@
       }
     },
     "reviewer": {
-      "runs": 2,
-      "successes": 2,
+      "runs": 5,
+      "successes": 5,
       "failures": 0,
       "last_action": "agent.review",
       "last_result": {
@@ -57,8 +57,8 @@
       }
     },
     "tester": {
-      "runs": 6,
-      "successes": 3,
+      "runs": 9,
+      "successes": 6,
       "failures": 3,
       "last_action": "agent.test",
       "last_result": {
@@ -66,16 +66,16 @@
         "status": "passed",
         "returncode": 0,
         "request": "workspace snapshot",
-        "summary": "60 passed in 18.80s",
-        "message": "60 passed in 18.80s",
-        "output": "............................................................             [100%]\n60 passed in 18.80s",
+        "summary": "60 passed in 22.29s",
+        "message": "60 passed in 22.29s",
+        "output": "............................................................             [100%]\n60 passed in 22.29s",
         "error": "",
-        "output_tail": "............................................................             [100%]\n60 passed in 18.80s"
+        "output_tail": "............................................................             [100%]\n60 passed in 22.29s"
       }
     },
     "builder": {
-      "runs": 4,
-      "successes": 4,
+      "runs": 7,
+      "successes": 7,
       "failures": 0,
       "last_action": "agent.build",
       "last_result": {
@@ -205,6 +205,78 @@
       "action": "agent.review",
       "result_status": "completed",
       "timestamp": "2026-07-14T07:35:30+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T00:47:09+00:00"
+    },
+    {
+      "agent": "builder",
+      "action": "agent.build",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T00:47:09+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "passed",
+      "timestamp": "2026-07-15T00:47:36+00:00"
+    },
+    {
+      "agent": "reviewer",
+      "action": "agent.review",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T00:47:36+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T00:48:11+00:00"
+    },
+    {
+      "agent": "builder",
+      "action": "agent.build",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T00:48:11+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "passed",
+      "timestamp": "2026-07-15T00:48:31+00:00"
+    },
+    {
+      "agent": "reviewer",
+      "action": "agent.review",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T00:48:31+00:00"
+    },
+    {
+      "agent": "planner",
+      "action": "plan",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T02:36:24+00:00"
+    },
+    {
+      "agent": "builder",
+      "action": "agent.build",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T02:36:24+00:00"
+    },
+    {
+      "agent": "tester",
+      "action": "agent.test",
+      "result_status": "passed",
+      "timestamp": "2026-07-15T02:36:48+00:00"
+    },
+    {
+      "agent": "reviewer",
+      "action": "agent.review",
+      "result_status": "completed",
+      "timestamp": "2026-07-15T02:36:48+00:00"
     }
   ]
 }

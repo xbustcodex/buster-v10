@@ -1,2105 +1,5 @@
 [
   {
-    "id": 103,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          186,
-          81,
-          81
-        ],
-        [
-          415,
-          224,
-          91,
-          91
-        ],
-        [
-          269,
-          188,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 103,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          231,
-          186,
-          81,
-          81
-        ],
-        [
-          415,
-          224,
-          91,
-          91
-        ],
-        [
-          269,
-          188,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 104,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          231,
-          185,
-          83,
-          83
-        ],
-        [
-          413,
-          224,
-          91,
-          91
-        ],
-        [
-          270,
-          189,
-          183,
-          183
-        ],
-        [
-          146,
-          286,
-          79,
-          79
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 104,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 4,
-      "faces": [
-        [
-          231,
-          185,
-          83,
-          83
-        ],
-        [
-          413,
-          224,
-          91,
-          91
-        ],
-        [
-          270,
-          189,
-          183,
-          183
-        ],
-        [
-          146,
-          286,
-          79,
-          79
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 105,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          89,
-          89
-        ],
-        [
-          265,
-          187,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 105,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          89,
-          89
-        ],
-        [
-          265,
-          187,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 106,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          224,
-          90,
-          90
-        ],
-        [
-          266,
-          190,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 106,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          224,
-          90,
-          90
-        ],
-        [
-          266,
-          190,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 107,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          91,
-          91
-        ],
-        [
-          267,
-          190,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 107,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          91,
-          91
-        ],
-        [
-          267,
-          190,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 108,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          415,
-          225,
-          89,
-          89
-        ],
-        [
-          267,
-          191,
-          187,
-          187
-        ],
-        [
-          146,
-          287,
-          77,
-          77
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 108,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          415,
-          225,
-          89,
-          89
-        ],
-        [
-          267,
-          191,
-          187,
-          187
-        ],
-        [
-          146,
-          287,
-          77,
-          77
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 109,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          415,
-          225,
-          89,
-          89
-        ],
-        [
-          146,
-          287,
-          77,
-          77
-        ],
-        [
-          267,
-          191,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 109,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          415,
-          225,
-          89,
-          89
-        ],
-        [
-          146,
-          287,
-          77,
-          77
-        ],
-        [
-          267,
-          191,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 110,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          229,
-          185,
-          84,
-          84
-        ],
-        [
-          415,
-          224,
-          90,
-          90
-        ],
-        [
-          267,
-          191,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 110,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          229,
-          185,
-          84,
-          84
-        ],
-        [
-          415,
-          224,
-          90,
-          90
-        ],
-        [
-          267,
-          191,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 111,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          230,
-          185,
-          83,
-          83
-        ],
-        [
-          414,
-          226,
-          88,
-          88
-        ],
-        [
-          268,
-          191,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 111,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          230,
-          185,
-          83,
-          83
-        ],
-        [
-          414,
-          226,
-          88,
-          88
-        ],
-        [
-          268,
-          191,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:01+00:00"
-  },
-  {
-    "id": 112,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          225,
-          88,
-          88
-        ],
-        [
-          267,
-          191,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 112,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          225,
-          88,
-          88
-        ],
-        [
-          267,
-          191,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.282732447817837
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 113,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          225,
-          88,
-          88
-        ],
-        [
-          267,
-          191,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 113,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          225,
-          88,
-          88
-        ],
-        [
-          267,
-          191,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 114,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          225,
-          88,
-          88
-        ],
-        [
-          266,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 114,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          225,
-          88,
-          88
-        ],
-        [
-          266,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 115,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          416,
-          225,
-          88,
-          88
-        ],
-        [
-          266,
-          190,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 115,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          416,
-          225,
-          88,
-          88
-        ],
-        [
-          266,
-          190,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 116,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          89,
-          89
-        ],
-        [
-          266,
-          189,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 116,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          89,
-          89
-        ],
-        [
-          266,
-          189,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 117,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          89,
-          89
-        ],
-        [
-          266,
-          189,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 117,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          89,
-          89
-        ],
-        [
-          266,
-          189,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 118,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          416,
-          221,
-          93,
-          93
-        ],
-        [
-          266,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 118,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          416,
-          221,
-          93,
-          93
-        ],
-        [
-          266,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 119,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          223,
-          92,
-          92
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 119,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          223,
-          92,
-          92
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 120,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          223,
-          92,
-          92
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 120,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          223,
-          92,
-          92
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 121,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          229,
-          185,
-          83,
-          83
-        ],
-        [
-          415,
-          222,
-          92,
-          92
-        ],
-        [
-          267,
-          191,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 121,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          229,
-          185,
-          83,
-          83
-        ],
-        [
-          415,
-          222,
-          92,
-          92
-        ],
-        [
-          267,
-          191,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 122,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          229,
-          185,
-          83,
-          83
-        ],
-        [
-          415,
-          224,
-          90,
-          90
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 122,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          229,
-          185,
-          83,
-          83
-        ],
-        [
-          415,
-          224,
-          90,
-          90
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 123,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          222,
-          93,
-          93
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 123,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          222,
-          93,
-          93
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 124,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          89,
-          89
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 124,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          89,
-          89
-        ],
-        [
-          267,
-          190,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 125,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          416,
-          224,
-          90,
-          90
-        ],
-        [
-          266,
-          190,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 125,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          416,
-          224,
-          90,
-          90
-        ],
-        [
-          266,
-          190,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 126,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          90,
-          90
-        ],
-        [
-          267,
-          192,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 126,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          415,
-          224,
-          90,
-          90
-        ],
-        [
-          267,
-          192,
-          185,
-          185
-        ]
-      ],
-      "fps": 13.847675568743819
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 127,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          224,
-          90,
-          90
-        ],
-        [
-          265,
-          191,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 127,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          224,
-          90,
-          90
-        ],
-        [
-          265,
-          191,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:02+00:00"
-  },
-  {
-    "id": 128,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          224,
-          90,
-          90
-        ],
-        [
-          265,
-          191,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 128,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          224,
-          90,
-          90
-        ],
-        [
-          265,
-          191,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 129,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          225,
-          90,
-          90
-        ],
-        [
-          263,
-          191,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 129,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          225,
-          90,
-          90
-        ],
-        [
-          263,
-          191,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 130,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          225,
-          90,
-          90
-        ],
-        [
-          263,
-          191,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 130,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          225,
-          90,
-          90
-        ],
-        [
-          263,
-          191,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 131,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          414,
-          225,
-          88,
-          88
-        ],
-        [
-          150,
-          285,
-          80,
-          80
-        ],
-        [
-          262,
-          191,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 131,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          414,
-          225,
-          88,
-          88
-        ],
-        [
-          150,
-          285,
-          80,
-          80
-        ],
-        [
-          262,
-          191,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 132,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          413,
-          224,
-          89,
-          89
-        ],
-        [
-          262,
-          192,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 132,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          413,
-          224,
-          89,
-          89
-        ],
-        [
-          262,
-          192,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 133,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          412,
-          226,
-          88,
-          88
-        ],
-        [
-          262,
-          193,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 133,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          412,
-          226,
-          88,
-          88
-        ],
-        [
-          262,
-          193,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 134,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          227,
-          87,
-          87
-        ],
-        [
-          263,
-          192,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 134,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          227,
-          87,
-          87
-        ],
-        [
-          263,
-          192,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 135,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          410,
-          227,
-          89,
-          89
-        ],
-        [
-          263,
-          192,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 135,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          410,
-          227,
-          89,
-          89
-        ],
-        [
-          263,
-          192,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 136,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          227,
-          88,
-          88
-        ],
-        [
-          265,
-          192,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 136,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          414,
-          227,
-          88,
-          88
-        ],
-        [
-          265,
-          192,
-          187,
-          187
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 137,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          412,
-          226,
-          89,
-          89
-        ],
-        [
-          266,
-          192,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 137,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          412,
-          226,
-          89,
-          89
-        ],
-        [
-          266,
-          192,
-          186,
-          186
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:03+00:00"
-  },
-  {
-    "id": 138,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          411,
-          226,
-          89,
-          89
-        ],
-        [
-          266,
-          191,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 138,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          411,
-          226,
-          89,
-          89
-        ],
-        [
-          266,
-          191,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 139,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          412,
-          227,
-          88,
-          88
-        ],
-        [
-          266,
-          191,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 139,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          412,
-          227,
-          88,
-          88
-        ],
-        [
-          266,
-          191,
-          189,
-          189
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 140,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          411,
-          226,
-          88,
-          88
-        ],
-        [
-          266,
-          191,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 140,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          411,
-          226,
-          88,
-          88
-        ],
-        [
-          266,
-          191,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.133208255159476
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 141,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          411,
-          226,
-          88,
-          88
-        ],
-        [
-          266,
-          191,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.245033112582782
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 141,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          411,
-          226,
-          88,
-          88
-        ],
-        [
-          266,
-          191,
-          188,
-          188
-        ]
-      ],
-      "fps": 13.245033112582782
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 142,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          412,
-          227,
-          88,
-          88
-        ],
-        [
-          266,
-          190,
-          191,
-          191
-        ]
-      ],
-      "fps": 13.245033112582782
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 142,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 2,
-      "faces": [
-        [
-          412,
-          227,
-          88,
-          88
-        ],
-        [
-          266,
-          190,
-          191,
-          191
-        ]
-      ],
-      "fps": 13.245033112582782
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 143,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          413,
-          227,
-          87,
-          87
-        ],
-        [
-          267,
-          191,
-          189,
-          189
-        ],
-        [
-          151,
-          250,
-          86,
-          86
-        ]
-      ],
-      "fps": 13.245033112582782
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
-    "id": 143,
-    "type": "vision.face.detected",
-    "source": "vision_panel",
-    "payload": {
-      "count": 3,
-      "faces": [
-        [
-          413,
-          227,
-          87,
-          87
-        ],
-        [
-          267,
-          191,
-          189,
-          189
-        ],
-        [
-          151,
-          250,
-          86,
-          86
-        ]
-      ],
-      "fps": 13.245033112582782
-    },
-    "created_at": "2026-07-13T08:23:04+00:00"
-  },
-  {
     "id": 144,
     "type": "vision.face.detected",
     "source": "vision_panel",
@@ -18076,5 +15976,811 @@
       "started": false
     },
     "created_at": "2026-07-14T07:36:25+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-15T00:47:08+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-15T00:47:08+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-15T00:47:09+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-15T00:47:09+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-15T00:47:09+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-15T00:47:09+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow completed successfully.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: 60 passed in 26.07s\n\u2022 Review final result: Architecture looks valid. Keep generated data out of commits."
+    },
+    "created_at": "2026-07-15T00:47:36+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow completed successfully.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: 60 passed in 26.07s\n\u2022 Review final result: Architecture looks valid. Keep generated data out of commits."
+    },
+    "created_at": "2026-07-15T00:47:36+00:00"
+  },
+  {
+    "id": 5,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "open vision"
+    },
+    "created_at": "2026-07-15T00:48:11+00:00"
+  },
+  {
+    "id": 5,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "open vision"
+    },
+    "created_at": "2026-07-15T00:48:11+00:00"
+  },
+  {
+    "id": 6,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "open vision"
+    },
+    "created_at": "2026-07-15T00:48:11+00:00"
+  },
+  {
+    "id": 6,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "open vision"
+    },
+    "created_at": "2026-07-15T00:48:11+00:00"
+  },
+  {
+    "id": 7,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "open vision",
+      "text": "The runtime workflow completed successfully.\n\nRequest: open vision\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: 60 passed in 19.02s\n\u2022 Review final result: Architecture looks valid. Keep generated data out of commits."
+    },
+    "created_at": "2026-07-15T00:48:31+00:00"
+  },
+  {
+    "id": 7,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "open vision",
+      "text": "The runtime workflow completed successfully.\n\nRequest: open vision\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: 60 passed in 19.02s\n\u2022 Review final result: Architecture looks valid. Keep generated data out of commits."
+    },
+    "created_at": "2026-07-15T00:48:31+00:00"
+  },
+  {
+    "id": 8,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adzs"
+    },
+    "created_at": "2026-07-15T00:52:55+00:00"
+  },
+  {
+    "id": 8,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adzs"
+    },
+    "created_at": "2026-07-15T00:52:55+00:00"
+  },
+  {
+    "id": 9,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:52:55+00:00"
+  },
+  {
+    "id": 9,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:52:55+00:00"
+  },
+  {
+    "id": 10,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:52:57+00:00"
+  },
+  {
+    "id": 10,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:52:57+00:00"
+  },
+  {
+    "id": 11,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:52:57+00:00"
+  },
+  {
+    "id": 11,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:52:57+00:00"
+  },
+  {
+    "id": 12,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adzs"
+    },
+    "created_at": "2026-07-15T00:53:00+00:00"
+  },
+  {
+    "id": 12,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adzs"
+    },
+    "created_at": "2026-07-15T00:53:00+00:00"
+  },
+  {
+    "id": 13,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:00+00:00"
+  },
+  {
+    "id": 13,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:00+00:00"
+  },
+  {
+    "id": 14,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:02+00:00"
+  },
+  {
+    "id": 14,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:02+00:00"
+  },
+  {
+    "id": 15,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:02+00:00"
+  },
+  {
+    "id": 15,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:02+00:00"
+  },
+  {
+    "id": 16,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adzs"
+    },
+    "created_at": "2026-07-15T00:53:03+00:00"
+  },
+  {
+    "id": 16,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adzs"
+    },
+    "created_at": "2026-07-15T00:53:03+00:00"
+  },
+  {
+    "id": 17,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:03+00:00"
+  },
+  {
+    "id": 17,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:03+00:00"
+  },
+  {
+    "id": 18,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:05+00:00"
+  },
+  {
+    "id": 18,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:05+00:00"
+  },
+  {
+    "id": 19,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:05+00:00"
+  },
+  {
+    "id": 19,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:05+00:00"
+  },
+  {
+    "id": 20,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adz"
+    },
+    "created_at": "2026-07-15T00:53:09+00:00"
+  },
+  {
+    "id": 20,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adz"
+    },
+    "created_at": "2026-07-15T00:53:09+00:00"
+  },
+  {
+    "id": 21,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:09+00:00"
+  },
+  {
+    "id": 21,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:09+00:00"
+  },
+  {
+    "id": 22,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:10+00:00"
+  },
+  {
+    "id": 22,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:10+00:00"
+  },
+  {
+    "id": 23,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:10+00:00"
+  },
+  {
+    "id": 23,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:10+00:00"
+  },
+  {
+    "id": 24,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adz"
+    },
+    "created_at": "2026-07-15T00:53:12+00:00"
+  },
+  {
+    "id": 24,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adz"
+    },
+    "created_at": "2026-07-15T00:53:12+00:00"
+  },
+  {
+    "id": 25,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:12+00:00"
+  },
+  {
+    "id": 25,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:12+00:00"
+  },
+  {
+    "id": 26,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:13+00:00"
+  },
+  {
+    "id": 26,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:13+00:00"
+  },
+  {
+    "id": 27,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:13+00:00"
+  },
+  {
+    "id": 27,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:13+00:00"
+  },
+  {
+    "id": 28,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adz"
+    },
+    "created_at": "2026-07-15T00:53:21+00:00"
+  },
+  {
+    "id": 28,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adz"
+    },
+    "created_at": "2026-07-15T00:53:21+00:00"
+  },
+  {
+    "id": 29,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:21+00:00"
+  },
+  {
+    "id": 29,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:21+00:00"
+  },
+  {
+    "id": 30,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:22+00:00"
+  },
+  {
+    "id": 30,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:22+00:00"
+  },
+  {
+    "id": 31,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:22+00:00"
+  },
+  {
+    "id": 31,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:22+00:00"
+  },
+  {
+    "id": 32,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adz"
+    },
+    "created_at": "2026-07-15T00:53:25+00:00"
+  },
+  {
+    "id": 32,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "speaking",
+      "text": "hello adz"
+    },
+    "created_at": "2026-07-15T00:53:25+00:00"
+  },
+  {
+    "id": 33,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:25+00:00"
+  },
+  {
+    "id": 33,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "speaking",
+      "message": "Buster is speaking."
+    },
+    "created_at": "2026-07-15T00:53:25+00:00"
+  },
+  {
+    "id": 34,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:27+00:00"
+  },
+  {
+    "id": 34,
+    "type": "voice.status",
+    "source": "voice_panel",
+    "payload": {
+      "status": "ready"
+    },
+    "created_at": "2026-07-15T00:53:27+00:00"
+  },
+  {
+    "id": 35,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:27+00:00"
+  },
+  {
+    "id": 35,
+    "type": "face.state",
+    "source": "runtime",
+    "payload": {
+      "state": "idle",
+      "message": "Buster is ready."
+    },
+    "created_at": "2026-07-15T00:53:27+00:00"
+  },
+  {
+    "id": 36,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-15T00:54:25+00:00"
+  },
+  {
+    "id": 36,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-15T00:54:25+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-15T02:36:23+00:00"
+  },
+  {
+    "id": 1,
+    "type": "runtime.started",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": true
+    },
+    "created_at": "2026-07-15T02:36:23+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-15T02:36:24+00:00"
+  },
+  {
+    "id": 2,
+    "type": "chat.message.received",
+    "source": "chat",
+    "payload": {
+      "role": "user",
+      "text": "workspace snapshot"
+    },
+    "created_at": "2026-07-15T02:36:24+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-15T02:36:24+00:00"
+  },
+  {
+    "id": 3,
+    "type": "runtime.request",
+    "source": "runtime_core",
+    "payload": {
+      "request": "workspace snapshot"
+    },
+    "created_at": "2026-07-15T02:36:24+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow completed successfully.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: 60 passed in 22.29s\n\u2022 Review final result: Architecture looks valid. Keep generated data out of commits."
+    },
+    "created_at": "2026-07-15T02:36:48+00:00"
+  },
+  {
+    "id": 4,
+    "type": "chat.message.completed",
+    "source": "chat",
+    "payload": {
+      "role": "assistant",
+      "request": "workspace snapshot",
+      "text": "The runtime workflow completed successfully.\n\nRequest: workspace snapshot\nAgents involved: Planner\nPlanned steps: 3\n\nResults:\n\u2022 Plan build task: Builder Agent prepared the implementation plan.\n\u2022 Run validation tests: 60 passed in 22.29s\n\u2022 Review final result: Architecture looks valid. Keep generated data out of commits."
+    },
+    "created_at": "2026-07-15T02:36:48+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-15T02:37:46+00:00"
+  },
+  {
+    "id": 5,
+    "type": "runtime.stopped",
+    "source": "runtime_core",
+    "payload": {
+      "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+      "started": false
+    },
+    "created_at": "2026-07-15T02:37:46+00:00"
   }
 ]

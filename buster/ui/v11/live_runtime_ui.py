@@ -1,4 +1,4 @@
-from buster.ui.v9.panels.live_runtime_ui import (
+from buster.ui.v9.panels.runtime_panel.live_panel import (
     BusterLiveRuntimeUI,
 )
 

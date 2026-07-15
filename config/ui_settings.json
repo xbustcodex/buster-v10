@@ -1,0 +1,10 @@
+{
+    "ai_provider": "OpenRouter",
+    "ai_model": "openai/gpt-4o-mini",
+    "theme": "Dark",
+    "developer_mode": true,
+    "show_backend_tools": true,
+    "face_popup": true,
+    "voice_enabled": true,
+    "vision_enabled": false
+}

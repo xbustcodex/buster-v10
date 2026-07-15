@@ -1,4 +1,4 @@
-from buster.ui.v9.panels.runtime_console_panel import (
+from buster.ui.v9.panels.runtime_panel.console_panel import (
     RuntimeConsole,
 )
 

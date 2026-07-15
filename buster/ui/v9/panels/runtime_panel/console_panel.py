@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
 from buster.runtime import create_runtime_core
 
 
+
 class Card(QFrame):
     def __init__(self, title: str, value: str = "0"):
         super().__init__()
