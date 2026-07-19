@@ -1,7 +1,0 @@
-{
-  "mode": "companion",
-  "camera": true,
-  "microphone": true,
-  "screen": true,
-  "local_processing_preferred": true
-}

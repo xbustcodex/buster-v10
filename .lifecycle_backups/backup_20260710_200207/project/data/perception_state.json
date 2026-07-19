@@ -1,9 +1,0 @@
-{
-  "enabled": true,
-  "sources": [
-    "vision",
-    "voice",
-    "desktop",
-    "hardware"
-  ]
-}

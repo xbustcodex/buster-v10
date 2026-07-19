@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections import deque
 from typing import Any
 
-from PySide6.QtCore import Qt, Slot
+from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -21,6 +21,10 @@ class RuntimeTimelinePanel(QWidget):
 
     MAX_EVENTS = 500
 
+    # Dispatcher callbacks may arrive from worker threads. This signal
+    # queues the event back onto the Qt GUI thread before widgets are touched.
+    runtime_event_received = Signal(dict)
+
     def __init__(
         self,
         runtime_core=None,
@@ -37,6 +41,8 @@ class RuntimeTimelinePanel(QWidget):
         self.paused = False
 
         self.pending_events = deque()
+
+        self._dispatcher_connected = False
 
         self.setObjectName("RuntimeTimelinePanel")
 
@@ -91,14 +97,7 @@ class RuntimeTimelinePanel(QWidget):
 
     def connect_runtime(self):
 
-        if self.runtime_core is None:
-            return
-
-        self.runtime_core.dispatcher.subscribe(
-            "*",
-            self._handle_runtime_event,
-        )
-
+        # UI controls always connect, even when no runtime core is supplied.
         self.filter_bar.searchChanged.connect(
             self.apply_filters
         )
@@ -117,15 +116,49 @@ class RuntimeTimelinePanel(QWidget):
 
         self.filter_bar.exportRequested.connect(
             self.export_json
-        )        
+        )
+
+        # A queued connection guarantees _process_runtime_event executes on
+        # this widget's GUI thread.
+        self.runtime_event_received.connect(
+            self._process_runtime_event,
+            Qt.ConnectionType.QueuedConnection,
+        )
+
+        if self.runtime_core is None:
+            return
+
+        self.runtime_core.dispatcher.subscribe(
+            "*",
+            self._handle_runtime_event,
+        )
+
+        self._dispatcher_connected = True
         
         
         
-    @Slot(dict)
     def _handle_runtime_event(
         self,
         event: dict,
     ):
+        """
+        RuntimeDispatcher callback.
+
+        This may be called from a worker thread, so it must not create or
+        modify Qt widgets directly.
+        """
+        if isinstance(event, dict):
+            self.runtime_event_received.emit(
+                dict(event)
+            )
+
+
+    @Slot(dict)
+    def _process_runtime_event(
+        self,
+        event: dict,
+    ):
+        """Process the event safely on the Qt GUI thread."""
 
         if self.paused:
 
@@ -146,7 +179,10 @@ class RuntimeTimelinePanel(QWidget):
 
         self.events.appendleft(event)
 
-        card = RuntimeEventCard(event)
+        card = RuntimeEventCard(
+            event,
+            parent=self.container,
+        )
 
         self.cards.appendleft(card)
 
@@ -272,10 +308,40 @@ class RuntimeTimelinePanel(QWidget):
 
         self.events.clear()
 
+        self.pending_events.clear()
+
         self.refresh_stats()
         
         
         
+    def disconnect_runtime(self):
+
+        if not self._dispatcher_connected:
+            return
+
+        if self.runtime_core is not None:
+
+            try:
+
+                self.runtime_core.dispatcher.unsubscribe(
+                    "*",
+                    self._handle_runtime_event,
+                )
+
+            except Exception:
+
+                pass
+
+        self._dispatcher_connected = False
+
+
+    def closeEvent(self, event):
+
+        self.disconnect_runtime()
+
+        super().closeEvent(event)
+
+
     def export_json(self):
 
         print(

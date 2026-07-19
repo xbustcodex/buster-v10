@@ -1,0 +1,212 @@
+{
+  "enabled": true,
+  "mode": "autonomous",
+  "last_cycle": {
+    "status": "proposal_ready",
+    "mode": "manual",
+    "findings": [
+      {
+        "category": "safety",
+        "title": "Review large uncommitted change set",
+        "description": "Git reports 4038 changed or untracked paths: 40 modified, 0 added, 3970 deleted, 0 renamed and 28 untracked.",
+        "severity": "medium",
+        "file": "",
+        "line": 0,
+        "confidence": 0.95,
+        "suggested_request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "metadata": {
+          "dirty_paths": 4038,
+          "modified": 40,
+          "added": 0,
+          "deleted": 3970,
+          "renamed": 0,
+          "untracked": 28
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\runtime\\self_improvement_runtime.py contains 1101 lines, 1 classes, 28 functions and 8 imports.",
+        "severity": "low",
+        "file": "buster\\runtime\\self_improvement_runtime.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\runtime\\self_improvement_runtime.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 1101,
+          "classes": 1,
+          "functions": 28,
+          "imports": 8
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\mission_control_panel.py contains 1510 lines, 4 classes, 50 functions and 8 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\mission_control_panel.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\mission_control_panel.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 1510,
+          "classes": 4,
+          "functions": 50,
+          "imports": 8
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py contains 956 lines, 5 classes, 36 functions and 6 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 956,
+          "classes": 5,
+          "functions": 36,
+          "imports": 6
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\self_improvement\\execution_card.py contains 1064 lines, 1 classes, 31 functions and 5 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\self_improvement\\execution_card.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\self_improvement\\execution_card.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 1064,
+          "classes": 1,
+          "functions": 31,
+          "imports": 5
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\self_improvement\\history_panel.py contains 1254 lines, 1 classes, 37 functions and 11 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\self_improvement\\history_panel.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\self_improvement\\history_panel.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 1254,
+          "classes": 1,
+          "functions": 37,
+          "imports": 11
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\self_improvement\\preview_diff_panel.py contains 956 lines, 5 classes, 36 functions and 6 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\self_improvement\\preview_diff_panel.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\self_improvement\\preview_diff_panel.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 956,
+          "classes": 5,
+          "functions": 36,
+          "imports": 6
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py contains 1301 lines, 2 classes, 45 functions and 19 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 1301,
+          "classes": 2,
+          "functions": 45,
+          "imports": 19
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_service.py contains 1071 lines, 3 classes, 45 functions and 8 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_service.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\self_improvement\\self_improvement_service.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 1071,
+          "classes": 3,
+          "functions": 45,
+          "imports": 8
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\vision_panel.py contains 1493 lines, 8 classes, 63 functions and 23 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\vision_panel.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\vision_panel.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 1493,
+          "classes": 8,
+          "functions": 63,
+          "imports": 23
+        }
+      },
+      {
+        "category": "architecture",
+        "title": "Review oversized Python module",
+        "description": "buster\\ui\\v9\\panels\\voice_panel.py contains 1160 lines, 5 classes, 45 functions and 19 imports.",
+        "severity": "low",
+        "file": "buster\\ui\\v9\\panels\\voice_panel.py",
+        "line": 0,
+        "confidence": 0.82,
+        "suggested_request": "Review buster\\ui\\v9\\panels\\voice_panel.py and propose a safe small-module refactor. Separate responsibilities without changing behaviour, then run tests.",
+        "metadata": {
+          "line_count": 1160,
+          "classes": 5,
+          "functions": 45,
+          "imports": 19
+        }
+      }
+    ],
+    "selected": {
+      "category": "safety",
+      "title": "Review large uncommitted change set",
+      "description": "Git reports 4038 changed or untracked paths: 40 modified, 0 added, 3970 deleted, 0 renamed and 28 untracked.",
+      "severity": "medium",
+      "file": "",
+      "line": 0,
+      "confidence": 0.95,
+      "suggested_request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "metadata": {
+        "dirty_paths": 4038,
+        "modified": 40,
+        "added": 0,
+        "deleted": 3970,
+        "renamed": 0,
+        "untracked": 28
+      }
+    },
+    "job": null,
+    "execution": null,
+    "message": "Manual mode reports improvements without creating jobs.",
+    "started_at": "2026-07-19T08:32:44Z",
+    "finished_at": "2026-07-19T08:32:57Z"
+  },
+  "updated_at": "2026-07-19T08:43:02Z"
+}

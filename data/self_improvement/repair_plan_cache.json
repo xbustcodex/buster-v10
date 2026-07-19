@@ -1,0 +1,25 @@
+{
+  "8b2e81be20250f95da59a3a219d4cdf96b07064aadbf4f097a75a27a551e4c4e": {
+    "success": true,
+    "title": "Review and Optimize Git Changes",
+    "goal": "Ensure safe handling of large uncommitted changes to prevent data loss or corruption.",
+    "risk": "medium",
+    "estimated_files": 1,
+    "estimated_effort": "5-10 minutes",
+    "steps": [
+      "Inspect the affected module and identify the exact boundary",
+      "Make the smallest focused change",
+      "Update imports or tests if required",
+      "Compile and run relevant tests"
+    ],
+    "warnings": [
+      "Preserve the existing public API",
+      "Review Git history for changes before making edits"
+    ],
+    "decision": "recommended",
+    "provider": "ollama",
+    "model": "<bound method AIProviderManager.current_model of <buster.brain.providers.manager.AIProviderManager object at 0x0000024C84BB10D0>>",
+    "cached": false,
+    "error": ""
+  }
+}

@@ -26,10 +26,43 @@ class MissionControl(QFrame):
         self.refresh()
 
     def refresh(self):
-        self.rows["AI"].setText("AI: " + self.live.safe(lambda: self.live.services.get("ai").quick_status(), "unknown"))
-        self.rows["Project"].setText("Project: " + Path.cwd().name)
-        self.rows["Git"].setText("Git: " + self.live.git_branch())
-        self.rows["Voice"].setText("Voice: " + self.live.safe(lambda: self.live.services.get("voice").status(), "unknown"))
-        self.rows["Vision"].setText("Vision: " + self.live.safe(lambda: self.live.services.get("vision").status(), "unknown"))
-        self.rows["CPU"].setText(f"CPU: {psutil.cpu_percent()}%")
-        self.rows["RAM"].setText(f"RAM: {psutil.virtual_memory().percent}%")
+        ai = self.live.ai_info()
+
+        self.rows["AI"].setText(
+            f"AI: {ai['provider_label']}"
+        )
+
+        self.rows["Project"].setText(
+            f"Project: {Path.cwd().name}"
+        )
+
+        self.rows["Git"].setText(
+            f"Git: {self.live.git_branch()}"
+        )
+
+        self.rows["Voice"].setText(
+            "Voice: "
+            + self.live.safe(
+                lambda: self.live.services.get("voice").status(),
+                "unknown",
+            )
+        )
+
+        self.rows["Vision"].setText(
+            "Vision: "
+            + self.live.safe(
+                lambda: self.live.services.get("vision").status(),
+                "unknown",
+            )
+        )
+
+        self.rows["CPU"].setText(
+            f"CPU: {psutil.cpu_percent():.1f}%"
+        )
+
+        self.rows["RAM"].setText(
+            f"RAM: {psutil.virtual_memory().percent:.1f}%"
+        )
+        
+        
+        

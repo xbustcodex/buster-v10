@@ -30,46 +30,57 @@ class DeveloperChecklistPanel(QWidget):
         text = f"""
 UI COMPLETION SPRINT
 
-Main UI
+==============================
+BUSTER v10 STABILIZATION
+==============================
+
+UI
 [✓] Dashboard
 [✓] Chat
-[✓] Backend Tools
+[✓] Sidebar Navigation
+[✓] Runtime Workspace
+[✓] Runtime Timeline
 [✓] Face Popup
-[~] Projects
-[~] Workspace
-[~] Vision
-[~] Voice
-[~] Agents
-[~] Terminal
-[~] Settings
+[✓] Notification Center
+[✓] Developer Mission Control
+[✓] Self Improvement
 
-Backend Tools
-[✓] Runtime Dashboard
-[✓] Runtime Console
-[✓] Mission Control
-[✓] Live Runtime UI
-
-Runtime
+Core Runtime
 [✓] Runtime Core
-[✓] SDK Runtime
-[✓] Registry
-[✓] Job Manager
-[✓] Agent Orchestrator
-[✓] Blackboard
-[✓] Agent Memory
-[✓] Developer Tools
+[✓] Event Bus
+[✓] Service Manager
+[✓] Runtime Monitor
+[✓] Lifecycle Manager
 
-Next Work
-[ ] Upgrade Projects panel
-[ ] Upgrade Workspace panel
-[ ] Upgrade Vision panel
-[ ] Upgrade Voice panel
-[ ] Upgrade Agents panel
-[ ] Upgrade Terminal panel
-[ ] Upgrade Settings panel
-[ ] Polish sidebar spacing
-[ ] Add proper plugin manager
+AI
+[✓] Provider Framework
+[✓] Ollama
+[ ] Claude
+[ ] OpenAI
+[ ] Gemini
 
+Autonomy
+[✓] Autonomy Engine
+[✓] Execution Engine
+[✓] Self Improvement Service
+[✓] Strategy Selector
+[✓] Risk Analysis
+
+Testing
+[ ] UI opens without errors
+[ ] Runtime starts cleanly
+[ ] Event Bus verified
+[ ] All panels refresh
+[ ] Memory verified
+[ ] Plugin loading verified
+[ ] AI conversation verified
+[ ] Execution Engine verified
+[ ] Self Improvement verified
+
+Release
+[ ] PyInstaller build
+[ ] Installer
+[ ] Documentation
 Git Branch
 {git}
 """

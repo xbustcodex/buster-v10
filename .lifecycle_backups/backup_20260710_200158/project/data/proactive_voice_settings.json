@@ -1,8 +1,0 @@
-{
-  "enabled": true,
-  "quiet_mode": false,
-  "talk_when_idle": true,
-  "talk_on_mission_events": true,
-  "minimum_priority": "normal",
-  "updated": "2026-06-29T07:22:21+00:00"
-}

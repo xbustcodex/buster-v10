@@ -70,3 +70,17 @@ class AIProviderManager:
         self._cached_status = "\n".join(lines)
         self._last_status_check = now
         return self._cached_status
+        
+        
+        
+    def current_provider(self):
+        return self.current    
+        
+        
+    def current_model(self):
+        provider = self.providers.get(self.current)
+
+        if provider is None:
+            return "Unknown"
+
+        return getattr(provider, "model", "Unknown")    

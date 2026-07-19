@@ -1,3 +1,4 @@
+import fnmatch
 import json
 import shutil
 from datetime import datetime
@@ -6,8 +7,8 @@ from pathlib import Path
 
 class BackupManager:
     def __init__(self, root: Path, backup_dir: Path, max_backups: int = 5):
-        self.root = Path(root)
-        self.backup_dir = Path(backup_dir)
+        self.root = Path(root).resolve()
+        self.backup_dir = Path(backup_dir).resolve()
         self.max_backups = max_backups
         self.backup_dir.mkdir(parents=True, exist_ok=True)
 
@@ -16,31 +17,40 @@ class BackupManager:
         target = self.backup_dir / f"backup_{stamp}"
         target.mkdir(parents=True, exist_ok=True)
 
-        ignored = shutil.ignore_patterns(
-            ".git",
-            "__pycache__",
-            "*.pyc",
-            ".env",
-            "venv",
-            ".venv",
-            "dist",
-            "dist/*",
-            "build",
-            "build/*",
-            "*.spec",
-            ".lifecycle_backups",
-            ".lifecycle_cache",
-            ".lifecycle_logs",
-            "buster_workspace",
-            "backups",
-            "logs"
-        )
+        # Standard baseline exclusions
+        ignored_names = {
+            ".git", "__pycache__", "venv", ".venv", "dist", "build",
+            ".lifecycle_backups", ".lifecycle_cache", ".lifecycle_logs",
+            "buster_workspace", "backups", "logs"
+        }
+        ignored_extensions = {"*.pyc", "*.spec"}
+
+        def strict_ignore(directory, contents):
+            current_dir = Path(directory).resolve()
+            ignored_items = []
+
+            # CRITICAL: Prevent copying the backup directory into itself
+            if current_dir == self.backup_dir or self.backup_dir in current_dir.parents:
+                return contents
+
+            for item in contents:
+                # 1. Match explicit directory/file names
+                if item in ignored_names:
+                    ignored_items.append(item)
+                    continue
+                
+                # 2. Match wildcards/extensions
+                if any(fnmatch.fnmatch(item, ext) for ext in ignored_extensions):
+                    ignored_items.append(item)
+                    continue
+
+            return ignored_items
 
         shutil.copytree(
             self.root,
             target / "project",
-            dirs_exist_ok=True,
-            ignore=ignored
+            dirs_exist_ok=False,  # Set to False to catch unintended path collisions early
+            ignore=strict_ignore
         )
 
         metadata = {

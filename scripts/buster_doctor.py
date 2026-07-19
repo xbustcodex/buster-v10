@@ -209,6 +209,213 @@ class BusterDoctor:
                 self.add(f"Import: {module}", "OK", "imported")
             except Exception as exc:
                 self.add(f"Import: {module}", "FAIL", str(exc))
+                
+    def check_runtime(self):
+        try:
+            from buster.runtime.core import create_runtime_core
+
+            core = create_runtime_core()
+
+            self.add(
+                "Runtime Core",
+                "OK",
+                "created successfully",
+            )
+
+            report = core.inspector.health()
+
+            for name, status in report.items():
+
+                self.add(
+                    f"Runtime {name}",
+                    "OK" if status == "healthy" else "WARN",
+                    status,
+                )
+
+        except Exception as exc:
+
+            self.add(
+                "Runtime Core",
+                "FAIL",
+                str(exc),
+            )                
+    
+    def check_runtime_package(self):
+
+        required = [
+
+            "buster/runtime/core.py",
+
+            "buster/runtime/dispatcher.py",
+
+            "buster/runtime/state_store.py",
+
+            "buster/runtime/inspector.py",
+
+            "buster/runtime/sdk_bootstrap.py",
+
+            "buster/runtime/job_manager.py",
+
+        ]
+
+        for rel in required:
+
+            path = ROOT / rel
+
+            self.add(
+
+                f"Runtime: {Path(rel).name}",
+
+                "OK" if path.exists() else "FAIL",
+
+                "found" if path.exists() else "missing",
+
+            )
+            
+            
+    def check_runtime_panels(self):
+
+        required = [
+
+            "buster/ui/v9/panels/runtime_panel/runtime_timeline_panel.py",
+
+            "buster/ui/v9/panels/runtime_panel/overview_panel.py",
+
+            "buster/ui/v9/panels/runtime_panel/timeline_panel.py",
+
+            "buster/ui/v9/panels/runtime_panel/console_panel.py",
+
+            "buster/ui/v9/panels/runtime_panel/live_panel.py",
+
+        ]
+
+        for rel in required:
+
+            path = ROOT / rel
+
+            self.add(
+
+                f"Runtime Panel: {Path(rel).stem}",
+
+                "OK" if path.exists() else "FAIL",
+
+                "found" if path.exists() else "missing",
+ 
+            )        
+    
+    def check_runtime_compile(self):
+
+        runtime = ROOT / "buster/runtime"
+
+        failures = []
+
+        for file in runtime.rglob("*.py"):
+
+            code, _, err = self.run_cmd(
+
+                [
+
+                    sys.executable,
+
+                    "-m",
+
+                    "py_compile",
+
+                    str(file),
+
+                ],
+
+                timeout=20,
+
+            )
+
+            if code != 0:
+
+                failures.append(file.name)
+
+        if failures:
+
+            self.add(
+
+                "Runtime Compile",
+
+                "FAIL",
+
+                ", ".join(failures),
+
+            )
+
+        else:
+
+            self.add(
+
+                "Runtime Compile",
+
+                "OK",
+
+                "all runtime modules compile",
+
+            )
+    
+    def check_runtime_inspector(self):
+
+        try:
+
+            from buster.runtime.inspector import RuntimeInspector
+
+            self.add(
+
+                "Runtime Inspector",
+
+                "OK",
+
+                "available",
+
+            )
+
+        except Exception as exc:
+
+            self.add(
+
+                "Runtime Inspector",
+
+                "FAIL",
+
+                str(exc),
+
+            )
+    
+    def check_dispatcher(self):
+
+        try:
+
+            from buster.runtime.dispatcher import RuntimeDispatcher
+
+            RuntimeDispatcher()
+
+            self.add(
+
+                "Dispatcher",
+
+                "OK",
+
+                "created",
+
+            )
+
+        except Exception as exc:
+
+            self.add(
+
+                "Dispatcher",
+
+                "FAIL",
+
+                str(exc),
+
+            )
+    
+    
 
     def run_all(self):
         self.check_python()
@@ -221,7 +428,18 @@ class BusterDoctor:
         self.check_buster_files()
         self.check_import_core_modules()
         self.check_provider_diagnostics()
+        self.check_runtime_package()
+
+        self.check_runtime_compile()
+
+        self.check_dispatcher()
+
+        self.check_runtime_inspector()
+
+        self.check_runtime()
+        
         self.check_pytest()
+        
 
     def print_report(self):
         print()
@@ -255,14 +473,45 @@ class BusterDoctor:
 
 
 def main():
+
     args = {arg.lower() for arg in sys.argv[1:]}
+
     auto_fix = "--fix" in args
     run_tests = "--no-tests" not in args
 
-    doctor = BusterDoctor(auto_fix=auto_fix, run_tests=run_tests)
-    doctor.run_all()
+    doctor = BusterDoctor(
+        auto_fix=auto_fix,
+        run_tests=run_tests,
+    )
+
+    if "runtime" in args:
+
+        doctor.check_python()
+        doctor.check_runtime_package()
+        doctor.check_runtime_compile()
+        doctor.check_dispatcher()
+        doctor.check_runtime_inspector()
+        doctor.check_runtime()
+        doctor.check_runtime_panels()
+
+    elif "ui" in args:
+
+        doctor.check_python()
+        doctor.check_runtime_panels()
+
+    elif "imports" in args:
+
+        doctor.check_import_core_modules()
+
+    else:
+
+        doctor.run_all()
+
     doctor.print_report()
-    raise SystemExit(doctor.exit_code())
+
+    raise SystemExit(
+        doctor.exit_code()
+    )
 
 
 if __name__ == "__main__":

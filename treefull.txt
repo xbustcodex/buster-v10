@@ -1,0 +1,1810 @@
+Folder PATH listing for volume Windows
+Volume serial number is 00000013 F6BF:F600
+C:.
+|   .gitignore
+|   add_buster_ai_os_1_shell.py
+|   add_runtime_console_ui.py
+|   add_ui_completion_sprint.py
+|   add_v10_1_runtime_registry_jobs.py
+|   add_v10_2_mission_control_dashboard.py
+|   add_v10_3_multi_agent_intelligence.py
+|   add_v10_4_collaborative_intelligence.py
+|   add_v10_5_runtime_core.py
+|   add_v10_6_developer_experience.py
+|   add_v10_sdk_runtime_bridge.py
+|   add_v11_live_runtime_ui.py
+|   add_v12_mission_control_3.py
+|   Buster.spec
+|   CONTRIBUTING.md
+|   fix_v9_ui_panels_and_resize.py
+|   main.py
+|   migration_report.json
+|   pytest.ini
+|   README.md
+|   README_V10_REFACTOR.md
+|   reorganize_self_improvement.py
+|   requirements.txt
+|   run_buster_ai_os.py
+|   run_lifecycle.py
+|   run_mission_control_v12.py
+|   run_runtime_console.py
+|   run_v11_live_runtime_ui.py
+|   run_v9_ui_preview.py
+|   setup_professional_project.py
+|   treefull.txt
+|   version.json
+|   vision_recording_2026-07-12_13-45-05.avi
+|   vision_recording_2026-07-12_14-56-08.avi
+|   vision_settings.json
+|   voice_settings.json
+|   
++---.github
+|   |   pull_request_template.md
+|   |   
+|   +---ISSUE_TEMPLATE
+|   |       bug_report.md
+|   |       feature_request.md
+|   |       
+|   \---workflows
+|           windows-build.yml
+|           
++---.lifecycle_cache
++---.lifecycle_logs
++---.pytest_cache
+|   |   .gitignore
+|   |   CACHEDIR.TAG
+|   |   README.md
+|   |   
+|   \---v
+|       \---cache
+|               lastfailed
+|               nodeids
+|               
++---buster
+|   |   tree.txt
+|   |   version.py
+|   |   __init__.py
+|   |   
+|   +---agents
+|   |   |   base.py
+|   |   |   builder.py
+|   |   |   fixer.py
+|   |   |   reviewer.py
+|   |   |   team.py
+|   |   |   tester.py
+|   |   |   verifier.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           base.cpython-312.pyc
+|   |           builder.cpython-312.pyc
+|   |           fixer.cpython-312.pyc
+|   |           reviewer.cpython-312.pyc
+|   |           team.cpython-312.pyc
+|   |           tester.cpython-312.pyc
+|   |           verifier.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---agent_os
+|   |   |   agent_runtime.py
+|   |   |   agent_service.py
+|   |   |   living_companion.py
+|   |   |   registry.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           agent_runtime.cpython-312.pyc
+|   |           agent_service.cpython-312.pyc
+|   |           living_companion.cpython-312.pyc
+|   |           registry.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---ai_os
+|   |   |   context.py
+|   |   |   facade.py
+|   |   |   integration.py
+|   |   |   orchestrator.py
+|   |   |   planning_pipeline.py
+|   |   |   status.py
+|   |   |   storage.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           context.cpython-312.pyc
+|   |           facade.cpython-312.pyc
+|   |           integration.cpython-312.pyc
+|   |           orchestrator.cpython-312.pyc
+|   |           planning_pipeline.cpython-312.pyc
+|   |           status.cpython-312.pyc
+|   |           storage.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---ai_state
+|   |   |   state.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           state.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---apps
+|   |   |   manager.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           manager.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---automation
+|   |   |   engine.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           engine.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---autonomy
+|   |   |   code_review_service.py
+|   |   |   dashboard.py
+|   |   |   engine.py
+|   |   |   execution_engine.py
+|   |   |   next_actions.py
+|   |   |   records.py
+|   |   |   repair_planner.py
+|   |   |   repair_plan_worker.py
+|   |   |   self_improvement_service.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           code_review_service.cpython-312.pyc
+|   |           dashboard.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           execution_engine.cpython-312.pyc
+|   |           next_actions.cpython-312.pyc
+|   |           records.cpython-312.pyc
+|   |           self_improvement_service.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---brain
+|   |   |   agent_loop.py
+|   |   |   conversation.py
+|   |   |   conversation_runtime.py
+|   |   |   engine.py
+|   |   |   knowledge_fusion.py
+|   |   |   orchestrator.py
+|   |   |   research_engine.py
+|   |   |   routed_agent_loop.py
+|   |   |   router_explainer.py
+|   |   |   tool_context.py
+|   |   |   tool_executor.py
+|   |   |   tool_router.py
+|   |   |   types.py
+|   |   |   unified_agent_loop.py
+|   |   |   web_brain.py
+|   |   |   
+|   |   +---planner
+|   |   |   |   autonomy_planner.py
+|   |   |   |   cognitive_loop_planner_bridge.py
+|   |   |   |   collaboration_planner_bridge.py
+|   |   |   |   conversation_planner_bridge.py
+|   |   |   |   experience_planner.py
+|   |   |   |   goal_loop_planner_bridge.py
+|   |   |   |   intent_classifier.py
+|   |   |   |   living_planner_bridge.py
+|   |   |   |   mind_planner_bridge.py
+|   |   |   |   mission_planner.py
+|   |   |   |   perception_planner_bridge.py
+|   |   |   |   planner.py
+|   |   |   |   presence_planner_bridge.py
+|   |   |   |   runtime_planner_bridge.py
+|   |   |   |   strategy_planner.py
+|   |   |   |   timeline_planner_bridge.py
+|   |   |   |   world_model_planner_bridge.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           autonomy_planner.cpython-312.pyc
+|   |   |           cognitive_loop_planner_bridge.cpython-312.pyc
+|   |   |           collaboration_planner_bridge.cpython-312.pyc
+|   |   |           conversation_planner_bridge.cpython-312.pyc
+|   |   |           experience_planner.cpython-312.pyc
+|   |   |           goal_loop_planner_bridge.cpython-312.pyc
+|   |   |           intent_classifier.cpython-312.pyc
+|   |   |           living_planner_bridge.cpython-312.pyc
+|   |   |           mind_planner_bridge.cpython-312.pyc
+|   |   |           mission_planner.cpython-312.pyc
+|   |   |           perception_planner_bridge.cpython-312.pyc
+|   |   |           planner.cpython-312.pyc
+|   |   |           presence_planner_bridge.cpython-312.pyc
+|   |   |           runtime_planner_bridge.cpython-312.pyc
+|   |   |           strategy_planner.cpython-312.pyc
+|   |   |           timeline_planner_bridge.cpython-312.pyc
+|   |   |           world_model_planner_bridge.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   +---providers
+|   |   |   |   ai_modes.py
+|   |   |   |   lmstudio.py
+|   |   |   |   local_rules.py
+|   |   |   |   manager.py
+|   |   |   |   mode_detector.py
+|   |   |   |   ollama.py
+|   |   |   |   ollama_models.py
+|   |   |   |   ollama_streaming.py
+|   |   |   |   openrouter.py
+|   |   |   |   prompt_builder.py
+|   |   |   |   provider_diagnostics.py
+|   |   |   |   provider_modes.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           ai_modes.cpython-312.pyc
+|   |   |           lmstudio.cpython-312.pyc
+|   |   |           local_rules.cpython-312.pyc
+|   |   |           manager.cpython-312.pyc
+|   |   |           mode_detector.cpython-312.pyc
+|   |   |           ollama.cpython-312.pyc
+|   |   |           ollama_models.cpython-312.pyc
+|   |   |           ollama_streaming.cpython-312.pyc
+|   |   |           openrouter.cpython-312.pyc
+|   |   |           prompt_builder.cpython-312.pyc
+|   |   |           provider_diagnostics.cpython-312.pyc
+|   |   |           provider_modes.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   \---__pycache__
+|   |           agent_loop.cpython-312.pyc
+|   |           conversation.cpython-312.pyc
+|   |           conversation_runtime.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           knowledge_fusion.cpython-312.pyc
+|   |           orchestrator.cpython-312.pyc
+|   |           research_engine.cpython-312.pyc
+|   |           routed_agent_loop.cpython-312.pyc
+|   |           router_explainer.cpython-312.pyc
+|   |           tool_context.cpython-312.pyc
+|   |           tool_executor.cpython-312.pyc
+|   |           tool_router.cpython-312.pyc
+|   |           types.cpython-312.pyc
+|   |           unified_agent_loop.cpython-312.pyc
+|   |           web_brain.cpython-312.pyc
+|   |           
+|   +---builder
+|   |   |   cli.py
+|   |   |   doctor.py
+|   |   |   repair.py
+|   |   |   storage.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           cli.cpython-312.pyc
+|   |           doctor.cpython-312.pyc
+|   |           repair.cpython-312.pyc
+|   |           storage.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---collaboration
+|   |   |   activity_feed.py
+|   |   |   agent_state.py
+|   |   |   conversation.py
+|   |   |   engine.py
+|   |   |   event_bridge.py
+|   |   |   proactive_voice.py
+|   |   |   proactive_voice_runtime.py
+|   |   |   README.md
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           activity_feed.cpython-312.pyc
+|   |           agent_state.cpython-312.pyc
+|   |           conversation.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           event_bridge.cpython-312.pyc
+|   |           proactive_voice.cpython-312.pyc
+|   |           proactive_voice_runtime.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---companion
+|   |   |   engine.py
+|   |   |   mind_companion_bridge.py
+|   |   |   runtime_speech_bridge.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           engine.cpython-312.pyc
+|   |           mind_companion_bridge.cpython-312.pyc
+|   |           runtime_speech_bridge.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---config
+|   |   |   settings.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           settings.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---conversation_os
+|   |   |   engine.py
+|   |   |   explanations.py
+|   |   |   fast_voice_runtime.py
+|   |   |   mission_voice.py
+|   |   |   modes.py
+|   |   |   natural_conversation.py
+|   |   |   README.md
+|   |   |   settings.py
+|   |   |   speech_queue.py
+|   |   |   speech_scheduler.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           engine.cpython-312.pyc
+|   |           explanations.cpython-312.pyc
+|   |           fast_voice_runtime.cpython-312.pyc
+|   |           mission_voice.cpython-312.pyc
+|   |           modes.cpython-312.pyc
+|   |           natural_conversation.cpython-312.pyc
+|   |           settings.cpython-312.pyc
+|   |           speech_queue.cpython-312.pyc
+|   |           speech_scheduler.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---core
+|   |   |   container.py
+|   |   |   events.py
+|   |   |   event_bus.py
+|   |   |   event_types.py
+|   |   |   logger.py
+|   |   |   runtime.py
+|   |   |   settings_store.py
+|   |   |   state.py
+|   |   |   subscribers.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           container.cpython-312.pyc
+|   |           events.cpython-312.pyc
+|   |           event_bus.cpython-312.pyc
+|   |           event_types.cpython-312.pyc
+|   |           logger.cpython-312.pyc
+|   |           runtime.cpython-312.pyc
+|   |           settings_store.cpython-312.pyc
+|   |           state.cpython-312.pyc
+|   |           subscribers.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---data
+|   |       web_cache.json
+|   |       
+|   +---diagnostics
+|   |   |   manager.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           manager.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---experience
+|   |   |   design_decisions.py
+|   |   |   engine.py
+|   |   |   project_experience.py
+|   |   |   records.py
+|   |   |   skills.py
+|   |   |   storage.py
+|   |   |   user_overrides.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           design_decisions.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           project_experience.cpython-312.pyc
+|   |           records.cpython-312.pyc
+|   |           skills.cpython-312.pyc
+|   |           storage.cpython-312.pyc
+|   |           user_overrides.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---hardware
+|   |   |   manager.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           manager.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---indexer
+|   |   |   project_indexer.py
+|   |   |   query_engine.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           project_indexer.cpython-312.pyc
+|   |           query_engine.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---intelligence
+|   |   |   agent_tracker.py
+|   |   |   confidence.py
+|   |   |   decision_tree.py
+|   |   |   experience_advisor.py
+|   |   |   health_monitor.py
+|   |   |   project_intelligence.py
+|   |   |   reasoning.py
+|   |   |   risk_analysis.py
+|   |   |   runtime_monitor.py
+|   |   |   runtime_snapshot.py
+|   |   |   scoring.py
+|   |   |   strategy_selector.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           agent_tracker.cpython-312.pyc
+|   |           confidence.cpython-312.pyc
+|   |           decision_tree.cpython-312.pyc
+|   |           experience_advisor.cpython-312.pyc
+|   |           health_monitor.cpython-312.pyc
+|   |           project_intelligence.cpython-312.pyc
+|   |           reasoning.cpython-312.pyc
+|   |           risk_analysis.cpython-312.pyc
+|   |           runtime_monitor.cpython-312.pyc
+|   |           runtime_snapshot.cpython-312.pyc
+|   |           scoring.cpython-312.pyc
+|   |           strategy_selector.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---intent_os
+|   |   |   activity_signals.py
+|   |   |   intent_engine.py
+|   |   |   intent_model.py
+|   |   |   interrupt_policy.py
+|   |   |   mission_intent.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           activity_signals.cpython-312.pyc
+|   |           intent_engine.cpython-312.pyc
+|   |           intent_model.cpython-312.pyc
+|   |           interrupt_policy.cpython-312.pyc
+|   |           mission_intent.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---knowledge
+|   |   |   intelligence.py
+|   |   |   knowledge_engine.py
+|   |   |   semantic_graph.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           intelligence.cpython-312.pyc
+|   |           knowledge_engine.cpython-312.pyc
+|   |           semantic_graph.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---learning
+|   |   |   engine.py
+|   |   |   experience.py
+|   |   |   patterns.py
+|   |   |   strategies.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           engine.cpython-312.pyc
+|   |           experience.cpython-312.pyc
+|   |           patterns.cpython-312.pyc
+|   |           strategies.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---lifecycle
+|   |   |   backup.py
+|   |   |   cli.py
+|   |   |   config.py
+|   |   |   health.py
+|   |   |   manager.py
+|   |   |   models.py
+|   |   |   planner.py
+|   |   |   rollback.py
+|   |   |   scanner.py
+|   |   |   verifier.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           backup.cpython-312.pyc
+|   |           cli.cpython-312.pyc
+|   |           config.cpython-312.pyc
+|   |           health.cpython-312.pyc
+|   |           manager.cpython-312.pyc
+|   |           models.cpython-312.pyc
+|   |           planner.cpython-312.pyc
+|   |           rollback.cpython-312.pyc
+|   |           scanner.cpython-312.pyc
+|   |           verifier.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---living
+|   |   |   dashboard.py
+|   |   |   engine.py
+|   |   |   event_bridge.py
+|   |   |   face_controller.py
+|   |   |   live_timeline.py
+|   |   |   mission_events.py
+|   |   |   notifications.py
+|   |   |   state.py
+|   |   |   timeline.py
+|   |   |   voice_vision_bridge.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           dashboard.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           event_bridge.cpython-312.pyc
+|   |           face_controller.cpython-312.pyc
+|   |           live_timeline.cpython-312.pyc
+|   |           mission_events.cpython-312.pyc
+|   |           notifications.cpython-312.pyc
+|   |           state.cpython-312.pyc
+|   |           timeline.cpython-312.pyc
+|   |           voice_vision_bridge.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---living_companion
+|   |   |   companion_runtime.py
+|   |   |   daily_rhythm.py
+|   |   |   voice_runtime.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           companion_runtime.cpython-312.pyc
+|   |           daily_rhythm.cpython-312.pyc
+|   |           voice_runtime.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---memory
+|   |   |   engine.py
+|   |   |   knowledge.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           engine.cpython-312.pyc
+|   |           knowledge.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---mind
+|   |   |   attention_system.py
+|   |   |   cognitive_loop.py
+|   |   |   companion_context.py
+|   |   |   context_priority.py
+|   |   |   continuous_runtime.py
+|   |   |   curiosity.py
+|   |   |   dream_mode.py
+|   |   |   engine.py
+|   |   |   goal_loop.py
+|   |   |   goal_manager.py
+|   |   |   internal_dialogue.py
+|   |   |   mission_context.py
+|   |   |   reflection.py
+|   |   |   self_improvement.py
+|   |   |   storage.py
+|   |   |   working_memory.py
+|   |   |   work_loop.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           attention_system.cpython-312.pyc
+|   |           cognitive_loop.cpython-312.pyc
+|   |           companion_context.cpython-312.pyc
+|   |           context_priority.cpython-312.pyc
+|   |           continuous_runtime.cpython-312.pyc
+|   |           curiosity.cpython-312.pyc
+|   |           dream_mode.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           goal_loop.cpython-312.pyc
+|   |           goal_manager.cpython-312.pyc
+|   |           internal_dialogue.cpython-312.pyc
+|   |           mission_context.cpython-312.pyc
+|   |           reflection.cpython-312.pyc
+|   |           self_improvement.cpython-312.pyc
+|   |           storage.cpython-312.pyc
+|   |           working_memory.cpython-312.pyc
+|   |           work_loop.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---mission_runtime
+|   |   |   autonomous_runtime.py
+|   |   |   capabilities.py
+|   |   |   executor.py
+|   |   |   mission.py
+|   |   |   scheduler.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           autonomous_runtime.cpython-312.pyc
+|   |           capabilities.cpython-312.pyc
+|   |           executor.cpython-312.pyc
+|   |           mission.cpython-312.pyc
+|   |           scheduler.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---multi_agent
+|   |   |   blackboard.py
+|   |   |   collaboration_runtime.py
+|   |   |   delegation.py
+|   |   |   messages.py
+|   |   |   negotiation.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           blackboard.cpython-312.pyc
+|   |           collaboration_runtime.cpython-312.pyc
+|   |           delegation.cpython-312.pyc
+|   |           messages.cpython-312.pyc
+|   |           negotiation.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---os_layer
+|   |   |   approved_folders.py
+|   |   |   filesystem.py
+|   |   |   os_layer.py
+|   |   |   windows_system.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           approved_folders.cpython-312.pyc
+|   |           filesystem.cpython-312.pyc
+|   |           os_layer.cpython-312.pyc
+|   |           windows_system.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---perception
+|   |   |   attention.py
+|   |   |   audio_learning.py
+|   |   |   cognitive_loop_bridge.py
+|   |   |   ears.py
+|   |   |   engine.py
+|   |   |   eyes.py
+|   |   |   mind_bridge.py
+|   |   |   modes.py
+|   |   |   perception_os.py
+|   |   |   privacy.py
+|   |   |   real_perception_loop.py
+|   |   |   screen_feed.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           attention.cpython-312.pyc
+|   |           audio_learning.cpython-312.pyc
+|   |           cognitive_loop_bridge.cpython-312.pyc
+|   |           ears.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           eyes.cpython-312.pyc
+|   |           mind_bridge.cpython-312.pyc
+|   |           modes.cpython-312.pyc
+|   |           perception_os.cpython-312.pyc
+|   |           privacy.cpython-312.pyc
+|   |           real_perception_loop.cpython-312.pyc
+|   |           screen_feed.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---plugins
+|   |   |   loader.py
+|   |   |   manager.py
+|   |   |   marketplace.py
+|   |   |   registry.py
+|   |   |   
+|   |   +---builtin
+|   |   |   |   android_plugin.py
+|   |   |   |   arduino_plugin.py
+|   |   |   |   esp32_plugin.py
+|   |   |   |   github_plugin.py
+|   |   |   |   ollama_plugin.py
+|   |   |   |   openrouter_plugin.py
+|   |   |   |   weather_plugin.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           android_plugin.cpython-312.pyc
+|   |   |           arduino_plugin.cpython-312.pyc
+|   |   |           esp32_plugin.cpython-312.pyc
+|   |   |           github_plugin.cpython-312.pyc
+|   |   |           ollama_plugin.cpython-312.pyc
+|   |   |           openrouter_plugin.cpython-312.pyc
+|   |   |           weather_plugin.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   +---sdk
+|   |   |   |   base_plugin.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           base_plugin.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   \---__pycache__
+|   |           loader.cpython-312.pyc
+|   |           manager.cpython-312.pyc
+|   |           marketplace.cpython-312.pyc
+|   |           registry.cpython-312.pyc
+|   |           
+|   +---presence
+|   |   |   ambient_awareness.py
+|   |   |   context_awareness.py
+|   |   |   director.py
+|   |   |   engine.py
+|   |   |   modes.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           ambient_awareness.cpython-312.pyc
+|   |           context_awareness.cpython-312.pyc
+|   |           director.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           modes.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---repository
+|   |   |   indexer.py
+|   |   |   intelligence.py
+|   |   |   intelligence_service.py
+|   |   |   knowledge_engine.py
+|   |   |   project_model.py
+|   |   |   semantic_graph.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           indexer.cpython-312.pyc
+|   |           intelligence.cpython-312.pyc
+|   |           intelligence_service.cpython-312.pyc
+|   |           knowledge_engine.cpython-312.pyc
+|   |           project_model.cpython-312.pyc
+|   |           semantic_graph.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---runtime
+|   |   |   agent_memory.py
+|   |   |   agent_orchestrator.py
+|   |   |   blackboard.py
+|   |   |   builder_agent.py
+|   |   |   coordinator.py
+|   |   |   core.py
+|   |   |   dev_tools.py
+|   |   |   dispatcher.py
+|   |   |   engine.py
+|   |   |   fixer_agent.py
+|   |   |   heartbeat.py
+|   |   |   idle_manager.py
+|   |   |   inspector.py
+|   |   |   intent_prediction.py
+|   |   |   job_agent.py
+|   |   |   job_manager.py
+|   |   |   lifecycle.py
+|   |   |   lifecycle_sdk_agent.py
+|   |   |   mission_control_dashboard.py
+|   |   |   multi_agent_workflow.py
+|   |   |   orchestrator_agent.py
+|   |   |   planner_agent.py
+|   |   |   plugin_api.py
+|   |   |   plugin_inspector.py
+|   |   |   registry_agent.py
+|   |   |   reviewer_agent.py
+|   |   |   runtime_registry.py
+|   |   |   scheduler.py
+|   |   |   sdk_agent.py
+|   |   |   sdk_agent_manager.py
+|   |   |   sdk_bootstrap.py
+|   |   |   sdk_runtime.py
+|   |   |   state_store.py
+|   |   |   storage.py
+|   |   |   tester_agent.py
+|   |   |   tree.txt
+|   |   |   v6_foundation.py
+|   |   |   watchdog.py
+|   |   |   workflow_graph.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           agent_memory.cpython-312.pyc
+|   |           agent_orchestrator.cpython-312.pyc
+|   |           blackboard.cpython-312.pyc
+|   |           builder_agent.cpython-312.pyc
+|   |           coordinator.cpython-312.pyc
+|   |           core.cpython-312.pyc
+|   |           dev_tools.cpython-312.pyc
+|   |           dispatcher.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           fixer_agent.cpython-312.pyc
+|   |           heartbeat.cpython-312.pyc
+|   |           idle_manager.cpython-312.pyc
+|   |           inspector.cpython-312.pyc
+|   |           intent_prediction.cpython-312.pyc
+|   |           job_agent.cpython-312.pyc
+|   |           job_manager.cpython-312.pyc
+|   |           lifecycle.cpython-312.pyc
+|   |           lifecycle_sdk_agent.cpython-312.pyc
+|   |           mission_control_dashboard.cpython-312.pyc
+|   |           multi_agent_workflow.cpython-312.pyc
+|   |           orchestrator_agent.cpython-312.pyc
+|   |           planner_agent.cpython-312.pyc
+|   |           plugin_api.cpython-312.pyc
+|   |           plugin_inspector.cpython-312.pyc
+|   |           registry_agent.cpython-312.pyc
+|   |           reviewer_agent.cpython-312.pyc
+|   |           runtime_registry.cpython-312.pyc
+|   |           scheduler.cpython-312.pyc
+|   |           sdk_agent.cpython-312.pyc
+|   |           sdk_agent_manager.cpython-312.pyc
+|   |           sdk_bootstrap.cpython-312.pyc
+|   |           sdk_runtime.cpython-312.pyc
+|   |           state_store.cpython-312.pyc
+|   |           storage.cpython-312.pyc
+|   |           tester_agent.cpython-312.pyc
+|   |           v6_foundation.cpython-312.pyc
+|   |           watchdog.cpython-312.pyc
+|   |           workflow_graph.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---sdk
+|   |   |   api.py
+|   |   |   config.py
+|   |   |   events.py
+|   |   |   lifecycle.py
+|   |   |   registry.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           api.cpython-312.pyc
+|   |           config.cpython-312.pyc
+|   |           events.cpython-312.pyc
+|   |           lifecycle.cpython-312.pyc
+|   |           registry.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---services
+|   |   |   job_queue.py
+|   |   |   lifecycle_service.py
+|   |   |   performance_monitor.py
+|   |   |   service_manager.py
+|   |   |   task_scheduler.py
+|   |   |   thread_pool.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           job_queue.cpython-312.pyc
+|   |           lifecycle_service.cpython-312.pyc
+|   |           performance_monitor.cpython-312.pyc
+|   |           service_manager.cpython-312.pyc
+|   |           task_scheduler.cpython-312.pyc
+|   |           thread_pool.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---skills
+|   |   |   growth.py
+|   |   |   registry.py
+|   |   |   skill.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           growth.cpython-312.pyc
+|   |           registry.cpython-312.pyc
+|   |           skill.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---system
+|   |   |   monitor.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           monitor.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---ui
+|   |   |   settings_dialog.py
+|   |   |   tree.txt
+|   |   |   
+|   |   +---os1
+|   |   |   |   main_window.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           main_window.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   +---themes
+|   |   |   |   dark.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           dark.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   +---v10
+|   |   |   |   runtime_dashboard.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           runtime_dashboard.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   +---v11
+|   |   |   |   live_runtime_ui.py
+|   |   |   |   runtime_console.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           live_runtime_ui.cpython-312.pyc
+|   |   |           runtime_console.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   +---v12
+|   |   |   |   mission_control.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           mission_control.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   +---v9
+|   |   |   |   chat_view.py
+|   |   |   |   chat_view.py.bak_resize
+|   |   |   |   command_palette.py
+|   |   |   |   dashboard.py
+|   |   |   |   face_window.py
+|   |   |   |   live_services.py
+|   |   |   |   main_window.py
+|   |   |   |   main_window.py.bak_resize
+|   |   |   |   runtime_monitor.py
+|   |   |   |   sidebar.py
+|   |   |   |   sidebar.py.bak_resize
+|   |   |   |   theme.py
+|   |   |   |   tree1.txt
+|   |   |   |   v9_shell.py
+|   |   |   |   v9_shell.py.bak_resize
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   +---assets
+|   |   |   |   +---avatar
+|   |   |   |   \---icons
+|   |   |   +---panels
+|   |   |   |   |   agent_panel.py
+|   |   |   |   |   developer_checklist_panel.py
+|   |   |   |   |   developer_mission_control.py
+|   |   |   |   |   face_panel.py
+|   |   |   |   |   lifecycle_panel.py
+|   |   |   |   |   mission_control_panel.py
+|   |   |   |   |   notification_center_panel.py
+|   |   |   |   |   project_panel.py
+|   |   |   |   |   python main.py
+|   |   |   |   |   settings_panel.py
+|   |   |   |   |   simple_status_panel.py
+|   |   |   |   |   terminal_panel.py
+|   |   |   |   |   vision_panel.bak
+|   |   |   |   |   vision_panel.py
+|   |   |   |   |   voice_panel.py
+|   |   |   |   |   workspace_panel.py
+|   |   |   |   |   __init__.py
+|   |   |   |   |   
+|   |   |   |   +---runtime_panel
+|   |   |   |   |   |   console_panel.py
+|   |   |   |   |   |   event_card.py
+|   |   |   |   |   |   event_model.py
+|   |   |   |   |   |   filter_bar.py
+|   |   |   |   |   |   inspector_panel.py
+|   |   |   |   |   |   live_panel.py
+|   |   |   |   |   |   overview_panel.py
+|   |   |   |   |   |   runtime_timeline_panel.py
+|   |   |   |   |   |   runtime_workspace.py
+|   |   |   |   |   |   stats_bar.py
+|   |   |   |   |   |   timeline_panel.py
+|   |   |   |   |   |   tree.txt
+|   |   |   |   |   |   __init__.py
+|   |   |   |   |   |   
+|   |   |   |   |   \---__pycache__
+|   |   |   |   |           console_panel.cpython-312.pyc
+|   |   |   |   |           event_card.cpython-312.pyc
+|   |   |   |   |           event_model.cpython-312.pyc
+|   |   |   |   |           filter_bar.cpython-312.pyc
+|   |   |   |   |           inspector_panel.cpython-312.pyc
+|   |   |   |   |           live_panel.cpython-312.pyc
+|   |   |   |   |           overview_panel.cpython-312.pyc
+|   |   |   |   |           runtime_timeline_panel.cpython-312.pyc
+|   |   |   |   |           runtime_workspace.cpython-312.pyc
+|   |   |   |   |           stats_bar.cpython-312.pyc
+|   |   |   |   |           timeline_panel.cpython-312.pyc
+|   |   |   |   |           __init__.cpython-312.pyc
+|   |   |   |   |           
+|   |   |   |   +---self_improvement
+|   |   |   |   |   |   apply_changes_worker.py
+|   |   |   |   |   |   code_review_worker.py
+|   |   |   |   |   |   diff_generator.py
+|   |   |   |   |   |   execution_card.py
+|   |   |   |   |   |   findings_table.py
+|   |   |   |   |   |   finding_details_panel.py
+|   |   |   |   |   |   history_panel.py
+|   |   |   |   |   |   job_queue.py
+|   |   |   |   |   |   mode_selector.py
+|   |   |   |   |   |   preview_diff_panel.py
+|   |   |   |   |   |   preview_diff_worker.py
+|   |   |   |   |   |   project_health_card.py
+|   |   |   |   |   |   repair_plan_panel.py
+|   |   |   |   |   |   self_improvement_panel.py
+|   |   |   |   |   |   __init__.py
+|   |   |   |   |   |   
+|   |   |   |   |   +---apply
+|   |   |   |   |   |       apply_changes_worker.py
+|   |   |   |   |   |       backup_manager.py
+|   |   |   |   |   |       change_manifest.py
+|   |   |   |   |   |       rollback_manager.py
+|   |   |   |   |   |       __init__.py
+|   |   |   |   |   |       
+|   |   |   |   |   +---session
+|   |   |   |   |   |       repair_session.py
+|   |   |   |   |   |       repair_session_store.py
+|   |   |   |   |   |       session_manager.py
+|   |   |   |   |   |       __init__.py
+|   |   |   |   |   |       
+|   |   |   |   |   +---verification
+|   |   |   |   |   |       behavioral_checker.py
+|   |   |   |   |   |       formatter_checker.py
+|   |   |   |   |   |       import_checker.py
+|   |   |   |   |   |       lint_checker.py
+|   |   |   |   |   |       syntax_checker.py
+|   |   |   |   |   |       unit_test_runner.py
+|   |   |   |   |   |       verification_engine.py
+|   |   |   |   |   |       verification_report.py
+|   |   |   |   |   |       verification_worker.py
+|   |   |   |   |   |       __init__.py
+|   |   |   |   |   |       
+|   |   |   |   |   \---__pycache__
+|   |   |   |   |           code_review_worker.cpython-312.pyc
+|   |   |   |   |           execution_card.cpython-312.pyc
+|   |   |   |   |           findings_table.cpython-312.pyc
+|   |   |   |   |           finding_details_panel.cpython-312.pyc
+|   |   |   |   |           history_panel.cpython-312.pyc
+|   |   |   |   |           job_queue.cpython-312.pyc
+|   |   |   |   |           mode_selector.cpython-312.pyc
+|   |   |   |   |           project_health_card.cpython-312.pyc
+|   |   |   |   |           self_improvement_panel.cpython-312.pyc
+|   |   |   |   |           __init__.cpython-312.pyc
+|   |   |   |   |           
+|   |   |   |   \---__pycache__
+|   |   |   |           agent_panel.cpython-312.pyc
+|   |   |   |           developer_checklist_panel.cpython-312.pyc
+|   |   |   |           developer_mission_control.cpython-312.pyc
+|   |   |   |           face_panel.cpython-312.pyc
+|   |   |   |           lifecycle_panel.cpython-312.pyc
+|   |   |   |           live_runtime_ui.cpython-312.pyc
+|   |   |   |           mission_control_panel.cpython-312.pyc
+|   |   |   |           notification_center_panel.cpython-312.pyc
+|   |   |   |           project_panel.cpython-312.pyc
+|   |   |   |           python main.cpython-312.pyc
+|   |   |   |           runtime_console_panel.cpython-312.pyc
+|   |   |   |           runtime_overview_panel.cpython-312.pyc
+|   |   |   |           runtime_timeline_panel.cpython-312.pyc
+|   |   |   |           settings_panel.cpython-312.pyc
+|   |   |   |           simple_status_panel.cpython-312.pyc
+|   |   |   |           terminal_panel.cpython-312.pyc
+|   |   |   |           vision_panel.cpython-312.pyc
+|   |   |   |           voice_panel.cpython-312.pyc
+|   |   |   |           workspace_panel.cpython-312.pyc
+|   |   |   |           __init__.cpython-312.pyc
+|   |   |   |           
+|   |   |   +---widgets
+|   |   |   |   |   animated_avatar.py
+|   |   |   |   |   avatar_canvas.py
+|   |   |   |   |   message_card.py
+|   |   |   |   |   metric_card.py
+|   |   |   |   |   mission_control.py
+|   |   |   |   |   status_card.py
+|   |   |   |   |   __init__.py
+|   |   |   |   |   
+|   |   |   |   \---__pycache__
+|   |   |   |           animated_avatar.cpython-312.pyc
+|   |   |   |           avatar_canvas.cpython-312.pyc
+|   |   |   |           message_card.cpython-312.pyc
+|   |   |   |           metric_card.cpython-312.pyc
+|   |   |   |           mission_control.cpython-312.pyc
+|   |   |   |           status_card.cpython-312.pyc
+|   |   |   |           __init__.cpython-312.pyc
+|   |   |   |           
+|   |   |   \---__pycache__
+|   |   |           chat_view.cpython-312.pyc
+|   |   |           command_palette.cpython-312.pyc
+|   |   |           dashboard.cpython-312.pyc
+|   |   |           face_window.cpython-312.pyc
+|   |   |           live_services.cpython-312.pyc
+|   |   |           main_window.cpython-312.pyc
+|   |   |           runtime_monitor.cpython-312.pyc
+|   |   |           sidebar.cpython-312.pyc
+|   |   |           theme.cpython-312.pyc
+|   |   |           v9_shell.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   +---widgets
+|   |   |   |   agent_collaboration_widget.py
+|   |   |   |   agent_os_widget.py
+|   |   |   |   ai_os_dashboard.py
+|   |   |   |   autonomous_mission_widget.py
+|   |   |   |   cognitive_loop_widget.py
+|   |   |   |   face.py
+|   |   |   |   intent_widget.py
+|   |   |   |   live_mission_timeline_widget.py
+|   |   |   |   living_companion_widget.py
+|   |   |   |   living_os_widget.py
+|   |   |   |   mind_widget.py
+|   |   |   |   mission_control_widget.py
+|   |   |   |   multi_agent_widget.py
+|   |   |   |   panel.py
+|   |   |   |   perception_loop_widget.py
+|   |   |   |   perception_os_widget.py
+|   |   |   |   presence_widget.py
+|   |   |   |   proactive_speech_widget.py
+|   |   |   |   runtime_widget.py
+|   |   |   |   service_card.py
+|   |   |   |   vision_window.py
+|   |   |   |   working_memory_goal_widget.py
+|   |   |   |   workspace_awareness_widget.py
+|   |   |   |   world_model_widget.py
+|   |   |   |   __init__.py
+|   |   |   |   
+|   |   |   \---__pycache__
+|   |   |           agent_collaboration_widget.cpython-312.pyc
+|   |   |           agent_os_widget.cpython-312.pyc
+|   |   |           ai_os_dashboard.cpython-312.pyc
+|   |   |           autonomous_mission_widget.cpython-312.pyc
+|   |   |           cognitive_loop_widget.cpython-312.pyc
+|   |   |           face.cpython-312.pyc
+|   |   |           intent_widget.cpython-312.pyc
+|   |   |           live_mission_timeline_widget.cpython-312.pyc
+|   |   |           living_companion_widget.cpython-312.pyc
+|   |   |           living_os_widget.cpython-312.pyc
+|   |   |           mind_widget.cpython-312.pyc
+|   |   |           mission_control_widget.cpython-312.pyc
+|   |   |           multi_agent_widget.cpython-312.pyc
+|   |   |           panel.cpython-312.pyc
+|   |   |           perception_loop_widget.cpython-312.pyc
+|   |   |           perception_os_widget.cpython-312.pyc
+|   |   |           presence_widget.cpython-312.pyc
+|   |   |           proactive_speech_widget.cpython-312.pyc
+|   |   |           runtime_widget.cpython-312.pyc
+|   |   |           service_card.cpython-312.pyc
+|   |   |           vision_window.cpython-312.pyc
+|   |   |           working_memory_goal_widget.cpython-312.pyc
+|   |   |           workspace_awareness_widget.cpython-312.pyc
+|   |   |           world_model_widget.cpython-312.pyc
+|   |   |           __init__.cpython-312.pyc
+|   |   |           
+|   |   \---__pycache__
+|   |           main_window.cpython-312.pyc
+|   |           settings_dialog.cpython-312.pyc
+|   |           
+|   +---updater
+|   |   |   github.py
+|   |   |   manager.py
+|   |   |   models.py
+|   |   |   version.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           github.cpython-312.pyc
+|   |           manager.cpython-312.pyc
+|   |           models.cpython-312.pyc
+|   |           version.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---updates
+|   |   |   updater.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           updater.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---utils
+|   |   |   datetime_utils.py
+|   |   |   json_utils.py
+|   |   |   logger.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           datetime_utils.cpython-312.pyc
+|   |           json_utils.cpython-312.pyc
+|   |           logger.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---vision
+|   |   |   camera.py
+|   |   |   engine.py
+|   |   |   face_detection.py
+|   |   |   face_recognition.py
+|   |   |   frame_processor.py
+|   |   |   learning_bridge.py
+|   |   |   object_detection.py
+|   |   |   ocr.py
+|   |   |   overlay.py
+|   |   |   perception_feed.py
+|   |   |   qr_scanner.py
+|   |   |   settings.py
+|   |   |   snapshot.py
+|   |   |   types.py
+|   |   |   world_model_bridge.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           camera.cpython-312.pyc
+|   |           engine.cpython-312.pyc
+|   |           face_detection.cpython-312.pyc
+|   |           face_recognition.cpython-312.pyc
+|   |           frame_processor.cpython-312.pyc
+|   |           learning_bridge.cpython-312.pyc
+|   |           object_detection.cpython-312.pyc
+|   |           ocr.cpython-312.pyc
+|   |           overlay.cpython-312.pyc
+|   |           perception_feed.cpython-312.pyc
+|   |           qr_scanner.cpython-312.pyc
+|   |           settings.cpython-312.pyc
+|   |           snapshot.cpython-312.pyc
+|   |           types.cpython-312.pyc
+|   |           world_model_bridge.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---visual_learning
+|   |   |   engine.py
+|   |   |   learner.py
+|   |   |   memory.py
+|   |   |   observation.py
+|   |   |   patterns.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           engine.cpython-312.pyc
+|   |           learner.cpython-312.pyc
+|   |           memory.cpython-312.pyc
+|   |           observation.cpython-312.pyc
+|   |           patterns.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---voice
+|   |   |   engine.py
+|   |   |   fast_listener.py
+|   |   |   latency_config.py
+|   |   |   voice_pipeline.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           engine.cpython-312.pyc
+|   |           fast_listener.cpython-312.pyc
+|   |           latency_config.cpython-312.pyc
+|   |           voice_pipeline.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---web
+|   |   |   cache.py
+|   |   |   fetch.py
+|   |   |   internet_service.py
+|   |   |   knowledge_cache.py
+|   |   |   models.py
+|   |   |   parser.py
+|   |   |   permissions.py
+|   |   |   providers.py
+|   |   |   research_memory_bridge.py
+|   |   |   search.py
+|   |   |   session.py
+|   |   |   source_ranker.py
+|   |   |   summarizer.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           cache.cpython-312.pyc
+|   |           fetch.cpython-312.pyc
+|   |           internet_service.cpython-312.pyc
+|   |           knowledge_cache.cpython-312.pyc
+|   |           models.cpython-312.pyc
+|   |           parser.cpython-312.pyc
+|   |           permissions.cpython-312.pyc
+|   |           providers.cpython-312.pyc
+|   |           research_memory_bridge.cpython-312.pyc
+|   |           search.cpython-312.pyc
+|   |           session.cpython-312.pyc
+|   |           source_ranker.cpython-312.pyc
+|   |           summarizer.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---workspace
+|   |   |   agent_os_dashboard.py
+|   |   |   ai_os.py
+|   |   |   ai_os_unified.py
+|   |   |   autonomous_mission_dashboard.py
+|   |   |   cognitive_loop_dashboard.py
+|   |   |   collaboration_dashboard.py
+|   |   |   dashboard.py
+|   |   |   experience_dashboard.py
+|   |   |   intent_dashboard.py
+|   |   |   live_mission_timeline.py
+|   |   |   living_companion_dashboard.py
+|   |   |   mind_dashboard.py
+|   |   |   mission_activity.py
+|   |   |   mission_control.py
+|   |   |   mission_control_dashboard.py
+|   |   |   mission_metrics.py
+|   |   |   mission_status.py
+|   |   |   multi_agent_dashboard.py
+|   |   |   perception_dashboard.py
+|   |   |   presence_dashboard.py
+|   |   |   proactive_speech_dashboard.py
+|   |   |   runtime.py
+|   |   |   runtime_dashboard.py
+|   |   |   working_memory_goal_dashboard.py
+|   |   |   workspace_awareness_dashboard.py
+|   |   |   world_model_dashboard.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           agent_os_dashboard.cpython-312.pyc
+|   |           ai_os.cpython-312.pyc
+|   |           ai_os_unified.cpython-312.pyc
+|   |           autonomous_mission_dashboard.cpython-312.pyc
+|   |           cognitive_loop_dashboard.cpython-312.pyc
+|   |           collaboration_dashboard.cpython-312.pyc
+|   |           dashboard.cpython-312.pyc
+|   |           experience_dashboard.cpython-312.pyc
+|   |           intent_dashboard.cpython-312.pyc
+|   |           live_mission_timeline.cpython-312.pyc
+|   |           living_companion_dashboard.cpython-312.pyc
+|   |           mind_dashboard.cpython-312.pyc
+|   |           mission_activity.cpython-312.pyc
+|   |           mission_control.cpython-312.pyc
+|   |           mission_control_dashboard.cpython-312.pyc
+|   |           mission_metrics.cpython-312.pyc
+|   |           mission_status.cpython-312.pyc
+|   |           multi_agent_dashboard.cpython-312.pyc
+|   |           perception_dashboard.cpython-312.pyc
+|   |           presence_dashboard.cpython-312.pyc
+|   |           proactive_speech_dashboard.cpython-312.pyc
+|   |           runtime.cpython-312.pyc
+|   |           runtime_dashboard.cpython-312.pyc
+|   |           working_memory_goal_dashboard.cpython-312.pyc
+|   |           workspace_awareness_dashboard.cpython-312.pyc
+|   |           world_model_dashboard.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---workspace_awareness
+|   |   |   app_detector.py
+|   |   |   device_watcher.py
+|   |   |   git_watcher.py
+|   |   |   project_context.py
+|   |   |   workspace_events.py
+|   |   |   workspace_runtime.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           app_detector.cpython-312.pyc
+|   |           device_watcher.cpython-312.pyc
+|   |           git_watcher.cpython-312.pyc
+|   |           project_context.cpython-312.pyc
+|   |           workspace_events.cpython-312.pyc
+|   |           workspace_runtime.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   +---world_model
+|   |   |   engine.py
+|   |   |   entities.py
+|   |   |   memory.py
+|   |   |   mind_bridge.py
+|   |   |   observations.py
+|   |   |   perception_bridge.py
+|   |   |   relationships.py
+|   |   |   storage.py
+|   |   |   understanding.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           engine.cpython-312.pyc
+|   |           entities.cpython-312.pyc
+|   |           memory.cpython-312.pyc
+|   |           mind_bridge.cpython-312.pyc
+|   |           observations.cpython-312.pyc
+|   |           perception_bridge.cpython-312.pyc
+|   |           relationships.cpython-312.pyc
+|   |           storage.cpython-312.pyc
+|   |           understanding.cpython-312.pyc
+|   |           __init__.cpython-312.pyc
+|   |           
+|   \---__pycache__
+|           version.cpython-312.pyc
+|           __init__.cpython-312.pyc
+|           
++---buster_workspace
+|   \---ai_builds
++---config
+|       lifecycle_config.json
+|       ui_settings.json
+|       
++---data
+|   |   agent_activity_feed.json
+|   |   agent_conversation.json
+|   |   agent_memory.json
+|   |   ai_os_architecture_state.json
+|   |   ai_os_state.json
+|   |   ai_os_status.json
+|   |   ai_provider_config.json
+|   |   approved_folders.json
+|   |   apps_cache.json
+|   |   attention_events.json
+|   |   attention_focus.json
+|   |   attention_state.json
+|   |   audio_learning_memory.json
+|   |   autonomy_history.json
+|   |   autonomy_state.json
+|   |   build_strategies.json
+|   |   buster_doctor_report.json
+|   |   buster_memory.db
+|   |   buster_repair_report.json
+|   |   buster_runtime_state.json
+|   |   camera_learning_state.json
+|   |   code_review_cache.json
+|   |   cognitive_loop_state.json
+|   |   cognitive_runtime_state.json
+|   |   collaborative_agents_state.json
+|   |   companion_context.json
+|   |   companion_world_state.json
+|   |   conversation_os_state.json
+|   |   curiosity_log.json
+|   |   decision_explanations.json
+|   |   decision_notifications.json
+|   |   design_decisions.json
+|   |   design_patterns.json
+|   |   dream_reflections.json
+|   |   event_history.json
+|   |   execution_history.json
+|   |   experience_memory.json
+|   |   goals.json
+|   |   goal_loop_state.json
+|   |   intelligence_state.json
+|   |   intent_predictions.json
+|   |   internal_dialogue.json
+|   |   internal_thoughts.json
+|   |   knowledge_memory.json
+|   |   learning_memory.json
+|   |   lifecycle_health.json
+|   |   lifecycle_history.json
+|   |   live_mission_timeline_state.json
+|   |   living_os_state.json
+|   |   mind_state.json
+|   |   mission_context.json
+|   |   mission_control_dashboard.json
+|   |   mission_control_state.json
+|   |   mission_control_unified.json
+|   |   mission_timeline.json
+|   |   mission_timeline_live.json
+|   |   natural_conversation_memory.json
+|   |   perception_loop_widget_state.json
+|   |   perception_observations.json
+|   |   perception_os_state.json
+|   |   perception_privacy_settings.json
+|   |   perception_state.json
+|   |   plugin_marketplace.json
+|   |   plugin_registry.json
+|   |   presence_settings.json
+|   |   presence_speech_queue.json
+|   |   presence_state.json
+|   |   proactive_speech_queue.json
+|   |   proactive_speech_settings.json
+|   |   proactive_voice_queue.json
+|   |   proactive_voice_settings.json
+|   |   project_experience_index.json
+|   |   project_index.json
+|   |   real_perception_loop_observations.json
+|   |   real_perception_loop_state.json
+|   |   reflection_journal.json
+|   |   runtime_coordination_state.json
+|   |   runtime_events.json
+|   |   runtime_health.json
+|   |   runtime_idle_state.json
+|   |   runtime_lifecycle.json
+|   |   screen_perception_feed_observations.json
+|   |   screen_perception_feed_state.json
+|   |   self_improvement_history.json
+|   |   self_improvement_missions.json
+|   |   self_improvement_state.json
+|   |   settings.json
+|   |   skill_profiles.json
+|   |   test_ai_os_state.json
+|   |   test_approved_folders.json
+|   |   test_project_index.json
+|   |   upgrade_manifest.json
+|   |   user_overrides.json
+|   |   vision_perception_feed_observations.json
+|   |   vision_perception_feed_state.json
+|   |   visual_learning_memory.json
+|   |   voice_vision_state.json
+|   |   web_cache.json
+|   |   web_knowledge_cache.json
+|   |   working_memory.json
+|   |   working_memory_goal_loop.json
+|   |   world_model.json
+|   |   world_model_mind_state.json
+|   |   world_model_state.json
+|   |   
+|   +---faces
+|   \---migration_backups
+|       \---self_improvement_reorg_20260719_160521
+|           |   apply_changes_worker.py
+|           |   backup_manager.py
+|           |   change_manifest.py
+|           |   code_review_worker.py
+|           |   diff_generator.py
+|           |   execution_card.py
+|           |   findings_table.py
+|           |   finding_details_panel.py
+|           |   history_panel.py
+|           |   job_queue.py
+|           |   mode_selector.py
+|           |   preview_diff_panel.py
+|           |   preview_diff_worker.py
+|           |   project_health_card.py
+|           |   repair_plan_panel.py
+|           |   rollback_manager.py
+|           |   self_improvement_panel.py
+|           |   __init__.py
+|           |   
+|           +---verification
+|           |       apply_changes_worker.py
+|           |       behavioral_checker.py
+|           |       formatter_checker.py
+|           |       import_checker.py
+|           |       lint_checker.py
+|           |       repair_session.py
+|           |       syntax_checker.py
+|           |       unit_test_runner.py
+|           |       verification_engine.py
+|           |       verification_report.py
+|           |       verification_worker.py
+|           |       
+|           \---__pycache__
+|                   code_review_worker.cpython-312.pyc
+|                   execution_card.cpython-312.pyc
+|                   findings_table.cpython-312.pyc
+|                   finding_details_panel.cpython-312.pyc
+|                   history_panel.cpython-312.pyc
+|                   job_queue.cpython-312.pyc
+|                   mode_selector.cpython-312.pyc
+|                   project_health_card.cpython-312.pyc
+|                   self_improvement_panel.cpython-312.pyc
+|                   __init__.cpython-312.pyc
+|                   
++---docs
+|   +---architecture
+|   |       PLUGIN_API.md
+|   |       ROADMAP.md
+|   |       RUNTIME_API.md
+|   |       
+|   \---legacy
+|           BUSTER_AI_OS_ARCHITECTURE.md
+|           BUSTER_COGNITIVE_LOOP.md
+|           BUSTER_MIND_ARCHITECTURE.md
+|           BUSTER_RUNTIME_INTEGRATION.md
+|           BUSTER_V6_1_AGENT_RUNTIME.md
+|           BUSTER_V6_2_WORKSPACE_AWARENESS.md
+|           BUSTER_V6_3_INTENT_ACTIVITY_INTELLIGENCE.md
+|           BUSTER_V6_4_MULTI_AGENT_COLLABORATION.md
+|           BUSTER_V6_5_1_MAINTENANCE.md
+|           BUSTER_V6_5_AUTONOMOUS_MISSION_RUNTIME.md
+|           BUSTER_V6_FOUNDATION.md
+|           BUSTER_V7_0_LIVING_AI_COMPANION.md
+|           README_DOCTOR_V2.md
+|           README_v7_1_INTERNET_INTELLIGENCE_CORE.md
+|           README_v7_3_AI_PROVIDER_AUTO_MODEL_MANAGER.md
+|           README_v7_4_VOICE_LATENCY_STREAMING_RUNTIME.md
+|           README_v7_5_AI_MODE_MANAGER.md
+|           README_v7_6_UNIFIED_INTELLIGENCE_ORCHESTRATOR.md
+|           
++---installer
+|       BusterSetup.iss
+|       
++---logs
++---recordings
+|       recording_20260716_145133.wav
+|       
++---screenshots
+|   |   vision_screenshot_2026-07-12_16-00-32.png
+|   |   
+|   \---vision
++---scripts
+|   |   benchmark.bat
+|   |   build.bat
+|   |   build_exe.bat
+|   |   buster_doctor.py
+|   |   clean.bat
+|   |   doctor.bat
+|   |   knowledge.bat
+|   |   new_feature_branch.bat
+|   |   pre_commit_check.bat
+|   |   release.bat
+|   |   run.bat
+|   |   run_ai_os_dashboard.bat
+|   |   run_ai_os_dashboard_v3_3_2.bat
+|   |   run_ai_os_dashboard_v3_3_5.bat
+|   |   run_ai_os_dashboard_v3_4_2.bat
+|   |   test.bat
+|   |   test_only.bat
+|   |   test_push.bat
+|   |   
+|   \---__pycache__
+|           buster_doctor.cpython-312.pyc
+|           
++---tests
+|   |   conftest.py
+|   |   test_buster_ai_os_shell_import.py
+|   |   test_buster_doctor_v2.py
+|   |   test_imports.py
+|   |   test_runtime_console_import.py
+|   |   test_v10_1_runtime_registry_jobs.py
+|   |   test_v10_2_mission_control_dashboard.py
+|   |   test_v10_2_runtime_dashboard_import.py
+|   |   test_v10_3_multi_agent_imports.py
+|   |   test_v10_3_multi_agent_intelligence.py
+|   |   test_v10_4_collaborative_intelligence.py
+|   |   test_v10_4_collaborative_intelligence_imports.py
+|   |   test_v10_5_runtime_core.py
+|   |   test_v10_5_runtime_core_imports.py
+|   |   test_v10_6_developer_experience.py
+|   |   test_v10_6_developer_experience_imports.py
+|   |   test_v10_sdk_runtime.py
+|   |   test_v11_live_runtime_ui.py
+|   |   test_v11_live_runtime_ui_imports.py
+|   |   test_v12_mission_control_import.py
+|   |   test_v7_1_internet_intelligence_core.py
+|   |   test_v7_2_tool_router_integration.py
+|   |   test_v7_3_ai_provider_auto_model_manager.py
+|   |   test_v7_4_voice_latency_streaming_runtime.py
+|   |   test_v7_5_ai_mode_manager.py
+|   |   test_v7_6_unified_intelligence_orchestrator.py
+|   |   test_v8_1_project_intelligence.py
+|   |   test_v8_1_repository_intelligence_service.py
+|   |   test_v8_1_update_manager.py
+|   |   test_v8_2_approved_folders.py
+|   |   test_v8_2_os_layer.py
+|   |   test_v8_2_workspace_snapshot.py
+|   |   test_v9_ai_os_state.py
+|   |   
+|   \---__pycache__
+|           conftest.cpython-312-pytest-9.0.3.pyc
+|           test_buster_ai_os_shell_import.cpython-312-pytest-9.0.3.pyc
+|           test_buster_doctor_v2.cpython-312-pytest-9.0.3.pyc
+|           test_imports.cpython-312-pytest-9.0.3.pyc
+|           test_runtime_console_import.cpython-312-pytest-9.0.3.pyc
+|           test_v10_1_runtime_registry_jobs.cpython-312-pytest-9.0.3.pyc
+|           test_v10_2_mission_control_dashboard.cpython-312-pytest-9.0.3.pyc
+|           test_v10_2_runtime_dashboard_import.cpython-312-pytest-9.0.3.pyc
+|           test_v10_3_multi_agent_imports.cpython-312-pytest-9.0.3.pyc
+|           test_v10_3_multi_agent_intelligence.cpython-312-pytest-9.0.3.pyc
+|           test_v10_4_collaborative_intelligence.cpython-312-pytest-9.0.3.pyc
+|           test_v10_4_collaborative_intelligence_imports.cpython-312-pytest-9.0.3.pyc
+|           test_v10_5_runtime_core.cpython-312-pytest-9.0.3.pyc
+|           test_v10_5_runtime_core_imports.cpython-312-pytest-9.0.3.pyc
+|           test_v10_6_developer_experience.cpython-312-pytest-9.0.3.pyc
+|           test_v10_6_developer_experience_imports.cpython-312-pytest-9.0.3.pyc
+|           test_v10_sdk_runtime.cpython-312-pytest-9.0.3.pyc
+|           test_v11_live_runtime_ui.cpython-312-pytest-9.0.3.pyc
+|           test_v11_live_runtime_ui_imports.cpython-312-pytest-9.0.3.pyc
+|           test_v12_mission_control_import.cpython-312-pytest-9.0.3.pyc
+|           test_v7_1_internet_intelligence_core.cpython-312-pytest-9.0.3.pyc
+|           test_v7_2_tool_router_integration.cpython-312-pytest-9.0.3.pyc
+|           test_v7_3_ai_provider_auto_model_manager.cpython-312-pytest-9.0.3.pyc
+|           test_v7_4_voice_latency_streaming_runtime.cpython-312-pytest-9.0.3.pyc
+|           test_v7_5_ai_mode_manager.cpython-312-pytest-9.0.3.pyc
+|           test_v7_6_unified_intelligence_orchestrator.cpython-312-pytest-9.0.3.pyc
+|           test_v8_1_project_intelligence.cpython-312-pytest-9.0.3.pyc
+|           test_v8_1_repository_intelligence_service.cpython-312-pytest-9.0.3.pyc
+|           test_v8_1_update_manager.cpython-312-pytest-9.0.3.pyc
+|           test_v8_2_approved_folders.cpython-312-pytest-9.0.3.pyc
+|           test_v8_2_os_layer.cpython-312-pytest-9.0.3.pyc
+|           test_v8_2_workspace_snapshot.cpython-312-pytest-9.0.3.pyc
+|           test_v9_ai_os_state.cpython-312-pytest-9.0.3.pyc
+|           
++---tools
+|   +---diagnostics
+|   +---legacy_scripts
+|   |       apply_fix_perception_planner_bridge_constructor.py
+|   |       apply_fix_real_perception_loop_compatibility.py
+|   |       apply_fix_real_perception_loop_contract.py
+|   |       apply_fix_real_perception_loop_final_contract (1).py
+|   |       apply_fix_real_perception_loop_final_contract.py
+|   |       apply_fix_real_perception_loop_syntax.py
+|   |       apply_fix_v5_1_and_v6_0_buster_builder.py
+|   |       apply_fix_v5_1_detection_and_drain.py
+|   |       apply_fix_v5_1_feed_and_tick_compatibility.py
+|   |       apply_fix_v5_1_full_perception_contract.py
+|   |       apply_fix_v5_1_perception_feed_missing_module.py
+|   |       apply_fix_v5_1_perception_loop_widget_missing_module.py
+|   |       apply_fix_v5_import_exports_and_signatures.py
+|   |       apply_fix_v6_5_1_datetime_utils_circular_import.py
+|   |       apply_fix_vision_feed_extra_kwarg.py
+|   |       apply_v3_0_vision_thread_fix.py
+|   |       apply_v3_1_ai_os_patch.py
+|   |       apply_v3_2_1_ai_os_dashboard.py
+|   |       apply_v3_2_ai_os_core.py
+|   |       apply_v3_3_1_repository_cleanup.py
+|   |       apply_v3_3_2_repository_ui_search.py
+|   |       apply_v3_3_3_semantic_repository_graph.py
+|   |       apply_v3_3_4_smarter_graph_search.py
+|   |       apply_v3_3_5_graph_search_dashboard.py
+|   |       apply_v3_3_repository_intelligence.py
+|   |       apply_v3_4_1_knowledge_engine_cli.py
+|   |       apply_v3_4_2_knowledge_engine_dashboard.py
+|   |       apply_v3_4_3_knowledge_package_migration.py
+|   |       apply_v3_4_repository_knowledge_engine.py
+|   |       apply_v3_5_learning_plugin_os.py
+|   |       apply_v3_6_jarvis_autonomy_layer.py
+|   |       apply_v3_7_intelligence_event_bus.py
+|   |       apply_v3_8_experience_engine.py
+|   |       apply_v3_9_mission_control_dashboard.py
+|   |       apply_v4_0_ai_os_core_integration.py
+|   |       apply_v4_1_voice_vision_living_os.py
+|   |       apply_v4_2_live_mission_timeline.py
+|   |       apply_v4_3_collaborative_agent_system.py
+|   |       apply_v4_4_natural_conversation_proactive_speech.py
+|   |       apply_v4_5_presence_visual_learning.py
+|   |       apply_v5_0_world_model_ai_os.py
+|   |       apply_v5_1_real_perception_loop.py
+|   |       apply_v5_2_perception_os.py
+|   |       apply_v5_3_cognitive_mind.py
+|   |       apply_v5_4_working_memory_goal_loop.py
+|   |       apply_v5_5_cognitive_loop_engine.py
+|   |       apply_v5_6_runtime_integration.py
+|   |       apply_v6_0_foundation_sdk.py
+|   |       apply_v6_5_1_maintenance_modernization.py
+|   |       create_lifecycle_manager.py
+|   |       create_v10_refactor_folder.py
+|   |       create_v8_1_upgrade.bat
+|   |       create_v8_1_upgrade.ps1
+|   |       debug_v9_face_state.py
+|   |       fix_all_scripts_and_git.bat
+|   |       fix_lifecycle_excludes.py
+|   |       fix_v8_1_update_manager_and_brain.py
+|   |       fix_v9_chat_state_delay.py
+|   |       fix_v9_face_repaint.py
+|   |       fix_v9_face_state.py
+|   |       patch_brain_project_intelligence_v2.py
+|   |       patch_persistent_settings.py
+|   |       patch_project_intelligence_v2.py
+|   |       patch_repository_intelligence_service.py
+|   |       patch_update_manager.py
+|   |       patch_v8_2_os_layer.py
+|   |       patch_v9_1_sidebar.py
+|   |       patch_v9_chat_avatar_state.py
+|   |       patch_v9_chat_constructor.py
+|   |       patch_v9_main_face_state.py
+|   |       patch_workspace_snapshot.py
+|   |       setup_v8_1_auto_updates.ps1
+|   |       setup_v8_1_branding.ps1
+|   |       setup_v8_1_persistent_settings.ps1
+|   |       setup_v8_1_project_intelligence.ps1
+|   |       setup_v8_1_project_intelligence_v2.ps1
+|   |       setup_v8_1_repository_intelligence_service.ps1
+|   |       setup_v8_1_settings_window.ps1
+|   |       setup_v8_1_update_manager.ps1
+|   |       setup_v8_2_approved_folders.ps1
+|   |       setup_v8_2_os_layer.ps1
+|   |       setup_v8_2_safe_file_reading.ps1
+|   |       setup_v8_2_workspace_snapshot.ps1
+|   |       setup_v9_1_avatar_mission_control.ps1
+|   |       setup_v9_ai_os_state.py
+|   |       setup_v9_modular_ui.bat
+|   |       setup_v9_modular_ui.ps1
+|   |       setup_v9_phase1_live_ui.py
+|   |       setup_v9_ui_shell.ps1
+|   |       setup_v9_widget_architecture.ps1
+|   |       switch_runtime_to_v9.py
+|   |       upgrade_v9_polish_pack_1.py
+|   |       upgrade_v9_ui_mockup.py
+|   |       wire_project_intelligence.py
+|   |       wire_v8_1_project_intelligence.ps1
+|   |       wire_v9_avatar_states.ps1
+|   |       
+|   \---migration
+\---__pycache__
+        test_v10_3_multi_agent_intelligence.cpython-312-pytest-9.0.3.pyc
+        test_v10_4_collaborative_intelligence.cpython-312-pytest-9.0.3.pyc
+        test_v10_5_runtime_core.cpython-312-pytest-9.0.3.pyc
+        test_v10_6_developer_experience.cpython-312-pytest-9.0.3.pyc
+        test_v11_live_runtime_ui.cpython-312-pytest-9.0.3.pyc
+        

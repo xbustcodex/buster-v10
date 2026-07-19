@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Dict
 
+
 from PySide6.QtCore import Signal, Slot, Qt
 from PySide6.QtWidgets import (
     QComboBox,
@@ -76,14 +77,14 @@ class TimelineEventCard(QFrame):
             QFrame#TimelineEventCard {{
                 background:#081321;
                 border:1px solid {color};
-                border-radius:12px;
+                border-radius:8px;
             }}
             """
         )
 
         root = QVBoxLayout(self)
-        root.setContentsMargins(14, 10, 14, 10)
-        root.setSpacing(6)
+        root.setContentsMargins(10, 6, 10, 6) # Tightened margins to save vertical space
+        root.setSpacing(3)                    # Tightened gap between elements
 
         header = QHBoxLayout()
 
@@ -91,7 +92,7 @@ class TimelineEventCard(QFrame):
             f"{icon}  {self._format_event_type(event_type)}"
         )
         event_label.setStyleSheet(
-            f"color:{color};font-size:15px;font-weight:700;"
+            f"color:{color};font-size:12px;font-weight:700;" # Slightly smaller header text
         )
 
         time_label = QLabel(
@@ -100,7 +101,7 @@ class TimelineEventCard(QFrame):
             )
         )
         time_label.setStyleSheet(
-            "color:#7188A5;font-size:11px;"
+            "color:#7188A5;font-size:10px;"
         )
 
         header.addWidget(event_label)
@@ -111,7 +112,7 @@ class TimelineEventCard(QFrame):
             f"Source: {event.get('source', 'runtime')}"
         )
         source_label.setStyleSheet(
-            "color:#8EA4BF;font-size:11px;"
+            "color:#8EA4BF;font-size:10px;"
         )
 
         message_label = QLabel(
@@ -125,7 +126,7 @@ class TimelineEventCard(QFrame):
             Qt.TextSelectableByMouse
         )
         message_label.setStyleSheet(
-            "color:#DCE8F8;font-size:13px;"
+            "color:#DCE8F8;font-size:11px;" # Shrank message size for maximum compactness
         )
 
         root.addLayout(header)
@@ -323,7 +324,7 @@ class RuntimeTimelinePanel(QWidget):
         self._maximum_events = 500
 
         self.setWindowTitle("Buster Runtime Timeline")
-        self.resize(900, 760)
+        self.resize(900, 600) # Reduced from 760 height to cleanly clear standard laptop monitors
 
         self.setStyleSheet(
             """
@@ -341,7 +342,7 @@ class RuntimeTimelinePanel(QWidget):
 
             QListWidget::item {
                 border:none;
-                padding:4px;
+                padding:2px; # Reduced vertical item padding
             }
 
             QComboBox,
@@ -349,8 +350,9 @@ class RuntimeTimelinePanel(QWidget):
                 background:#0A1D33;
                 color:#DCEBFF;
                 border:1px solid #175A94;
-                border-radius:8px;
-                padding:8px 12px;
+                border-radius:6px;
+                padding:4px 10px; # Halved from 8px 12px to dramatically shrink button size
+                font-size:11px;    # Explicit smaller text size
                 font-weight:600;
             }
 
@@ -379,8 +381,8 @@ class RuntimeTimelinePanel(QWidget):
 
     def _build_ui(self) -> None:
         root = QVBoxLayout(self)
-        root.setContentsMargins(14, 14, 14, 14)
-        root.setSpacing(10)
+        root.setContentsMargins(12, 12, 12, 12) # Slightly smaller margins
+        root.setSpacing(8)                      # Tighter spacing between layout sections
 
         header = QHBoxLayout()
 
@@ -388,14 +390,14 @@ class RuntimeTimelinePanel(QWidget):
 
         title = QLabel("LIVE RUNTIME TIMELINE")
         title.setStyleSheet(
-            "font-size:25px;font-weight:800;color:#23B8FF;"
+            "font-size:18px;font-weight:800;color:#23B8FF;" # Smaller main title font
         )
 
         subtitle = QLabel(
             "Runtime, jobs, agents, voice, vision and system activity"
         )
         subtitle.setStyleSheet(
-            "font-size:12px;color:#7894B5;"
+            "font-size:10px;color:#7894B5;"                 # Compacted subtitle font
         )
 
         title_box.addWidget(title)
@@ -403,7 +405,7 @@ class RuntimeTimelinePanel(QWidget):
 
         self.count_label = QLabel("0 events")
         self.count_label.setStyleSheet(
-            "color:#9FB8D5;font-weight:600;"
+            "color:#9FB8D5;font-weight:600;font-size:11px;"
         )
 
         self.filter_combo = QComboBox()
@@ -444,7 +446,7 @@ class RuntimeTimelinePanel(QWidget):
         header.addWidget(clear_button)
 
         self.timeline_list = QListWidget()
-        self.timeline_list.setSpacing(5)
+        self.timeline_list.setSpacing(3) # Tighter card-to-card spacing
 
         root.addLayout(header)
         root.addWidget(self.timeline_list, 1)

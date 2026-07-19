@@ -469,15 +469,18 @@ class RuntimeDispatcher:
         for handler in handlers:
 
             try:
+               # print(
+               #     f"[Dispatcher] "
+               #     f"{event_type} -> "
+               #     f"{handler.__module__}.{handler.__qualname__}"
+               # )
 
                 handler(event)
 
             except Exception:
-
                 print(
                     f"[Dispatcher] handler failed for '{event_type}'"
                 )
-
                 traceback.print_exc()
 
         return event

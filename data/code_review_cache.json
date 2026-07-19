@@ -1,0 +1,30 @@
+{
+  "66872dea1446e6937b3dbf920c877ab90b4e07e1391191fcee50d9b1d665f475": {
+    "success": true,
+    "summary": "The Python module `buster/ui/v9/panels/self_improvement/execution_card.py` has grown significantly, with 1064 lines.",
+    "evidence": "The file contains 1064 lines, 1 class, and 31 functions.",
+    "impact": "This could potentially lead to performance issues or make the code harder to maintain.",
+    "risk": "LOW",
+    "recommended_repair": "Refactor the module into smaller, more manageable classes and functions.",
+    "validation": "Run tests after refactoring to ensure functionality remains unchanged.",
+    "decision": "PLAN FIRST",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "cached": false,
+    "error": ""
+  },
+  "3e322f0ccb182d87acfa7bfc011d503b2515c757e83f46547a53c59a266be56d": {
+    "success": true,
+    "summary": "Large uncommitted change set detected with 4038 changes.",
+    "evidence": "Git reports 40 modified, 0 added, and 3970 deleted files.",
+    "impact": "Potential for data loss or corruption if not reviewed.",
+    "risk": "MEDIUM",
+    "recommended_repair": "Review working tree and create a safe checkpoint.",
+    "validation": "Check Git history for changes before making edits.",
+    "decision": "PLAN FIRST",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:3b",
+    "cached": false,
+    "error": ""
+  }
+}

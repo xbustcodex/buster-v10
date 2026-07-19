@@ -11,24 +11,28 @@ class LifecycleScanner:
 
     def should_exclude(self, rel_path: str) -> bool:
         rel_path = str(rel_path).replace("\\", "/")
+        path_parts = rel_path.split("/")
         name = Path(rel_path).name
 
         for pattern in self.exclude_patterns:
-            pattern = str(pattern).replace("\\", "/").strip()
+            # Clean up leading/trailing slashes for evaluation consistency
+            pattern = str(pattern).replace("\\", "/").strip().rstrip("/")
 
             if not pattern:
                 continue
 
-            if fnmatch.fnmatch(name, pattern):
-                return True
-
-            if fnmatch.fnmatch(rel_path, pattern):
+            # Check exact or wildcard matches on name and full relative path
+            if fnmatch.fnmatch(name, pattern) or fnmatch.fnmatch(rel_path, pattern):
                 return True
 
             if rel_path == pattern:
                 return True
 
-            if rel_path.startswith(pattern.rstrip("/") + "/"):
+            # Check if the pattern is explicitly part of the parent folder hierarchy
+            if pattern in path_parts:
+                return True
+
+            if rel_path.startswith(pattern + "/"):
                 return True
 
         return False

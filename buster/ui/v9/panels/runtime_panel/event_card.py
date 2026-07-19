@@ -82,14 +82,17 @@ class RuntimeEventCard(QFrame):
     ):
         super().__init__(parent)
 
-        self.event = event if isinstance(event, dict) else {}
+        self.runtime_event = (
+            event if isinstance(event, dict) else {}
+        )
+
         self.event_type = str(
-            self.event.get("type", "unknown")
+            self.runtime_event.get("type", "unknown")
         )
         self.source = str(
-            self.event.get("source", "runtime")
+            self.runtime_event.get("source", "runtime")
         )
-        self.payload = self.event.get("payload", {})
+        self.payload = self.runtime_event.get("payload", {})
 
         if not isinstance(self.payload, dict):
             self.payload = {
@@ -114,6 +117,7 @@ class RuntimeEventCard(QFrame):
         self._expanded = False
 
         self.setObjectName("RuntimeEventCard")
+        
         self.setStyleSheet(
             f"""
             QFrame#RuntimeEventCard {{
@@ -177,7 +181,7 @@ class RuntimeEventCard(QFrame):
 
         self.time_label = QLabel(
             self._format_time(
-                str(self.event.get("created_at", ""))
+                str(self.runtime_event.get("created_at", ""))
             )
         )
         self.time_label.setStyleSheet(
@@ -197,7 +201,7 @@ class RuntimeEventCard(QFrame):
 
         metadata = QHBoxLayout()
 
-        event_id = self.event.get("id")
+        event_id = self.runtime_event.get("id")
 
         event_id_text = (
             f"Event #{event_id}"

@@ -1,18 +1,22 @@
-"""Buster Jarvis Autonomy Layer.
-
-This package lets Buster recommend next actions, remember autonomous
-sessions, and expose OS-style status snapshots to the dashboard.
-"""
-
 from .engine import AutonomyEngine
+from .execution_engine import ExecutionEngine, ExecutionResult, StepResult
 from .next_actions import NextActionRecommender
-from .records import AutonomyJob, AutonomyDecision
-from .dashboard import AutonomyDashboard
+from .records import AutonomyDecision, AutonomyJob
+from .self_improvement_service import (
+    ImprovementCycleResult,
+    ImprovementFinding,
+    SelfImprovementService,
+)
 
 __all__ = [
-    "AutonomyEngine",
-    "NextActionRecommender",
-    "AutonomyJob",
     "AutonomyDecision",
-    "AutonomyDashboard",
+    "AutonomyEngine",
+    "AutonomyJob",
+    "ExecutionEngine",
+    "ExecutionResult",
+    "ImprovementCycleResult",
+    "ImprovementFinding",
+    "NextActionRecommender",
+    "SelfImprovementService",
+    "StepResult",
 ]

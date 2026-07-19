@@ -282,6 +282,8 @@ class AgentDashboardWidget(QWidget):
         
         # Left panel - Agents
         left_panel = QWidget()
+        left_panel.setMaximumWidth(260)
+        left_panel.setMinimumWidth(200)
         left_layout = QVBoxLayout(left_panel)
         left_layout.setContentsMargins(0, 0, 0, 0)
         
@@ -490,7 +492,7 @@ class AgentDashboardWidget(QWidget):
         layout.addWidget(status_bar)
         
         content_splitter.addWidget(right_panel)
-        content_splitter.setSizes([400, 800])
+        content_splitter.setSizes([220, 600])
         
         # Set initial focus
         self.message_input.setFocus()
@@ -809,7 +811,7 @@ class AgentPanel(QWidget):
         self.live = live
 
         self.setWindowTitle("Agent Manager")
-        self.resize(1300, 850)
+        self.resize(900, 600)
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)

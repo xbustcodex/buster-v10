@@ -1,3 +1,38 @@
-{
-  "strategies": []
-}
+[
+  {
+    "name": "plan_build_test_fix_verify",
+    "description": "Plan first, build files, run tests, fix errors, verify result.",
+    "project_types": [
+      "python",
+      "desktop",
+      "general"
+    ],
+    "successes": 0,
+    "failures": 0,
+    "score": 0.75
+  },
+  {
+    "name": "small_incremental_patch",
+    "description": "Apply a small safe patch, then test immediately.",
+    "project_types": [
+      "existing_project",
+      "bugfix",
+      "general"
+    ],
+    "successes": 0,
+    "failures": 0,
+    "score": 0.7
+  },
+  {
+    "name": "modular_plugin_expansion",
+    "description": "Add new capability as a module or plugin instead of growing main.py.",
+    "project_types": [
+      "buster",
+      "plugin",
+      "ai_os"
+    ],
+    "successes": 0,
+    "failures": 0,
+    "score": 0.85
+  }
+]
