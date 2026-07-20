@@ -4,7 +4,7 @@
   "tick_count": 2,
   "mode": "companion",
   "privacy_mode": "companion",
-  "started_at": "2026-07-20T05:45:56+00:00",
+  "started_at": "2026-07-20T08:35:38+00:00",
   "last_tick": "2026-07-09T06:02:36+00:00",
   "latest_prediction": {
     "intent": "idle",
@@ -139,5 +139,5 @@
     },
     "observation_count": 0
   },
-  "stopped_at": "2026-07-20T05:55:27+00:00"
+  "stopped_at": "2026-07-20T08:45:55+00:00"
 }

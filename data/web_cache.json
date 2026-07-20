@@ -1,6 +1,6 @@
 {
   "search:test query:1": {
-    "time": 1784526369.8363683,
+    "time": 1784534158.2350838,
     "value": [
       {
         "title": "Example Docs",
@@ -12,7 +12,7 @@
     ]
   },
   "search:latest fake docs:5": {
-    "time": 1784526369.8443708,
+    "time": 1784534158.2430964,
     "value": [
       {
         "title": "Fake Result",

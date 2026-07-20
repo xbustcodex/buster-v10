@@ -9,5 +9,16 @@
     ],
     "source": "18aa8f32-c7f4-4d02-9945-21d4022e0772",
     "uses": 0
+  },
+  {
+    "name": "general_safe_build",
+    "description": "general_safe_build",
+    "project_type": "python",
+    "tags": [
+      "python",
+      "autonomy"
+    ],
+    "source": "e173582c-bc02-43bd-a873-9f052ad77bde",
+    "uses": 0
   }
 ]

@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from buster.runtime.audit_service import AuditService
-from buster.ui.v9.panels.self_improvement/apply.preflight import PreflightChecker
+from buster.ui.v9.panels.self_improvement.apply.preflight import PreflightChecker
 
 logger = logging.getLogger("buster.patch_transaction")
 

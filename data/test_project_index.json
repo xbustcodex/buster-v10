@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-07-20T15:50:26",
+  "built_at": "2026-07-20T18:35:58",
   "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
   "files": [
     ".gitignore",
@@ -17,6 +17,7 @@
     "add_v12_mission_control_3.py",
     "Buster.spec",
     "CONTRIBUTING.md",
+    "dump1.txt",
     "fix_v9_ui_panels_and_resize.py",
     "fulltree.txt",
     "fulltree2.txt",
@@ -414,6 +415,7 @@
     "buster\\repository\\__init__.py",
     "buster\\runtime\\agent_memory.py",
     "buster\\runtime\\agent_orchestrator.py",
+    "buster\\runtime\\audit_service.py",
     "buster\\runtime\\blackboard.py",
     "buster\\runtime\\builder_agent.py",
     "buster\\runtime\\coordinator.py",
@@ -603,6 +605,8 @@
     "buster\\brain\\providers\\provider_diagnostics.py",
     "buster\\brain\\providers\\provider_modes.py",
     "buster\\brain\\providers\\__init__.py",
+    "buster\\core\\integration\\hub_lifecycle.py",
+    "buster\\core\\integration\\repo_knowledge_base.py",
     "buster\\plugins\\builtin\\android_plugin.py",
     "buster\\plugins\\builtin\\arduino_plugin.py",
     "buster\\plugins\\builtin\\esp32_plugin.py",
@@ -665,10 +669,12 @@
     "buster\\ui\\v9\\panels\\developer_checklist_panel.py",
     "buster\\ui\\v9\\panels\\developer_mission_control.py",
     "buster\\ui\\v9\\panels\\face_panel.py",
+    "buster\\ui\\v9\\panels\\integration_hub_panel.py",
     "buster\\ui\\v9\\panels\\lifecycle_panel.py",
     "buster\\ui\\v9\\panels\\mission_control_panel.py",
     "buster\\ui\\v9\\panels\\mission_control_repair_binding.py",
     "buster\\ui\\v9\\panels\\notification_center_panel.py",
+    "buster\\ui\\v9\\panels\\plugin_panel.py",
     "buster\\ui\\v9\\panels\\project_panel.py",
     "buster\\ui\\v9\\panels\\python main.py",
     "buster\\ui\\v9\\panels\\settings_panel.py",
@@ -727,8 +733,10 @@
     "buster\\ui\\v9\\panels\\self_improvement\\__init__.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\backup_manager.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\change_manifest.py",
+    "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
+    "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\rollback_manager.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\__init__.py",
     "buster\\ui\\v9\\panels\\self_improvement\\session\\repair_session.py",
@@ -2131,6 +2139,11 @@
       "line": 6
     },
     {
+      "name": "AuditService",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 18
+    },
+    {
       "name": "RuntimeBlackboard",
       "file": "buster\\runtime\\blackboard.py",
       "line": 7
@@ -3031,6 +3044,21 @@
       "line": 7
     },
     {
+      "name": "HubState",
+      "file": "buster\\core\\integration\\hub_lifecycle.py",
+      "line": 18
+    },
+    {
+      "name": "SafetyValidator",
+      "file": "buster\\core\\integration\\hub_lifecycle.py",
+      "line": 31
+    },
+    {
+      "name": "RepoKnowledgeBase",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 21
+    },
+    {
       "name": "AndroidPlugin",
       "file": "buster\\plugins\\builtin\\android_plugin.py",
       "line": 2
@@ -3303,12 +3331,17 @@
     {
       "name": "DeveloperMissionControl",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 293
+      "line": 419
     },
     {
       "name": "FacePanel",
       "file": "buster\\ui\\v9\\panels\\face_panel.py",
       "line": 4
+    },
+    {
+      "name": "IntegrationHubPanel",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 31
     },
     {
       "name": "LifecyclePanel",
@@ -3349,6 +3382,16 @@
       "name": "NotificationCenterPanel",
       "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
       "line": 101
+    },
+    {
+      "name": "SmartDropZone",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 26
+    },
+    {
+      "name": "PluginPanel",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 115
     },
     {
       "name": "ProjectPanel",
@@ -3706,6 +3749,16 @@
       "line": 163
     },
     {
+      "name": "PreflightCheckError",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 18
+    },
+    {
+      "name": "PreflightChecker",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 22
+    },
+    {
       "name": "PreviewDiff",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
       "line": 24
@@ -3734,6 +3787,36 @@
       "name": "ProtectedFileError",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
       "line": 7
+    },
+    {
+      "name": "FileClassification",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 18
+    },
+    {
+      "name": "DecisionStatus",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 24
+    },
+    {
+      "name": "ProtectionDecision",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 31
+    },
+    {
+      "name": "ProtectionRule",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 64
+    },
+    {
+      "name": "PathNormalizer",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 91
+    },
+    {
+      "name": "ProtectionPolicy",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 120
     },
     {
       "name": "RollbackFileResult",
@@ -9609,6 +9692,21 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 21
+    },
+    {
+      "name": "record",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 29
+    },
+    {
+      "name": "get_history",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 46
+    },
+    {
+      "name": "__init__",
       "file": "buster\\runtime\\blackboard.py",
       "line": 8
     },
@@ -13223,6 +13321,51 @@
       "line": 30
     },
     {
+      "name": "evaluate_safety",
+      "file": "buster\\core\\integration\\hub_lifecycle.py",
+      "line": 41
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 24
+    },
+    {
+      "name": "_load_learning_memory",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 31
+    },
+    {
+      "name": "save_learned_route",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 40
+    },
+    {
+      "name": "reindex",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 50
+    },
+    {
+      "name": "_index_file",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 65
+    },
+    {
+      "name": "_classify_category",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 95
+    },
+    {
+      "name": "match_dropped_content",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 106
+    },
+    {
+      "name": "compute_diff_summary",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 195
+    },
+    {
       "name": "status",
       "file": "buster\\plugins\\sdk\\base_plugin.py",
       "line": 4
@@ -14205,77 +14348,87 @@
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 27
+      "line": 50
     },
     {
       "name": "_build_ui",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 76
+      "line": 108
     },
     {
       "name": "_metric",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 149
+      "line": 205
     },
     {
       "name": "_connect_runtime",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 164
+      "line": 220
     },
     {
       "name": "_handle_event",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 175
+      "line": 231
+    },
+    {
+      "name": "_process_transaction_event",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 287
+    },
+    {
+      "name": "_update_patch_display",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 310
     },
     {
       "name": "_event_summary",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 223
+      "line": 347
     },
     {
       "name": "refresh",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 240
+      "line": 366
     },
     {
       "name": "shutdown",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 276
+      "line": 402
     },
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 298
+      "line": 424
     },
     {
       "name": "_build_ui",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 352
+      "line": 477
     },
     {
       "name": "_create_runtime_page",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 499
+      "line": 629
     },
     {
       "name": "_create_tool_page",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 505
+      "line": 635
     },
     {
       "name": "_fallback_page",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 548
+      "line": 678
     },
     {
       "name": "_change_page",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 569
+      "line": 699
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 573
+      "line": 703
     },
     {
       "name": "__init__",
@@ -14286,6 +14439,51 @@
       "name": "set_state",
       "file": "buster\\ui\\v9\\panels\\face_panel.py",
       "line": 16
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 34
+    },
+    {
+      "name": "_build_ui",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 51
+    },
+    {
+      "name": "_set_state",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 165
+    },
+    {
+      "name": "_drag_enter",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 172
+    },
+    {
+      "name": "_drop_event",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 176
+    },
+    {
+      "name": "_click_browse",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 182
+    },
+    {
+      "name": "_process_ingestion",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 188
+    },
+    {
+      "name": "_learn_route",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 253
+    },
+    {
+      "name": "_execute_transaction_flow",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 260
     },
     {
       "name": "__init__",
@@ -14696,6 +14894,61 @@
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
       "line": 374
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 31
+    },
+    {
+      "name": "dragEnterEvent",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 65
+    },
+    {
+      "name": "dropEvent",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 69
+    },
+    {
+      "name": "mousePressEvent",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 78
+    },
+    {
+      "name": "_analyze_and_route",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 85
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 121
+    },
+    {
+      "name": "_build_ui",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 132
+    },
+    {
+      "name": "_on_file_dropped",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 215
+    },
+    {
+      "name": "_override_target_dir",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 220
+    },
+    {
+      "name": "_update_status_display",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 226
+    },
+    {
+      "name": "_apply_patch",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 235
     },
     {
       "name": "__init__",
@@ -18133,6 +18386,16 @@
       "line": 624
     },
     {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 25
+    },
+    {
+      "name": "run_all",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 33
+    },
+    {
       "name": "_to_int",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
       "line": 943
@@ -18326,6 +18589,46 @@
       "name": "find_protected_paths",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
       "line": 68
+    },
+    {
+      "name": "to_dict",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 45
+    },
+    {
+      "name": "matches",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 74
+    },
+    {
+      "name": "normalize",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 93
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 230
+    },
+    {
+      "name": "_sort_rules",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 244
+    },
+    {
+      "name": "clear_cache",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 248
+    },
+    {
+      "name": "evaluate",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 251
+    },
+    {
+      "name": "_evaluate_cached",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 281
     },
     {
       "name": "to_dict",
@@ -26236,6 +26539,31 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 8
+    },
+    {
+      "name": "json",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 10
+    },
+    {
+      "name": "logging",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 11
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 12
+    },
+    {
+      "name": "typing",
+      "file": "buster\\runtime\\audit_service.py",
+      "line": 13
+    },
+    {
+      "name": "__future__",
       "file": "buster\\runtime\\blackboard.py",
       "line": 1
     },
@@ -29680,6 +30008,71 @@
       "line": 4
     },
     {
+      "name": "__future__",
+      "file": "buster\\core\\integration\\hub_lifecycle.py",
+      "line": 10
+    },
+    {
+      "name": "ast",
+      "file": "buster\\core\\integration\\hub_lifecycle.py",
+      "line": 12
+    },
+    {
+      "name": "enum",
+      "file": "buster\\core\\integration\\hub_lifecycle.py",
+      "line": 13
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\core\\integration\\hub_lifecycle.py",
+      "line": 14
+    },
+    {
+      "name": "typing",
+      "file": "buster\\core\\integration\\hub_lifecycle.py",
+      "line": 15
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 8
+    },
+    {
+      "name": "ast",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 10
+    },
+    {
+      "name": "difflib",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 11
+    },
+    {
+      "name": "json",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 12
+    },
+    {
+      "name": "logging",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 13
+    },
+    {
+      "name": "os",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 14
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 15
+    },
+    {
+      "name": "typing",
+      "file": "buster\\core\\integration\\repo_knowledge_base.py",
+      "line": 16
+    },
+    {
       "name": "buster.plugins.sdk.base_plugin",
       "file": "buster\\plugins\\builtin\\android_plugin.py",
       "line": 1
@@ -30500,6 +30893,61 @@
       "line": 2
     },
     {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 5
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 7
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 8
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 9
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 11
+    },
+    {
+      "name": "PySide6.QtGui",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 12
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 13
+    },
+    {
+      "name": "buster.core.integration.repo_knowledge_base",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 25
+    },
+    {
+      "name": "buster.core.integration.hub_lifecycle",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 26
+    },
+    {
+      "name": "buster.ui.v9.panels.self_improvement.apply.patch_transaction",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 27
+    },
+    {
+      "name": "buster.runtime.audit_service",
+      "file": "buster\\ui\\v9\\panels\\integration_hub_panel.py",
+      "line": 28
+    },
+    {
       "name": "PySide6.QtCore",
       "file": "buster\\ui\\v9\\panels\\lifecycle_panel.py",
       "line": 1
@@ -30608,6 +31056,46 @@
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\panels\\notification_center_panel.py",
       "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 6
+    },
+    {
+      "name": "ast",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 8
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 9
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 10
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 11
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 13
+    },
+    {
+      "name": "PySide6.QtGui",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 14
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 15
     },
     {
       "name": "pathlib",
@@ -32116,6 +32604,41 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 7
+    },
+    {
+      "name": "logging",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 9
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 10
+    },
+    {
+      "name": "shutil",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 11
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 12
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 13
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preflight.py",
+      "line": 72
+    },
+    {
+      "name": "__future__",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
       "line": 1
     },
@@ -32158,6 +32681,41 @@
       "name": "typing",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
       "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 8
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 10
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 11
+    },
+    {
+      "name": "enum",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 12
+    },
+    {
+      "name": "functools",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 13
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 14
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protection_policy.py",
+      "line": 15
     },
     {
       "name": "__future__",

@@ -10,19 +10,42 @@ from PySide6.QtWidgets import (
     QListWidget,
     QListWidgetItem,
     QPushButton,
+    QScrollArea,
     QSplitter,
     QStackedWidget,
     QTextEdit,
     QVBoxLayout,
     QWidget,
-    QScrollArea,  # Added to prevent vertical clipping
 )
 
 from buster.ui.v9.panels.runtime_panel.runtime_workspace import RuntimeWorkspace
 
 
 class RuntimeSummaryPanel(QFrame):
-    """Compact live runtime intelligence sidebar."""
+    """Compact live runtime intelligence sidebar with self-improvement transaction tracking."""
+
+    # Stage order mapping for percentage & checklist progression
+    PATCH_STAGES = [
+        "PREFLIGHT_PASSED",
+        "BACKUP_COMPLETE",
+        "APPLY_COMPLETE",
+        "COMPILE_PASSED",
+        "VERIFICATION_PASSED",
+        "TESTS_PASSED",
+        "GIT_COMMIT_COMPLETE",
+        "TRANSACTION_COMMITTED",
+    ]
+
+    STAGE_LABELS = {
+        "PREFLIGHT_PASSED": "Preflight",
+        "BACKUP_COMPLETE": "Backup",
+        "APPLY_COMPLETE": "Apply",
+        "COMPILE_PASSED": "Compile",
+        "VERIFICATION_PASSED": "Verification",
+        "TESTS_PASSED": "Tests",
+        "GIT_COMMIT_COMPLETE": "Git Commit",
+        "TRANSACTION_COMMITTED": "Committed",
+    }
 
     def __init__(self, runtime_core=None, parent=None):
         super().__init__(parent)
@@ -33,6 +56,15 @@ class RuntimeSummaryPanel(QFrame):
         self._active_agents: set[str] = set()
         self._running_jobs: set[str] = set()
         self._queued_jobs = 0
+
+        # Self-improvement patch tracking state
+        self._active_patch_id: Optional[str] = None
+        self._active_transaction_id: Optional[str] = None
+        self._patch_agent: str = "AI"
+        self._patch_target: str = "None"
+        self._patch_stage: str = "IDLE"
+        self._patch_completed_stages: set[str] = set()
+        self._patch_status: str = "IDLE"  # IDLE, IN_PROGRESS, COMMITTED, ROLLED_BACK
 
         self.setObjectName("RuntimeSummaryPanel")
         self.setMinimumWidth(180)
@@ -76,7 +108,7 @@ class RuntimeSummaryPanel(QFrame):
     def _build_ui(self) -> None:
         root = QVBoxLayout(self)
         root.setContentsMargins(14, 14, 14, 14)
-        root.setSpacing(10) # Margins tightened slightly to save vertical space
+        root.setSpacing(10)
 
         title = QLabel("RUNTIME INTELLIGENCE")
         title.setStyleSheet(
@@ -91,6 +123,29 @@ class RuntimeSummaryPanel(QFrame):
         self.queue_label = self._metric("Queue", "0")
         self.errors_label = self._metric("Errors", "0")
 
+        # --- Self-Improvement Transaction Display ---
+        tx_section = QLabel("ACTIVE TRANSACTION")
+        tx_section.setStyleSheet(
+            "color:#7894B5;font-size:10px;font-weight:700;margin-top:4px;"
+        )
+        root.addWidget(tx_section)
+
+        self.patch_box = QLabel("No active patch")
+        self.patch_box.setStyleSheet(
+            """
+            color:#AFC8E6;
+            background:#050B14;
+            border:1px solid #14324F;
+            border-radius:9px;
+            padding:8px;
+            font-family:Consolas;
+            font-size:10px;
+            """
+        )
+        self.patch_box.setWordWrap(True)
+        root.addWidget(self.patch_box)
+
+        # --- Agent Flow Display ---
         section = QLabel("AGENT FLOW")
         section.setStyleSheet(
             "color:#7894B5;font-size:10px;font-weight:700;margin-top:4px;"
@@ -114,6 +169,7 @@ class RuntimeSummaryPanel(QFrame):
         )
         root.addWidget(self.flow_label)
 
+        # --- Activity Log ---
         section = QLabel("LATEST ACTIVITY")
         section.setStyleSheet(
             "color:#7894B5;font-size:10px;font-weight:700;margin-top:4px;"
@@ -122,7 +178,7 @@ class RuntimeSummaryPanel(QFrame):
 
         self.activity = QTextEdit()
         self.activity.setReadOnly(True)
-        self.activity.setMinimumHeight(100) # Ensure it keeps a useful height
+        self.activity.setMinimumHeight(100)
         self.activity.setMaximumHeight(200)
         self.activity.setStyleSheet(
             """
@@ -177,17 +233,20 @@ class RuntimeSummaryPanel(QFrame):
             return
 
         self._event_count += 1
-        event_type = str(event.get("type", "unknown"))
-        payload = event.get("payload", {})
-        if not isinstance(payload, dict):
-            payload = {}
+        event_type = str(event.get("type", event.get("stage", "unknown")))
+        payload = event.get("payload", event) if isinstance(event.get("payload"), dict) else event
 
         if event_type.endswith(".failed") or event_type in {
             "error",
             "runtime.error",
+            "PREFLIGHT_FAILED",
+            "COMPILE_FAILED",
+            "VERIFICATION_FAILED",
+            "TESTS_FAILED",
         }:
             self._error_count += 1
 
+        # Agent Tracking
         if event_type == "agent.started":
             agent = str(payload.get("agent", "Agent"))
             self._active_agents.add(agent)
@@ -195,6 +254,7 @@ class RuntimeSummaryPanel(QFrame):
             agent = str(payload.get("agent", "Agent"))
             self._active_agents.discard(agent)
 
+        # Job Tracking
         if event_type in {"job.created", "job.queued"}:
             self._queued_jobs += 1
         elif event_type == "job.started":
@@ -215,10 +275,74 @@ class RuntimeSummaryPanel(QFrame):
             )
             self._running_jobs.discard(job)
 
+        # --- Self-Improvement Transaction Pipeline Recognition ---
+        if "patch_id" in payload or event_type in self.PATCH_STAGES or "ROLLBACK" in event_type:
+            self._process_transaction_event(event_type, payload)
+
         summary = self._event_summary(event_type, payload)
         self.activity.append(f"{event_type}\n{summary}\n")
         scrollbar = self.activity.verticalScrollBar()
         scrollbar.setValue(scrollbar.maximum())
+
+    def _process_transaction_event(self, stage: str, payload: dict) -> None:
+        """Updates internal state for live patch transaction rendering."""
+        patch_id = payload.get("patch_id")
+        if patch_id:
+            if patch_id != self._active_patch_id:
+                self._active_patch_id = patch_id
+                self._patch_completed_stages.clear()
+                self._patch_status = "IN_PROGRESS"
+
+        self._patch_agent = payload.get("agent_id") or payload.get("executor") or self._patch_agent
+        self._patch_target = payload.get("target") or self._patch_target
+        self._patch_stage = stage
+
+        if stage in self.PATCH_STAGES:
+            self._patch_completed_stages.add(stage)
+
+        if stage == "TRANSACTION_COMMITTED":
+            self._patch_status = "COMMITTED"
+        elif "ROLLBACK" in stage or "FAILED" in stage:
+            self._patch_status = "ROLLED_BACK"
+
+        self._update_patch_display()
+
+    def _update_patch_display(self) -> None:
+        if not self._active_patch_id:
+            self.patch_box.setText("No active transaction")
+            return
+
+        lines = [f"<b>{self._active_patch_id}</b>"]
+        lines.append(f"Agent: <font color='#23B8FF'>{self._patch_agent}</font>")
+        
+        # Target truncation for sidebar fit
+        target_disp = self._patch_target
+        if len(target_disp) > 22:
+            target_disp = "..." + target_disp[-19:]
+        lines.append(f"Target: <font color='#8EA2C0'>{target_disp}</font>")
+        lines.append("")
+
+        # Progress calculation
+        completed_count = len(self._patch_completed_stages)
+        pct = int((completed_count / len(self.PATCH_STAGES)) * 100)
+        lines.append(f"Progress: <b>{pct}%</b>")
+
+        # Stage Checklist Rendering
+        for stage_key in self.PATCH_STAGES:
+            label = self.STAGE_LABELS[stage_key]
+            if stage_key in self._patch_completed_stages:
+                lines.append(f"<font color='#31D158'>✓ {label}</font>")
+            elif stage_key == self._patch_stage:
+                lines.append(f"<font color='#23B8FF'>➔ {label}</font>")
+            else:
+                lines.append(f"<font color='#4A617C'>○ {label}</font>")
+
+        if self._patch_status == "ROLLED_BACK":
+            lines.append("<br><font color='#FF4D4D'><b>✗ ROLLED BACK</b></font>")
+        elif self._patch_status == "COMMITTED":
+            lines.append("<br><font color='#31D158'><b>✓ COMMITTED</b></font>")
+
+        self.patch_box.setText("<br>".join(lines))
 
     def _event_summary(self, event_type: str, payload: dict) -> str:
         for key in (
@@ -227,6 +351,8 @@ class RuntimeSummaryPanel(QFrame):
             "request",
             "title",
             "agent",
+            "agent_id",
+            "patch_id",
             "job_id",
             "status",
             "error",
@@ -308,7 +434,6 @@ class DeveloperMissionControl(QWidget):
         self._pages: dict[str, QWidget] = {}
 
         self.setWindowTitle("Buster Developer Mission Control")
-        # Reduced initial size to comfortable fit on standard laptop screens
         self.resize(1100, 700) 
         self.setObjectName("DeveloperMissionControl")
         self.setStyleSheet(
@@ -394,7 +519,6 @@ class DeveloperMissionControl(QWidget):
         outer_splitter.addWidget(centre_splitter)
 
         self.stack = QStackedWidget()
-        # CRUCIAL: Protect the stacked view page from being completely crushed 
         self.stack.setMinimumHeight(350) 
         centre_splitter.addWidget(self.stack)
 
@@ -404,23 +528,21 @@ class DeveloperMissionControl(QWidget):
             "TerminalPanel",
             fallback_text="Runtime terminal is unavailable.",
         )
-        # CRUCIAL: Prevent terminal from squishing layout below 90px
         self.bottom_dock.setMinimumHeight(90)
         centre_splitter.addWidget(self.bottom_dock)
-        centre_splitter.setSizes([450, 150]) # Adjusted default weights
+        centre_splitter.setSizes([450, 150])
 
         self.runtime_summary = RuntimeSummaryPanel(
             runtime_core=self.runtime_core
         )
 
-        # CRUCIAL: Wrap sidebar in a scroll area so it adapts beautifully when height is constrained
         scroll_sidebar = QScrollArea()
         scroll_sidebar.setWidgetResizable(True)
         scroll_sidebar.setWidget(self.runtime_summary)
         scroll_sidebar.setFrameShape(QFrame.NoFrame)
         scroll_sidebar.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         scroll_sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        scroll_sidebar.setFixedWidth(210) # Lock width smoothly
+        scroll_sidebar.setFixedWidth(210)
 
         outer_splitter.addWidget(scroll_sidebar)
         outer_splitter.setSizes([150, 740, 210])
@@ -481,6 +603,14 @@ class DeveloperMissionControl(QWidget):
                     "Settings",
                     "buster.ui.v9.panels.settings_panel",
                     "SettingsPanel",
+                ),
+            ),
+            (
+                "Integration Hub",
+                lambda: self._create_tool_page(
+                    "Integration Hub",
+                    "buster.ui.v9.panels.integration_hub_panel",
+                    "IntegrationHubPanel",
                 ),
             ),
         ]

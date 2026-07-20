@@ -1,16 +1,16 @@
 {
-  "enabled": true,
-  "mode": "autonomous",
+  "enabled": false,
+  "mode": "manual",
   "last_decision": {
-    "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+    "request": "Fix the syntax error in buster\\ui\\v9\\panels\\self_improvement\\apply\\patch_transaction.py at line 24, then run tests.",
     "project_type": "python",
-    "recommended_action": "plan_build_test_fix_verify",
-    "confidence": 0.88,
-    "reason": "Build request detected; use the full agent pipeline.",
+    "recommended_action": "fix_then_verify",
+    "confidence": 0.92,
+    "reason": "Errors or failures detected, so Buster should repair first and verify after.",
     "strategy": "plan_build_test_fix_verify",
     "plugins": [],
     "patterns": [],
-    "created_at": "2026-07-20T05:46:37Z"
+    "created_at": "2026-07-20T07:29:02Z"
   },
   "active_jobs": [
     {
@@ -159,7 +159,7 @@
       "updated_at": "2026-07-20T04:44:06Z"
     }
   ],
-  "completed_jobs": 1,
+  "completed_jobs": 2,
   "failed_jobs": 0,
-  "updated_at": "2026-07-20T05:47:02Z"
+  "updated_at": "2026-07-20T08:36:23Z"
 }
