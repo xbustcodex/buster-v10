@@ -44,7 +44,7 @@ class V9MainWindow(QMainWindow):
         self.current_face_state = 'idle'
         self.dashboard_window = None
 
-        self.setWindowTitle("Buster v9.0 — Windows AI Desktop Companion")
+        self.setWindowTitle("Buster AI OS v10.4 AI Operating System for Developers")
         
         # Safe laptop dimensions: Prevents window cutoff under the taskbar
         self.resize(1150, 620) 
