@@ -1,99 +1,262 @@
-# Buster Desktop Companion v6.3 Developer Edition
+# Buster AI OS v10.4
 
-Clean rebuild of Buster with a stable architecture.
+## AI Operating System for Developers
 
-This version avoids patch-on-patch problems. It is generated as one consistent project.
+Buster AI OS is a modular AI-powered desktop operating environment designed for software development.
 
-## Core features
+Instead of acting as a simple coding assistant, Buster understands projects, coordinates AI agents, analyzes repositories, reviews code, safely applies changes, and provides a unified developer workspace.
 
-- PySide6 desktop UI
-- Event bus
-- Service container
-- Thread pool
-- Service manager
-- Performance monitor
-- AI provider manager
-- Local rules AI
-- Ollama provider
-- LM Studio provider
-- OpenRouter provider
-- Async brain execution
-- Application manager
-- Voice TTS
-- Microphone input
-- Conversation mode
-- Vision engine
-- Lazy webcam loading
-- YOLO object detection
+---
+
+# Features
+
+## Mission Control
+
+Monitor the entire AI operating system.
+
+- Live Runtime
+- Agent activity
+- Event timeline
+- Background jobs
+- Runtime statistics
+- Patch transactions
+- System health
+
+---
+
+## Developer Workspace
+
+Unified development environment.
+
+- Chat
+- Repository Explorer
+- Project Intelligence
+- Runtime Console
+- Developer Tools
+- Vision
+- Voice
+- Terminal
+
+---
+
+## Integration Hub
+
+Safely import new code into Buster.
+
+- Drag & Drop modules
+- AST analysis
+- Intelligent routing
+- Repository knowledge
+- AI Patch Review
+- Simulation
+- Protected transactions
+
+---
+
+## Repository Intelligence
+
+Understand entire codebases.
+
+- Project indexing
+- Class discovery
+- Function discovery
+- Dependency mapping
+- Import analysis
+- Symbol lookup
+
+---
+
+## AI Patch Review
+
+Review code before deployment.
+
+- Risk analysis
+- Compatibility checks
+- Change summaries
+- Dependency impact
+- Confidence scoring
+
+---
+
+## Simulation Engine
+
+Validate changes before writing files.
+
+- Dry-run deployment
+- Compile verification
+- Overwrite detection
+- Restart planning
+- Rollback preparation
+
+---
+
+## Protected Patch Transactions
+
+Every deployment follows a protected workflow.
+
+Preflight
+
+↓
+
+Backup
+
+↓
+
+Apply
+
+↓
+
+Compile
+
+↓
+
+Verify
+
+↓
+
+Test
+
+↓
+
+Git Commit
+
+↓
+
+Commit / Rollback
+
+---
+
+## Runtime Services
+
+- Event Bus
+- Lifecycle Manager
+- Memory Service
+- Repository Intelligence
+- Project Intelligence
+- Voice
+- Vision
+- Plugin Manager
+- Update Manager
+- Notification Service
+
+---
+
+## AI Providers
+
+Supports multiple AI backends.
+
+- OpenAI
+- OpenRouter
+- Ollama
+- LM Studio
+
+Automatic provider selection and fallback are supported.
+
+---
+
+## Voice & Vision
+
+- Speech recognition
+- Text-to-speech
+- Wake word support
+- Live webcam
+- Object detection
 - Face detection
-- Face learning
-- Face recognition
-- QR/barcode scanner
-- Snapshot saving
-- Desktop automation
-- Agent team
-- Plugin framework
-- Memory database
-- Diagnostics
+- Visual learning
 
-## Install
+---
 
-```bat
-cd buster_desktop_companion_v3_0_developer_edition
+## Plugin Framework
+
+Extend Buster with modular components.
+
+- Plugin discovery
+- Plugin Manager
+- Hot loading
+- Command registration
+- Integration Hub deployment
+
+---
+
+# Installation
+
+```bash
+git clone https://github.com/xbustcodex/buster-v10.git
+cd buster-v10
+
 python -m venv .venv
+
+# Windows
 .venv\Scripts\activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+
+pip install -r requirements.txt
+
 python main.py
 ```
 
-## Commands to try
+---
 
-```text
-performance
-services
-thread status
-ai status
-use local
-ask what can you do
-open my browser
-listen once
-start conversation
-start vision
-vision status
-detect objects
-detect faces
-learn my face
-who am i
-take photo
-scan qr
-agents
-builder create a calculator
-system status
-diagnostics
+# Current Architecture
+
+```
+Buster AI OS
+
+├── Mission Control
+├── Runtime
+├── Developer Workspace
+├── Integration Hub
+├── Repository Intelligence
+├── Project Intelligence
+├── Plugin Manager
+├── Voice
+├── Vision
+├── Memory
+├── AI Providers
+├── Event Bus
+└── Protected Transaction System
 ```
 
-## Optional Ollama
+---
 
-```bat
-ollama pull llama3.2
-```
+# Development Goals
 
-Then in Buster:
+Buster AI OS is evolving toward an autonomous AI development platform capable of:
 
-```text
-use ollama
-ask write me a simple Python function
-```
+- Understanding entire repositories
+- Planning implementation strategies
+- Coordinating multiple AI agents
+- Reviewing generated code
+- Simulating deployments
+- Safely applying changes
+- Learning from previous work
+- Assisting developers throughout the software lifecycle
 
-## Optional OpenRouter
+---
 
-```bat
-setx OPENROUTER_API_KEY "your_key_here"
-```
+# Project Status
 
-Restart terminal, then:
+Current Version
 
-```text
-use openrouter
-```
+**Buster AI OS v10.4**
+
+Project Status
+
+**Active Development**
+
+Platform
+
+**Windows (PySide6)**
+
+License
+
+See LICENSE file.
+
+---
+
+# Author
+
+Created and maintained by **Adam Clarke**.
+
+GitHub
+
+https://github.com/xbustcodex
