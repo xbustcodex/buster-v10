@@ -255,7 +255,7 @@ See LICENSE file.
 
 # Author
 
-Created and maintained by **Adam Clarke**.
+Created and maintained by **Adam Clarke  xbustcodex**.
 
 GitHub
 
