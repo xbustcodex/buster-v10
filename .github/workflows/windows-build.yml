@@ -13,25 +13,46 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: "pip"
 
       - name: Install dependencies
+        shell: pwsh
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pyinstaller
+          python -m pip install -r requirements.txt
+          python -m pip install pyinstaller
 
-      - name: Build
-        run: pyinstaller Buster.spec
+      - name: Build Buster AI OS
+        shell: pwsh
+        run: |
+          pyinstaller --clean --noconfirm Buster.spec
 
-      - name: Zip release
-        run: Compress-Archive -Path dist\Buster\* -DestinationPath Buster-Windows.zip
+      - name: Verify build
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "dist\Buster\Buster.exe")) {
+            throw "Build failed: dist\Buster\Buster.exe was not created."
+          }
 
-      - name: Upload release
+      - name: Create release archive
+        shell: pwsh
+        run: |
+          $archive = "Buster-AI-OS-${{ github.ref_name }}-Windows.zip"
+          Compress-Archive `
+            -Path "dist\Buster\*" `
+            -DestinationPath $archive `
+            -Force
+
+      - name: Upload GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: Buster-Windows.zip
+          name: Buster AI OS ${{ github.ref_name }}
+          generate_release_notes: true
+          files: Buster-AI-OS-${{ github.ref_name }}-Windows.zip
