@@ -37,11 +37,22 @@ class VerificationEngine:
             target_files=[str(f) for f in files],
         )
 
+        print("VERIFY: syntax")
         report.add_check(self.syntax.check(files,required=True))
+        
+        print("VERIFY: imports")
         report.add_check(self.imports.check(files,required=True))
+        
+        print("VERIFY: formatter")
         report.add_check(self.formatter.check(files,required=False))
+        
+        print("VERIFY: lint")
         report.add_check(self.linter.check(files,required=False))
+        
+        print("VERIFY: tests")
         report.add_check(self.tests.check(required=False))
+        
+        print("VERIFY: complete")
 
         if launch_command:
             report.add_check(

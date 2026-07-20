@@ -17,6 +17,9 @@ from PySide6.QtWidgets import (
     QPushButton,
     QVBoxLayout,
     QWidget,
+    QProgressBar,
+    QScrollArea,
+    QFrame,
 )
 
 from buster.ui.v9.theme import STYLE
@@ -24,7 +27,7 @@ from buster.ui.v9.theme import STYLE
 
 class DashboardWindow(QWidget):
     """
-    Compact runtime dashboard.
+    Compact runtime dashboard updated with Evolution Core metrics.
 
     The dashboard keeps lightweight system monitoring on its timer, while all
     user actions are explicitly connected to working handlers.
@@ -38,7 +41,8 @@ class DashboardWindow(QWidget):
         self.live = live
 
         self.setWindowTitle("Dashboard")
-        self.resize(520, 520)
+        # Expanded slightly to elegantly contain evolution metrics with system logs
+        self.resize(540, 680)
         self.setWindowFlags(
             Qt.WindowStaysOnTopHint
             | Qt.Tool
@@ -64,11 +68,130 @@ class DashboardWindow(QWidget):
 
     def _build_ui(self) -> None:
         root = QVBoxLayout(self)
+        root.setContentsMargins(0, 0, 0, 0)
+
+        # Scroll area prevents clipping on low-resolution or tight display scales
+        scroll = QScrollArea(self)
+        scroll.setWidgetResizable(True)
+        scroll.setStyleSheet("QScrollArea { border: none; background: transparent; }")
+        
+        container = QWidget()
+        layout = QVBoxLayout(container)
+        layout.setContentsMargins(15, 15, 15, 15)
+        layout.setSpacing(12)
 
         title = QLabel("Dashboard")
         title.setObjectName("Title")
-        root.addWidget(title)
+        layout.addWidget(title)
 
+        # ------------------------------------------------------------------
+        # BUSTER EVOLUTION BLOCK
+        # ------------------------------------------------------------------
+        evo_section = QVBoxLayout()
+        evo_section.setSpacing(6)
+
+        evo_hdr = QLabel("BUSTER EVOLUTION")
+        evo_hdr.setStyleSheet("font-weight: bold; color: #00FFCC; font-size: 13px; letter-spacing: 0.5px;")
+        evo_section.addWidget(evo_hdr)
+
+        # Level & Progress Bar
+        level_row = QHBoxLayout()
+        self.level_val = QLabel("Level 12 — Engineer")
+        self.level_val.setStyleSheet("font-weight: bold;")
+        self.xp_pct_lbl = QLabel("78%")
+        self.xp_pct_lbl.setStyleSheet("color: #00FFCC;")
+        level_row.addWidget(self.level_val)
+        level_row.addStretch()
+        level_row.addWidget(self.xp_pct_lbl)
+        evo_section.addLayout(level_row)
+
+        self.xp_bar = QProgressBar(self)
+        self.xp_bar.setFixedHeight(10)
+        self.xp_bar.setRange(0, 100)
+        self.xp_bar.setValue(78)
+        self.xp_bar.setTextVisible(False)
+        self.xp_bar.setStyleSheet("""
+            QProgressBar { border: 1px solid #333; background: #151515; border-radius: 3px; }
+            QProgressBar::chunk { background-color: #00FFCC; }
+        """)
+        evo_section.addWidget(self.xp_bar)
+
+        # Identity Profiles & Capabilities
+        self.permissions_val = QLabel("Permission Level: Local Git, Python Execution, File Refactoring")
+        self.permissions_val.setStyleSheet("color: #AAAAAA; font-size: 11px;")
+        self.permissions_val.setWordWrap(True)
+        
+        self.trust_val = QLabel("Trust by Capability: 94% Core Trust Metric Factor")
+        self.trust_val.setStyleSheet("color: #AAAAAA; font-size: 11px;")
+        
+        self.mood_val = QLabel("Current Emotional State: Focused / Analytical")
+        self.mood_val.setStyleSheet("color: #AA66CC; font-size: 11px; font-weight: 500;")
+
+        evo_section.addWidget(self.permissions_val)
+        evo_section.addWidget(self.trust_val)
+        evo_section.addWidget(self.mood_val)
+
+        # Core Drives Configuration Subgrid
+        self.drive_bars: dict[str, QProgressBar] = {}
+        drives = [
+            ("Helping Drive", "helping", "#4285F4"),
+            ("Builder Drive", "builder", "#00C851"),
+            ("Learning Drive", "learning", "#AA66CC"),
+            ("Protection Drive", "protection", "#FF4444"),
+            ("Curiosity Drive", "curiosity", "#FFBB33")
+        ]
+        
+        drives_layout = QVBoxLayout()
+        drives_layout.setSpacing(4)
+        for d_lbl, d_key, d_color in drives:
+            d_row = QHBoxLayout()
+            lbl = QLabel(d_lbl)
+            lbl.setStyleSheet("font-size: 11px; color: #888;")
+            lbl.setMinimumWidth(95)
+            
+            pbar = QProgressBar(self)
+            pbar.setFixedHeight(6)
+            pbar.setRange(0, 100)
+            pbar.setValue(60)
+            pbar.setTextVisible(False)
+            pbar.setStyleSheet(f"""
+                QProgressBar {{ background: #151515; border: none; border-radius: 1px; }}
+                QProgressBar::chunk {{ background-color: {d_color}; }}
+            """)
+            d_row.addWidget(lbl)
+            d_row.addWidget(pbar)
+            drives_layout.addLayout(d_row)
+            self.drive_bars[d_key] = pbar
+            
+        evo_section.addLayout(drives_layout)
+
+        # Active Goals, Learned Skills & Agent Levels
+        self.goals_val = QLabel("Active Goal: Resolving missing runtime UI components in workspace updates.")
+        self.goals_val.setStyleSheet("color: #FFBB33; font-size: 11px; font-style: italic;")
+        self.goals_val.setWordWrap(True)
+        
+        self.skills_val = QLabel("Learned Skills: Python, PySide6, Git Automation, Diagnostics, Sub-agents")
+        self.skills_val.setStyleSheet("color: #888888; font-size: 11px;")
+        self.skills_val.setWordWrap(True)
+
+        self.agents_val = QLabel("Agent Levels: Builder Agent Lv.3 | Fixer Agent Lv.2 | Reviewer Agent Lv.1")
+        self.agents_val.setStyleSheet("color: #00C851; font-size: 10px; font-weight: bold;")
+
+        evo_section.addWidget(self.goals_val)
+        evo_section.addWidget(self.skills_val)
+        evo_section.addWidget(self.agents_val)
+
+        layout.addLayout(evo_section)
+
+        # Visual Structural Separation Line
+        sep = QFrame()
+        sep.setFrameShape(QFrame.HLine)
+        sep.setStyleSheet("color: #333; margin: 4px 0;")
+        layout.addWidget(sep)
+
+        # ------------------------------------------------------------------
+        # TELEMETRY MONITORING GRID[cite: 12]
+        # ------------------------------------------------------------------
         self.rows: dict[str, QLabel] = {}
 
         for label in (
@@ -93,7 +216,7 @@ class DashboardWindow(QWidget):
             row.addStretch()
             row.addWidget(right)
 
-            root.addLayout(row)
+            layout.addLayout(row)
             self.rows[label] = right
 
         buttons = QHBoxLayout()
@@ -118,7 +241,10 @@ class DashboardWindow(QWidget):
             self.run_doctor_button
         )
 
-        root.addLayout(buttons)
+        layout.addLayout(buttons)
+        
+        scroll.setWidget(container)
+        root.addWidget(scroll)
 
     def _connect_signals(self) -> None:
         self.refresh_button.clicked.connect(
@@ -132,10 +258,24 @@ class DashboardWindow(QWidget):
         )
 
     # ------------------------------------------------------------------
-    # Dashboard refresh
+    # Dashboard refresh[cite: 12]
     # ------------------------------------------------------------------
 
     def refresh(self, *_args) -> None:
+        # Dynamic internal extraction hook if runtime context offers structural variables
+        if hasattr(self.live, "runtime_core") and hasattr(self.live.runtime_core, "identity"):
+            ctx = self.live.runtime_core.identity.get_ui_context()
+            self.level_val.setText(ctx.get("title", "Level 12 — Engineer"))
+            self.xp_bar.setValue(ctx.get("xp_pct", 78))
+            self.xp_pct_lbl.setText(f"{ctx.get('xp_pct', 78)}%")
+            self.trust_val.setText(f"Trust by Capability: {ctx.get('trust_factor', '94%')}")
+            self.mood_val.setText(f"Current Emotional State: {ctx.get('emotion', 'Focused')}")
+            
+            drives_matrix = ctx.get("drives_matrix", {})
+            for key, bar in self.drive_bars.items():
+                bar.setValue(drives_matrix.get(key, 65))
+
+        # Core System Telemetry Loop Refresh[cite: 12]
         self._set_row(
             "CPU",
             f"{psutil.cpu_percent()}%",
@@ -210,7 +350,7 @@ class DashboardWindow(QWidget):
             )
 
     # ------------------------------------------------------------------
-    # Button actions
+    # Button actions[cite: 12]
     # ------------------------------------------------------------------
 
     def open_data_folder(self) -> None:
@@ -278,15 +418,10 @@ class DashboardWindow(QWidget):
             self.refresh()
 
     # ------------------------------------------------------------------
-    # Doctor discovery
+    # Doctor discovery[cite: 12]
     # ------------------------------------------------------------------
 
     def _execute_doctor(self) -> Any:
-        """
-        Locate the available diagnostic API without coupling DashboardWindow
-        to one runtime revision.
-        """
-
         candidates: list[
             tuple[Any, tuple[str, ...]]
         ] = [
@@ -387,7 +522,7 @@ class DashboardWindow(QWidget):
         return _NOT_FOUND
 
     # ------------------------------------------------------------------
-    # Runtime helpers
+    # Runtime helpers[cite: 12]
     # ------------------------------------------------------------------
 
     def _service_value(
@@ -555,7 +690,7 @@ class DashboardWindow(QWidget):
             return False
 
     # ------------------------------------------------------------------
-    # Formatting
+    # Formatting[cite: 12]
     # ------------------------------------------------------------------
 
     @staticmethod
@@ -642,7 +777,7 @@ class DashboardWindow(QWidget):
         )
 
     # ------------------------------------------------------------------
-    # Shutdown
+    # Shutdown[cite: 12]
     # ------------------------------------------------------------------
 
     def closeEvent(

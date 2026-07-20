@@ -313,6 +313,7 @@ class V9MainWindow(QMainWindow):
             self.dashboard_window = DashboardWindow(self.live)
         self.dashboard_window.show()
         self.dashboard_window.raise_()
+        self.dashboard_window.activateWindow()
         
     def show_backend_tools(self):
         from PySide6.QtWidgets import (

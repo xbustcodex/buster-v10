@@ -1,4 +1,3 @@
-from __future__ import annotations
 from buster.utils.datetime_utils import utc_now, utc_timestamp
 
 import json
@@ -58,3 +57,7 @@ class EventBus:
             items = []
         items.append(event.to_dict())
         self.history_path.write_text(json.dumps(items[-500:], indent=2), encoding="utf-8")
+
+# --- NEW EXTENSIONS (APPENDED TO ORIGINAL FILE) ---
+# Authoritative shared instance deployment
+main_event_bus = EventBus()

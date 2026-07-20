@@ -7,9 +7,9 @@
       "desktop",
       "general"
     ],
-    "successes": 0,
+    "successes": 1,
     "failures": 0,
-    "score": 0.75
+    "score": 1.0
   },
   {
     "name": "small_incremental_patch",

@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-07-19T18:39:16",
+  "built_at": "2026-07-20T15:50:28",
   "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
   "files": [
     ".gitignore",
@@ -18,6 +18,9 @@
     "Buster.spec",
     "CONTRIBUTING.md",
     "fix_v9_ui_panels_and_resize.py",
+    "fulltree.txt",
+    "fulltree2.txt",
+    "generated_file",
     "install_self_improvement_compatibility.py",
     "main.py",
     "migration_report.json",
@@ -33,7 +36,6 @@
     "run_runtime_console.py",
     "run_v11_live_runtime_ui.py",
     "run_v9_ui_preview.py",
-    "treefull.txt",
     "version.json",
     "vision_recording_2026-07-12_13-45-05.avi",
     "vision_recording_2026-07-12_14-56-08.avi",
@@ -80,6 +82,7 @@
     "data\\design_patterns.json",
     "data\\dream_reflections.json",
     "data\\event_history.json",
+    "data\\evolution_state.json",
     "data\\execution_history.json",
     "data\\experience_memory.json",
     "data\\goals.json",
@@ -266,6 +269,7 @@
     "buster\\diagnostics\\__init__.py",
     "buster\\experience\\design_decisions.py",
     "buster\\experience\\engine.py",
+    "buster\\experience\\evolution_state.py",
     "buster\\experience\\project_experience.py",
     "buster\\experience\\records.py",
     "buster\\experience\\skills.py",
@@ -333,6 +337,7 @@
     "buster\\living_companion\\__init__.py",
     "buster\\memory\\engine.py",
     "buster\\memory\\knowledge.py",
+    "buster\\memory\\manager.py",
     "buster\\memory\\__init__.py",
     "buster\\mind\\attention_system.py",
     "buster\\mind\\cognitive_loop.py",
@@ -358,6 +363,8 @@
     "buster\\mission_runtime\\mission.py",
     "buster\\mission_runtime\\scheduler.py",
     "buster\\mission_runtime\\__init__.py",
+    "buster\\motivation\\goal_engine.py",
+    "buster\\motivation\\__init__.py",
     "buster\\multi_agent\\blackboard.py",
     "buster\\multi_agent\\collaboration_runtime.py",
     "buster\\multi_agent\\delegation.py",
@@ -382,6 +389,12 @@
     "buster\\perception\\real_perception_loop.py",
     "buster\\perception\\screen_feed.py",
     "buster\\perception\\__init__.py",
+    "buster\\personality\\emotions.py",
+    "buster\\personality\\identity.py",
+    "buster\\personality\\moods.py",
+    "buster\\personality\\motivations.py",
+    "buster\\personality\\values.py",
+    "buster\\personality\\__init__.py",
     "buster\\plugins\\loader.py",
     "buster\\plugins\\manager.py",
     "buster\\plugins\\marketplace.py",
@@ -423,6 +436,7 @@
     "buster\\runtime\\planner_agent.py",
     "buster\\runtime\\plugin_api.py",
     "buster\\runtime\\plugin_inspector.py",
+    "buster\\runtime\\protected_files.py",
     "buster\\runtime\\registry_agent.py",
     "buster\\runtime\\repair_event_stream.py",
     "buster\\runtime\\reviewer_agent.py",
@@ -671,6 +685,11 @@
     "buster\\ui\\v9\\widgets\\mission_control.py",
     "buster\\ui\\v9\\widgets\\status_card.py",
     "buster\\ui\\v9\\widgets\\__init__.py",
+    "buster\\ui\\v9\\panels\\evolution_panel\\drive_card.py",
+    "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+    "buster\\ui\\v9\\panels\\evolution_panel\\level_card.py",
+    "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
+    "buster\\ui\\v9\\panels\\evolution_panel\\__init__.py",
     "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
     "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
     "buster\\ui\\v9\\panels\\runtime_panel\\event_model.py",
@@ -709,6 +728,7 @@
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\backup_manager.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\change_manifest.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
+    "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\rollback_manager.py",
     "buster\\ui\\v9\\panels\\self_improvement\\apply\\__init__.py",
     "buster\\ui\\v9\\panels\\self_improvement\\session\\repair_session.py",
@@ -731,6 +751,7 @@
     "data\\compatibility_backup\\repair_session_store.py",
     "data\\compatibility_backup\\rollback_manager.py",
     "data\\compatibility_backup\\session_manager.py",
+    "data\\self_improvement\\repair_plan_cache.json",
     "data\\migration_backups\\self_improvement_reorg_20260719_160521\\backup_manager.py",
     "data\\migration_backups\\self_improvement_reorg_20260719_160521\\change_manifest.py",
     "data\\migration_backups\\self_improvement_reorg_20260719_160521\\code_review_worker.py",
@@ -758,6 +779,14 @@
     "data\\migration_backups\\self_improvement_reorg_20260719_160521\\verification\\verification_engine.py",
     "data\\migration_backups\\self_improvement_reorg_20260719_160521\\verification\\verification_report.py",
     "data\\migration_backups\\self_improvement_reorg_20260719_160521\\verification\\verification_worker.py",
+    "data\\self_improvement\\manifests\\4d7b8483ab014ae99e3811e1d78e3509.json",
+    "data\\self_improvement\\manifests\\c5ae3a6e5069415c808a8769de3270a5.json",
+    "data\\self_improvement\\manifests\\c7041f412d98482f8b2357abd6829ee5.json",
+    "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\metadata.json",
+    "data\\self_improvement\\backups\\c5ae3a6e5069415c808a8769de3270a5\\metadata.json",
+    "data\\self_improvement\\backups\\c7041f412d98482f8b2357abd6829ee5\\metadata.json",
+    "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+    "data\\self_improvement\\backups\\c7041f412d98482f8b2357abd6829ee5\\files\\generated_file",
     "docs\\architecture\\PLUGIN_API.md",
     "docs\\architecture\\ROADMAP.md",
     "docs\\architecture\\RUNTIME_API.md",
@@ -1219,12 +1248,12 @@
     {
       "name": "Event",
       "file": "buster\\core\\event_bus.py",
-      "line": 12
+      "line": 11
     },
     {
       "name": "EventBus",
       "file": "buster\\core\\event_bus.py",
-      "line": 25
+      "line": 24
     },
     {
       "name": "EventTypes",
@@ -1269,6 +1298,11 @@
     {
       "name": "ExperienceEngine",
       "file": "buster\\experience\\engine.py",
+      "line": 11
+    },
+    {
+      "name": "EvolutionState",
+      "file": "buster\\experience\\evolution_state.py",
       "line": 11
     },
     {
@@ -1692,6 +1726,11 @@
       "line": 4
     },
     {
+      "name": "CompartmentalizedMemory",
+      "file": "buster\\memory\\manager.py",
+      "line": 6
+    },
+    {
       "name": "AttentionEvent",
       "file": "buster\\mind\\attention_system.py",
       "line": 13
@@ -1837,6 +1876,16 @@
       "line": 8
     },
     {
+      "name": "BusterGoal",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 7
+    },
+    {
+      "name": "ProactiveGoalEngine",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 15
+    },
+    {
       "name": "CollaborationBlackboard",
       "file": "buster\\multi_agent\\blackboard.py",
       "line": 5
@@ -1957,6 +2006,36 @@
       "line": 6
     },
     {
+      "name": "BusterEmotionalState",
+      "file": "buster\\personality\\emotions.py",
+      "line": 4
+    },
+    {
+      "name": "BusterIdentity",
+      "file": "buster\\personality\\identity.py",
+      "line": 6
+    },
+    {
+      "name": "MoodEngine",
+      "file": "buster\\personality\\moods.py",
+      "line": 5
+    },
+    {
+      "name": "CoreDrives",
+      "file": "buster\\personality\\motivations.py",
+      "line": 4
+    },
+    {
+      "name": "CoreValue",
+      "file": "buster\\personality\\values.py",
+      "line": 5
+    },
+    {
+      "name": "BusterConstitution",
+      "file": "buster\\personality\\values.py",
+      "line": 14
+    },
+    {
       "name": "PluginLoader",
       "file": "buster\\plugins\\loader.py",
       "line": 9
@@ -2069,7 +2148,7 @@
     {
       "name": "BusterRuntimeCore",
       "file": "buster\\runtime\\core.py",
-      "line": 25
+      "line": 33
     },
     {
       "name": "RuntimeDeveloperTools",
@@ -2229,7 +2308,7 @@
     {
       "name": "RuntimeRepairAdapter",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 183
+      "line": 189
     },
     {
       "name": "RuntimeStateStore",
@@ -3019,12 +3098,12 @@
     {
       "name": "DashboardWindow",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 25
+      "line": 28
     },
     {
       "name": "_NotFound",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 656
+      "line": 791
     },
     {
       "name": "StatusRow",
@@ -3392,6 +3471,26 @@
       "line": 3
     },
     {
+      "name": "DriveCard",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\drive_card.py",
+      "line": 4
+    },
+    {
+      "name": "EvolutionPanel",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 9
+    },
+    {
+      "name": "LevelCard",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\level_card.py",
+      "line": 5
+    },
+    {
+      "name": "SkillsCard",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
+      "line": 4
+    },
+    {
       "name": "Card",
       "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
       "line": 15
@@ -3564,12 +3663,12 @@
     {
       "name": "_SelfImprovementWorker",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 33
+      "line": 39
     },
     {
       "name": "SelfImprovementPanel",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 63
+      "line": 69
     },
     {
       "name": "RepairWorkflowHandlers",
@@ -3630,6 +3729,11 @@
       "name": "PreviewDiffPanel",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
       "line": 477
+    },
+    {
+      "name": "ProtectedFileError",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
+      "line": 7
     },
     {
       "name": "RollbackFileResult",
@@ -3980,6 +4084,11 @@
       "name": "VerificationWorker",
       "file": "data\\migration_backups\\self_improvement_reorg_20260719_160521\\verification\\verification_worker.py",
       "line": 20
+    },
+    {
+      "name": "RuntimeRepairAdapter",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 189
     }
   ],
   "functions": [
@@ -4764,69 +4873,74 @@
       "line": 122
     },
     {
-      "name": "register_step_handler",
+      "name": "_record_evolution_action",
       "file": "buster\\autonomy\\execution_engine.py",
       "line": 183
     },
     {
+      "name": "register_step_handler",
+      "file": "buster\\autonomy\\execution_engine.py",
+      "line": 203
+    },
+    {
       "name": "status",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 188
+      "line": 208
     },
     {
       "name": "_allowed",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 199
+      "line": 219
     },
     {
       "name": "_run_step",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 215
+      "line": 235
     },
     {
       "name": "_run_agent",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 267
+      "line": 294
     },
     {
       "name": "_fix_loop",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 287
+      "line": 314
     },
     {
       "name": "_run_command",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 310
+      "line": 337
     },
     {
       "name": "_normalise",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 328
+      "line": 355
     },
     {
       "name": "_complete_job",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 343
+      "line": 370
     },
     {
       "name": "_finish",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 358
+      "line": 392
     },
     {
       "name": "_history",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 365
+      "line": 399
     },
     {
       "name": "_resolve",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 372
+      "line": 406
     },
     {
       "name": "_has_tests",
       "file": "buster\\autonomy\\execution_engine.py",
-      "line": 376
+      "line": 410
     },
     {
       "name": "recommend",
@@ -5831,32 +5945,32 @@
     {
       "name": "to_dict",
       "file": "buster\\core\\event_bus.py",
-      "line": 18
+      "line": 17
     },
     {
       "name": "__init__",
       "file": "buster\\core\\event_bus.py",
-      "line": 26
+      "line": 25
     },
     {
       "name": "subscribe",
       "file": "buster\\core\\event_bus.py",
-      "line": 33
+      "line": 32
     },
     {
       "name": "publish",
       "file": "buster\\core\\event_bus.py",
-      "line": 36
+      "line": 35
     },
     {
       "name": "history",
       "file": "buster\\core\\event_bus.py",
-      "line": 45
+      "line": 44
     },
     {
       "name": "_append_history",
       "file": "buster\\core\\event_bus.py",
-      "line": 52
+      "line": 51
     },
     {
       "name": "__init__",
@@ -6007,6 +6121,46 @@
       "name": "summary",
       "file": "buster\\experience\\engine.py",
       "line": 39
+    },
+    {
+      "name": "process_evolution_xp",
+      "file": "buster\\experience\\engine.py",
+      "line": 45
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 14
+    },
+    {
+      "name": "load",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 46
+    },
+    {
+      "name": "save",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 66
+    },
+    {
+      "name": "log_experience_history",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 99
+    },
+    {
+      "name": "get_ui_context",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 116
+    },
+    {
+      "name": "dispatch_event",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 127
+    },
+    {
+      "name": "to_dict",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 132
     },
     {
       "name": "__init__",
@@ -7799,6 +7953,31 @@
       "line": 43
     },
     {
+      "name": "__init__",
+      "file": "buster\\memory\\manager.py",
+      "line": 9
+    },
+    {
+      "name": "_initialize_tree",
+      "file": "buster\\memory\\manager.py",
+      "line": 21
+    },
+    {
+      "name": "write_record",
+      "file": "buster\\memory\\manager.py",
+      "line": 25
+    },
+    {
+      "name": "read_record",
+      "file": "buster\\memory\\manager.py",
+      "line": 32
+    },
+    {
+      "name": "log_failure_incident",
+      "file": "buster\\memory\\manager.py",
+      "line": 41
+    },
+    {
       "name": "to_dict",
       "file": "buster\\mind\\attention_system.py",
       "line": 23
@@ -8470,6 +8649,26 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 18
+    },
+    {
+      "name": "evaluate_environment",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 23
+    },
+    {
+      "name": "trigger_goal_completion",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 73
+    },
+    {
+      "name": "get_missions_context",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 82
+    },
+    {
+      "name": "__init__",
       "file": "buster\\multi_agent\\blackboard.py",
       "line": 6
     },
@@ -8925,6 +9124,116 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\personality\\emotions.py",
+      "line": 7
+    },
+    {
+      "name": "process_outcome",
+      "file": "buster\\personality\\emotions.py",
+      "line": 14
+    },
+    {
+      "name": "decay_and_stabilize",
+      "file": "buster\\personality\\emotions.py",
+      "line": 27
+    },
+    {
+      "name": "_approach_baseline",
+      "file": "buster\\personality\\emotions.py",
+      "line": 35
+    },
+    {
+      "name": "to_dict",
+      "file": "buster\\personality\\emotions.py",
+      "line": 40
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\personality\\identity.py",
+      "line": 9
+    },
+    {
+      "name": "get_tier_title",
+      "file": "buster\\personality\\identity.py",
+      "line": 51
+    },
+    {
+      "name": "check_permission",
+      "file": "buster\\personality\\identity.py",
+      "line": 54
+    },
+    {
+      "name": "log_action_outcome",
+      "file": "buster\\personality\\identity.py",
+      "line": 75
+    },
+    {
+      "name": "evaluate_system_level_progression",
+      "file": "buster\\personality\\identity.py",
+      "line": 105
+    },
+    {
+      "name": "get_ui_context",
+      "file": "buster\\personality\\identity.py",
+      "line": 124
+    },
+    {
+      "name": "save_state",
+      "file": "buster\\personality\\identity.py",
+      "line": 138
+    },
+    {
+      "name": "load_state",
+      "file": "buster\\personality\\identity.py",
+      "line": 151
+    },
+    {
+      "name": "resolve_mood",
+      "file": "buster\\personality\\moods.py",
+      "line": 9
+    },
+    {
+      "name": "get_system_tone_modifier",
+      "file": "buster\\personality\\moods.py",
+      "line": 24
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\personality\\motivations.py",
+      "line": 7
+    },
+    {
+      "name": "update_from_event",
+      "file": "buster\\personality\\motivations.py",
+      "line": 15
+    },
+    {
+      "name": "get_active_drive_summary",
+      "file": "buster\\personality\\motivations.py",
+      "line": 50
+    },
+    {
+      "name": "to_dict",
+      "file": "buster\\personality\\motivations.py",
+      "line": 61
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\personality\\values.py",
+      "line": 17
+    },
+    {
+      "name": "get_constitution_prompts",
+      "file": "buster\\personality\\values.py",
+      "line": 28
+    },
+    {
+      "name": "evaluate_risk",
+      "file": "buster\\personality\\values.py",
+      "line": 32
+    },
+    {
+      "name": "__init__",
       "file": "buster\\plugins\\loader.py",
       "line": 12
     },
@@ -9346,122 +9655,127 @@
     {
       "name": "create_runtime_core",
       "file": "buster\\runtime\\core.py",
-      "line": 558
+      "line": 613
     },
     {
       "name": "__init__",
       "file": "buster\\runtime\\core.py",
-      "line": 26
+      "line": 34
     },
     {
       "name": "start",
       "file": "buster\\runtime\\core.py",
-      "line": 145
+      "line": 173
     },
     {
       "name": "stop",
       "file": "buster\\runtime\\core.py",
-      "line": 169
+      "line": 197
     },
     {
       "name": "tick",
       "file": "buster\\runtime\\core.py",
-      "line": 198
+      "line": 226
     },
     {
       "name": "run",
       "file": "buster\\runtime\\core.py",
-      "line": 210
+      "line": 238
     },
     {
       "name": "run_agent",
       "file": "buster\\runtime\\core.py",
-      "line": 255
+      "line": 283
     },
     {
       "name": "create_job",
       "file": "buster\\runtime\\core.py",
-      "line": 299
+      "line": 327
     },
     {
       "name": "run_job",
       "file": "buster\\runtime\\core.py",
-      "line": 320
+      "line": 348
     },
     {
       "name": "service",
       "file": "buster\\runtime\\core.py",
-      "line": 357
+      "line": 385
     },
     {
       "name": "require_service",
       "file": "buster\\runtime\\core.py",
-      "line": 364
+      "line": 392
     },
     {
       "name": "status",
       "file": "buster\\runtime\\core.py",
-      "line": 367
+      "line": 395
     },
     {
       "name": "_ai_status",
       "file": "buster\\runtime\\core.py",
-      "line": 401
+      "line": 429
     },
     {
       "name": "capture_snapshot",
       "file": "buster\\runtime\\core.py",
-      "line": 440
+      "line": 468
     },
     {
       "name": "notify",
       "file": "buster\\runtime\\core.py",
-      "line": 450
+      "line": 478
     },
     {
       "name": "refresh_state",
       "file": "buster\\runtime\\core.py",
-      "line": 466
+      "line": 494
     },
     {
       "name": "run_self_improvement",
       "file": "buster\\runtime\\core.py",
-      "line": 508
+      "line": 536
     },
     {
       "name": "self_improvement_status",
       "file": "buster\\runtime\\core.py",
-      "line": 531
+      "line": 559
     },
     {
       "name": "autonomy_status",
       "file": "buster\\runtime\\core.py",
-      "line": 535
+      "line": 563
     },
     {
       "name": "execution_status",
       "file": "buster\\runtime\\core.py",
-      "line": 539
+      "line": 567
     },
     {
       "name": "health",
       "file": "buster\\runtime\\core.py",
-      "line": 543
+      "line": 571
     },
     {
       "name": "repair_workflow_status",
       "file": "buster\\runtime\\core.py",
-      "line": 546
+      "line": 574
     },
     {
       "name": "recover_repair_sessions",
       "file": "buster\\runtime\\core.py",
-      "line": 550
+      "line": 578
     },
     {
       "name": "active_repair_sessions",
       "file": "buster\\runtime\\core.py",
-      "line": 554
+      "line": 582
+    },
+    {
+      "name": "record_evolution_action",
+      "file": "buster\\runtime\\core.py",
+      "line": 586
     },
     {
       "name": "__init__",
@@ -9934,6 +10248,11 @@
       "line": 10
     },
     {
+      "name": "is_protected",
+      "file": "buster\\runtime\\protected_files.py",
+      "line": 16
+    },
+    {
       "name": "run",
       "file": "buster\\runtime\\registry_agent.py",
       "line": 11
@@ -10291,132 +10610,132 @@
     {
       "name": "shutdown_self_improvement_runtime",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 107
+      "line": 113
     },
     {
       "name": "self_improvement_runtime_status",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 135
+      "line": 141
     },
     {
       "name": "_register_with_runtime_registry",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 744
+      "line": 768
     },
     {
       "name": "_publish_runtime_event",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 803
+      "line": 827
     },
     {
       "name": "_first_available",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 862
+      "line": 886
     },
     {
       "name": "_resolve_method",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 875
+      "line": 899
     },
     {
       "name": "_invoke_attempts",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 891
+      "line": 915
     },
     {
       "name": "_to_plain",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 910
+      "line": 934
     },
     {
       "name": "_as_dict",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 948
+      "line": 972
     },
     {
       "name": "_preview_to_dict",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 962
+      "line": 986
     },
     {
       "name": "_normalise_operation_result",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 976
+      "line": 1000
     },
     {
       "name": "_normalise_verification_result",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 1005
+      "line": 1029
     },
     {
       "name": "_session_summary",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 1069
+      "line": 1093
     },
     {
       "name": "__init__",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 192
+      "line": 198
     },
     {
       "name": "publish",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 205
+      "line": 211
     },
     {
       "name": "review",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 220
+      "line": 226
     },
     {
       "name": "plan",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 274
+      "line": 280
     },
     {
       "name": "preview",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 334
+      "line": 340
     },
     {
       "name": "apply",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 406
+      "line": 412
     },
     {
       "name": "verify",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 464
+      "line": 470
     },
     {
       "name": "rollback",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 526
+      "line": 532
     },
     {
       "name": "history",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 574
+      "line": 580
     },
     {
       "name": "_resolve_diff_provider",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 600
+      "line": 606
     },
     {
       "name": "_resolve_patch_applier",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 632
+      "line": 638
     },
     {
       "name": "_resolve_verifier",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 669
+      "line": 693
     },
     {
       "name": "_resolve_rollback_service",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 706
+      "line": 730
     },
     {
       "name": "__init__",
@@ -13001,97 +13320,97 @@
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 35
+      "line": 38
     },
     {
       "name": "_build_ui",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 65
+      "line": 69
     },
     {
       "name": "_connect_signals",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 123
+      "line": 249
     },
     {
       "name": "refresh",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 138
+      "line": 264
     },
     {
       "name": "_set_row",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 200
+      "line": 340
     },
     {
       "name": "open_data_folder",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 216
+      "line": 356
     },
     {
       "name": "run_doctor",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 245
+      "line": 385
     },
     {
       "name": "_execute_doctor",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 284
+      "line": 424
     },
     {
       "name": "_call_first",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 370
+      "line": 505
     },
     {
       "name": "_service_value",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 393
+      "line": 528
     },
     {
       "name": "_get_service",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 431
+      "line": 566
     },
     {
       "name": "_git_branch",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 455
+      "line": 590
     },
     {
       "name": "_project_root",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 498
+      "line": 633
     },
     {
       "name": "_disk_root",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 529
+      "line": 664
     },
     {
       "name": "_open_path",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 538
+      "line": 673
     },
     {
       "name": "_display_value",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 562
+      "line": 697
     },
     {
       "name": "_format_result",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 594
+      "line": 729
     },
     {
       "name": "_show_error",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 633
+      "line": 768
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 648
+      "line": 783
     },
     {
       "name": "__init__",
@@ -13321,37 +13640,37 @@
     {
       "name": "show_backend_tools",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 317
+      "line": 318
     },
     {
       "name": "show_developer_checklist",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 405
+      "line": 406
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 414
+      "line": 415
     },
     {
       "name": "keyPressEvent",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 456
+      "line": 457
     },
     {
       "name": "show_notifications",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 468
+      "line": 469
     },
     {
       "name": "show_runtime_timeline",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 490
+      "line": 491
     },
     {
       "name": "open_tool",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 374
+      "line": 375
     },
     {
       "name": "__init__",
@@ -15420,6 +15739,81 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\drive_card.py",
+      "line": 5
+    },
+    {
+      "name": "init_ui",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\drive_card.py",
+      "line": 10
+    },
+    {
+      "name": "update_data",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\drive_card.py",
+      "line": 50
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 10
+    },
+    {
+      "name": "init_ui",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 14
+    },
+    {
+      "name": "refresh_identity_telemetry",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 78
+    },
+    {
+      "name": "_add_timeline_entry",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 85
+    },
+    {
+      "name": "handle_xp_log",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 92
+    },
+    {
+      "name": "handle_level_up_log",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 100
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\level_card.py",
+      "line": 6
+    },
+    {
+      "name": "init_ui",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\level_card.py",
+      "line": 10
+    },
+    {
+      "name": "update_data",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\level_card.py",
+      "line": 53
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
+      "line": 5
+    },
+    {
+      "name": "init_ui",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
+      "line": 11
+    },
+    {
+      "name": "update_data",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
+      "line": 64
+    },
+    {
+      "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
       "line": 16
     },
@@ -17026,227 +17420,247 @@
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 37
+      "line": 43
     },
     {
       "name": "run",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 43
+      "line": 49
     },
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 71
+      "line": 77
     },
     {
       "name": "_build_ui",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 110
+      "line": 118
     },
     {
       "name": "_apply_styles",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 220
+      "line": 228
     },
     {
       "name": "run_scan",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 264
+      "line": 272
     },
     {
       "name": "_scan_finished",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 301
+      "line": 309
     },
     {
       "name": "_scan_failed",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 313
+      "line": 321
     },
     {
       "name": "_cleanup_scan_thread",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 322
+      "line": 330
     },
     {
       "name": "refresh",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 335
+      "line": 343
     },
     {
       "name": "refresh_cached_state",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 339
+      "line": 347
     },
     {
       "name": "_review_finished",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 365
+      "line": 373
     },
     {
       "name": "_review_failed",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 380
+      "line": 388
     },
     {
       "name": "_cleanup_review_thread",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 388
+      "line": 396
     },
     {
       "name": "_plan_finished",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 399
+      "line": 407
     },
     {
       "name": "_plan_failed",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 415
+      "line": 423
     },
     {
       "name": "_cleanup_plan_thread",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 423
+      "line": 431
     },
     {
       "name": "_preview_finished",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 435
+      "line": 443
     },
     {
       "name": "_preview_failed",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 449
+      "line": 461
     },
     {
       "name": "_cleanup_preview_thread",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 457
+      "line": 469
     },
     {
       "name": "_apply_finished",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 468
+      "line": 480
     },
     {
       "name": "_apply_failed",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 486
+      "line": 498
     },
     {
       "name": "_cleanup_apply_thread",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 498
+      "line": 523
     },
     {
       "name": "_refresh_findings_from_status",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 508
+      "line": 533
     },
     {
       "name": "_get_self_improvement_status",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 547
+      "line": 572
     },
     {
       "name": "_apply_scan_result",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 581
+      "line": 606
     },
     {
       "name": "_select_finding",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 606
+      "line": 631
     },
     {
       "name": "_review_finding",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 621
+      "line": 646
     },
     {
       "name": "_plan_finding",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 695
+      "line": 720
     },
     {
       "name": "_preview_finding",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 795
+      "line": 820
     },
     {
       "name": "_preview_progress",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 870
+      "line": 895
     },
     {
       "name": "_apply_preview",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 875
+      "line": 900
     },
     {
       "name": "_apply_progress",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 943
+      "line": 968
     },
     {
       "name": "_verify_preview",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 948
+      "line": 973
+    },
+    {
+      "name": "_verification_reward_key",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
+      "line": 1045
+    },
+    {
+      "name": "_verification_progress",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
+      "line": 1067
+    },
+    {
+      "name": "_verification_finished",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
+      "line": 1071
+    },
+    {
+      "name": "_verification_failed",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
+      "line": 1114
     },
     {
       "name": "_reject_preview",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1000
+      "line": 1150
     },
     {
       "name": "_copy_patch",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1006
+      "line": 1156
     },
     {
       "name": "_resolve_diff_provider",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1021
+      "line": 1171
     },
     {
       "name": "_resolve_patch_applier",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1039
+      "line": 1189
     },
     {
       "name": "_resolve_verifier",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1060
+      "line": 1244
     },
     {
       "name": "_invoke_verifier",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1082
+      "line": 1266
     },
     {
       "name": "_normalise_verification_result",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1127
+      "line": 1311
     },
     {
       "name": "_ignore_finding",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1173
+      "line": 1357
     },
     {
       "name": "_current_mode",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1214
+      "line": 1398
     },
     {
       "name": "set_runtime_core",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1241
+      "line": 1425
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 1256
+      "line": 1440
     },
     {
       "name": "__init__",
@@ -17897,6 +18311,21 @@
       "name": "_derive_path",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
       "line": 934
+    },
+    {
+      "name": "normalize_project_path",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
+      "line": 31
+    },
+    {
+      "name": "is_protected",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
+      "line": 53
+    },
+    {
+      "name": "find_protected_paths",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
+      "line": 68
     },
     {
       "name": "to_dict",
@@ -20957,6 +21386,146 @@
       "name": "run",
       "file": "data\\migration_backups\\self_improvement_reorg_20260719_160521\\verification\\verification_worker.py",
       "line": 45
+    },
+    {
+      "name": "build_self_improvement_runtime",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 14
+    },
+    {
+      "name": "register_self_improvement_runtime",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 68
+    },
+    {
+      "name": "shutdown_self_improvement_runtime",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 113
+    },
+    {
+      "name": "self_improvement_runtime_status",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 141
+    },
+    {
+      "name": "_register_with_runtime_registry",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 770
+    },
+    {
+      "name": "_publish_runtime_event",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 829
+    },
+    {
+      "name": "_first_available",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 888
+    },
+    {
+      "name": "_resolve_method",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 901
+    },
+    {
+      "name": "_invoke_attempts",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 917
+    },
+    {
+      "name": "_to_plain",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 936
+    },
+    {
+      "name": "_as_dict",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 974
+    },
+    {
+      "name": "_preview_to_dict",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 988
+    },
+    {
+      "name": "_normalise_operation_result",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 1002
+    },
+    {
+      "name": "_normalise_verification_result",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 1031
+    },
+    {
+      "name": "_session_summary",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 1095
+    },
+    {
+      "name": "__init__",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 198
+    },
+    {
+      "name": "publish",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 211
+    },
+    {
+      "name": "review",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 226
+    },
+    {
+      "name": "plan",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 280
+    },
+    {
+      "name": "preview",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 340
+    },
+    {
+      "name": "apply",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 412
+    },
+    {
+      "name": "verify",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 470
+    },
+    {
+      "name": "rollback",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 532
+    },
+    {
+      "name": "history",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 580
+    },
+    {
+      "name": "_resolve_diff_provider",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 606
+    },
+    {
+      "name": "_resolve_patch_applier",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 638
+    },
+    {
+      "name": "_resolve_verifier",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 695
+    },
+    {
+      "name": "_resolve_rollback_service",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 732
     }
   ],
   "imports": [
@@ -22761,39 +23330,34 @@
       "line": 2
     },
     {
-      "name": "__future__",
+      "name": "buster.utils.datetime_utils",
       "file": "buster\\core\\event_bus.py",
       "line": 1
     },
     {
-      "name": "buster.utils.datetime_utils",
-      "file": "buster\\core\\event_bus.py",
-      "line": 2
-    },
-    {
       "name": "json",
       "file": "buster\\core\\event_bus.py",
-      "line": 4
+      "line": 3
     },
     {
       "name": "dataclasses",
       "file": "buster\\core\\event_bus.py",
-      "line": 5
+      "line": 4
     },
     {
       "name": "datetime",
       "file": "buster\\core\\event_bus.py",
-      "line": 6
+      "line": 5
     },
     {
       "name": "pathlib",
       "file": "buster\\core\\event_bus.py",
-      "line": 7
+      "line": 6
     },
     {
       "name": "typing",
       "file": "buster\\core\\event_bus.py",
-      "line": 8
+      "line": 7
     },
     {
       "name": "__future__",
@@ -22969,6 +23533,31 @@
       "name": "user_overrides",
       "file": "buster\\experience\\engine.py",
       "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 5
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\experience\\evolution_state.py",
+      "line": 7
     },
     {
       "name": "__future__",
@@ -24386,6 +24975,21 @@
       "line": 2
     },
     {
+      "name": "json",
+      "file": "buster\\memory\\manager.py",
+      "line": 2
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\memory\\manager.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\memory\\manager.py",
+      "line": 4
+    },
+    {
       "name": "__future__",
       "file": "buster\\mind\\attention_system.py",
       "line": 1
@@ -24936,6 +25540,21 @@
       "line": 5
     },
     {
+      "name": "time",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 2
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\motivation\\goal_engine.py",
+      "line": 4
+    },
+    {
       "name": "__future__",
       "file": "buster\\multi_agent\\blackboard.py",
       "line": 1
@@ -25296,6 +25915,51 @@
       "line": 34
     },
     {
+      "name": "typing",
+      "file": "buster\\personality\\emotions.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\personality\\identity.py",
+      "line": 2
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\personality\\identity.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\personality\\identity.py",
+      "line": 4
+    },
+    {
+      "name": "buster.personality.emotions",
+      "file": "buster\\personality\\moods.py",
+      "line": 2
+    },
+    {
+      "name": "buster.personality.motivations",
+      "file": "buster\\personality\\moods.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\personality\\motivations.py",
+      "line": 2
+    },
+    {
+      "name": "enum",
+      "file": "buster\\personality\\values.py",
+      "line": 2
+    },
+    {
+      "name": "typing",
+      "file": "buster\\personality\\values.py",
+      "line": 3
+    },
+    {
       "name": "__future__",
       "file": "buster\\plugins\\loader.py",
       "line": 1
@@ -25636,74 +26300,94 @@
       "line": 4
     },
     {
-      "name": "buster.intelligence.agent_tracker",
+      "name": "buster.ui.v9.panels.self_improvement.verification.verification_engine",
       "file": "buster\\runtime\\core.py",
       "line": 6
     },
     {
-      "name": "buster.intelligence.runtime_monitor",
-      "file": "buster\\runtime\\core.py",
-      "line": 7
-    },
-    {
-      "name": "buster.intelligence.runtime_snapshot",
-      "file": "buster\\runtime\\core.py",
-      "line": 8
-    },
-    {
-      "name": "dispatcher",
+      "name": "buster.intelligence.agent_tracker",
       "file": "buster\\runtime\\core.py",
       "line": 10
     },
     {
-      "name": "sdk_bootstrap",
+      "name": "buster.intelligence.runtime_monitor",
       "file": "buster\\runtime\\core.py",
       "line": 11
     },
     {
-      "name": "state_store",
+      "name": "buster.intelligence.runtime_snapshot",
       "file": "buster\\runtime\\core.py",
       "line": 12
     },
     {
-      "name": "buster.autonomy.engine",
+      "name": "buster.core.event_bus",
       "file": "buster\\runtime\\core.py",
       "line": 14
     },
     {
-      "name": "buster.autonomy.execution_engine",
+      "name": "buster.experience.evolution_state",
       "file": "buster\\runtime\\core.py",
       "line": 15
     },
     {
-      "name": "buster.autonomy.self_improvement_service",
+      "name": "buster.experience.engine",
       "file": "buster\\runtime\\core.py",
       "line": 16
     },
     {
+      "name": "dispatcher",
+      "file": "buster\\runtime\\core.py",
+      "line": 18
+    },
+    {
+      "name": "sdk_bootstrap",
+      "file": "buster\\runtime\\core.py",
+      "line": 19
+    },
+    {
+      "name": "state_store",
+      "file": "buster\\runtime\\core.py",
+      "line": 20
+    },
+    {
+      "name": "buster.autonomy.engine",
+      "file": "buster\\runtime\\core.py",
+      "line": 22
+    },
+    {
+      "name": "buster.autonomy.execution_engine",
+      "file": "buster\\runtime\\core.py",
+      "line": 23
+    },
+    {
+      "name": "buster.autonomy.self_improvement_service",
+      "file": "buster\\runtime\\core.py",
+      "line": 24
+    },
+    {
       "name": "self_improvement_runtime",
       "file": "buster\\runtime\\core.py",
-      "line": 17
+      "line": 25
     },
     {
       "name": "buster.brain.providers.manager",
       "file": "buster\\runtime\\core.py",
-      "line": 57
+      "line": 65
     },
     {
       "name": "buster.intelligence.health_monitor",
       "file": "buster\\runtime\\core.py",
-      "line": 126
+      "line": 154
     },
     {
       "name": "dev_tools",
       "file": "buster\\runtime\\core.py",
-      "line": 131
+      "line": 159
     },
     {
       "name": "inspector",
       "file": "buster\\runtime\\core.py",
-      "line": 136
+      "line": 164
     },
     {
       "name": "__future__",
@@ -26121,6 +26805,11 @@
       "line": 3
     },
     {
+      "name": "pathlib",
+      "file": "buster\\runtime\\protected_files.py",
+      "line": 1
+    },
+    {
       "name": "__future__",
       "file": "buster\\runtime\\registry_agent.py",
       "line": 1
@@ -26388,12 +27077,17 @@
     {
       "name": "buster.autonomy.code_review_service",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 236
+      "line": 242
     },
     {
       "name": "buster.autonomy.repair_planner",
       "file": "buster\\runtime\\self_improvement_runtime.py",
-      "line": 290
+      "line": 296
+    },
+    {
+      "name": "buster.ui.v9.panels.self_improvement.patch_applier",
+      "file": "buster\\runtime\\self_improvement_runtime.py",
+      "line": 679
     },
     {
       "name": "__future__",
@@ -29143,7 +29837,7 @@
     {
       "name": "buster.ui.v9.theme",
       "file": "buster\\ui\\v9\\dashboard.py",
-      "line": 22
+      "line": 25
     },
     {
       "name": "__future__",
@@ -29283,12 +29977,12 @@
     {
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 318
+      "line": 319
     },
     {
       "name": "buster.ui.v9.panels.developer_checklist_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 406
+      "line": 407
     },
     {
       "name": "buster.ui.v9.panels.agent_panel",
@@ -29333,12 +30027,12 @@
     {
       "name": "buster.ui.v9.panels.notification_center_panel",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 470
+      "line": 471
     },
     {
       "name": "buster.ui.v9.panels.developer_mission_control",
       "file": "buster\\ui\\v9\\main_window.py",
-      "line": 492
+      "line": 493
     },
     {
       "name": "PySide6.QtCore",
@@ -30376,6 +31070,56 @@
       "line": 1
     },
     {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\drive_card.py",
+      "line": 2
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 2
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 3
+    },
+    {
+      "name": "buster.ui.v9.panels.evolution_panel.level_card",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 5
+    },
+    {
+      "name": "buster.ui.v9.panels.evolution_panel.drive_card",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 6
+    },
+    {
+      "name": "buster.ui.v9.panels.evolution_panel.skills_card",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 7
+    },
+    {
+      "name": "buster.core.event_bus",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\evolution_panel.py",
+      "line": 70
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\level_card.py",
+      "line": 2
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\level_card.py",
+      "line": 3
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
+      "line": 2
+    },
+    {
       "name": "__future__",
       "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
       "line": 1
@@ -31166,19 +31910,34 @@
       "line": 29
     },
     {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
+      "line": 31
+    },
+    {
+      "name": "buster.ui.v9.panels.self_improvement.verification.verification_worker",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
+      "line": 33
+    },
+    {
       "name": "buster.autonomy.code_review_service",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 639
+      "line": 664
     },
     {
       "name": "buster.autonomy.repair_planner",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 732
+      "line": 757
     },
     {
       "name": "repair_plan_worker",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
-      "line": 733
+      "line": 758
+    },
+    {
+      "name": "buster.ui.v9.panels.self_improvement.patch_applier",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\self_improvement_panel.py",
+      "line": 1230
     },
     {
       "name": "__future__",
@@ -31384,6 +32143,21 @@
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\preview_diff_panel.py",
       "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\self_improvement\\apply\\protected_files.py",
+      "line": 4
     },
     {
       "name": "__future__",
@@ -32999,6 +33773,51 @@
       "name": "verification_report",
       "file": "data\\migration_backups\\self_improvement_reorg_20260719_160521\\verification\\verification_worker.py",
       "line": 10
+    },
+    {
+      "name": "__future__",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 1
+    },
+    {
+      "name": "pathlib",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 4
+    },
+    {
+      "name": "buster.ui.v9.panels.self_improvement.diff_generator",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 6
+    },
+    {
+      "name": "buster.ui.v9.panels.self_improvement.preview_diff_panel",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 7
+    },
+    {
+      "name": "buster.ui.v9.panels.self_improvement.self_improvement_service",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 8
+    },
+    {
+      "name": "buster.autonomy.code_review_service",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 242
+    },
+    {
+      "name": "buster.autonomy.repair_planner",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 296
+    },
+    {
+      "name": "buster.ui.v9.panels.self_improvement.patch_applier",
+      "file": "data\\self_improvement\\backups\\4d7b8483ab014ae99e3811e1d78e3509\\files\\buster\\runtime\\self_improvement_runtime.py",
+      "line": 679
     },
     {
       "name": "pathlib",

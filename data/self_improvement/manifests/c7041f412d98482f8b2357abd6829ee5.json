@@ -1,0 +1,110 @@
+{
+  "change_id": "c7041f412d98482f8b2357abd6829ee5",
+  "created_at": "2026-07-20T03:34:30.780595+00:00",
+  "updated_at": "2026-07-20T03:34:30.804676+00:00",
+  "status": "applied",
+  "project_root": "C:\\Users\\xkali\\new_ai\\buster-v10",
+  "title": "Preview: generated_file",
+  "summary": "Review working tree and create a safe checkpoint before self-improvement edits.",
+  "finding": {},
+  "review": {},
+  "plan": {},
+  "patch": "--- a/generated_file\n+++ b/generated_file\n@@ -0,0 +1,11 @@\n+Hey! It looks like you have a few changes in your Git repository. Let's go through them step by step to ensure everything is safe.\n\n+\n\n+1. **Open the Git Repository**: First, open your Git repository in Buster Desktop AI OS.\n\n+2. **Review Changed Files**: Check the list of changed files:\n\n+   - 23 modified files\n\n+   - 1 deleted file\n\n+3. **Run `git status`**: Run `git status` to ensure there are no unintended changes present.\n\n+4. **Create a Safe Checkpoint**: If necessary, create a new branch or commit to save your current state.\n\n+5. **Revert Unwanted Changes**: If you need to revert any unwanted changes, use `git checkout -- <file>`.\n\n+\n\n+Remember to always have backups of important data before making significant changes. Let's proceed with reviewing and committing these changes safely!",
+  "files": [
+    {
+      "path": "C:\\Users\\xkali\\new_ai\\buster-v10\\generated_file",
+      "backup_path": "C:\\Users\\xkali\\new_ai\\buster-v10\\data\\self_improvement\\backups\\c7041f412d98482f8b2357abd6829ee5\\files\\generated_file",
+      "original_hash": "170a23c626a8b2d8ee011f4af365e420c730cdb919c638319f8d738132282c62",
+      "modified_hash": "d2d38bf4939e48f73730fdec5b95718c814a8cb5bdf66f81453babf460ba8537",
+      "original_size": 781,
+      "modified_size": 1562,
+      "existed_before": true,
+      "exists_after": true,
+      "status": "applied",
+      "error": "",
+      "metadata": {
+        "relative_path": "generated_file",
+        "mode": 33206,
+        "mtime_ns": 1784518422130018900
+      }
+    }
+  ],
+  "approval_required": true,
+  "approved": true,
+  "approved_at": "2026-07-20T03:34:30.780595+00:00",
+  "rejected_at": "",
+  "applied_at": "2026-07-20T03:34:30.804676+00:00",
+  "verified_at": "",
+  "rolled_back_at": "",
+  "verification": {},
+  "rollback": {},
+  "provider": "",
+  "model": "",
+  "requested_from": "self_improvement",
+  "error": "",
+  "metadata": {
+    "finding": {
+      "category": "safety",
+      "confidence": 0.95,
+      "description": "Git reports 34 changed or untracked paths: 23 modified, 0 added, 1 deleted, 0 renamed and 10 untracked.",
+      "file": "",
+      "line": 0,
+      "metadata": {
+        "added": 0,
+        "deleted": 1,
+        "dirty_paths": 34,
+        "modified": 23,
+        "renamed": 0,
+        "untracked": 10
+      },
+      "severity": "medium",
+      "suggested_request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "title": "Review large uncommitted change set"
+    },
+    "review": {
+      "success": true,
+      "summary": "Large uncommitted changes detected in Git.",
+      "evidence": "34 changed or untracked paths, including 23 modified files and 1 deleted file.",
+      "impact": "Safety risk due to potential data loss if not reviewed.",
+      "risk": "MEDIUM",
+      "recommended_repair": "Review working tree and create a safe checkpoint before self-improvement edits.",
+      "validation": "Check Git status for changes and confirm no unintended modifications.",
+      "decision": "PLAN FIRST",
+      "provider": "ollama",
+      "model": "qwen2.5-coder:3b",
+      "cached": false,
+      "error": ""
+    },
+    "plan": {
+      "success": true,
+      "title": "Review and Commit Changes",
+      "goal": "Ensure all changes are safe before proceeding with code updates.",
+      "risk": "low",
+      "estimated_files": 1,
+      "estimated_effort": "5-10 minutes",
+      "steps": [
+        "Open the Git repository in Buster Desktop AI OS.",
+        "Review the list of changed files (23 modified, 1 deleted).",
+        "Ensure no unintended changes are present by running `git status`.",
+        "Create a new branch or commit to save your current state if needed.",
+        "If necessary, revert any unwanted changes using `git checkout -- <file>`."
+      ],
+      "warnings": [
+        "Always ensure you have a backup of important data before making significant changes."
+      ],
+      "decision": "recommended",
+      "provider": "ollama",
+      "model": "<bound method AIProviderManager.current_model of <buster.brain.providers.manager.AIProviderManager object at 0x0000021C014F7F20>>",
+      "cached": false,
+      "error": ""
+    },
+    "context": {
+      "requested_from": "self_improvement_ui",
+      "approval_required": true
+    },
+    "target_path": "",
+    "generator": "DiffGenerator",
+    "file_path": "generated_file",
+    "changed_files": 1
+  }
+}

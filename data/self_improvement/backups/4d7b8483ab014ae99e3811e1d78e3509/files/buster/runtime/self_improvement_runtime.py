@@ -1,0 +1,1127 @@
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any, Mapping, Optional
+
+from buster.ui.v9.panels.self_improvement.diff_generator import DiffGenerator
+from buster.ui.v9.panels.self_improvement.preview_diff_panel import PreviewDiff
+from buster.ui.v9.panels.self_improvement.self_improvement_service import (
+    RepairWorkflowHandlers,
+    SelfImprovementService,
+)
+
+
+def build_self_improvement_runtime(
+    runtime_core: Any,
+    *,
+    auto_review: bool = False,
+    auto_plan: bool = False,
+    auto_preview: bool = False,
+    auto_verify: bool = True,
+    auto_complete: bool = True,
+    rollback_on_verification_failure: bool = False,
+) -> SelfImprovementService:
+    """
+    Build the singleton repair-workflow service owned by BusterRuntimeCore.
+
+    This does not replace the existing autonomy SelfImprovementService used
+    for project scanning. The runtime should keep:
+
+        runtime_core.self_improvement
+            Existing scan/findings service.
+
+    and expose this service as:
+
+        runtime_core.self_improvement_service
+            Repair session orchestration service.
+    """
+    adapter = RuntimeRepairAdapter(runtime_core)
+
+    service = SelfImprovementService(
+        project_root=adapter.root,
+        handlers=RepairWorkflowHandlers(
+            review=adapter.review,
+            plan=adapter.plan,
+            preview=adapter.preview,
+            apply=adapter.apply,
+            verify=adapter.verify,
+            rollback=adapter.rollback,
+            history=adapter.history,
+        ),
+        event_publisher=adapter.publish,
+        auto_review=auto_review,
+        auto_plan=auto_plan,
+        auto_preview=auto_preview,
+        auto_verify=auto_verify,
+        auto_complete=auto_complete,
+        rollback_on_verification_failure=(
+            rollback_on_verification_failure
+        ),
+    )
+
+    # Keep the adapter alive for the lifetime of the service and make it
+    # available for runtime inspection.
+    service.runtime_adapter = adapter
+    return service
+
+
+def register_self_improvement_runtime(
+    runtime_core: Any,
+) -> SelfImprovementService:
+    """
+    Create, expose and register the singleton repair service.
+
+    Safe to call more than once. Existing instances are reused.
+    """
+    existing = getattr(
+        runtime_core,
+        "self_improvement_service",
+        None,
+    )
+
+    if isinstance(existing, SelfImprovementService):
+        return existing
+
+    service = build_self_improvement_runtime(runtime_core)
+    runtime_core.self_improvement_service = service
+    runtime_core.repair_service = service
+    runtime_core.self_improvement_runtime = service
+    
+    adapter = getattr(service, "runtime_adapter", None)
+
+    if adapter is not None:
+        runtime_core.repair_runtime_adapter = adapter
+
+    _register_with_runtime_registry(
+        runtime_core,
+        "self_improvement.repair",
+        service,
+    )
+
+    _publish_runtime_event(
+        runtime_core,
+        "repair.service.registered",
+        {
+            "service": "self_improvement.repair",
+            "project_root": str(service.project_root),
+        },
+    )
+
+    return service
+
+
+def shutdown_self_improvement_runtime(
+    runtime_core: Any,
+    *,
+    wait: bool = False,
+) -> None:
+    service = getattr(
+        runtime_core,
+        "self_improvement_service",
+        None,
+    )
+
+    if not isinstance(service, SelfImprovementService):
+        return
+
+    service.shutdown(
+        wait=wait,
+        cancel_futures=True,
+    )
+
+    _publish_runtime_event(
+        runtime_core,
+        "repair.service.stopped",
+        {
+            "service": "self_improvement.repair",
+        },
+    )
+
+
+def self_improvement_runtime_status(
+    runtime_core: Any,
+) -> dict[str, Any]:
+    service = getattr(
+        runtime_core,
+        "self_improvement_service",
+        None,
+    )
+
+    if not isinstance(service, SelfImprovementService):
+        return {
+            "available": False,
+            "running_tasks": 0,
+            "active_sessions": 0,
+        }
+
+    try:
+        active_sessions = service.active_sessions()
+    except Exception:
+        active_sessions = []
+
+    try:
+        running_tasks = service.running_tasks()
+    except Exception:
+        running_tasks = []
+
+    latest = None
+
+    try:
+        latest = service.latest_session(
+            include_completed=True
+        )
+    except Exception:
+        latest = None
+
+    return {
+        "available": True,
+        "project_root": str(service.project_root),
+        "running_tasks": len(running_tasks),
+        "active_sessions": len(active_sessions),
+        "latest_session": (
+            _session_summary(latest)
+            if latest is not None
+            else None
+        ),
+    }
+
+
+class RuntimeRepairAdapter:
+    """
+    Runtime-owned backend adapter for repair workflow stages.
+
+    UI panels do not construct review, planner, diff, apply, verification or
+    rollback services after this adapter has been registered. They call the
+    singleton SelfImprovementService exposed by BusterRuntimeCore.
+    """
+
+    def __init__(
+        self,
+        runtime_core: Any,
+    ) -> None:
+        self.runtime_core = runtime_core
+        self.root = Path(
+            getattr(runtime_core, "root", ".")
+        ).expanduser().resolve()
+
+    # ------------------------------------------------------------------
+    # Event publication
+    # ------------------------------------------------------------------
+
+    def publish(
+        self,
+        event_type: str,
+        payload: Mapping[str, Any],
+    ) -> None:
+        _publish_runtime_event(
+            self.runtime_core,
+            event_type,
+            payload,
+        )
+
+    # ------------------------------------------------------------------
+    # Repair stage handlers
+    # ------------------------------------------------------------------
+
+    def review(
+        self,
+        session: Any,
+    ) -> dict[str, Any]:
+        ai_manager = getattr(
+            self.runtime_core,
+            "ai_manager",
+            None,
+        )
+
+        if ai_manager is None:
+            raise RuntimeError(
+                "AI Code Review is unavailable because the shared "
+                "AI provider manager is not connected."
+            )
+
+        from buster.autonomy.code_review_service import (
+            CodeReviewService,
+        )
+
+        reviewer = CodeReviewService(
+            root=self.root,
+            ai_manager=ai_manager,
+            dispatcher=getattr(
+                self.runtime_core,
+                "dispatcher",
+                None,
+            ),
+        )
+
+        method = _resolve_method(
+            reviewer,
+            (
+                "review_finding",
+                "review",
+                "analyse",
+                "analyze",
+                "run",
+            ),
+        )
+
+        finding = dict(
+            getattr(session, "finding", {}) or {}
+        )
+
+        result = _invoke_attempts(
+            (
+                lambda: method(finding=finding),
+                lambda: method(finding),
+                lambda: method(),
+            )
+        )
+        return _as_dict(result)
+
+    def plan(
+        self,
+        session: Any,
+    ) -> dict[str, Any]:
+        ai_manager = getattr(
+            self.runtime_core,
+            "ai_manager",
+            None,
+        )
+
+        if ai_manager is None:
+            raise RuntimeError(
+                "Repair Planner is unavailable because the shared "
+                "AI provider manager is not connected."
+            )
+
+        from buster.autonomy.repair_planner import RepairPlanner
+
+        planner = RepairPlanner(
+            root=self.root,
+            ai_manager=ai_manager,
+            dispatcher=getattr(
+                self.runtime_core,
+                "dispatcher",
+                None,
+            ),
+        )
+
+        method = _resolve_method(
+            planner,
+            (
+                "create_plan",
+                "plan_repair",
+                "plan",
+                "build_plan",
+                "run",
+            ),
+        )
+
+        finding = dict(
+            getattr(session, "finding", {}) or {}
+        )
+        review = _as_dict(
+            getattr(session, "review", {})
+        )
+
+        result = _invoke_attempts(
+            (
+                lambda: method(
+                    finding=finding,
+                    review=review,
+                ),
+                lambda: method(finding, review),
+                lambda: method(finding=finding),
+                lambda: method(finding),
+                lambda: method(),
+            )
+        )
+        return _as_dict(result)
+
+    def preview(
+        self,
+        session: Any,
+    ) -> dict[str, Any]:
+        generator = DiffGenerator(
+            project_root=self.root,
+            provider=self._resolve_diff_provider(),
+        )
+
+        method = _resolve_method(
+            generator,
+            (
+                "generate",
+                "generate_diff",
+                "create_preview",
+                "build",
+                "run",
+            ),
+        )
+
+        finding = dict(
+            getattr(session, "finding", {}) or {}
+        )
+        review = _as_dict(
+            getattr(session, "review", {})
+        )
+        plan = _as_dict(
+            getattr(
+                session,
+                "repair_plan",
+                getattr(session, "plan", {}),
+            )
+        )
+        context = {
+            "requested_from": "runtime",
+            "approval_required": True,
+            "session_id": str(
+                getattr(session, "session_id", "")
+            ),
+        }
+
+        result = _invoke_attempts(
+            (
+                lambda: method(
+                    finding=finding,
+                    review=review,
+                    plan=plan,
+                    context=context,
+                ),
+                lambda: method(
+                    finding,
+                    review,
+                    plan,
+                    context,
+                ),
+                lambda: method(
+                    finding=finding,
+                    review=review,
+                    plan=plan,
+                ),
+                lambda: method(
+                    finding,
+                    review,
+                    plan,
+                ),
+                lambda: method(),
+            )
+        )
+
+        preview = PreviewDiff.from_value(result)
+        return _preview_to_dict(preview)
+
+    def apply(
+        self,
+        session: Any,
+    ) -> dict[str, Any]:
+        preview = PreviewDiff.from_value(
+            getattr(session, "preview", {})
+        )
+
+        if not preview.patch.strip():
+            raise RuntimeError(
+                "The approved repair contains no patch."
+            )
+
+        applier = self._resolve_patch_applier()
+
+        if applier is None:
+            raise RuntimeError(
+                "Apply is unavailable because no patch applier is "
+                "connected to the runtime."
+            )
+
+        method = (
+            applier
+            if callable(applier)
+            else _resolve_method(
+                applier,
+                (
+                    "apply",
+                    "apply_changes",
+                    "apply_patch",
+                    "run",
+                ),
+            )
+        )
+
+        result = _invoke_attempts(
+            (
+                lambda: method(
+                    preview=preview,
+                    backup=True,
+                ),
+                lambda: method(
+                    patch=preview.patch,
+                    file_path=preview.file_path,
+                    backup=True,
+                ),
+                lambda: method(preview, True),
+                lambda: method(preview),
+                lambda: method(preview.patch),
+                lambda: method(),
+            )
+        )
+
+        return _normalise_operation_result(
+            result,
+            default_message="Changes applied successfully.",
+        )
+
+    def verify(
+        self,
+        session: Any,
+    ) -> dict[str, Any]:
+        verifier = self._resolve_verifier()
+
+        if verifier is None:
+            return {
+                "passed": False,
+                "status": "unavailable",
+                "message": (
+                    "Changes were applied, but no verification "
+                    "service is connected."
+                ),
+            }
+
+        preview = PreviewDiff.from_value(
+            getattr(session, "preview", {})
+        )
+
+        method = (
+            verifier
+            if callable(verifier)
+            else _resolve_method(
+                verifier,
+                (
+                    "verify",
+                    "verify_changes",
+                    "verify_patch",
+                    "run",
+                ),
+            )
+        )
+
+        result = _invoke_attempts(
+            (
+                lambda: method(preview=preview),
+                lambda: method(
+                    patch=preview.patch,
+                    file_path=preview.file_path,
+                ),
+                lambda: method(preview),
+                lambda: method(preview.patch),
+                lambda: method(),
+            )
+        )
+
+        passed, message = (
+            _normalise_verification_result(result)
+        )
+
+        return {
+            "passed": passed,
+            "status": (
+                "passed"
+                if passed
+                else "failed"
+            ),
+            "message": message,
+            "result": _as_dict(result),
+        }
+
+    def rollback(
+        self,
+        session: Any,
+    ) -> dict[str, Any]:
+        rollback = self._resolve_rollback_service()
+
+        if rollback is None:
+            raise RuntimeError(
+                "Rollback is unavailable because no rollback service "
+                "is connected to the runtime."
+            )
+
+        method = (
+            rollback
+            if callable(rollback)
+            else _resolve_method(
+                rollback,
+                (
+                    "rollback",
+                    "restore",
+                    "revert",
+                    "run",
+                ),
+            )
+        )
+
+        change_id = str(
+            getattr(session, "change_id", "")
+        )
+
+        result = _invoke_attempts(
+            (
+                lambda: method(
+                    session=session,
+                    change_id=change_id,
+                ),
+                lambda: method(change_id=change_id),
+                lambda: method(session),
+                lambda: method(change_id),
+                lambda: method(),
+            )
+        )
+
+        return _normalise_operation_result(
+            result,
+            default_message="Rollback completed.",
+        )
+
+    def history(
+        self,
+        session: Any,
+    ) -> dict[str, Any]:
+        return {
+            "session_id": str(
+                getattr(session, "session_id", "")
+            ),
+            "finding": dict(
+                getattr(session, "finding", {}) or {}
+            ),
+            "status": str(
+                getattr(session, "status", "")
+            ),
+            "change_id": str(
+                getattr(session, "change_id", "")
+            ),
+            "completed_at": str(
+                getattr(session, "completed_at", "")
+            ),
+        }
+
+    # ------------------------------------------------------------------
+    # Runtime dependency discovery
+    # ------------------------------------------------------------------
+
+    def _resolve_diff_provider(self) -> Any:
+        scan_service = getattr(
+            self.runtime_core,
+            "self_improvement",
+            None,
+        )
+
+        candidates = (
+            getattr(
+                self.runtime_core,
+                "diff_generator",
+                None,
+            ),
+            getattr(
+                self.runtime_core,
+                "code_generator",
+                None,
+            ),
+            getattr(
+                self.runtime_core,
+                "ai_manager",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "diff_generator",
+                None,
+            ),
+        )
+
+        return _first_available(candidates)
+
+    def _resolve_patch_applier(self) -> Any:
+        scan_service = getattr(
+            self.runtime_core,
+            "self_improvement",
+            None,
+        )
+
+        candidates = (
+            getattr(
+                self.runtime_core,
+                "patch_applier",
+                None,
+            ),
+            getattr(
+                self.runtime_core,
+                "apply_changes",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "patch_applier",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "apply_changes",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "apply_patch",
+                None,
+            ),
+        )
+
+        existing = _first_available(candidates)
+
+        if existing is not None:
+            return existing
+
+        try:
+            from buster.ui.v9.panels.self_improvement.patch_applier import (
+                PatchApplier,
+            )
+
+            applier = PatchApplier(
+                project_root=self.root,
+            )
+
+            self.runtime_core.patch_applier = applier
+            return applier
+
+        except Exception as exc:
+            raise RuntimeError(
+                f"PatchApplier could not be created: {exc}"
+            ) from exc
+
+    def _resolve_verifier(self) -> Any:
+        scan_service = getattr(
+            self.runtime_core,
+            "self_improvement",
+            None,
+        )
+
+        candidates = (
+            getattr(
+                self.runtime_core,
+                "verify_changes",
+                None,
+            ),
+            getattr(
+                self.runtime_core,
+                "verification_service",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "verify_changes",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "verify_patch",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "verification_service",
+                None,
+            ),
+        )
+
+        return _first_available(candidates)
+
+    def _resolve_rollback_service(self) -> Any:
+        scan_service = getattr(
+            self.runtime_core,
+            "self_improvement",
+            None,
+        )
+
+        candidates = (
+            getattr(
+                self.runtime_core,
+                "rollback_changes",
+                None,
+            ),
+            getattr(
+                self.runtime_core,
+                "rollback_service",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "rollback_changes",
+                None,
+            ),
+            getattr(
+                scan_service,
+                "rollback_service",
+                None,
+            ),
+        )
+
+        return _first_available(candidates)
+
+
+# ----------------------------------------------------------------------
+# Runtime registration
+# ----------------------------------------------------------------------
+
+
+def _register_with_runtime_registry(
+    runtime_core: Any,
+    name: str,
+    service: Any,
+) -> bool:
+    candidates = (
+        getattr(runtime_core, "services", None),
+        getattr(runtime_core, "registry", None),
+        getattr(
+            getattr(runtime_core, "sdk", None),
+            "registry",
+            None,
+        ),
+    )
+
+    for registry in candidates:
+        if registry is None:
+            continue
+
+        register = getattr(registry, "register", None)
+
+        if not callable(register):
+            continue
+
+        attempts = (
+            lambda: register(name, service),
+            lambda: register(
+                name=name,
+                service=service,
+            ),
+            lambda: register(service),
+        )
+
+        for attempt in attempts:
+            try:
+                attempt()
+                return True
+            except TypeError:
+                continue
+            except Exception:
+                break
+
+    sdk = getattr(runtime_core, "sdk", None)
+    register_service = getattr(
+        sdk,
+        "register_service",
+        None,
+    )
+
+    if callable(register_service):
+        try:
+            register_service(name, service)
+            return True
+        except Exception:
+            pass
+
+    return False
+
+
+def _publish_runtime_event(
+    runtime_core: Any,
+    event_type: str,
+    payload: Mapping[str, Any],
+) -> None:
+    dispatcher = getattr(
+        runtime_core,
+        "dispatcher",
+        None,
+    )
+    publish = getattr(dispatcher, "publish", None)
+
+    if callable(publish):
+        try:
+            publish(
+                str(event_type),
+                dict(payload),
+                source="self_improvement",
+            )
+            return
+        except TypeError:
+            try:
+                publish(
+                    str(event_type),
+                    dict(payload),
+                )
+                return
+            except Exception:
+                pass
+        except Exception:
+            pass
+
+    events = getattr(runtime_core, "events", None)
+    publish = getattr(events, "publish", None)
+
+    if callable(publish):
+        try:
+            publish(
+                str(event_type),
+                dict(payload),
+                source="self_improvement",
+            )
+        except TypeError:
+            try:
+                publish(
+                    str(event_type),
+                    dict(payload),
+                )
+            except Exception:
+                pass
+        except Exception:
+            pass
+
+
+# ----------------------------------------------------------------------
+# Conversion helpers
+# ----------------------------------------------------------------------
+
+
+def _first_available(
+    candidates: tuple[Any, ...],
+) -> Any:
+    return next(
+        (
+            candidate
+            for candidate in candidates
+            if candidate is not None
+        ),
+        None,
+    )
+
+
+def _resolve_method(
+    target: Any,
+    names: tuple[str, ...],
+) -> Any:
+    for name in names:
+        method = getattr(target, name, None)
+
+        if callable(method):
+            return method
+
+    raise RuntimeError(
+        f"{type(target).__name__} exposes no supported method: "
+        f"{', '.join(names)}."
+    )
+
+
+def _invoke_attempts(
+    attempts: tuple[Any, ...],
+) -> Any:
+    last_error: Optional[TypeError] = None
+
+    for attempt in attempts:
+        try:
+            return attempt()
+        except TypeError as exc:
+            last_error = exc
+
+    if last_error is not None:
+        raise last_error
+
+    raise RuntimeError(
+        "No invocation attempts were provided."
+    )
+
+
+def _to_plain(
+    value: Any,
+) -> Any:
+    if value is None:
+        return None
+
+    if isinstance(value, Mapping):
+        return {
+            str(key): _to_plain(item)
+            for key, item in value.items()
+        }
+
+    if isinstance(value, (list, tuple, set)):
+        return [
+            _to_plain(item)
+            for item in value
+        ]
+
+    method = getattr(value, "to_dict", None)
+
+    if callable(method):
+        try:
+            return _to_plain(method())
+        except Exception:
+            pass
+
+    attributes = getattr(value, "__dict__", None)
+
+    if isinstance(attributes, Mapping):
+        return {
+            str(key): _to_plain(item)
+            for key, item in attributes.items()
+            if not str(key).startswith("_")
+        }
+
+    return value
+
+
+def _as_dict(
+    value: Any,
+) -> dict[str, Any]:
+    plain = _to_plain(value)
+
+    if isinstance(plain, Mapping):
+        return dict(plain)
+
+    if plain is None:
+        return {}
+
+    return {"value": plain}
+
+
+def _preview_to_dict(
+    preview: PreviewDiff,
+) -> dict[str, Any]:
+    method = getattr(preview, "to_dict", None)
+
+    if callable(method):
+        value = method()
+
+        if isinstance(value, Mapping):
+            return dict(value)
+
+    return _as_dict(preview)
+
+
+def _normalise_operation_result(
+    result: Any,
+    *,
+    default_message: str,
+) -> dict[str, Any]:
+    if isinstance(result, bool):
+        return {
+            "success": result,
+            "message": (
+                default_message
+                if result
+                else "Operation failed."
+            ),
+        }
+
+    value = _as_dict(result)
+
+    if not value:
+        value = {
+            "success": True,
+            "message": default_message,
+        }
+    else:
+        value.setdefault("success", True)
+        value.setdefault("message", default_message)
+
+    return value
+
+
+def _normalise_verification_result(
+    result: Any,
+) -> tuple[bool, str]:
+    if isinstance(result, bool):
+        return (
+            result,
+            "Verification passed."
+            if result
+            else "Verification failed.",
+        )
+
+    value = _as_dict(result)
+
+    if value:
+        if "passed" in value:
+            passed = bool(value.get("passed"))
+        elif "success" in value:
+            passed = bool(value.get("success"))
+        elif "valid" in value:
+            passed = bool(value.get("valid"))
+        else:
+            status = str(
+                value.get("status") or ""
+            ).lower()
+            passed = status in {
+                "passed",
+                "success",
+                "verified",
+                "valid",
+            }
+
+        message = str(
+            value.get("message")
+            or value.get("summary")
+            or (
+                "Verification passed."
+                if passed
+                else "Verification failed."
+            )
+        )
+        return passed, message
+
+    text = str(result or "").strip()
+    lowered = text.lower()
+    passed = bool(text) and not any(
+        word in lowered
+        for word in (
+            "fail",
+            "error",
+            "invalid",
+        )
+    )
+
+    return (
+        passed,
+        text
+        or (
+            "Verification passed."
+            if passed
+            else "Verification failed."
+        ),
+    )
+
+
+def _session_summary(
+    session: Any,
+) -> dict[str, Any]:
+    return {
+        "session_id": str(
+            getattr(session, "session_id", "")
+        ),
+        "status": str(
+            getattr(session, "status", "")
+        ),
+        "progress_percent": int(
+            getattr(session, "progress_percent", 0)
+            or 0
+        ),
+        "change_id": str(
+            getattr(session, "change_id", "")
+        ),
+        "error": str(
+            getattr(session, "error", "")
+        ),
+        "updated_at": str(
+            getattr(session, "updated_at", "")
+        ),
+    }
+
+
+__all__ = [
+    "RuntimeRepairAdapter",
+    "build_self_improvement_runtime",
+    "register_self_improvement_runtime",
+    "self_improvement_runtime_status",
+    "shutdown_self_improvement_runtime",
+]

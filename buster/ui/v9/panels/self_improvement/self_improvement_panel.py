@@ -28,6 +28,12 @@ from .diff_generator import DiffGenerator
 from .preview_diff_panel import PreviewDiff
 from .preview_diff_worker import PreviewDiffWorker
 
+from PySide6.QtCore import QThreadPool
+
+from buster.ui.v9.panels.self_improvement.verification.verification_worker import (
+    VerificationWorker,
+)
+
 
 
 class _SelfImprovementWorker(QObject):
@@ -95,6 +101,8 @@ class SelfImprovementPanel(QFrame):
         self._current_review: dict[str, Any] | None = None
         self._current_plan: dict[str, Any] | None = None
         self._current_preview: PreviewDiff | None = None
+        self._rewarded_verifications: set[str] = set()
+        self._verification_worker = None
 
         self.setObjectName("SelfImprovementPanel")
 
@@ -440,6 +448,10 @@ class SelfImprovementPanel(QFrame):
         except Exception as exc:
             self._preview_failed(str(exc))
             return
+        
+        reward_key = self._verification_reward_key(preview)
+        self._rewarded_verifications.discard(reward_key)
+
 
         self._current_preview = preview
         self.finding_details.show_diff(preview)
@@ -489,6 +501,19 @@ class SelfImprovementPanel(QFrame):
             "invalid",
             message,
         )
+        recorder = getattr(
+            self.runtime_core,
+            "record_evolution_action",
+            None,
+        )
+
+        if callable(recorder):
+            recorder(
+                "repair",
+                success=False,
+            )
+        
+        
         self.finding_details.set_action_output(
             f"Could not apply the approved patch:\n{message}"
         )
@@ -956,45 +981,170 @@ class SelfImprovementPanel(QFrame):
             )
             return
 
-        self.finding_details.set_preview_validation(
-            "running",
-            "Running verification...",
-        )
+        file_path = str(preview.file_path or "").strip()
 
-        verifier = self._resolve_verifier()
-        if verifier is None:
-            self.finding_details.set_preview_validation(
-                "warning",
-                "Changes were applied, but no verification service is "
-                "connected."
-            )
-            self.status_label.setText(
-                "Applied; verification service unavailable"
-            )
-            return
-
-        try:
-            result = self._invoke_verifier(verifier, preview)
-        except Exception as exc:
+        if not file_path:
             self.finding_details.set_preview_validation(
                 "invalid",
-                str(exc),
+                "The preview does not identify a file to verify.",
             )
             self.finding_details.set_action_output(
-                f"Verification failed:\n{exc}"
+                "Verification cannot run because this preview has no file path."
             )
             self.status_label.setText("Verification failed")
             return
 
-        passed, message = self._normalise_verification_result(result)
+        if self._verification_worker is not None:
+            self.finding_details.set_action_output(
+                "Verification is already running."
+            )
+            return
+
+        self._current_preview = preview
+
+        self.finding_details.set_preview_busy(
+            True,
+            "Running verification...",
+        )
+        self.finding_details.set_preview_validation(
+            "running",
+            "Running verification in the background...",
+        )
+        self.status_label.setText("Running verification")
+        
+        print("VERIFY FILE:", repr(file_path))
+        print("PROJECT ROOT:", self.runtime_core.root)
+
+        worker = VerificationWorker(
+            project_root=self.runtime_core.root,
+            files=[file_path],
+            change_id=str(
+                preview.metadata.get("change_id", "")
+            ),
+        )
+
+        worker.signals.progress.connect(
+            self._verification_progress
+        )
+        worker.signals.finished.connect(
+            lambda report, p=preview: self._verification_finished(
+                report,
+                p,
+            )
+        )
+        worker.signals.failed.connect(
+            lambda message, p=preview: self._verification_failed(
+                message,
+                p,
+            )
+        )
+
+        self._verification_worker = worker
+        QThreadPool.globalInstance().start(worker)
+
+    def _verification_reward_key(
+        self,
+        preview: PreviewDiff,
+    ) -> str:
+        change_id = str(
+            getattr(preview, "change_id", "") or ""
+        ).strip()
+
+        if change_id:
+            return change_id
+
+        file_path = str(
+            getattr(preview, "file_path", "") or ""
+        ).strip()
+
+        patch = str(
+            getattr(preview, "patch", "") or ""
+        )
+
+        return f"{file_path}:{hash(patch)}"
+        
+    @Slot(str)
+    def _verification_progress(self, message: str) -> None:
+        self.status_label.setText(str(message))
+
+
+    def _verification_finished(
+        self,
+        report: Any,
+        preview: PreviewDiff,
+    ) -> None:
+        self.finding_details.set_preview_busy(False)
+
+        passed, message = self._normalise_verification_result(
+            report
+        )
+
+        recorder = getattr(
+            self.runtime_core,
+            "record_evolution_action",
+            None,
+        )
+
+        reward_key = self._verification_reward_key(preview)
+
+        if reward_key not in self._rewarded_verifications:
+            if callable(recorder):
+                recorder(
+                    "repair",
+                    success=passed,
+                )
+
+            self._rewarded_verifications.add(reward_key)
+
         self.finding_details.set_preview_validation(
             "valid" if passed else "invalid",
             message,
         )
         self.finding_details.set_action_output(message)
+
         self.status_label.setText(
-            "Verification passed" if passed else "Verification failed"
+            "Verification passed"
+            if passed
+            else "Verification failed"
         )
+
+        self._verification_worker = None
+
+
+    def _verification_failed(
+        self,
+        message: str,
+        preview: PreviewDiff,
+    ) -> None:
+        self.finding_details.set_preview_busy(False)
+
+        self.finding_details.set_preview_validation(
+            "invalid",
+            str(message),
+        )
+        self.finding_details.set_action_output(
+            f"Verification failed:\n{message}"
+        )
+        self.status_label.setText("Verification failed")
+
+        recorder = getattr(
+            self.runtime_core,
+            "record_evolution_action",
+            None,
+        )
+
+        reward_key = self._verification_reward_key(preview)
+
+        if reward_key not in self._rewarded_verifications:
+            if callable(recorder):
+                recorder(
+                    "repair",
+                    success=False,
+                )
+
+            self._rewarded_verifications.add(reward_key)
+
+        self._verification_worker = None    
 
     @Slot(object)
     def _reject_preview(self, value: Any) -> None:
@@ -1037,25 +1187,59 @@ class SelfImprovementPanel(QFrame):
         return None
 
     def _resolve_patch_applier(self) -> Any:
-        service = getattr(
+        scan_service = getattr(
             self.runtime_core,
             "self_improvement",
+            None,
+        )
+
+        repair_service = getattr(
+            self.runtime_core,
+            "self_improvement_service",
+            None,
+        )
+
+        repair_adapter = getattr(
+            repair_service,
+            "runtime_adapter",
             None,
         )
 
         candidates = (
             getattr(self.runtime_core, "patch_applier", None),
             getattr(self.runtime_core, "apply_changes", None),
-            getattr(service, "patch_applier", None),
-            getattr(service, "apply_changes", None),
-            getattr(service, "apply_patch", None),
+
+            getattr(scan_service, "patch_applier", None),
+            getattr(scan_service, "apply_changes", None),
+            getattr(scan_service, "apply_patch", None),
+
+            getattr(repair_service, "patch_applier", None),
+            getattr(repair_service, "apply_changes", None),
+            getattr(repair_service, "apply_patch", None),
+
+            getattr(repair_adapter, "patch_applier", None),
+            getattr(repair_adapter, "apply_changes", None),
+            getattr(repair_adapter, "apply_patch", None),
         )
 
         for candidate in candidates:
             if candidate is not None:
                 return candidate
 
-        return None
+        try:
+            from buster.ui.v9.panels.self_improvement.patch_applier import (
+                PatchApplier,
+            )
+
+            return PatchApplier(
+                project_root=getattr(
+                    self.runtime_core,
+                    "root",
+                    ".",
+                )
+            )
+        except Exception:
+            return None
 
     def _resolve_verifier(self) -> Any:
         service = getattr(

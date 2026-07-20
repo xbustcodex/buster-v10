@@ -6,5 +6,455 @@
     },
     "source": "test",
     "timestamp": "2026-06-29T05:16:44.313570Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "repair",
+      "success": true,
+      "xp_gained": 20
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T02:22:50.398738Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 1,
+      "current_xp": 20,
+      "xp_to_next_level": 100,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 78.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 2,
+        "testing": 1,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T02:22:50.399748Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "repair",
+      "success": true,
+      "xp_gained": 20
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T02:23:48.559351Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 1,
+      "current_xp": 40,
+      "xp_to_next_level": 100,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 81.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 3,
+        "testing": 1,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T02:23:48.560387Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "repair",
+      "success": true,
+      "xp_gained": 20
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T03:33:33.905673Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 1,
+      "current_xp": 60,
+      "xp_to_next_level": 100,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 84.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 4,
+        "testing": 1,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T03:33:33.906626Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "repair",
+      "success": true,
+      "xp_gained": 20
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T03:49:32.774600Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 1,
+      "current_xp": 80,
+      "xp_to_next_level": 100,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 87.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 5,
+        "testing": 1,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T03:49:32.777600Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "repair",
+      "success": true,
+      "xp_gained": 20
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T04:21:09.075400Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 2,
+      "current_xp": 0,
+      "xp_to_next_level": 125,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 90.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 5,
+        "testing": 1,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T04:21:09.076399Z"
+  },
+  {
+    "type": "level.progressed",
+    "payload": {
+      "level": 2,
+      "current_xp": 0,
+      "xp_to_next_level": 125,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 90.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 5,
+        "testing": 1,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T04:21:09.077743Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "test_run",
+      "success": true,
+      "xp_gained": 5
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T05:46:50.034124Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 2,
+      "current_xp": 5,
+      "xp_to_next_level": 125,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 91.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 5,
+        "testing": 2,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T05:46:50.035124Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "repair",
+      "success": true,
+      "xp_gained": 20
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T05:47:02.453449Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 2,
+      "current_xp": 25,
+      "xp_to_next_level": 125,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 94.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 5,
+        "testing": 2,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T05:47:02.454446Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "repair",
+      "success": true,
+      "xp_gained": 20
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T05:50:30.768539Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 2,
+      "current_xp": 45,
+      "xp_to_next_level": 125,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 97.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 5,
+        "testing": 2,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T05:50:30.770529Z"
+  },
+  {
+    "type": "experience.recorded",
+    "payload": {
+      "action_type": "repair",
+      "success": false,
+      "xp_gained": -10
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T05:50:39.846138Z"
+  },
+  {
+    "type": "evolution.changed",
+    "payload": {
+      "level": 2,
+      "current_xp": 35,
+      "xp_to_next_level": 125,
+      "permission_rank": "L1_LOCAL",
+      "trust_score": 91.0,
+      "mood": "Focused",
+      "dominant_drive": "builder",
+      "active_goal": "Initialize system monitoring structures.",
+      "skills": {},
+      "capability_trust": {
+        "file_editing": 4,
+        "testing": 2,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+      },
+      "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+      },
+      "drives_matrix": {
+        "helping": 70,
+        "builder": 85,
+        "learning": 90,
+        "protection": 60,
+        "curiosity": 80
+      }
+    },
+    "source": "buster",
+    "timestamp": "2026-07-20T05:50:39.849218Z"
   }
 ]

@@ -1,0 +1,24 @@
+{
+    "level": 2,
+    "current_xp": 45,
+    "xp_to_next_level": 125,
+    "permission_rank": "L1_LOCAL",
+    "trust_score": 97.0,
+    "mood": "Focused",
+    "dominant_drive": "builder",
+    "active_goal": "Initialize system monitoring structures.",
+    "skills": {},
+    "capability_trust": {
+        "file_editing": 5,
+        "testing": 2,
+        "git_operations": 1,
+        "deployment": 0,
+        "system_maintenance": 1,
+        "esp32_operations": 0
+    },
+    "agent_levels": {
+        "builder": 1,
+        "fixer": 1,
+        "reviewer": 1
+    }
+}

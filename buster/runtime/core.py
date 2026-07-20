@@ -3,9 +3,17 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict
 
+from buster.ui.v9.panels.self_improvement.verification.verification_engine import (
+    VerificationEngine,
+)
+
 from buster.intelligence.agent_tracker import AgentTracker
 from buster.intelligence.runtime_monitor import RuntimeMonitor
 from buster.intelligence.runtime_snapshot import RuntimeSnapshot
+
+from buster.core.event_bus import main_event_bus
+from buster.experience.evolution_state import EvolutionState
+from buster.experience.engine import ExperienceEngine
 
 from .dispatcher import RuntimeDispatcher
 from .sdk_bootstrap import build_sdk_runtime
@@ -95,6 +103,26 @@ class BusterRuntimeCore:
         self.autonomy_engine = AutonomyEngine(
             state_path=self.root / "data" / "autonomy_state.json",
             history_path=self.root / "data" / "autonomy_history.json",
+        )
+        
+        # --------------------------------------------------
+        # Evolution Runtime
+        # --------------------------------------------------
+
+        self.evolution = EvolutionState(
+            state_dir=str(self.root / "data"),
+            event_bus=main_event_bus,
+        )
+         
+        # Compatibility alias used by DashboardWindow
+        self.identity = self.evolution
+
+        self.experience_engine = ExperienceEngine(
+            data_dir=str(self.root / "data"),
+        )
+        
+        self.verification_service = VerificationEngine(
+            project_root=self.root,
         )
 
         self.execution_engine = ExecutionEngine(
@@ -554,6 +582,33 @@ class BusterRuntimeCore:
     def active_repair_sessions(self):
         return self.self_improvement_service.active_sessions()        
 
+
+    def record_evolution_action(
+        self,
+        action: str,
+        *,
+        success: bool,
+    ) -> None:
+        experience_engine = getattr(
+            self,
+            "experience_engine",
+            None,
+        )
+        evolution = getattr(
+            self,
+            "evolution",
+            None,
+        )
+
+        if experience_engine is None or evolution is None:
+            return
+
+        experience_engine.process_evolution_xp(
+            evolution,
+            main_event_bus,
+            action,
+            success=success,
+        )
 
 def create_runtime_core(
     root: str | Path = ".",

@@ -10,7 +10,7 @@
     "strategy": "plan_build_test_fix_verify",
     "plugins": [],
     "patterns": [],
-    "created_at": "2026-07-18T06:42:52Z"
+    "created_at": "2026-07-20T05:46:37Z"
   },
   "active_jobs": [
     {
@@ -70,9 +70,96 @@
       "job_id": "fc77950d-7dd5-4ee8-8686-b345fd1e0718",
       "created_at": "2026-07-18T06:42:52Z",
       "updated_at": "2026-07-18T06:42:52Z"
+    },
+    {
+      "title": "Self Improvement: Review large uncommitted change set",
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project": "buster-v10",
+      "project_type": "python",
+      "status": "queued",
+      "assigned_agents": [
+        "Builder",
+        "Tester",
+        "Fixer",
+        "Reviewer",
+        "Verifier"
+      ],
+      "decision": {
+        "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "project_type": "python",
+        "recommended_action": "plan_build_test_fix_verify",
+        "confidence": 0.88,
+        "reason": "Build request detected; use the full agent pipeline.",
+        "strategy": "plan_build_test_fix_verify",
+        "plugins": [],
+        "patterns": [],
+        "created_at": "2026-07-20T01:38:43Z"
+      },
+      "result": {},
+      "job_id": "8a2169ab-317e-41c6-8dcc-24215cc700f9",
+      "created_at": "2026-07-20T01:38:43Z",
+      "updated_at": "2026-07-20T01:38:43Z"
+    },
+    {
+      "title": "Self Improvement: Review large uncommitted change set",
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project": "buster-v10",
+      "project_type": "python",
+      "status": "queued",
+      "assigned_agents": [
+        "Builder",
+        "Tester",
+        "Fixer",
+        "Reviewer",
+        "Verifier"
+      ],
+      "decision": {
+        "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "project_type": "python",
+        "recommended_action": "plan_build_test_fix_verify",
+        "confidence": 0.88,
+        "reason": "Build request detected; use the full agent pipeline.",
+        "strategy": "plan_build_test_fix_verify",
+        "plugins": [],
+        "patterns": [],
+        "created_at": "2026-07-20T03:30:48Z"
+      },
+      "result": {},
+      "job_id": "8cdba8eb-d804-468a-b8c8-60b1b592799e",
+      "created_at": "2026-07-20T03:30:48Z",
+      "updated_at": "2026-07-20T03:30:48Z"
+    },
+    {
+      "title": "Self Improvement: Review large uncommitted change set",
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project": "buster-v10",
+      "project_type": "python",
+      "status": "queued",
+      "assigned_agents": [
+        "Builder",
+        "Tester",
+        "Fixer",
+        "Reviewer",
+        "Verifier"
+      ],
+      "decision": {
+        "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "project_type": "python",
+        "recommended_action": "plan_build_test_fix_verify",
+        "confidence": 0.88,
+        "reason": "Build request detected; use the full agent pipeline.",
+        "strategy": "plan_build_test_fix_verify",
+        "plugins": [],
+        "patterns": [],
+        "created_at": "2026-07-20T04:44:06Z"
+      },
+      "result": {},
+      "job_id": "2cea2384-5ec4-4590-897f-c2c0f735ab5e",
+      "created_at": "2026-07-20T04:44:06Z",
+      "updated_at": "2026-07-20T04:44:06Z"
     }
   ],
-  "completed_jobs": 0,
+  "completed_jobs": 1,
   "failed_jobs": 0,
-  "updated_at": "2026-07-19T08:43:02Z"
+  "updated_at": "2026-07-20T05:47:02Z"
 }

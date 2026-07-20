@@ -180,6 +180,26 @@ class ExecutionEngine:
             self._complete_job(job_obj, False, result)
             return self._finish(result)
 
+    def _record_evolution_action(self, action: str, *, success: bool) -> None:
+        """Forward a completed runtime outcome to the central evolution system.
+
+        Evolution tracking must never interrupt job execution, so missing runtime
+        wiring or telemetry failures are safely ignored.
+        """
+        runtime = self.runtime_core
+        if runtime is None:
+            return
+
+        recorder = getattr(runtime, "record_evolution_action", None)
+        if not callable(recorder):
+            return
+
+        try:
+            recorder(action, success=bool(success))
+        except Exception:
+            # Progress telemetry is non-critical and must not break autonomy jobs.
+            return
+
     def register_step_handler(self, step: str, handler: Callable[[Dict[str, Any]], Any]) -> None:
         if not step or not callable(handler):
             raise ValueError("step and callable handler are required")
@@ -242,6 +262,10 @@ class ExecutionEngine:
                 raw = self._run_agent(agent, step, payload)
 
             success, message, data = self._normalise(raw)
+
+            if step in {"test", "behavioral_test"}:
+                self._record_evolution_action("test_run", success=success)
+
             return StepResult(
                 step=step,
                 success=success,
@@ -253,6 +277,9 @@ class ExecutionEngine:
                 finished_at=utc_now(),
             )
         except Exception as exc:
+            if step in {"test", "behavioral_test"}:
+                self._record_evolution_action("test_run", success=False)
+
             return StepResult(
                 step=step,
                 success=False,
@@ -341,6 +368,13 @@ class ExecutionEngine:
         return True, str(raw), {"output": raw}
 
     def _complete_job(self, job: AutonomyJob, success: bool, result: ExecutionResult) -> None:
+        repair_attempted = any(
+            step.get("step") == "fix_if_needed"
+            for step in result.steps
+        )
+        if repair_attempted:
+            self._record_evolution_action("repair", success=success)
+
         if self.autonomy_engine is None or not hasattr(self.autonomy_engine, "complete_job"):
             return
         payload = {

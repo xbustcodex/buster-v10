@@ -1,5 +1,5 @@
 Folder PATH listing for volume Windows
-Volume serial number is 00000013 F6BF:F600
+Volume serial number is 00000054 F6BF:F600
 C:.
 |   .gitignore
 |   add_buster_ai_os_1_shell.py
@@ -17,10 +17,14 @@ C:.
 |   Buster.spec
 |   CONTRIBUTING.md
 |   fix_v9_ui_panels_and_resize.py
+|   fulltree.txt
+|   fulltree2.txt
+|   install_self_improvement_compatibility.py
 |   main.py
 |   migration_report.json
 |   pytest.ini
 |   README.md
+|   README.txt
 |   README_V10_REFACTOR.md
 |   reorganize_self_improvement.py
 |   requirements.txt
@@ -31,7 +35,6 @@ C:.
 |   run_v11_live_runtime_ui.py
 |   run_v9_ui_preview.py
 |   setup_professional_project.py
-|   treefull.txt
 |   version.json
 |   vision_recording_2026-07-12_13-45-05.avi
 |   vision_recording_2026-07-12_14-56-08.avi
@@ -162,6 +165,8 @@ C:.
 |   |           execution_engine.cpython-312.pyc
 |   |           next_actions.cpython-312.pyc
 |   |           records.cpython-312.pyc
+|   |           repair_planner.cpython-312.pyc
+|   |           repair_plan_worker.cpython-312.pyc
 |   |           self_improvement_service.cpython-312.pyc
 |   |           __init__.cpython-312.pyc
 |   |           
@@ -387,6 +392,7 @@ C:.
 |   +---experience
 |   |   |   design_decisions.py
 |   |   |   engine.py
+|   |   |   evolution_state.py
 |   |   |   project_experience.py
 |   |   |   records.py
 |   |   |   skills.py
@@ -561,6 +567,7 @@ C:.
 |   +---memory
 |   |   |   engine.py
 |   |   |   knowledge.py
+|   |   |   manager.py
 |   |   |   __init__.py
 |   |   |   
 |   |   \---__pycache__
@@ -624,6 +631,10 @@ C:.
 |   |           scheduler.cpython-312.pyc
 |   |           __init__.cpython-312.pyc
 |   |           
+|   +---motivation
+|   |       goal_engine.py
+|   |       __init__.py
+|   |       
 |   +---multi_agent
 |   |   |   blackboard.py
 |   |   |   collaboration_runtime.py
@@ -684,6 +695,14 @@ C:.
 |   |           screen_feed.cpython-312.pyc
 |   |           __init__.cpython-312.pyc
 |   |           
+|   +---personality
+|   |       emotions.py
+|   |       identity.py
+|   |       moods.py
+|   |       motivations.py
+|   |       values.py
+|   |       __init__.py
+|   |       
 |   +---plugins
 |   |   |   loader.py
 |   |   |   manager.py
@@ -784,6 +803,7 @@ C:.
 |   |   |   plugin_api.py
 |   |   |   plugin_inspector.py
 |   |   |   registry_agent.py
+|   |   |   repair_event_stream.py
 |   |   |   reviewer_agent.py
 |   |   |   runtime_registry.py
 |   |   |   scheduler.py
@@ -791,6 +811,7 @@ C:.
 |   |   |   sdk_agent_manager.py
 |   |   |   sdk_bootstrap.py
 |   |   |   sdk_runtime.py
+|   |   |   self_improvement_runtime.py
 |   |   |   state_store.py
 |   |   |   storage.py
 |   |   |   tester_agent.py
@@ -826,6 +847,7 @@ C:.
 |   |           plugin_api.cpython-312.pyc
 |   |           plugin_inspector.cpython-312.pyc
 |   |           registry_agent.cpython-312.pyc
+|   |           repair_event_stream.cpython-312.pyc
 |   |           reviewer_agent.cpython-312.pyc
 |   |           runtime_registry.cpython-312.pyc
 |   |           scheduler.cpython-312.pyc
@@ -833,6 +855,7 @@ C:.
 |   |           sdk_agent_manager.cpython-312.pyc
 |   |           sdk_bootstrap.cpython-312.pyc
 |   |           sdk_runtime.cpython-312.pyc
+|   |           self_improvement_runtime.cpython-312.pyc
 |   |           state_store.cpython-312.pyc
 |   |           storage.cpython-312.pyc
 |   |           tester_agent.cpython-312.pyc
@@ -969,6 +992,7 @@ C:.
 |   |   |   |   |   face_panel.py
 |   |   |   |   |   lifecycle_panel.py
 |   |   |   |   |   mission_control_panel.py
+|   |   |   |   |   mission_control_repair_binding.py
 |   |   |   |   |   notification_center_panel.py
 |   |   |   |   |   project_panel.py
 |   |   |   |   |   python main.py
@@ -981,6 +1005,13 @@ C:.
 |   |   |   |   |   workspace_panel.py
 |   |   |   |   |   __init__.py
 |   |   |   |   |   
+|   |   |   |   +---evolution_panel
+|   |   |   |   |       drive_card.py
+|   |   |   |   |       evolution_panel.py
+|   |   |   |   |       level_card.py
+|   |   |   |   |       skills_card.py
+|   |   |   |   |       __init__.py
+|   |   |   |   |       
 |   |   |   |   +---runtime_panel
 |   |   |   |   |   |   console_panel.py
 |   |   |   |   |   |   event_card.py
@@ -1012,6 +1043,8 @@ C:.
 |   |   |   |   |           
 |   |   |   |   +---self_improvement
 |   |   |   |   |   |   apply_changes_worker.py
+|   |   |   |   |   |   backup_manager.py
+|   |   |   |   |   |   change_manifest.py
 |   |   |   |   |   |   code_review_worker.py
 |   |   |   |   |   |   diff_generator.py
 |   |   |   |   |   |   execution_card.py
@@ -1020,48 +1053,96 @@ C:.
 |   |   |   |   |   |   history_panel.py
 |   |   |   |   |   |   job_queue.py
 |   |   |   |   |   |   mode_selector.py
+|   |   |   |   |   |   patch_applier.py
 |   |   |   |   |   |   preview_diff_panel.py
 |   |   |   |   |   |   preview_diff_worker.py
 |   |   |   |   |   |   project_health_card.py
 |   |   |   |   |   |   repair_plan_panel.py
+|   |   |   |   |   |   repair_plan_worker.py
+|   |   |   |   |   |   repair_session.py
+|   |   |   |   |   |   repair_session_store.py
+|   |   |   |   |   |   rollback_manager.py
 |   |   |   |   |   |   self_improvement_panel.py
+|   |   |   |   |   |   self_improvement_service.py
+|   |   |   |   |   |   session_manager.py
 |   |   |   |   |   |   __init__.py
 |   |   |   |   |   |   
 |   |   |   |   |   +---apply
-|   |   |   |   |   |       apply_changes_worker.py
-|   |   |   |   |   |       backup_manager.py
-|   |   |   |   |   |       change_manifest.py
-|   |   |   |   |   |       rollback_manager.py
-|   |   |   |   |   |       __init__.py
-|   |   |   |   |   |       
+|   |   |   |   |   |   |   apply_changes_worker.py
+|   |   |   |   |   |   |   backup_manager.py
+|   |   |   |   |   |   |   change_manifest.py
+|   |   |   |   |   |   |   preview_diff_panel.py
+|   |   |   |   |   |   |   rollback_manager.py
+|   |   |   |   |   |   |   __init__.py
+|   |   |   |   |   |   |   
+|   |   |   |   |   |   \---__pycache__
+|   |   |   |   |   |           apply_changes_worker.cpython-312.pyc
+|   |   |   |   |   |           backup_manager.cpython-312.pyc
+|   |   |   |   |   |           change_manifest.cpython-312.pyc
+|   |   |   |   |   |           preview_diff_panel.cpython-312.pyc
+|   |   |   |   |   |           rollback_manager.cpython-312.pyc
+|   |   |   |   |   |           __init__.cpython-312.pyc
+|   |   |   |   |   |           
 |   |   |   |   |   +---session
-|   |   |   |   |   |       repair_session.py
-|   |   |   |   |   |       repair_session_store.py
-|   |   |   |   |   |       session_manager.py
-|   |   |   |   |   |       __init__.py
-|   |   |   |   |   |       
+|   |   |   |   |   |   |   repair_session.py
+|   |   |   |   |   |   |   repair_session_store.py
+|   |   |   |   |   |   |   session_manager.py
+|   |   |   |   |   |   |   __init__.py
+|   |   |   |   |   |   |   
+|   |   |   |   |   |   \---__pycache__
+|   |   |   |   |   |           repair_session.cpython-312.pyc
+|   |   |   |   |   |           repair_session_store.cpython-312.pyc
+|   |   |   |   |   |           session_manager.cpython-312.pyc
+|   |   |   |   |   |           __init__.cpython-312.pyc
+|   |   |   |   |   |           
 |   |   |   |   |   +---verification
-|   |   |   |   |   |       behavioral_checker.py
-|   |   |   |   |   |       formatter_checker.py
-|   |   |   |   |   |       import_checker.py
-|   |   |   |   |   |       lint_checker.py
-|   |   |   |   |   |       syntax_checker.py
-|   |   |   |   |   |       unit_test_runner.py
-|   |   |   |   |   |       verification_engine.py
-|   |   |   |   |   |       verification_report.py
-|   |   |   |   |   |       verification_worker.py
-|   |   |   |   |   |       __init__.py
-|   |   |   |   |   |       
+|   |   |   |   |   |   |   behavioral_checker.py
+|   |   |   |   |   |   |   formatter_checker.py
+|   |   |   |   |   |   |   import_checker.py
+|   |   |   |   |   |   |   lint_checker.py
+|   |   |   |   |   |   |   syntax_checker.py
+|   |   |   |   |   |   |   unit_test_runner.py
+|   |   |   |   |   |   |   verification_engine.py
+|   |   |   |   |   |   |   verification_report.py
+|   |   |   |   |   |   |   verification_worker.py
+|   |   |   |   |   |   |   __init__.py
+|   |   |   |   |   |   |   
+|   |   |   |   |   |   \---__pycache__
+|   |   |   |   |   |           behavioral_checker.cpython-312.pyc
+|   |   |   |   |   |           formatter_checker.cpython-312.pyc
+|   |   |   |   |   |           import_checker.cpython-312.pyc
+|   |   |   |   |   |           lint_checker.cpython-312.pyc
+|   |   |   |   |   |           syntax_checker.cpython-312.pyc
+|   |   |   |   |   |           unit_test_runner.cpython-312.pyc
+|   |   |   |   |   |           verification_engine.cpython-312.pyc
+|   |   |   |   |   |           verification_report.cpython-312.pyc
+|   |   |   |   |   |           verification_worker.cpython-312.pyc
+|   |   |   |   |   |           __init__.cpython-312.pyc
+|   |   |   |   |   |           
 |   |   |   |   |   \---__pycache__
+|   |   |   |   |           apply_changes_worker.cpython-312.pyc
+|   |   |   |   |           backup_manager.cpython-312.pyc
+|   |   |   |   |           change_manifest.cpython-312.pyc
 |   |   |   |   |           code_review_worker.cpython-312.pyc
+|   |   |   |   |           diff_generator.cpython-312.pyc
 |   |   |   |   |           execution_card.cpython-312.pyc
 |   |   |   |   |           findings_table.cpython-312.pyc
 |   |   |   |   |           finding_details_panel.cpython-312.pyc
 |   |   |   |   |           history_panel.cpython-312.pyc
 |   |   |   |   |           job_queue.cpython-312.pyc
 |   |   |   |   |           mode_selector.cpython-312.pyc
+|   |   |   |   |           patch_applier.cpython-312.pyc
+|   |   |   |   |           preview_diff_panel.cpython-312.pyc
+|   |   |   |   |           preview_diff_worker.cpython-312.pyc
 |   |   |   |   |           project_health_card.cpython-312.pyc
+|   |   |   |   |           repair_plan_panel.cpython-312.pyc
+|   |   |   |   |           repair_plan_worker.cpython-312.pyc
+|   |   |   |   |           repair_session.cpython-312.pyc
+|   |   |   |   |           repair_session_store.cpython-312.pyc
+|   |   |   |   |           rollback_manager.cpython-312.pyc
 |   |   |   |   |           self_improvement_panel.cpython-312.pyc
+|   |   |   |   |           self_improvement_service.cpython-312.pyc
+|   |   |   |   |           session_manager.cpython-312.pyc
 |   |   |   |   |           __init__.cpython-312.pyc
 |   |   |   |   |           
 |   |   |   |   \---__pycache__
@@ -1072,6 +1153,7 @@ C:.
 |   |   |   |           lifecycle_panel.cpython-312.pyc
 |   |   |   |           live_runtime_ui.cpython-312.pyc
 |   |   |   |           mission_control_panel.cpython-312.pyc
+|   |   |   |           mission_control_repair_binding.cpython-312.pyc
 |   |   |   |           notification_center_panel.cpython-312.pyc
 |   |   |   |           project_panel.cpython-312.pyc
 |   |   |   |           python main.cpython-312.pyc
@@ -1523,53 +1605,69 @@ C:.
 |   |   world_model_mind_state.json
 |   |   world_model_state.json
 |   |   
+|   +---compatibility_backup
+|   |       apply_changes_worker.py
+|   |       backup_manager.py
+|   |       change_manifest.py
+|   |       patch_applier.py
+|   |       repair_session.py
+|   |       repair_session_store.py
+|   |       rollback_manager.py
+|   |       session_manager.py
+|   |       
 |   +---faces
-|   \---migration_backups
-|       \---self_improvement_reorg_20260719_160521
-|           |   apply_changes_worker.py
-|           |   backup_manager.py
-|           |   change_manifest.py
-|           |   code_review_worker.py
-|           |   diff_generator.py
-|           |   execution_card.py
-|           |   findings_table.py
-|           |   finding_details_panel.py
-|           |   history_panel.py
-|           |   job_queue.py
-|           |   mode_selector.py
-|           |   preview_diff_panel.py
-|           |   preview_diff_worker.py
-|           |   project_health_card.py
-|           |   repair_plan_panel.py
-|           |   rollback_manager.py
-|           |   self_improvement_panel.py
-|           |   __init__.py
-|           |   
-|           +---verification
-|           |       apply_changes_worker.py
-|           |       behavioral_checker.py
-|           |       formatter_checker.py
-|           |       import_checker.py
-|           |       lint_checker.py
-|           |       repair_session.py
-|           |       syntax_checker.py
-|           |       unit_test_runner.py
-|           |       verification_engine.py
-|           |       verification_report.py
-|           |       verification_worker.py
-|           |       
-|           \---__pycache__
-|                   code_review_worker.cpython-312.pyc
-|                   execution_card.cpython-312.pyc
-|                   findings_table.cpython-312.pyc
-|                   finding_details_panel.cpython-312.pyc
-|                   history_panel.cpython-312.pyc
-|                   job_queue.cpython-312.pyc
-|                   mode_selector.cpython-312.pyc
-|                   project_health_card.cpython-312.pyc
-|                   self_improvement_panel.cpython-312.pyc
-|                   __init__.cpython-312.pyc
-|                   
+|   +---migration_backups
+|   |   \---self_improvement_reorg_20260719_160521
+|   |       |   apply_changes_worker.py
+|   |       |   backup_manager.py
+|   |       |   change_manifest.py
+|   |       |   code_review_worker.py
+|   |       |   diff_generator.py
+|   |       |   execution_card.py
+|   |       |   findings_table.py
+|   |       |   finding_details_panel.py
+|   |       |   history_panel.py
+|   |       |   job_queue.py
+|   |       |   mode_selector.py
+|   |       |   preview_diff_panel.py
+|   |       |   preview_diff_worker.py
+|   |       |   project_health_card.py
+|   |       |   repair_plan_panel.py
+|   |       |   rollback_manager.py
+|   |       |   self_improvement_panel.py
+|   |       |   __init__.py
+|   |       |   
+|   |       +---verification
+|   |       |       apply_changes_worker.py
+|   |       |       behavioral_checker.py
+|   |       |       formatter_checker.py
+|   |       |       import_checker.py
+|   |       |       lint_checker.py
+|   |       |       repair_session.py
+|   |       |       syntax_checker.py
+|   |       |       unit_test_runner.py
+|   |       |       verification_engine.py
+|   |       |       verification_report.py
+|   |       |       verification_worker.py
+|   |       |       
+|   |       \---__pycache__
+|   |               code_review_worker.cpython-312.pyc
+|   |               execution_card.cpython-312.pyc
+|   |               findings_table.cpython-312.pyc
+|   |               finding_details_panel.cpython-312.pyc
+|   |               history_panel.cpython-312.pyc
+|   |               job_queue.cpython-312.pyc
+|   |               mode_selector.cpython-312.pyc
+|   |               project_health_card.cpython-312.pyc
+|   |               self_improvement_panel.cpython-312.pyc
+|   |               __init__.cpython-312.pyc
+|   |               
+|   \---self_improvement
+|       |   repair_plan_cache.json
+|       |   
+|       +---backups
+|       +---manifests
+|       \---sessions
 +---docs
 |   +---architecture
 |   |       PLUGIN_API.md

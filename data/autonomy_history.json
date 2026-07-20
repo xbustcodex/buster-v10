@@ -146,5 +146,522 @@
       "updated_at": "2026-07-18T06:42:52Z"
     },
     "created_at": "2026-07-18T06:42:52Z"
+  },
+  {
+    "type": "decision",
+    "decision": {
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project_type": "python",
+      "recommended_action": "plan_build_test_fix_verify",
+      "confidence": 0.88,
+      "reason": "Build request detected; use the full agent pipeline.",
+      "strategy": "plan_build_test_fix_verify",
+      "plugins": [],
+      "patterns": [],
+      "created_at": "2026-07-20T01:38:43Z"
+    },
+    "plan": {
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project_type": "python",
+      "recommended_strategy": {
+        "name": "plan_build_test_fix_verify",
+        "description": "Plan first, build files, run tests, fix errors, verify result.",
+        "project_types": [
+          "python",
+          "desktop",
+          "general"
+        ],
+        "successes": 0,
+        "failures": 0,
+        "score": 0.75
+      },
+      "reusable_patterns": [],
+      "similar_experiences": [],
+      "plugins": [],
+      "steps": [
+        "Understand user request",
+        "Use strategy: plan_build_test_fix_verify",
+        "Assign agent team",
+        "Execute build/test/fix/verify loop",
+        "Record outcome in Learning Engine"
+      ]
+    },
+    "created_at": "2026-07-20T01:38:43Z"
+  },
+  {
+    "type": "job_created",
+    "job": {
+      "title": "Self Improvement: Review large uncommitted change set",
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project": "buster-v10",
+      "project_type": "python",
+      "status": "queued",
+      "assigned_agents": [
+        "Builder",
+        "Tester",
+        "Fixer",
+        "Reviewer",
+        "Verifier"
+      ],
+      "decision": {
+        "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "project_type": "python",
+        "recommended_action": "plan_build_test_fix_verify",
+        "confidence": 0.88,
+        "reason": "Build request detected; use the full agent pipeline.",
+        "strategy": "plan_build_test_fix_verify",
+        "plugins": [],
+        "patterns": [],
+        "created_at": "2026-07-20T01:38:43Z"
+      },
+      "result": {},
+      "job_id": "8a2169ab-317e-41c6-8dcc-24215cc700f9",
+      "created_at": "2026-07-20T01:38:43Z",
+      "updated_at": "2026-07-20T01:38:43Z"
+    },
+    "created_at": "2026-07-20T01:38:43Z"
+  },
+  {
+    "type": "decision",
+    "decision": {
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project_type": "python",
+      "recommended_action": "plan_build_test_fix_verify",
+      "confidence": 0.88,
+      "reason": "Build request detected; use the full agent pipeline.",
+      "strategy": "plan_build_test_fix_verify",
+      "plugins": [],
+      "patterns": [],
+      "created_at": "2026-07-20T03:30:48Z"
+    },
+    "plan": {
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project_type": "python",
+      "recommended_strategy": {
+        "name": "plan_build_test_fix_verify",
+        "description": "Plan first, build files, run tests, fix errors, verify result.",
+        "project_types": [
+          "python",
+          "desktop",
+          "general"
+        ],
+        "successes": 0,
+        "failures": 0,
+        "score": 0.75
+      },
+      "reusable_patterns": [],
+      "similar_experiences": [],
+      "plugins": [],
+      "steps": [
+        "Understand user request",
+        "Use strategy: plan_build_test_fix_verify",
+        "Assign agent team",
+        "Execute build/test/fix/verify loop",
+        "Record outcome in Learning Engine"
+      ]
+    },
+    "created_at": "2026-07-20T03:30:48Z"
+  },
+  {
+    "type": "job_created",
+    "job": {
+      "title": "Self Improvement: Review large uncommitted change set",
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project": "buster-v10",
+      "project_type": "python",
+      "status": "queued",
+      "assigned_agents": [
+        "Builder",
+        "Tester",
+        "Fixer",
+        "Reviewer",
+        "Verifier"
+      ],
+      "decision": {
+        "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "project_type": "python",
+        "recommended_action": "plan_build_test_fix_verify",
+        "confidence": 0.88,
+        "reason": "Build request detected; use the full agent pipeline.",
+        "strategy": "plan_build_test_fix_verify",
+        "plugins": [],
+        "patterns": [],
+        "created_at": "2026-07-20T03:30:48Z"
+      },
+      "result": {},
+      "job_id": "8cdba8eb-d804-468a-b8c8-60b1b592799e",
+      "created_at": "2026-07-20T03:30:48Z",
+      "updated_at": "2026-07-20T03:30:48Z"
+    },
+    "created_at": "2026-07-20T03:30:48Z"
+  },
+  {
+    "type": "decision",
+    "decision": {
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project_type": "python",
+      "recommended_action": "plan_build_test_fix_verify",
+      "confidence": 0.88,
+      "reason": "Build request detected; use the full agent pipeline.",
+      "strategy": "plan_build_test_fix_verify",
+      "plugins": [],
+      "patterns": [],
+      "created_at": "2026-07-20T04:44:06Z"
+    },
+    "plan": {
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project_type": "python",
+      "recommended_strategy": {
+        "name": "plan_build_test_fix_verify",
+        "description": "Plan first, build files, run tests, fix errors, verify result.",
+        "project_types": [
+          "python",
+          "desktop",
+          "general"
+        ],
+        "successes": 0,
+        "failures": 0,
+        "score": 0.75
+      },
+      "reusable_patterns": [],
+      "similar_experiences": [],
+      "plugins": [],
+      "steps": [
+        "Understand user request",
+        "Use strategy: plan_build_test_fix_verify",
+        "Assign agent team",
+        "Execute build/test/fix/verify loop",
+        "Record outcome in Learning Engine"
+      ]
+    },
+    "created_at": "2026-07-20T04:44:06Z"
+  },
+  {
+    "type": "job_created",
+    "job": {
+      "title": "Self Improvement: Review large uncommitted change set",
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project": "buster-v10",
+      "project_type": "python",
+      "status": "queued",
+      "assigned_agents": [
+        "Builder",
+        "Tester",
+        "Fixer",
+        "Reviewer",
+        "Verifier"
+      ],
+      "decision": {
+        "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "project_type": "python",
+        "recommended_action": "plan_build_test_fix_verify",
+        "confidence": 0.88,
+        "reason": "Build request detected; use the full agent pipeline.",
+        "strategy": "plan_build_test_fix_verify",
+        "plugins": [],
+        "patterns": [],
+        "created_at": "2026-07-20T04:44:06Z"
+      },
+      "result": {},
+      "job_id": "2cea2384-5ec4-4590-897f-c2c0f735ab5e",
+      "created_at": "2026-07-20T04:44:06Z",
+      "updated_at": "2026-07-20T04:44:06Z"
+    },
+    "created_at": "2026-07-20T04:44:06Z"
+  },
+  {
+    "type": "decision",
+    "decision": {
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project_type": "python",
+      "recommended_action": "plan_build_test_fix_verify",
+      "confidence": 0.88,
+      "reason": "Build request detected; use the full agent pipeline.",
+      "strategy": "plan_build_test_fix_verify",
+      "plugins": [],
+      "patterns": [],
+      "created_at": "2026-07-20T05:46:37Z"
+    },
+    "plan": {
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project_type": "python",
+      "recommended_strategy": {
+        "name": "plan_build_test_fix_verify",
+        "description": "Plan first, build files, run tests, fix errors, verify result.",
+        "project_types": [
+          "python",
+          "desktop",
+          "general"
+        ],
+        "successes": 0,
+        "failures": 0,
+        "score": 0.75
+      },
+      "reusable_patterns": [],
+      "similar_experiences": [],
+      "plugins": [],
+      "steps": [
+        "Understand user request",
+        "Use strategy: plan_build_test_fix_verify",
+        "Assign agent team",
+        "Execute build/test/fix/verify loop",
+        "Record outcome in Learning Engine"
+      ]
+    },
+    "created_at": "2026-07-20T05:46:37Z"
+  },
+  {
+    "type": "job_created",
+    "job": {
+      "title": "Self Improvement: Review large uncommitted change set",
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project": "buster-v10",
+      "project_type": "python",
+      "status": "queued",
+      "assigned_agents": [
+        "Builder",
+        "Tester",
+        "Fixer",
+        "Reviewer",
+        "Verifier"
+      ],
+      "decision": {
+        "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "project_type": "python",
+        "recommended_action": "plan_build_test_fix_verify",
+        "confidence": 0.88,
+        "reason": "Build request detected; use the full agent pipeline.",
+        "strategy": "plan_build_test_fix_verify",
+        "plugins": [],
+        "patterns": [],
+        "created_at": "2026-07-20T05:46:37Z"
+      },
+      "result": {},
+      "job_id": "020ea7cf-611c-4038-9eaa-d4923b705970",
+      "created_at": "2026-07-20T05:46:37Z",
+      "updated_at": "2026-07-20T05:46:37Z"
+    },
+    "created_at": "2026-07-20T05:46:37Z"
+  },
+  {
+    "type": "job_completed",
+    "success": true,
+    "job": {
+      "title": "Self Improvement: Review large uncommitted change set",
+      "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+      "project": "buster-v10",
+      "project_type": "python",
+      "status": "completed",
+      "assigned_agents": [
+        "Builder",
+        "Tester",
+        "Fixer",
+        "Reviewer",
+        "Verifier"
+      ],
+      "decision": {
+        "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+        "project_type": "python",
+        "recommended_action": "plan_build_test_fix_verify",
+        "confidence": 0.88,
+        "reason": "Build request detected; use the full agent pipeline.",
+        "strategy": "plan_build_test_fix_verify",
+        "plugins": [],
+        "patterns": [],
+        "created_at": "2026-07-20T05:46:37Z"
+      },
+      "result": {
+        "execution": {
+          "job_id": "020ea7cf-611c-4038-9eaa-d4923b705970",
+          "success": true,
+          "status": "completed",
+          "strategy": "general_safe_build",
+          "risk": {
+            "level": "low",
+            "risks": [],
+            "blockers": []
+          },
+          "steps": [
+            {
+              "step": "inspect",
+              "success": true,
+              "status": "completed",
+              "agent": "reviewer",
+              "message": "Step completed.",
+              "data": {
+                "agent": "reviewer_agent",
+                "status": "completed",
+                "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+                "runtime_files": 42,
+                "test_files": 32,
+                "findings": [
+                  "Runtime event state file exists; ensure generated data is not committed unless intentional."
+                ],
+                "recommendation": "Architecture looks valid. Keep generated data out of commits."
+              },
+              "started_at": "2026-07-20T05:46:37Z",
+              "finished_at": "2026-07-20T05:46:38Z"
+            },
+            {
+              "step": "plan",
+              "success": true,
+              "status": "completed",
+              "agent": "builder",
+              "message": "Builder Agent prepared the implementation plan.",
+              "data": {
+                "agent": "builder_agent",
+                "status": "completed",
+                "summary": "Builder Agent prepared the implementation plan.",
+                "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+                "actions": [
+                  "checked requested build scope",
+                  "prepared implementation placeholder",
+                  "recommended validation through tester agent"
+                ]
+              },
+              "started_at": "2026-07-20T05:46:38Z",
+              "finished_at": "2026-07-20T05:46:39Z"
+            },
+            {
+              "step": "build",
+              "success": true,
+              "status": "completed",
+              "agent": "builder",
+              "message": "Builder Agent prepared the implementation plan.",
+              "data": {
+                "agent": "builder_agent",
+                "status": "completed",
+                "summary": "Builder Agent prepared the implementation plan.",
+                "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+                "actions": [
+                  "checked requested build scope",
+                  "prepared implementation placeholder",
+                  "recommended validation through tester agent"
+                ]
+              },
+              "started_at": "2026-07-20T05:46:39Z",
+              "finished_at": "2026-07-20T05:46:39Z"
+            },
+            {
+              "step": "test",
+              "success": true,
+              "status": "completed",
+              "agent": "tester",
+              "message": "Command passed.",
+              "data": {
+                "success": true,
+                "message": "Command passed.",
+                "command": [
+                  "python",
+                  "-m",
+                  "pytest",
+                  "-q"
+                ],
+                "returncode": 0,
+                "stdout": "............................................................             [100%]\n60 passed in 9.21s\n",
+                "stderr": ""
+              },
+              "started_at": "2026-07-20T05:46:39Z",
+              "finished_at": "2026-07-20T05:46:50Z"
+            },
+            {
+              "step": "fix_if_needed",
+              "success": true,
+              "status": "completed",
+              "agent": "fixer",
+              "message": "Fixer Agent ran in safe mode and did not modify files.",
+              "data": {
+                "agent": "fixer_agent",
+                "status": "safe_noop",
+                "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+                "summary": "Fixer Agent ran in safe mode and did not modify files.",
+                "next_step": "Enable targeted patch mode when a concrete failing test or file issue is provided."
+              },
+              "started_at": "2026-07-20T05:46:50Z",
+              "finished_at": "2026-07-20T05:46:50Z"
+            },
+            {
+              "step": "review",
+              "success": true,
+              "status": "completed",
+              "agent": "reviewer",
+              "message": "Step completed.",
+              "data": {
+                "agent": "reviewer_agent",
+                "status": "completed",
+                "request": "Review the Git working tree and create a safe checkpoint before self-improvement edits.",
+                "runtime_files": 42,
+                "test_files": 32,
+                "findings": [
+                  "Runtime event state file exists; ensure generated data is not committed unless intentional."
+                ],
+                "recommendation": "Architecture looks valid. Keep generated data out of commits."
+              },
+              "started_at": "2026-07-20T05:46:50Z",
+              "finished_at": "2026-07-20T05:46:51Z"
+            },
+            {
+              "step": "verify",
+              "success": true,
+              "status": "completed",
+              "agent": "verifier",
+              "message": "Command passed.",
+              "data": {
+                "success": true,
+                "message": "Command passed.",
+                "command": [
+                  "python",
+                  "-m",
+                  "pytest",
+                  "-q"
+                ],
+                "returncode": 0,
+                "stdout": "............................................................             [100%]\n60 passed in 10.08s\n",
+                "stderr": ""
+              },
+              "started_at": "2026-07-20T05:46:51Z",
+              "finished_at": "2026-07-20T05:47:02Z"
+            },
+            {
+              "step": "learn",
+              "success": true,
+              "status": "completed",
+              "agent": "reviewer",
+              "message": "Learning step recorded.",
+              "data": {
+                "success": true,
+                "message": "Learning step recorded."
+              },
+              "started_at": "2026-07-20T05:47:02Z",
+              "finished_at": "2026-07-20T05:47:02Z"
+            }
+          ],
+          "errors": [],
+          "started_at": "2026-07-20T05:46:37Z",
+          "finished_at": "2026-07-20T05:46:37Z"
+        },
+        "what_worked": [
+          "inspect",
+          "plan",
+          "build",
+          "test",
+          "fix_if_needed",
+          "review",
+          "verify",
+          "learn"
+        ],
+        "what_failed": [],
+        "fixes": [
+          "Fixer Agent ran in safe mode and did not modify files."
+        ],
+        "reusable_patterns": [
+          "general_safe_build"
+        ]
+      },
+      "job_id": "020ea7cf-611c-4038-9eaa-d4923b705970",
+      "created_at": "2026-07-20T05:46:37Z",
+      "updated_at": "2026-07-20T05:47:02Z"
+    },
+    "created_at": "2026-07-20T05:47:02Z"
   }
 ]
