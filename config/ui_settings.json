@@ -1,6 +1,6 @@
 {
-    "ai_provider": "OpenRouter",
-    "ai_model": "openai/gpt-4o-mini",
+    "ai_provider": "Ollama",
+    "ai_model": "qwen2.5-coder:7b",
     "theme": "Dark",
     "developer_mode": true,
     "show_backend_tools": true,

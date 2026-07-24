@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import difflib
-import inspect
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional, Sequence
 
+from .ai_response_validator import AIResponseValidator
 from .preview_diff_panel import PreviewDiff
 
 
@@ -25,17 +25,8 @@ class DiffGenerator:
     """
     Generate a safe PreviewDiff without writing to disk.
 
-    DiffGenerator supports two main strategies:
-
-    1. Provider-assisted generation
-       A provider, planner, runtime service, or callable returns replacement
-       content or a ready-made patch.
-
-    2. Deterministic generation
-       Existing and proposed file content are compared locally using
-       difflib.unified_diff().
-
-    No project files are modified by this class.
+    Provider output is validated before normalization. The resulting unified
+    diff is validated again before it can leave this class.
     """
 
     def __init__(
@@ -43,6 +34,7 @@ class DiffGenerator:
         project_root: str | Path | None = None,
         provider: Any = None,
         encoding: str = "utf-8",
+        validator: Optional[AIResponseValidator] = None,
     ) -> None:
         self.project_root = (
             Path(project_root).expanduser().resolve()
@@ -51,6 +43,7 @@ class DiffGenerator:
         )
         self.provider = provider
         self.encoding = str(encoding or "utf-8")
+        self.validator = validator or AIResponseValidator()
         self._cancelled = False
 
     def generate(
@@ -63,9 +56,6 @@ class DiffGenerator:
             Callable[[int, str], None]
         ] = None,
     ) -> PreviewDiff:
-        """
-        Generate a PreviewDiff for the supplied workflow state.
-        """
         self._cancelled = False
 
         request = DiffGenerationRequest(
@@ -75,36 +65,17 @@ class DiffGenerator:
             context=dict(context or {}),
         )
 
-        self._progress(
-            progress_callback,
-            5,
-            "Resolving target file...",
-        )
-
+        self._progress(progress_callback, 5, "Resolving target file...")
         file_path = self._resolve_target_path(request)
         display_path = self._display_path(file_path, request)
-
         self._check_cancelled()
 
-        self._progress(
-            progress_callback,
-            15,
-            "Loading current file content...",
-        )
-
-        original_content = self._resolve_original_content(
-            request,
-            file_path,
-        )
-
+        self._progress(progress_callback, 15, "Loading current file content...")
+        original_content = self._resolve_original_content(request, file_path)
         self._check_cancelled()
 
-        self._progress(
-            progress_callback,
-            30,
-            "Resolving proposed changes...",
-        )
-
+        self._progress(progress_callback, 30, "Resolving proposed changes...")
+        
         generated = self._generate_candidate(
             request=request,
             file_path=file_path,
@@ -112,7 +83,41 @@ class DiffGenerator:
             progress_callback=progress_callback,
         )
 
+        print("\n========== GENERATED CANDIDATE DEBUG ==========")
+        print("TYPE:", type(generated))
+        print("REPR:", repr(generated))
+
+        if isinstance(generated, str):
+            print("LINES:", len(generated.splitlines()))
+            print("CHARS:", len(generated))
+            print("START:", repr(generated[:500]))
+
+        elif isinstance(generated, Mapping):
+            print("KEYS:", list(generated.keys()))
+            for key, value in generated.items():
+                print(
+                    f"{key}:",
+                    "type=",
+                    type(value),
+                    "repr=",
+                    repr(value)[:500],
+                )
+       
+        self._raise_if_provider_error(generated)
         self._check_cancelled()
+
+        self._progress(progress_callback, 65, "Cleaning generated response...")
+        generated = self.validator.normalise_provider_output(generated)
+
+        self._progress(progress_callback, 70, "Validating AI response...")
+        provider_validation = self.validator.validate_provider_output(
+            generated,
+            original_content=original_content,
+            file_path=file_path or display_path,
+        )
+        provider_validation.raise_for_errors(
+            "Generated response blocked"
+        )
 
         preview = self._normalise_candidate(
             generated=generated,
@@ -122,33 +127,60 @@ class DiffGenerator:
             original_content=original_content,
         )
 
-        self._progress(
-            progress_callback,
-            90,
-            "Validating generated patch...",
+        self._progress(progress_callback, 90, "Validating generated patch...")
+        self._validate_preview(
+            preview,
+            original_content=original_content,
+            file_path=file_path or display_path,
         )
 
-        self._validate_preview(preview)
+        if provider_validation.warnings:
+            warning_text = "; ".join(
+                item.message
+                for item in provider_validation.warnings
+            )
+            preview.validation_state = "warning"
+            preview.validation_message = warning_text
 
-        self._progress(
-            progress_callback,
-            100,
-            "Diff generation complete",
-        )
-
+        self._progress(progress_callback, 100, "Diff generation complete")
         return preview
+        
+    @staticmethod
+    def _raise_if_provider_error(value: Any) -> None:
+        """
+        Reject provider status/error messages before they are treated as
+        replacement source code.
+        """
+        if not isinstance(value, str):
+            return
 
-    def generate_diff(
-        self,
-        finding: Mapping[str, Any],
-        review: Optional[Mapping[str, Any]] = None,
-        plan: Optional[Mapping[str, Any]] = None,
-        context: Optional[Mapping[str, Any]] = None,
-        progress_callback: Optional[
-            Callable[[int, str], None]
-        ] = None,
-    ) -> PreviewDiff:
-        """Compatibility alias for PreviewDiffWorker."""
+        text = value.strip()
+        if not text:
+            raise RuntimeError("The AI provider returned an empty response.")
+
+        lower = text.lower()
+
+        error_markers = (
+            "ollama is not available:",
+            "openrouter is not available:",
+            "lm studio is not available:",
+            "provider is not available:",
+            "connection refused",
+            "connection aborted",
+            "connection error",
+            "read timed out",
+            "connect timeout",
+            "httpconnectionpool(",
+            "httpsconnectionpool(",
+            "failed to connect",
+            "request failed:",
+            "provider error:",
+        )
+
+        if any(marker in lower for marker in error_markers):
+            raise RuntimeError(text)    
+
+    def generate_diff(self, finding, review=None, plan=None, context=None, progress_callback=None):
         return self.generate(
             finding=finding,
             review=review,
@@ -157,17 +189,7 @@ class DiffGenerator:
             progress_callback=progress_callback,
         )
 
-    def create_preview(
-        self,
-        finding: Mapping[str, Any],
-        review: Optional[Mapping[str, Any]] = None,
-        plan: Optional[Mapping[str, Any]] = None,
-        context: Optional[Mapping[str, Any]] = None,
-        progress_callback: Optional[
-            Callable[[int, str], None]
-        ] = None,
-    ) -> PreviewDiff:
-        """Compatibility alias for PreviewDiffWorker."""
+    def create_preview(self, finding, review=None, plan=None, context=None, progress_callback=None):
         return self.generate(
             finding=finding,
             review=review,
@@ -176,17 +198,7 @@ class DiffGenerator:
             progress_callback=progress_callback,
         )
 
-    def build_preview(
-        self,
-        finding: Mapping[str, Any],
-        review: Optional[Mapping[str, Any]] = None,
-        plan: Optional[Mapping[str, Any]] = None,
-        context: Optional[Mapping[str, Any]] = None,
-        progress_callback: Optional[
-            Callable[[int, str], None]
-        ] = None,
-    ) -> PreviewDiff:
-        """Compatibility alias for PreviewDiffWorker."""
+    def build_preview(self, finding, review=None, plan=None, context=None, progress_callback=None):
         return self.generate(
             finding=finding,
             review=review,
@@ -197,7 +209,6 @@ class DiffGenerator:
 
     def cancel(self) -> None:
         self._cancelled = True
-
         cancel = getattr(self.provider, "cancel", None)
         if callable(cancel):
             try:
@@ -205,10 +216,7 @@ class DiffGenerator:
             except Exception:
                 pass
 
-    def _resolve_target_path(
-        self,
-        request: DiffGenerationRequest,
-    ) -> Optional[Path]:
+    def _resolve_target_path(self, request: DiffGenerationRequest) -> Optional[Path]:
         raw_path = (
             request.plan.get("file_path")
             or request.plan.get("file")
@@ -217,18 +225,14 @@ class DiffGenerator:
             or request.context.get("file_path")
             or request.context.get("file")
         )
-
         if not raw_path:
             return None
 
         candidate = Path(str(raw_path)).expanduser()
-
         if candidate.is_absolute():
             return candidate.resolve()
-
         if self.project_root is not None:
             return (self.project_root / candidate).resolve()
-
         return candidate.resolve()
 
     def _resolve_original_content(
@@ -236,38 +240,18 @@ class DiffGenerator:
         request: DiffGenerationRequest,
         file_path: Optional[Path],
     ) -> str:
-        inline = self._first_text(
-            request.context,
-            (
-                "original_content",
-                "current_content",
-                "source_content",
-            ),
-        )
-        if inline is not None:
-            return inline
-
-        inline = self._first_text(
-            request.plan,
-            (
-                "original_content",
-                "current_content",
-                "source_content",
-            ),
-        )
-        if inline is not None:
-            return inline
-
-        if file_path is None:
-            return ""
-
-        if not file_path.exists():
-            return ""
-
-        if not file_path.is_file():
-            raise RuntimeError(
-                f"Diff target is not a file: {file_path}"
+        for mapping in (request.context, request.plan):
+            inline = self._first_text(
+                mapping,
+                ("original_content", "current_content", "source_content"),
             )
+            if inline is not None:
+                return inline
+
+        if file_path is None or not file_path.exists():
+            return ""
+        if not file_path.is_file():
+            raise RuntimeError(f"Diff target is not a file: {file_path}")
 
         return file_path.read_text(
             encoding=self.encoding,
@@ -279,18 +263,13 @@ class DiffGenerator:
         request: DiffGenerationRequest,
         file_path: Optional[Path],
         original_content: str,
-        progress_callback: Optional[
-            Callable[[int, str], None]
-        ],
+        progress_callback: Optional[Callable[[int, str], None]],
     ) -> Any:
         ready_patch = self._extract_ready_patch(request)
         if ready_patch:
             return {
                 "patch": ready_patch,
-                "file_path": self._display_path(
-                    file_path,
-                    request,
-                ),
+                "file_path": self._display_path(file_path, request),
                 "summary": self._build_summary(request),
                 "validation_state": "pending",
             }
@@ -313,7 +292,6 @@ class DiffGenerator:
             50,
             "Requesting generated replacement content...",
         )
-
         return self._invoke_provider(
             provider=self.provider,
             request=request,
@@ -335,11 +313,7 @@ class DiffGenerator:
             "review": dict(request.review),
             "plan": dict(request.plan),
             "context": dict(request.context),
-            "file_path": (
-                str(file_path)
-                if file_path is not None
-                else ""
-            ),
+            "file_path": str(file_path) if file_path is not None else "",
             "original_content": original_content,
         }
 
@@ -357,16 +331,12 @@ class DiffGenerator:
                 request.review,
                 request.plan,
             ),
-            lambda: method(
-                original_content,
-                request.plan,
-            ),
+            lambda: method(original_content, request.plan),
             lambda: method(original_content),
             lambda: method(),
         )
 
         last_type_error: Optional[TypeError] = None
-
         for attempt in attempts:
             try:
                 return attempt()
@@ -375,10 +345,7 @@ class DiffGenerator:
 
         if last_type_error is not None:
             raise last_type_error
-
-        raise RuntimeError(
-            "Could not invoke the configured diff provider."
-        )
+        raise RuntimeError("Could not invoke the configured diff provider.")
 
     def _resolve_provider_method(self, provider: Any):
         if callable(provider):
@@ -411,42 +378,25 @@ class DiffGenerator:
     ) -> PreviewDiff:
         if isinstance(generated, PreviewDiff):
             preview = generated
-
-        elif hasattr(generated, "to_dict") and callable(
-            generated.to_dict
-        ):
-            preview = PreviewDiff.from_value(
-                generated.to_dict()
-            )
-
+        elif hasattr(generated, "to_dict") and callable(generated.to_dict):
+            preview = PreviewDiff.from_value(generated.to_dict())
         elif isinstance(generated, str):
             if self._looks_like_patch(generated):
-                preview = PreviewDiff(
-                    patch=generated,
-                )
+                preview = PreviewDiff(patch=generated)
             else:
                 preview = self._preview_from_contents(
                     original_content=original_content,
                     proposed_content=generated,
                     display_path=display_path,
                 )
-
         elif isinstance(generated, Mapping):
             generated_map = dict(generated)
-
             patch = self._first_text(
                 generated_map,
-                (
-                    "patch",
-                    "diff",
-                    "unified_diff",
-                    "preview",
-                ),
+                ("patch", "diff", "unified_diff", "preview"),
             )
             if patch:
-                preview = PreviewDiff.from_value(
-                    generated_map
-                )
+                preview = PreviewDiff.from_value(generated_map)
             else:
                 proposed_content = self._first_text(
                     generated_map,
@@ -458,7 +408,6 @@ class DiffGenerator:
                         "content",
                     ),
                 )
-
                 if proposed_content is None:
                     raise RuntimeError(
                         "The diff provider returned no patch and no "
@@ -467,30 +416,21 @@ class DiffGenerator:
 
                 original = self._first_text(
                     generated_map,
-                    (
-                        "original_content",
-                        "current_content",
-                    ),
+                    ("original_content", "current_content"),
                 )
                 preview = self._preview_from_contents(
                     original_content=(
-                        original
-                        if original is not None
-                        else original_content
+                        original if original is not None else original_content
                     ),
                     proposed_content=proposed_content,
-                    display_path=(
-                        str(
-                            generated_map.get("file_path")
-                            or generated_map.get("file")
-                            or display_path
-                        )
+                    display_path=str(
+                        generated_map.get("file_path")
+                        or generated_map.get("file")
+                        or display_path
                     ),
                 )
-
                 preview.title = str(
-                    generated_map.get("title")
-                    or preview.title
+                    generated_map.get("title") or preview.title
                 )
                 preview.summary = str(
                     generated_map.get("summary")
@@ -498,16 +438,10 @@ class DiffGenerator:
                     or ""
                 )
                 preview.validation_state = str(
-                    generated_map.get(
-                        "validation_state",
-                        "pending",
-                    )
+                    generated_map.get("validation_state", "pending")
                 )
                 preview.validation_message = str(
-                    generated_map.get(
-                        "validation_message",
-                        "",
-                    )
+                    generated_map.get("validation_message", "")
                 )
                 preview.metadata.update(
                     dict(generated_map.get("metadata") or {})
@@ -520,10 +454,8 @@ class DiffGenerator:
 
         if not preview.file_path:
             preview.file_path = display_path
-
         if not preview.title or preview.title == "Generated Patch":
             preview.title = self._build_title(request)
-
         if not preview.summary:
             preview.summary = self._build_summary(request)
 
@@ -533,14 +465,10 @@ class DiffGenerator:
             "review": dict(request.review),
             "plan": dict(request.plan),
             "context": dict(request.context),
-            "target_path": (
-                str(file_path)
-                if file_path is not None
-                else ""
-            ),
+            "target_path": str(file_path) if file_path is not None else "",
             "generator": type(self).__name__,
+            "ai_validation": "passed",
         }
-
         return preview
 
     def _preview_from_contents(
@@ -550,13 +478,8 @@ class DiffGenerator:
         display_path: str,
     ) -> PreviewDiff:
         path = display_path or "generated_file"
-
-        original_lines = original_content.splitlines(
-            keepends=True
-        )
-        proposed_lines = proposed_content.splitlines(
-            keepends=True
-        )
+        original_lines = original_content.splitlines(keepends=True)
+        proposed_lines = proposed_content.splitlines(keepends=True)
 
         patch_lines = difflib.unified_diff(
             original_lines,
@@ -565,7 +488,6 @@ class DiffGenerator:
             tofile=f"b/{path}",
             lineterm="",
         )
-
         patch = "\n".join(patch_lines)
 
         return PreviewDiff(
@@ -575,10 +497,7 @@ class DiffGenerator:
             validation_state="pending",
         )
 
-    def _extract_ready_patch(
-        self,
-        request: DiffGenerationRequest,
-    ) -> Optional[str]:
+    def _extract_ready_patch(self, request: DiffGenerationRequest) -> Optional[str]:
         for mapping in (
             request.context,
             request.plan,
@@ -587,22 +506,13 @@ class DiffGenerator:
         ):
             value = self._first_text(
                 mapping,
-                (
-                    "patch",
-                    "diff",
-                    "unified_diff",
-                    "preview_diff",
-                ),
+                ("patch", "diff", "unified_diff", "preview_diff"),
             )
             if value:
                 return value
-
         return None
 
-    def _extract_proposed_content(
-        self,
-        request: DiffGenerationRequest,
-    ) -> Optional[str]:
+    def _extract_proposed_content(self, request: DiffGenerationRequest) -> Optional[str]:
         for mapping in (
             request.context,
             request.plan,
@@ -621,7 +531,6 @@ class DiffGenerator:
             )
             if value is not None:
                 return value
-
         return None
 
     def _display_path(
@@ -638,10 +547,8 @@ class DiffGenerator:
             or request.context.get("file")
             or ""
         )
-
         if raw:
             return str(raw).replace("\\", "/")
-
         if file_path is None:
             return ""
 
@@ -652,26 +559,18 @@ class DiffGenerator:
                 ).replace("\\", "/")
             except ValueError:
                 pass
-
         return str(file_path).replace("\\", "/")
 
-    def _build_title(
-        self,
-        request: DiffGenerationRequest,
-    ) -> str:
+    def _build_title(self, request: DiffGenerationRequest) -> str:
         title = str(
             request.finding.get("title")
             or request.finding.get("description")
             or request.plan.get("title")
             or "Generated Patch"
         ).strip()
-
         return f"Preview: {title}" if title else "Generated Patch"
 
-    def _build_summary(
-        self,
-        request: DiffGenerationRequest,
-    ) -> str:
+    def _build_summary(self, request: DiffGenerationRequest) -> str:
         return str(
             request.plan.get("summary")
             or request.plan.get("objective")
@@ -686,56 +585,52 @@ class DiffGenerator:
     def _validate_preview(
         self,
         preview: PreviewDiff,
+        *,
+        original_content: str,
+        file_path: str | Path | None,
     ) -> None:
         patch = preview.patch.strip()
-
         if not patch:
-            raise RuntimeError(
-                "Diff generation produced an empty patch."
-            )
-
+            raise RuntimeError("Diff generation produced an empty patch.")
         if not self._looks_like_patch(patch):
-            raise RuntimeError(
-                "Generated output is not a valid unified diff."
-            )
+            raise RuntimeError("Generated output is not a valid unified diff.")
 
-        additions, deletions = PreviewDiff.count_changes(
-            preview.patch
+        validation = self.validator.validate_preview_patch(
+            preview.patch,
+            original_content=original_content,
+            file_path=file_path,
         )
-        changed_files = PreviewDiff.count_files(
-            preview.patch
-        )
+        validation.raise_for_errors("Generated patch blocked")
 
+        additions, deletions = PreviewDiff.count_changes(preview.patch)
+        changed_files = PreviewDiff.count_files(preview.patch)
         preview.additions = additions
         preview.deletions = deletions
         preview.changed_files = changed_files
 
-        if additions == 0 and deletions == 0:
+        if validation.warnings:
             preview.validation_state = "warning"
-            preview.validation_message = (
-                "The patch contains no changed lines."
+            preview.validation_message = "; ".join(
+                item.message
+                for item in validation.warnings
             )
-        elif preview.validation_state in {
-            "",
-            "unknown",
-        }:
-            preview.validation_state = "pending"
+        elif preview.validation_state in {"", "unknown", "pending"}:
+            preview.validation_state = "passed"
+            preview.validation_message = "AI response and patch validation passed."
+
+        preview.metadata = {
+            **dict(preview.metadata or {}),
+            "validation": validation.to_dict(),
+        }
 
     def _check_cancelled(self) -> None:
         if self._cancelled:
-            raise RuntimeError(
-                "Diff generation was cancelled."
-            )
+            raise RuntimeError("Diff generation was cancelled.")
 
     @staticmethod
-    def _progress(
-        callback: Optional[Callable[[int, str], None]],
-        value: int,
-        message: str,
-    ) -> None:
+    def _progress(callback, value: int, message: str) -> None:
         if callback is None:
             return
-
         try:
             callback(int(value), str(message))
         except Exception:
@@ -743,23 +638,7 @@ class DiffGenerator:
 
     @staticmethod
     def _looks_like_patch(value: str) -> bool:
-        text = str(value or "")
-        lines = text.splitlines()
-
-        has_old = any(
-            line.startswith("--- ")
-            for line in lines
-        )
-        has_new = any(
-            line.startswith("+++ ")
-            for line in lines
-        )
-        has_hunk = any(
-            line.startswith("@@")
-            for line in lines
-        )
-
-        return has_old and has_new and has_hunk
+        return AIResponseValidator.looks_like_patch(value)
 
     @staticmethod
     def _first_text(
@@ -769,16 +648,10 @@ class DiffGenerator:
         for key in keys:
             if key not in mapping:
                 continue
-
             value = mapping.get(key)
             if value is None:
                 continue
-
-            if isinstance(value, str):
-                return value
-
-            return str(value)
-
+            return value if isinstance(value, str) else str(value)
         return None
 
 

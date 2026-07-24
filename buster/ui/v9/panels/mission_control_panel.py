@@ -18,8 +18,6 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from buster.runtime import create_runtime_core
-
 try:
     from buster.runtime.repair_event_stream import RepairEventStream
 except Exception:
@@ -846,15 +844,22 @@ class MissionControlV12(QWidget):
 
     def __init__(
         self,
-        runtime_core=None,
         parent=None,
+        live=None,
+        runtime_core=None,
+        **kwargs,
     ):
         super().__init__(parent)
 
-        self.core = (
-            runtime_core
-            or create_runtime_core(".")
-        )
+        self.live = live
+        self.runtime_core = runtime_core or getattr(live, "runtime_core", None)
+
+        if self.runtime_core is None:
+            raise RuntimeError(
+                "MissionControlV12 requires the application runtime_core."
+            )
+
+        self.core = self.runtime_core
         self.setObjectName(
             "MissionControlV12"
         )

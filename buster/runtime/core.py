@@ -28,8 +28,18 @@ from .self_improvement_runtime import (
     shutdown_self_improvement_runtime,
 )
 
+from buster.agents.python_agent import AgentRequest, PreviewDiff, PythonAgentWorker
 
-  
+# v13 Subsystems
+from buster.learning.curiosity_engine import CuriosityEngine, CuriosityScore
+from buster.kernel.circadian import HeartbeatDaemon
+
+# Automation & Workspace Subsystems
+from buster.automation.unified_router import UnifiedAutomationRouter
+from buster.workspace.sandbox_manager import SandboxManager
+
+from buster.autonomy.goals.goal_service import GoalService
+
 class BusterRuntimeCore:
     def __init__(
         self,
@@ -38,18 +48,19 @@ class BusterRuntimeCore:
     ):
         self.root = Path(root).resolve()
 
+        # --------------------------------------------------
+        # 1. Primary SDK & Kernel Runtime Construction
+        # --------------------------------------------------
         self.system = build_sdk_runtime(
             root=self.root,
             observation_provider=observation_provider,
         )
 
-        # Core SDK runtime components
         self.runtime = self.system["runtime"]
         self.sdk = self.system["sdk"]
         self.events = self.sdk.events
         self.services = self.sdk.registry
 
-        # Runtime systems
         self.agents = self.system["agents"]
         self.registry = self.system["registry"]
         self.jobs = self.system["jobs"]
@@ -57,30 +68,22 @@ class BusterRuntimeCore:
         self.blackboard = self.system["blackboard"]
         self.agent_memory = self.system["agent_memory"]
         self.orchestrator = self.system["orchestrator"]
+
+        # State management & event dispatching
+        self.state = RuntimeStateStore()
+        self.dispatcher = RuntimeDispatcher(self.state)
+
+        # --------------------------------------------------
+        # 2. Canonical Subsystem Instantiation
+        # --------------------------------------------------
         
-        # --------------------------------------------------
-        # Shared AI Provider Manager
-        # --------------------------------------------------
-
+        # AI Manager & Brain Providers
         from buster.brain.providers.manager import AIProviderManager
-
         self.ai_manager = AIProviderManager(
             self.root / "data" / "ai_provider_config.json"
         )
 
-        # Register as a runtime service so every panel can use it
-        try:
-            self.services.register("ai", self.ai_manager)
-        except Exception:
-            pass
-            
-
-        # Shared runtime state and dispatcher must be created before
-        # Runtime Intelligence subscribes to events.
-        self.state = RuntimeStateStore()
-        self.dispatcher = RuntimeDispatcher(self.state)
-
-        # Runtime Intelligence
+        # Runtime Intelligence & Telemetry
         self.runtime_monitor = RuntimeMonitor()
         self.agent_tracker = AgentTracker()
 
@@ -88,7 +91,6 @@ class BusterRuntimeCore:
             "*",
             self.runtime_monitor.handle_event,
         )
-
         self.dispatcher.subscribe(
             "agent.*",
             self.agent_tracker.handle_event,
@@ -99,30 +101,11 @@ class BusterRuntimeCore:
             runtime_monitor=self.runtime_monitor,
             agent_tracker=self.agent_tracker,
         )
-        
+
+        # Autonomy & Execution Subsystems
         self.autonomy_engine = AutonomyEngine(
             state_path=self.root / "data" / "autonomy_state.json",
             history_path=self.root / "data" / "autonomy_history.json",
-        )
-        
-        # --------------------------------------------------
-        # Evolution Runtime
-        # --------------------------------------------------
-
-        self.evolution = EvolutionState(
-            state_dir=str(self.root / "data"),
-            event_bus=main_event_bus,
-        )
-         
-        # Compatibility alias used by DashboardWindow
-        self.identity = self.evolution
-
-        self.experience_engine = ExperienceEngine(
-            data_dir=str(self.root / "data"),
-        )
-        
-        self.verification_service = VerificationEngine(
-            project_root=self.root,
         )
 
         self.execution_engine = ExecutionEngine(
@@ -131,48 +114,123 @@ class BusterRuntimeCore:
             autonomy_engine=self.autonomy_engine,
         )
 
+        # Evolution, Memory & Experience
+        self.evolution = EvolutionState(
+            state_dir=str(self.root / "data"),
+            event_bus=main_event_bus,
+        )
+        self.identity = self.evolution  # Compatibility alias
+
+        self.experience_engine = ExperienceEngine(
+            data_dir=str(self.root / "data"),
+        )
+
+        # v13: Curiosity Engine & Heartbeat Rhythm
+        self.curiosity_engine = CuriosityEngine(
+            data_dir=self.root / "data",
+        )
+
+        self.heartbeat_daemon = HeartbeatDaemon(
+            runtime_core=self,
+        )
+
+        self.verification_service = VerificationEngine(
+            project_root=self.root,
+        )
+
+        # Unified Automation Router & Sandbox Workspace
+        self.automation_router = UnifiedAutomationRouter(
+            event_bus=self.dispatcher,
+            security_intercept=getattr(self, "security", None),
+        )
+
+        self.sandbox_manager = SandboxManager(
+            root_dir=self.root,
+        )
+
+        # Repair & Self-Improvement
         self.self_improvement = SelfImprovementService(
             root=self.root,
             runtime_core=self,
             autonomy_engine=self.autonomy_engine,
             execution_engine=self.execution_engine,
         )
-        
         self.self_improvement.set_mode("manual")
-        
-        # Runtime-owned repair workflow service.
-        # self.self_improvement remains the project scan service.
-        # self.self_improvement_service owns repair sessions.
+
+        self.python_agent_worker = PythonAgentWorker(
+            provider=self.ai_manager,
+            event_bus=self.dispatcher,
+            max_retries=3,
+            score_threshold=90.0,
+        )
+
+        self._repair_workers = {
+            "python": self.python_agent_worker,
+        }
+        # Autonomous Goal Runtime
+        self.goal_service = GoalService(runtime_core=self)
+
+        # Subsystem Services & Monitors
+        from buster.intelligence.health_monitor import HealthMonitor
+        self.health_monitor = HealthMonitor(self)
+
+        from .dev_tools import RuntimeDeveloperTools
+        self.devtools = RuntimeDeveloperTools(self)
+
+        from .inspector import RuntimeInspector
+        self.inspector = RuntimeInspector(self)
+
+        # --------------------------------------------------
+        # 3. Service Registry Consolidation
+        # --------------------------------------------------
+        self._register_core_services()
 
         self.self_improvement_service = (
             register_self_improvement_runtime(self)
         )
-
-        # Compatibility alias
         self.repair_service = self.self_improvement_service
-        
-        from buster.intelligence.health_monitor import HealthMonitor
-
-        self.health_monitor = HealthMonitor(self)
-
-        # Developer tools
-        from .dev_tools import RuntimeDeveloperTools
-
-        self.devtools = RuntimeDeveloperTools(self)
-
-        # Runtime inspector
-        from .inspector import RuntimeInspector
-
-        self.inspector = RuntimeInspector(self)
 
         self.started = False
-
-        # Build the initial shared state.
         self.refresh_state()
 
+    def _register_core_services(self) -> None:
+        """Register all permanent core subsystems in the ServiceRegistry."""
+        core_services = {
+            "ai": self.ai_manager,
+            "python_agent": self.python_agent_worker,
+            "autonomy": self.autonomy_engine,
+            "goal_service": self.goal_service,
+            "execution": self.execution_engine,
+            "evolution": self.evolution,
+            "experience": self.experience_engine,
+            "curiosity": self.curiosity_engine,
+            "verification": self.verification_service,
+            "automation_router": self.automation_router,
+            "sandbox_manager": self.sandbox_manager,
+            "self_improvement": self.self_improvement,
+            "health_monitor": self.health_monitor,
+        }
+
+        for name, instance in core_services.items():
+            try:
+                self.services.register(name, instance)
+            except Exception:
+                pass
+
+    # --------------------------------------------------
+    # Atomic Runtime Lifecycle Entry Points
+    # --------------------------------------------------
+
     def start(self) -> Dict[str, Any]:
+        """Single consolidated entry point for starting the entire AI OS runtime."""
+        if self.started:
+            return self.runtime.status()
+
         result = self.runtime.start()
         self.started = True
+
+        # Start background rhythm
+        self.heartbeat_daemon.start()
 
         event = {
             "root": str(self.root),
@@ -195,11 +253,19 @@ class BusterRuntimeCore:
         return result
 
     def stop(self) -> Dict[str, Any]:
+        """Single consolidated entry point for shutting down all services."""
+        if not self.started:
+            return self.runtime.status()
+
+        # Stop background rhythm
+        self.heartbeat_daemon.stop()
+
+        # Teardown self-improvement background processes
         shutdown_self_improvement_runtime(
             self,
             wait=False,
         )
-        
+
         result = self.runtime.stop()
         self.started = False
 
@@ -235,10 +301,108 @@ class BusterRuntimeCore:
         self.refresh_state()
         return result
 
+    # --------------------------------------------------
+    # Dispatch & Execution Wrappers
+    # --------------------------------------------------
+
+    def run_repair(
+        self,
+        file_path: str | Path,
+        instruction: str,
+        language: str = "python",
+    ) -> PreviewDiff:
+        self.heartbeat_daemon.notify_activity()
+        path = Path(file_path).resolve()
+
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Target repair file does not exist: {file_path}"
+            )
+
+        if not path.is_file():
+            raise ValueError(
+                f"Target repair path is not a file: {file_path}"
+            )
+
+        lang_key = str(language or "python").lower().strip()
+        worker = self._repair_workers.get(lang_key)
+
+        if worker is None:
+            raise ValueError(
+                "No repair worker registered for "
+                f"language/platform: {language!r}"
+            )
+
+        event_prefix = f"{lang_key}_agent"
+
+        self.dispatcher.publish(
+            f"{event_prefix}.started",
+            {
+                "file": str(path),
+                "instruction": instruction,
+                "language": lang_key,
+            },
+            source="runtime_core",
+        )
+
+        try:
+            original_code = path.read_text(encoding="utf-8")
+
+            request = AgentRequest(
+                file_path=str(path),
+                instruction=instruction,
+                original_code=original_code,
+            )
+
+            preview_diff = worker.run(request)
+
+            if not preview_diff.success:
+                raise RuntimeError(
+                    f"Repair agent [{lang_key}] failed: "
+                    f"{preview_diff.error_message}"
+                )
+
+            quality = getattr(preview_diff, "quality", None)
+            score = getattr(quality, "overall_score", None)
+
+            self.dispatcher.publish(
+                f"{event_prefix}.finished",
+                {
+                    "file": str(path),
+                    "score": score,
+                    "language": lang_key,
+                },
+                source="runtime_core",
+            )
+
+            return preview_diff
+
+        except Exception as exc:
+            self.dispatcher.publish(
+                f"{event_prefix}.failed",
+                {
+                    "file": str(path),
+                    "error": str(exc),
+                    "language": lang_key,
+                },
+                source="runtime_core",
+            )
+            raise
+
+    def run_python_repair(
+        self,
+        file_path: str | Path,
+        instruction: str,
+    ) -> PreviewDiff:
+        return self.run_repair(
+            file_path=file_path,
+            instruction=instruction,
+            language="python",
+        )
+
     def run(self, request: str) -> Dict[str, Any]:
-        event = {
-            "request": request,
-        }
+        self.heartbeat_daemon.notify_activity()
+        event = {"request": request}
 
         self.events.publish(
             "runtime.core.request.received",
@@ -280,11 +444,8 @@ class BusterRuntimeCore:
             self.refresh_state()
             raise
 
-    def run_agent(
-        self,
-        name: str,
-        task=None,
-    ):
+    def run_agent(self, name: str, task=None):
+        self.heartbeat_daemon.notify_activity()
         self.dispatcher.publish(
             "agent.started",
             {
@@ -324,12 +485,7 @@ class BusterRuntimeCore:
             self.refresh_state()
             raise
 
-    def create_job(
-        self,
-        title,
-        job_type="generic",
-        payload=None,
-    ):
+    def create_job(self, title, job_type="generic", payload=None):
         job = self.jobs.create_job(
             title=title,
             job_type=job_type,
@@ -346,11 +502,10 @@ class BusterRuntimeCore:
         return job
 
     def run_job(self, job_id):
+        self.heartbeat_daemon.notify_activity()
         self.dispatcher.publish(
             "job.started",
-            {
-                "job_id": job_id,
-            },
+            {"job_id": job_id},
             source="runtime_core",
         )
 
@@ -382,11 +537,11 @@ class BusterRuntimeCore:
             self.refresh_state()
             raise
 
-    def service(
-        self,
-        name: str,
-        default=None,
-    ):
+    # --------------------------------------------------
+    # Service Registry & Telemetry Proxies
+    # --------------------------------------------------
+
+    def service(self, name: str, default=None):
         return self.sdk.service(name, default)
 
     def require_service(self, name: str):
@@ -402,10 +557,7 @@ class BusterRuntimeCore:
             "started": self.started,
             "runtime": self.runtime.status(),
             "sdk": self.sdk.status(),
-            "registry_summary": registry_status.get(
-                "summary",
-                {},
-            ),
+            "registry_summary": registry_status.get("summary", {}),
             "jobs": job_status,
             "agents": self.agents.status(),
             "blackboard": self.blackboard.snapshot(),
@@ -413,38 +565,22 @@ class BusterRuntimeCore:
             "recent_events": self.events.recent(20),
             "state": self.state.snapshot(),
             "dispatcher": self.dispatcher.status(),
-            
-            
             "ai": self._ai_status(),
-
             "autonomy": self.autonomy_engine.status(),
-
             "execution": self.execution_engine.status(),
-
+            "curiosity": self.curiosity_engine.status(),
+            "circadian": self.heartbeat_daemon.status(),
+            "automation_router": self.automation_router.status(),
+            "sandbox_manager": self.sandbox_manager.status(),
             "self_improvement": self.self_improvement.status(),
-            
             "repair_workflow": self_improvement_runtime_status(self),
         }
 
     def _ai_status(self) -> Dict[str, Any]:
-        """
-        Return AI configuration without performing network requests.
-
-        Provider availability checks must never run from status(), refresh_state(),
-        sidebar refreshes, timers, or the Qt UI thread. Use the Settings panel's
-        explicit Test Connection action for live diagnostics.
-        """
         manager = self.ai_manager
-        provider_key = str(
-            getattr(manager, "current", "unknown")
-        ).lower()
+        provider_key = str(getattr(manager, "current", "unknown")).lower()
 
-        provider = getattr(
-            manager,
-            "providers",
-            {},
-        ).get(provider_key)
-
+        provider = getattr(manager, "providers", {}).get(provider_key)
         model = getattr(provider, "model", "Unknown")
 
         if provider is None:
@@ -475,12 +611,7 @@ class BusterRuntimeCore:
             activity_limit=activity_limit,
         )
 
-    def notify(
-        self,
-        title,
-        message,
-        level="info",
-    ):
+    def notify(self, title, message, level="info"):
         return self.dispatcher.publish(
             "notification",
             {
@@ -495,35 +626,24 @@ class BusterRuntimeCore:
         snapshot = {
             "runtime": {
                 "started": self.started,
-                "status": (
-                    "running"
-                    if self.started
-                    else "ready"
-                ),
+                "status": "running" if self.started else "ready",
                 "root": str(self.root),
                 "details": self.runtime.status(),
             },
-
             "jobs": self.jobs.status(),
-
             "agents": self.agents.status(),
-
             "memory": self.agent_memory.status(),
-
             "blackboard": self.blackboard.snapshot(),
-
             "registry": self.registry.status(),
-
             "services": self.sdk.status(),
-
             "ai": self._ai_status(),
-
             "autonomy": self.autonomy_engine.status(),
-
             "execution": self.execution_engine.status(),
-
+            "curiosity": self.curiosity_engine.status(),
+            "circadian": self.heartbeat_daemon.status(),
+            "automation_router": self.automation_router.status(),
+            "sandbox_manager": self.sandbox_manager.status(),
             "self_improvement": self.self_improvement.status(),
-            
             "repair_workflow": self_improvement_runtime_status(self),
         }
 
@@ -531,19 +651,11 @@ class BusterRuntimeCore:
             self.state.set(key, value)
 
         return self.state.snapshot()
-        
-        
-    def run_self_improvement(
-        self,
-        mode="manual",
-    ):
-        result = self.self_improvement.run_cycle(
-            mode=mode,
-        )
 
+    def run_self_improvement(self, mode="manual"):
+        self.heartbeat_daemon.notify_activity()
+        result = self.self_improvement.run_cycle(mode=mode)
         data = result.to_dict()
-
-        
 
         self.dispatcher.publish(
             "self_improvement.finished",
@@ -552,36 +664,28 @@ class BusterRuntimeCore:
         )
 
         self.refresh_state()
-
         return result
-
 
     def self_improvement_status(self):
         return self.self_improvement.status()
 
-
     def autonomy_status(self):
         return self.autonomy_engine.status()
 
-
     def execution_status(self):
-        return self.execution_engine.status()    
-        
-        
+        return self.execution_engine.status()
+
     def health(self):
-        return self.health_monitor.compact() 
+        return self.health_monitor.compact()
 
     def repair_workflow_status(self):
         return self_improvement_runtime_status(self)
 
-
     def recover_repair_sessions(self):
         return self.self_improvement_service.recover_sessions()
 
-
     def active_repair_sessions(self):
-        return self.self_improvement_service.active_sessions()        
-
+        return self.self_improvement_service.active_sessions()
 
     def record_evolution_action(
         self,
@@ -589,16 +693,8 @@ class BusterRuntimeCore:
         *,
         success: bool,
     ) -> None:
-        experience_engine = getattr(
-            self,
-            "experience_engine",
-            None,
-        )
-        evolution = getattr(
-            self,
-            "evolution",
-            None,
-        )
+        experience_engine = getattr(self, "experience_engine", None)
+        evolution = getattr(self, "evolution", None)
 
         if experience_engine is None or evolution is None:
             return
@@ -609,6 +705,7 @@ class BusterRuntimeCore:
             action,
             success=success,
         )
+
 
 def create_runtime_core(
     root: str | Path = ".",

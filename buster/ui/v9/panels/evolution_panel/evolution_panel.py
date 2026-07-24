@@ -7,9 +7,13 @@ from buster.ui.v9.panels.evolution_panel.drive_card import DriveCard
 from buster.ui.v9.panels.evolution_panel.skills_card import SkillsCard
 
 class EvolutionPanel(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, live=None, runtime_core=None, parent=None):
         super().__init__(parent)
+        self.live = live
+        self.runtime_core = runtime_core or getattr(live, "kernel_core", None) or getattr(live, "runtime_core", None)
+        
         self.init_ui()
+        self.connect_events()
 
     def init_ui(self):
         self.setObjectName("EvolutionPanel")
@@ -42,7 +46,7 @@ class EvolutionPanel(QWidget):
         content_layout.addWidget(self.drive_card)
         content_layout.addWidget(self.skills_card)
 
-        # --- NEW TIMELINE WIDGET INJECTION ---
+        # --- TIMELINE WIDGET INJECTION ---
         timeline_label = QLabel("EVOLUTION EVENT LOG", container)
         timeline_label.setStyleSheet("color: #8E8E8E; font-size: 10px; font-weight: bold; letter-spacing: 1px; margin-top: 5px;")
         content_layout.addWidget(timeline_label)
@@ -66,22 +70,40 @@ class EvolutionPanel(QWidget):
         scroll.setWidget(container)
         main_layout.addWidget(scroll)
 
-        # --- NEW EXTENSIONS (APPENDED AT END OF INITIALIZATION SETUP) ---
-        from buster.core.event_bus import main_event_bus
+    def connect_events(self):
+        """Connects subscriptions safely through the active runtime event_bus."""
+        if not self.runtime_core:
+            return
+
+        bus = getattr(self.runtime_core, "event_bus", None) or getattr(self.runtime_core, "dispatcher", None)
         
-        # Subscribe the display components directly to the consolidated system change topic
-        main_event_bus.subscribe("evolution.changed", lambda event: self.refresh_identity_telemetry(event.payload))
-        main_event_bus.subscribe("level.progressed", lambda event: self.handle_level_up_log(event.payload))
-        main_event_bus.subscribe("experience.recorded", lambda event: self.handle_xp_log(event.payload))
+        if bus:
+            # Helper function to extract payload safely regardless of event wrapper structure
+            def _wrap(callback):
+                def _handler(event_data):
+                    payload = getattr(event_data, "payload", event_data) if not isinstance(event_data, dict) else event_data
+                    callback(payload)
+                return _handler
+
+            if hasattr(bus, "subscribe"):
+                bus.subscribe("evolution.changed", _wrap(self.refresh_identity_telemetry))
+                bus.subscribe("level.progressed", _wrap(self.handle_level_up_log))
+                bus.subscribe("experience.recorded", _wrap(self.handle_xp_log))
+            elif hasattr(bus, "on"):
+                bus.on("evolution.changed", _wrap(self.refresh_identity_telemetry))
+                bus.on("level.progressed", _wrap(self.handle_level_up_log))
+                bus.on("experience.recorded", _wrap(self.handle_xp_log))
 
     @Slot(dict)
     def refresh_identity_telemetry(self, identity_data: dict):
         """Dynamic slot handler targeted directly from the core Event Bus."""
-        self.level_card.update_data(identity_data)
-        self.drive_card.update_data(identity_data.get("drives_matrix", {}))
-        self.skills_card.update_data(identity_data)
+        if hasattr(self.level_card, "update_data"):
+            self.level_card.update_data(identity_data)
+        if hasattr(self.drive_card, "update_data"):
+            self.drive_card.update_data(identity_data.get("drives_matrix", {}))
+        if hasattr(self.skills_card, "update_data"):
+            self.skills_card.update_data(identity_data)
 
-    # --- NEW LOGGING SLOTS APPENDED TO THE CLASS ---
     def _add_timeline_entry(self, text: str):
         """Helper to prepend timestamps and keep the timeline auto-scrolling."""
         timestamp = QTime.currentTime().toString("hh:mm")

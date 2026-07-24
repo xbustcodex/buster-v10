@@ -1,6 +1,13 @@
 from PySide6.QtCore import Qt, QTime, QTimer
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QLineEdit, QFrame, QScrollArea
 
+# Quick lookup for conversational triggers that don't need task execution
+CONVERSATIONAL_GREETINGS = {
+    "hello", "hi", "hey", "hello buster", "hi buster", "hey buster",
+    "how are you", "who are you", "ping", "good morning", "good evening"
+}
+
+
 class ChatCard(QFrame):
     def __init__(self, text, is_user=False):
         super().__init__()
@@ -32,12 +39,14 @@ class ChatCard(QFrame):
             actions.addStretch()
             layout.addLayout(actions)
 
+
 class ChatView(QWidget):
-    def __init__(self, live, on_message=None, on_state=None):
+    def __init__(self, live, on_message=None, on_state=None, runtime_core=None, **kwargs):
         super().__init__()
         self.live = live
         self.on_message = on_message
         self.on_state = on_state
+        self.runtime_core = runtime_core
         self.build()
 
     def build(self):
@@ -87,16 +96,24 @@ class ChatView(QWidget):
         self.input.clear()
         self.add_card(text, True)
 
-        try:
-            if self.on_state:
-                self.on_state("thinking")
-            reply = self.live.brain(text)
+        clean_text = text.lower().strip()
+
+        # Intercept simple greetings to prevent triggering multi-agent tasks
+        if clean_text in CONVERSATIONAL_GREETINGS:
+            reply = "Hello! I'm online and ready. What are we building today?"
             if self.on_state:
                 self.on_state("speaking")
-        except Exception as exc:
-            reply = f"Command failed: {exc}"
-            if self.on_state:
-                self.on_state("error")
+        else:
+            try:
+                if self.on_state:
+                    self.on_state("thinking")
+                reply = self.live.brain(text)
+                if self.on_state:
+                    self.on_state("speaking")
+            except Exception as exc:
+                reply = f"Command failed: {exc}"
+                if self.on_state:
+                    self.on_state("error")
 
         self.add_card(reply, False)
         if self.on_state:

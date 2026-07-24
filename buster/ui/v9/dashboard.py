@@ -262,9 +262,11 @@ class DashboardWindow(QWidget):
     # ------------------------------------------------------------------
 
     def refresh(self, *_args) -> None:
-        # Dynamic internal extraction hook if runtime context offers structural variables
-        if hasattr(self.live, "runtime_core") and hasattr(self.live.runtime_core, "identity"):
-            ctx = self.live.runtime_core.identity.get_ui_context()
+        # Check kernel_core first, then fall back to legacy runtime_core
+        core = getattr(self.live, "kernel_core", None) or getattr(self.live, "runtime_core", None)
+
+        if core and hasattr(core, "identity"):
+            ctx = core.identity.get_ui_context()
             self.level_val.setText(ctx.get("title", "Level 12 — Engineer"))
             self.xp_bar.setValue(ctx.get("xp_pct", 78))
             self.xp_pct_lbl.setText(f"{ctx.get('xp_pct', 78)}%")
@@ -275,7 +277,7 @@ class DashboardWindow(QWidget):
             for key, bar in self.drive_bars.items():
                 bar.setValue(drives_matrix.get(key, 65))
 
-        # Core System Telemetry Loop Refresh[cite: 12]
+        # Core System Telemetry Loop Refresh
         self._set_row(
             "CPU",
             f"{psutil.cpu_percent()}%",

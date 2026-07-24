@@ -55,35 +55,63 @@ class OllamaProvider:
         self.refresh_model()
         selected_mode = self.mode_manager.get_mode(mode)
 
+        options = self.mode_manager.options(selected_mode.name) or {}
+        options["num_predict"] = 8192
+        options["num_ctx"] = 16384
+
         try:
             response = requests.post(
                 f"{self.host}/api/generate",
                 json={
                     "model": self.model,
                     "keep_alive": self.keep_alive,
-                    "options": self.mode_manager.options(selected_mode.name),
-                    "prompt": self.prompt_builder.build(prompt, context, selected_mode.name),
+                    "options": options,
+                    "prompt": self.prompt_builder.build(
+                        prompt,
+                        context,
+                        selected_mode.name,
+                    ),
                     "stream": False,
                 },
-                timeout=self.mode_manager.timeout(selected_mode.name),
+                timeout=(10, 600),
             )
 
             if response.status_code == 404:
-                installed = ", ".join(self.model_manager.model_names()) or "none"
-                return (
+                installed = ", ".join(
+                    self.model_manager.model_names()
+                ) or "none"
+
+                raise RuntimeError(
                     f"Ollama model not found: {self.model}. "
                     f"Installed models: {installed}. "
                     "Run `ollama pull <model>` or change the preferred model."
                 )
 
-            if response.status_code != 200:
-                return f"Ollama error: {response.status_code} {response.text[:200]}"
+            response.raise_for_status()
 
-            return response.json().get("response", "").strip() or "Ollama returned no text."
+            generated_text = str(
+                response.json().get("response") or ""
+            ).strip()
 
-        except Exception as exc:
-            self.last_error = str(exc)
-            return f"Ollama is not available: {exc}"
+            if not generated_text:
+                raise RuntimeError("Ollama returned no generated text.")
+
+            return generated_text
+
+        except requests.Timeout as exc:
+            raise RuntimeError(
+                "Ollama generation timed out after 600 seconds."
+            ) from exc
+
+        except requests.RequestException as exc:
+            raise RuntimeError(
+                f"Ollama request failed: {exc}"
+            ) from exc
+
+        except (ValueError, TypeError) as exc:
+            raise RuntimeError(
+                f"Ollama returned an invalid response: {exc}"
+            ) from exc
 
     def complete_stream(self, prompt, context="", on_chunk=None, mode: str | None = None):
         self.refresh_model()

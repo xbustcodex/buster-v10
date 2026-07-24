@@ -14,6 +14,7 @@ class Sidebar(QFrame):
         on_vision=None,
         on_voice=None,
         on_agents=None,
+        on_tasks=None,
         on_terminal=None,
         on_settings=None,
         on_developer_checklist=None,
@@ -31,6 +32,7 @@ class Sidebar(QFrame):
         self.on_vision = on_vision
         self.on_voice = on_voice
         self.on_agents = on_agents
+        self.on_tasks = on_tasks
         self.on_terminal = on_terminal
         self.on_settings = on_settings
         self.on_developer_checklist = on_developer_checklist
@@ -51,7 +53,7 @@ class Sidebar(QFrame):
         logo.setObjectName("Logo")
         layout.addWidget(logo)
 
-        sub = QLabel("v9.0 Desktop AI OS")
+        sub = QLabel("v10.4 Buster Desktop AI OS")
         sub.setObjectName("Small")
         layout.addWidget(sub)
 
@@ -70,6 +72,7 @@ class Sidebar(QFrame):
         self.nav_mapping = {
             "⚡ Select Tools / Panels...": lambda: None,
             "🏠  Dashboard": self.on_dashboard,
+            "📋  Tasks & Agents": self.on_tasks,
             "📁  Projects": self.on_projects,
             "🧠  Workspace": self.on_workspace,
             "🧠  Self Improvement": self.on_self_improvement,

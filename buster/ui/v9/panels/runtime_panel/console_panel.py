@@ -8,9 +8,6 @@ from PySide6.QtWidgets import (
     QListWidgetItem, QSplitter
 )
 
-from buster.runtime import create_runtime_core
-
-
 
 class Card(QFrame):
     def __init__(self, title: str, value: str = "0"):
@@ -29,11 +26,22 @@ class Card(QFrame):
 
 
 class RuntimeConsole(QWidget):
-    def __init__(self, parent=None):
+    def __init__(
+        self,
+        parent=None,
+        live=None,
+        runtime_core=None,
+        **kwargs,
+    ):
         super().__init__(parent)
 
-        self.core = create_runtime_core(".")
-        self.core.start()
+        self.live = live
+        self.runtime_core = runtime_core or getattr(live, "runtime_core", None)
+
+        if self.runtime_core is None:
+            raise RuntimeError("RuntimeConsole requires the application runtime_core.")
+
+        self.core = self.runtime_core
 
         root = QVBoxLayout(self)
         root.setContentsMargins(16, 16, 16, 16)

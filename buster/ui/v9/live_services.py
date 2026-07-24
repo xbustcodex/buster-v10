@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 import json
@@ -21,10 +20,25 @@ class V9LiveServices:
         services=None,
         settings=None,
         runtime_core=None,
+        kernel_core=None,
+        **kwargs,
     ):
         self.services = services
         self.settings = settings
-        self.runtime_core = runtime_core
+        
+        self.runtime_core = runtime_core   # Legacy core for v9 panels
+        self.kernel_core = kernel_core     # Modern kernel core for v10+ features
+
+    def __getattr__(self, item: str) -> Any:
+        """
+        Fallback mechanism: If an attribute or service method isn't found on kernel_core,
+        check runtime_core (legacy core).
+        """
+        if self.runtime_core is not None and hasattr(self.runtime_core, item):
+            return getattr(self.runtime_core, item)
+        if self.kernel_core is not None and hasattr(self.kernel_core, item):
+            return getattr(self.kernel_core, item)
+        raise AttributeError(f"'V9LiveServices' object has no attribute '{item}'")
 
     def safe(self, fn, fallback="unknown"):
         try:
@@ -38,38 +52,52 @@ class V9LiveServices:
         if not text:
             return "I am online."
 
-        if self.runtime_core is not None:
-            try:
-                self.runtime_core.dispatcher.publish(
-                    "chat.message.received",
-                    {"role": "user", "text": text},
-                    source="chat",
-                )
+        # Normal commands enter BusterRuntimeCore.run(), which routes
+        # direct commands through BrainEngine and explicit workflows through
+        # the multi-agent orchestrator.
+        active_core = self.runtime_core or self.kernel_core
 
-                result = self.runtime_core.run(text)
+        if active_core is not None:
+            try:
+                if hasattr(active_core, "dispatcher"):
+                    active_core.dispatcher.publish(
+                        "chat.message.received",
+                        {"role": "user", "text": text},
+                        source="chat",
+                    )
+
+                if hasattr(active_core, "run"):
+                    result = active_core.run(text)
+                elif hasattr(active_core, "execute"):
+                    result = active_core.execute(text)
+                else:
+                    result = f"Core active, but no execution method (run/execute) available."
+
                 reply = self._format_runtime_result(result)
 
-                self.runtime_core.dispatcher.publish(
-                    "chat.message.completed",
-                    {
-                        "role": "assistant",
-                        "request": text,
-                        "text": reply,
-                    },
-                    source="chat",
-                )
+                if hasattr(active_core, "dispatcher"):
+                    active_core.dispatcher.publish(
+                        "chat.message.completed",
+                        {
+                            "role": "assistant",
+                            "request": text,
+                            "text": reply,
+                        },
+                        source="chat",
+                    )
                 return reply
 
             except Exception as exc:
                 try:
-                    self.runtime_core.dispatcher.publish(
-                        "chat.message.failed",
-                        {
-                            "request": text,
-                            "error": str(exc),
-                        },
-                        source="chat",
-                    )
+                    if hasattr(active_core, "dispatcher"):
+                        active_core.dispatcher.publish(
+                            "chat.message.failed",
+                            {
+                                "request": text,
+                                "error": str(exc),
+                            },
+                            source="chat",
+                        )
                 except Exception:
                     pass
 
@@ -157,13 +185,6 @@ class V9LiveServices:
         return sys.version.split()[0]
 
     def ai_info(self):
-        """
-        Read AI configuration without calling provider.available() or status().
-
-        This method is called by a repeating UI refresh. Network checks here would
-        block the Qt event loop whenever Ollama, LM Studio, or another provider is
-        not running.
-        """
         info = {
             "provider": "unknown",
             "provider_label": "Unknown",
@@ -174,19 +195,11 @@ class V9LiveServices:
 
         manager = None
 
-        if self.runtime_core is not None:
-            manager = getattr(
-                self.runtime_core,
-                "ai_manager",
-                None,
-            )
-
-            if manager is None:
-                manager = getattr(
-                    self.runtime_core,
-                    "provider_manager",
-                    None,
-                )
+        for core in (self.kernel_core, self.runtime_core):
+            if core is not None:
+                manager = getattr(core, "ai_manager", None) or getattr(core, "provider_manager", None)
+                if manager is not None:
+                    break
 
         if manager is None:
             manager = self._legacy_service("ai")
@@ -195,16 +208,8 @@ class V9LiveServices:
             return info
 
         try:
-            provider_key = str(
-                getattr(manager, "current", "unknown")
-            ).lower()
-
-            provider = getattr(
-                manager,
-                "providers",
-                {},
-            ).get(provider_key)
-
+            provider_key = str(getattr(manager, "current", "unknown")).lower()
+            provider = getattr(manager, "providers", {}).get(provider_key)
             model = getattr(provider, "model", "Unknown")
 
             if provider is None:

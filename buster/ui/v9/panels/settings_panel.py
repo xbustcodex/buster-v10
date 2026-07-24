@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 import json
@@ -40,19 +39,20 @@ class SettingsPanel(QWidget):
 
     DEFAULT_MODELS = {
         "openrouter": "openai/gpt-4o-mini",
-        "ollama": "qwen2.5-coder:3b",
+        "ollama": "qwen2.5-coder:7b",
         "lmstudio": "local-model",
         "local": "",
     }
 
-    def __init__(self, live=None, runtime_core=None):
+    def __init__(self, live=None, runtime_core=None, **kwargs):
         super().__init__()
 
         self.live = live
-        self.runtime_core = (
-            runtime_core
-            or getattr(live, "runtime_core", None)
-        )
+        self.runtime_core = runtime_core or getattr(live, "runtime_core", None)
+
+        if self.runtime_core is None:
+            raise RuntimeError("SettingsPanel requires the application runtime_core.")
+
         self.ai_manager = self._resolve_ai_manager()
 
         self.config_path = Path.cwd() / "config" / "ui_settings.json"

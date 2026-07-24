@@ -6,6 +6,7 @@ from buster.brain.providers.ollama import OllamaProvider
 from buster.brain.providers.lmstudio import LMStudioProvider
 from buster.brain.providers.openrouter import OpenRouterProvider
 
+
 class AIProviderManager:
     def __init__(self, config_file):
         self.config_file = Path(config_file)
@@ -16,7 +17,7 @@ class AIProviderManager:
             "lmstudio": LMStudioProvider(),
             "openrouter": OpenRouterProvider(),
         }
-        self.current = "local"
+        self.current = "ollama"
         self._cached_status = "AI provider starting..."
         self._last_status_check = 0.0
         self._status_ttl = 15.0
@@ -28,18 +29,26 @@ class AIProviderManager:
             return
         try:
             data = json.loads(self.config_file.read_text(encoding="utf-8"))
-            self.current = data.get("current", "local")
+            self.current = data.get("current", "ollama")
             if self.current not in self.providers:
-                self.current = "local"
+                self.current = "ollama"
         except Exception:
-            self.current = "local"
+            self.current = "ollama"
 
     def save(self):
-        self.config_file.write_text(json.dumps({"current": self.current}, indent=2), encoding="utf-8")
+        self.config_file.write_text(
+            json.dumps({"current": self.current}, indent=2), encoding="utf-8"
+        )
 
     def set_provider(self, name):
         key = name.lower().replace(" ", "")
-        aliases = {"lm": "lmstudio", "lmstudio": "lmstudio", "local": "local", "ollama": "ollama", "openrouter": "openrouter"}
+        aliases = {
+            "lm": "lmstudio",
+            "lmstudio": "lmstudio",
+            "local": "local",
+            "ollama": "ollama",
+            "openrouter": "openrouter",
+        }
         key = aliases.get(key, key)
         if key not in self.providers:
             return f"Unknown AI provider: {name}"
@@ -50,8 +59,13 @@ class AIProviderManager:
 
     def complete(self, prompt, context=""):
         provider = self.providers.get(self.current, self.providers["local"])
+
+        # Give active provider a short pause if warming up instead of collapsing to local rules
         if self.current != "local" and not provider.available():
-            return f"{provider.status()} Falling back to local provider. " + self.providers["local"].complete(prompt, context)
+            time.sleep(2.0)
+            if not provider.available():
+                return f"Error: Provider '{self.current}' is not available ({provider.status()})."
+
         return provider.complete(prompt, context)
 
     def quick_status(self):
@@ -70,17 +84,14 @@ class AIProviderManager:
         self._cached_status = "\n".join(lines)
         self._last_status_check = now
         return self._cached_status
-        
-        
-        
+
     def current_provider(self):
-        return self.current    
-        
-        
+        return self.current
+
     def current_model(self):
         provider = self.providers.get(self.current)
 
         if provider is None:
             return "Unknown"
 
-        return getattr(provider, "model", "Unknown")    
+        return getattr(provider, "model", "Unknown")

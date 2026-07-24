@@ -23,9 +23,11 @@ class OpenRouterProvider:
                         {"role": "system", "content": "You are Buster, a desktop AI companion. Be direct."},
                         {"role": "user", "content": f"Context:\n{context}\n\nUser:\n{prompt}"},
                     ],
+                    "max_tokens": 8192,
+                    "max_completion_tokens": 8192,
                     "temperature": 0.2,
                 },
-                timeout=90)
+                timeout=180)
             if r.status_code != 200:
                 return f"OpenRouter error: {r.status_code} {r.text[:200]}"
             return r.json()["choices"][0]["message"]["content"].strip()

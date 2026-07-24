@@ -69,6 +69,27 @@ class AutonomyEngine:
         state["enabled"] = mode != "manual"
         self.save_state(state)
         return state
+        
+    def plan_goal(
+        self,
+        goal: str,
+        project_type: str = "general",
+    ) -> Dict[str, Any]:
+        """Decomposes a high-level goal into structured steps using strategy_planner."""
+        plan = self.strategy_planner.plan(goal, project_type=project_type)
+        
+        # Format steps array for downstream autonomy execution
+        steps = plan.get("steps") or plan.get("phases") or []
+        if not steps and "recommended_strategy" in plan:
+            steps = [plan["recommended_strategy"]]
+
+        return {
+            "goal": goal,
+            "project_type": project_type,
+            "recommended_strategy": plan.get("recommended_strategy"),
+            "steps": steps,
+            "raw_plan": plan,
+        }    
 
     def decide_next_action(
         self,

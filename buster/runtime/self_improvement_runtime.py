@@ -3,6 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Mapping, Optional
 
+
+from buster.agents.python_agent.diff_builder import DiffBuilder
 from buster.ui.v9.panels.self_improvement.diff_generator import DiffGenerator
 from buster.ui.v9.panels.self_improvement.preview_diff_panel import PreviewDiff
 from buster.ui.v9.panels.self_improvement.self_improvement_service import (
@@ -276,6 +278,24 @@ class RuntimeRepairAdapter:
             )
         )
         return _as_dict(result)
+        
+    def _preview_handler(session):
+        # Retrieve finding data from session
+        finding = getattr(session, "finding", {}) or {}
+    
+        # Extract file path, original code, and proposed code
+        file_path = finding.get("file", finding.get("file_path", "file.py"))
+        original_code = finding.get("original", finding.get("original_code", ""))
+        proposed_code = finding.get("proposed", finding.get("proposed_code", ""))
+
+        # Call static method with required parameters
+        diff_text = DiffBuilder.build_unified_diff(
+            file_path=file_path,
+            original=original_code,
+            proposed=proposed_code,
+        )
+    
+        return {"diff": diff_text, "patch": diff_text} 
 
     def plan(
         self,

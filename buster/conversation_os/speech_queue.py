@@ -1,5 +1,4 @@
 from __future__ import annotations
-from buster.utils.datetime_utils import utc_now, utc_timestamp
 
 import json
 from pathlib import Path
@@ -8,7 +7,8 @@ from typing import Dict, Any, List, Optional
 from uuid import uuid4
 
 
-def utc_now() -> str:
+def get_utc_now_str() -> str:
+    """Returns ISO formatted UTC timestamp string."""
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
@@ -27,9 +27,22 @@ class SpeechQueue:
             return []
 
     def _save(self, items: List[Dict[str, Any]]) -> None:
-        self.path.write_text(json.dumps(items[-500:], indent=2), encoding="utf-8")
+        temp_path = self.path.with_suffix(".tmp")
+        try:
+            temp_path.write_text(json.dumps(items[-500:], indent=2), encoding="utf-8")
+            temp_path.replace(self.path)
+        except Exception:
+            if temp_path.exists():
+                temp_path.unlink()
 
-    def add(self, text: str, priority: str = "normal", source: str = "buster", reason: str = "", metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def add(
+        self,
+        text: str,
+        priority: str = "normal",
+        source: str = "buster",
+        reason: str = "",
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
         item = {
             "id": uuid4().hex[:12],
             "text": text,
@@ -37,7 +50,7 @@ class SpeechQueue:
             "source": source,
             "reason": reason,
             "metadata": metadata or {},
-            "created": utc_now(),
+            "created": get_utc_now_str(),
             "spoken": False,
             "spoken_at": None,
         }
@@ -55,10 +68,11 @@ class SpeechQueue:
         for item in items:
             if item.get("id") == item_id:
                 item["spoken"] = True
-                item["spoken_at"] = utc_now()
+                item["spoken_at"] = get_utc_now_str()
                 changed = True
                 break
-        self._save(items)
+        if changed:
+            self._save(items)
         return changed
 
     def clear(self) -> None:

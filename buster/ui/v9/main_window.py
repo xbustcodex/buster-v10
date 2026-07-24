@@ -2,7 +2,19 @@ from __future__ import annotations
 
 from pathlib import Path
 from PySide6.QtCore import Qt, QTimer
-from PySide6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QLabel, QApplication
+from PySide6.QtGui import QGuiApplication, QKeySequence, QShortcut
+from PySide6.QtWidgets import (
+    QApplication,
+    QDialog,
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
 
 from buster.ui.v9.theme import STYLE
 from buster.ui.v9.live_services import V9LiveServices
@@ -11,9 +23,13 @@ from buster.ui.v9.chat_view import ChatView
 from buster.ui.v9.face_window import FaceWindow
 from buster.ui.v9.dashboard import DashboardWindow
 from buster.ui.v9.command_palette import CommandPalette
+
+# Import modern Kernel Runtime core factory alongside legacy factory
 from buster.runtime.core import create_runtime_core
+
 from buster.ui.v9.runtime_monitor import RuntimeMonitor
 from buster.ui.v9.panels.runtime_panel.runtime_workspace import RuntimeWorkspace
+from buster.ui.v9.panels.task_panel import TaskPanel
 
 
 class V9MainWindow(QMainWindow):
@@ -21,15 +37,25 @@ class V9MainWindow(QMainWindow):
         super().__init__()
         self.services = services
         self.settings = settings
-        
+        # --------------------------------------------------
+        # Unified Runtime Setup
+        # --------------------------------------------------
+        # One runtime core owns command routing, agents, automation,
+        # self-improvement, and repair workers.
         self.runtime_core = create_runtime_core(".")
-        self.runtime_core.start()
-        
+        self.legacy_runtime_core = self.runtime_core  # compatibility alias
+
+        if hasattr(self.runtime_core, "start"):
+            self.runtime_core.start()
+
+        self.event_bus = getattr(self.runtime_core, "event_bus", None)
+
         self.live = V9LiveServices(
             services=services,
             settings=settings,
             runtime_core=self.runtime_core,
-        )  
+        )
+
         self.runtime_monitor = RuntimeMonitor(
             self.runtime_core,
             interval_ms=1000,
@@ -43,6 +69,8 @@ class V9MainWindow(QMainWindow):
         self.face_window = None
         self.current_face_state = 'idle'
         self.dashboard_window = None
+        self.tool_windows = []
+        self.backend_windows = []
 
         self.setWindowTitle("Buster AI OS v10.4 AI Operating System for Developers")
         
@@ -50,6 +78,7 @@ class V9MainWindow(QMainWindow):
         self.resize(1150, 620) 
         self.setStyleSheet(STYLE)
         self.build()
+        self.setup_shortcuts()
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.refresh_live)
@@ -73,6 +102,7 @@ class V9MainWindow(QMainWindow):
             on_vision=self.show_vision,
             on_voice=self.show_voice,
             on_agents=self.show_agents,
+            on_tasks=self.show_tasks,
             on_terminal=self.show_terminal,
             on_settings=self.show_settings,
             on_developer_checklist=self.show_developer_checklist,
@@ -83,7 +113,6 @@ class V9MainWindow(QMainWindow):
 
         main = QWidget()
         main_layout = QVBoxLayout(main)
-        # Tighter vertical margins ensure the bottom text input stays safely visible
         main_layout.setContentsMargins(20, 12, 20, 10)
         main_layout.setSpacing(6)
 
@@ -97,7 +126,13 @@ class V9MainWindow(QMainWindow):
         """)
         main_layout.addWidget(title)
 
-        self.chat = ChatView(self.live, self.refresh_live, self.set_face_state)
+        # ChatView receives legacy core so chat commands pass through v9 orchestrator
+        self.chat = ChatView(
+            self.live, 
+            self.refresh_live, 
+            self.set_face_state,
+            runtime_core=self.legacy_runtime_core
+        )
         main_layout.addWidget(self.chat, 1)
 
         footer = QLabel("Context: buster-desktop-companion     Tokens: 1,248     Temp: 0.2")
@@ -105,13 +140,45 @@ class V9MainWindow(QMainWindow):
         footer.setStyleSheet("font-size: 10px; color: #5B728E; padding-top: 2px;")
         main_layout.addWidget(footer)
 
-        # Assemble clean layout: Left Sidebar & Dynamic Center Chat Workspace
         outer.addWidget(self.sidebar)
         outer.addWidget(main, 1)
 
+    def setup_shortcuts(self):
+        """Binds full custom keyboard shortcuts across the OS."""
+        shortcuts = [
+            ("Ctrl+K", self._open_command_palette),
+            ("Ctrl+Shift+D", self.show_dashboard),
+            ("Ctrl+Shift+T", self.show_tasks),
+            ("Ctrl+I", self.show_self_improvement),
+            ("Ctrl+`", self.show_terminal),
+            ("Ctrl+Shift+F", self.show_face),
+            ("Ctrl+,", self.show_settings),
+            ("Ctrl+Shift+A", self.show_agents),
+            ("Ctrl+Shift+W", self.show_workspace),
+            ("Ctrl+Shift+N", self.show_notifications),
+            ("Ctrl+Shift+M", self.show_runtime_timeline),
+            ("Ctrl+Shift+P", self.show_projects),
+            ("Ctrl+Shift+V", self.show_vision),
+        ]
+
+        self._shortcuts = []
+
+        for seq, slot in shortcuts:
+            shortcut = QShortcut(QKeySequence(seq), self)
+            shortcut.activated.connect(slot)
+            self._shortcuts.append(shortcut)
+
+    def _open_command_palette(self):
+        dlg = CommandPalette(self)
+        if dlg.exec():
+            cmd = dlg.selected_command()
+            if cmd:
+                self.chat.input.setText(cmd)
+                self.chat.send()
+
     def refresh_live(self):
         self.sidebar.refresh()
-        
+
     def show_agents(self):
         try:
             from buster.ui.v9.panels.agent_panel import AgentPanel
@@ -143,13 +210,11 @@ class V9MainWindow(QMainWindow):
         self.face_window.show()
         self.face_window.raise_()
         self.face_window.activateWindow()
-        
+
         QTimer.singleShot(
             100,
             self.face_window.refresh_runtime
         )
-        
-    from PySide6.QtGui import QGuiApplication
 
     def _show_tool_window(self, title, widget_cls, width=900, height=650):
         window = widget_cls()
@@ -161,13 +226,10 @@ class V9MainWindow(QMainWindow):
 
         available = screen.availableGeometry()
 
-        # Never request a window larger than the usable desktop.
         safe_width = min(width, available.width() - 40)
         safe_height = min(height, available.height() - 40)
 
         window.resize(safe_width, safe_height)
-
-        # Allow layouts to shrink if needed.
         window.setMinimumSize(500, 400)
 
         window.show()
@@ -179,8 +241,6 @@ class V9MainWindow(QMainWindow):
         return window
 
     def _show_message_tool(self, title, message):
-        from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
-
         dlg = QDialog(self)
         dlg.setWindowTitle(title)
         dlg.resize(520, 320)
@@ -227,7 +287,7 @@ class V9MainWindow(QMainWindow):
 
     def show_vision(self):
         try:
-            from buster.ui.v9.panels.vision_panel import VisionPanel
+            from buster.ui.v9.panels.vision.vision_panel import VisionPanel
 
             self._show_tool_window(
                 "Buster Vision",
@@ -241,7 +301,7 @@ class V9MainWindow(QMainWindow):
 
     def show_voice(self):
         try:
-            from buster.ui.v9.panels.voice_panel import VoicePanel
+            from buster.ui.v9.panels.voice.voice_panel import VoicePanel
 
             self._show_tool_window(
                 "Buster Voice",
@@ -252,7 +312,7 @@ class V9MainWindow(QMainWindow):
 
         except Exception as e:
             self._show_message_tool("Voice", f"Voice panel error:\n{e}")
-            
+
     def show_self_improvement(self):
         try:
             from buster.ui.v9.panels.self_improvement.self_improvement_panel import (
@@ -272,8 +332,7 @@ class V9MainWindow(QMainWindow):
             self._show_message_tool(
                 "Self Improvement",
                 f"Self Improvement panel error:\n{exc}",
-            )        
-            
+            )
 
     def show_terminal(self):
         try:
@@ -292,12 +351,15 @@ class V9MainWindow(QMainWindow):
             from buster.ui.v9.panels.settings_panel import SettingsPanel
             self._show_tool_window(
                 "Settings",
-                lambda: SettingsPanel(self.live),
+                lambda: SettingsPanel(
+                    live=self.live,
+                    runtime_core=self.legacy_runtime_core
+                ),
                 820,
                 560,
             )
         except Exception as e:
-            self._show_message_tool("Settings", f"Settings panel error:\n{e}")  
+            self._show_message_tool("Settings", f"Settings panel error:\n{e}")
 
     def set_face_state(self, state):
         print("FACE STATE:", state)
@@ -314,23 +376,15 @@ class V9MainWindow(QMainWindow):
         self.dashboard_window.show()
         self.dashboard_window.raise_()
         self.dashboard_window.activateWindow()
-        
+
     def show_backend_tools(self):
-        from PySide6.QtWidgets import (
-            QDialog,
-            QVBoxLayout,
-            QLabel,
-            QPushButton,
-            QFrame,
-            QMessageBox,
-        )
+        self.backend_tools_dlg = QDialog(self)
+        self.backend_tools_dlg.setWindowTitle("Backend Tools")
+        self.backend_tools_dlg.resize(420, 420)
+        self.backend_tools_dlg.setStyleSheet(STYLE)
+        self.backend_tools_dlg.setWindowModality(Qt.WindowModality.NonModal)
 
-        dlg = QDialog(self)
-        dlg.setWindowTitle("Backend Tools")
-        dlg.resize(420, 420)
-        dlg.setStyleSheet(STYLE)
-
-        layout = QVBoxLayout(dlg)
+        layout = QVBoxLayout(self.backend_tools_dlg)
 
         title = QLabel("🧰 Backend Tools")
         title.setObjectName("Title")
@@ -381,7 +435,7 @@ class V9MainWindow(QMainWindow):
                         window = cls(self.runtime_core)
                     else:
                         window = cls()
-                    
+
                     window.setWindowTitle(title)
                     window.resize(1100, 600)
                     window.setAttribute(Qt.WA_DeleteOnClose, True)
@@ -393,6 +447,7 @@ class V9MainWindow(QMainWindow):
 
                     window.show()
                     window.raise_()
+                    window.activateWindow()
                     self.backend_windows.append(window)
                 except Exception as e:
                     QMessageBox.critical(self, "Backend Tool Error", str(e))
@@ -401,8 +456,11 @@ class V9MainWindow(QMainWindow):
             layout.addWidget(btn)
 
         layout.addStretch()
-        dlg.exec()
-        
+
+        self.backend_tools_dlg.show()
+        self.backend_tools_dlg.raise_()
+        self.backend_tools_dlg.activateWindow()
+
     def show_developer_checklist(self):
         from buster.ui.v9.panels.developer_checklist_panel import DeveloperChecklistPanel
         self._show_tool_window(
@@ -410,7 +468,7 @@ class V9MainWindow(QMainWindow):
             lambda: DeveloperChecklistPanel(self.live),
             720,
             540,
-        ) 
+        )
 
     def closeEvent(self, event):
         if self.timer.isActive():
@@ -446,7 +504,7 @@ class V9MainWindow(QMainWindow):
             except Exception:
                 pass
 
-        if self.runtime_core is not None:
+        if self.runtime_core is not None and hasattr(self.runtime_core, "stop"):
             try:
                 self.runtime_core.stop()
             except Exception as exc:
@@ -456,16 +514,11 @@ class V9MainWindow(QMainWindow):
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_K and event.modifiers() & Qt.ControlModifier:
-            dlg = CommandPalette(self)
-            if dlg.exec():
-                cmd = dlg.selected_command()
-                if cmd:
-                    self.chat.input.setText(cmd)
-                    self.chat.send()
+            self._open_command_palette()
             return
 
         super().keyPressEvent(event)
-        
+
     def show_notifications(self):
         try:
             from buster.ui.v9.panels.notification_center_panel import (
@@ -486,7 +539,7 @@ class V9MainWindow(QMainWindow):
             self._show_message_tool(
                 "Notification Center",
                 f"Notification Center error:\n{exc}",
-            )   
+            )
 
     def show_runtime_timeline(self):
         try:
@@ -509,3 +562,24 @@ class V9MainWindow(QMainWindow):
                 "Developer Mission Control",
                 f"Developer Mission Control error:\n{exc}",
             )
+            
+    def show_tasks(self):
+        """Displays the real-time Task & Orchestrator Dashboard panel."""
+        try:
+            from buster.ui.v9.panels.task_panel import TaskPanel
+
+            orchestrator = getattr(self.runtime_core, "orchestrator", None) or getattr(self.legacy_runtime_core, "orchestrator", None)
+            event_bus = getattr(self.runtime_core, "event_bus", None) or getattr(self.legacy_runtime_core, "event_bus", None)
+
+            self._show_tool_window(
+                "Tasks & Orchestrator Monitor",
+                lambda: TaskPanel(
+                    orchestrator=orchestrator,
+                    event_bus=event_bus,
+                ),
+                1100,
+                620,
+            )
+
+        except Exception as e:
+            self._show_message_tool("Tasks", f"Task Panel error:\n{e}")

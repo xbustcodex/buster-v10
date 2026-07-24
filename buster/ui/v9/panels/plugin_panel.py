@@ -1,26 +1,32 @@
 """
 Smart Patch Drop Zone Panel for Buster Mission Control
-Allows dragging and dropping python files/patches to hot-update system modules safely.
+Allows dragging and dropping python files/patches to hot-update system modules safely,
+dynamically importing modules into sys.modules and registering them with runtime_core.
 """
 
 from __future__ import annotations
 
 import ast
+import importlib
+import logging
 import os
+import sys
 from pathlib import Path
 from typing import Optional, Tuple
 
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QDragEnterEvent, QDropEvent
 from PySide6.QtWidgets import (
+    QFileDialog,
     QFrame,
     QHBoxLayout,
     QLabel,
     QPushButton,
     QVBoxLayout,
     QWidget,
-    QFileDialog,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class SmartDropZone(QFrame):
@@ -91,6 +97,22 @@ class SmartDropZone(QFrame):
 
             tree = ast.parse(content)
             
+            # Check for Automation signatures (v10.6)
+            is_automation = any(
+                kw in content
+                for kw in ["playwright", "pyautogui", "pygetwindow", "Browser", "DesktopAutomation", "automation"]
+            )
+            if is_automation or "automation" in filename.lower():
+                return f"buster/automation/{filename}"
+
+            # Check for Kernel / Event Bus / Router signatures
+            is_kernel = any(
+                kw in content
+                for kw in ["EventBus", "ActionRouter", "SandboxManager", "ServiceRegistry", "SecurityIntercept"]
+            )
+            if is_kernel:
+                return f"buster/kernel/{filename}"
+
             # Check for UI Panel signatures
             is_ui = any("PySide6" in ast.dump(node) or "QWidget" in ast.dump(node) for node in ast.walk(tree))
             if is_ui or filename.endswith("_panel.py"):
@@ -138,7 +160,7 @@ class PluginPanel(QWidget):
         title = QLabel("PLUGIN MANAGER & HOT-PATCH HUB")
         title.setStyleSheet("color: #23B8FF; font-size: 20px; font-weight: 800; letter-spacing: 1px;")
         
-        subtitle = QLabel("Drop updated components or plugins here to automatically deploy via PatchTransaction.")
+        subtitle = QLabel("Drop updated components or plugins here to automatically deploy and wire into the runtime.")
         subtitle.setStyleSheet("color: #7894B5; font-size: 12px;")
 
         layout.addWidget(title)
@@ -156,6 +178,8 @@ class PluginPanel(QWidget):
         cat_layout.addWidget(cat_label)
 
         for name, rel_dir in [
+            ("Automation", "buster/automation/"),
+            ("Kernel", "buster/kernel/"),
             ("UI Panel", "buster/ui/v9/panels/"),
             ("Runtime", "buster/runtime/"),
             ("Core", "buster/core/"),
@@ -193,7 +217,7 @@ class PluginPanel(QWidget):
         btn_layout = QHBoxLayout()
         btn_layout.addStretch()
 
-        self.apply_btn = QPushButton("Apply Patch Transaction")
+        self.apply_btn = QPushButton("Apply Patch & Wire Into Kernel")
         self.apply_btn.setEnabled(False)
         self.apply_btn.setFixedHeight(32)
         self.apply_btn.setStyleSheet(
@@ -233,7 +257,7 @@ class PluginPanel(QWidget):
             self.apply_btn.setEnabled(True)
 
     def _apply_patch(self) -> None:
-        """Executes patch via the runtime PatchTransaction pipeline."""
+        """Executes patch via file deployment, live module reload, and kernel wiring."""
         if not self._selected_file or not self._target_rel_path:
             return
 
@@ -241,8 +265,63 @@ class PluginPanel(QWidget):
             with open(self._selected_file, "r", encoding="utf-8") as f:
                 new_content = f.read()
 
-            # Execute transaction (integrates directly with our PatchTransaction pipeline)
-            self.file_info_label.setText(f"<font color='#31D158'><b>✓ Patch applied to {self._target_rel_path}!</b></font>")
+            target_full_path = self.project_root / self._target_rel_path
+            target_full_path.parent.mkdir(parents=True, exist_ok=True)
+
+            # 1. Save file to disk
+            with open(target_full_path, "w", encoding="utf-8") as f:
+                f.write(new_content)
+
+            # 2. Convert path to module notation
+            rel_path_no_ext = Path(self._target_rel_path).with_suffix("")
+            module_name = ".".join(rel_path_no_ext.parts)
+
+            # Ensure project root is in sys.path
+            if str(self.project_root) not in sys.path:
+                sys.path.insert(0, str(self.project_root))
+
+            # 3. Dynamic Import / Reload into sys.modules
+            if module_name in sys.modules:
+                mod = importlib.reload(sys.modules[module_name])
+            else:
+                mod = importlib.import_module(module_name)
+
+            # 4. Wire dynamically loaded module into runtime_core if available
+            wire_status = "Saved & reloaded into Python memory."
+            if self.runtime_core:
+                if hasattr(self.runtime_core, "apply_patch"):
+                    self.runtime_core.apply_patch(str(self._target_rel_path), new_content)
+                
+                # Auto-wire services into runtime_core registry/attributes safely
+                if hasattr(self.runtime_core, "services"):
+                    services = self.runtime_core.services
+                    for attr in dir(mod):
+                        obj = getattr(mod, attr)
+                        if isinstance(obj, type) and not attr.startswith("_"):
+                            # If class ends with key component suffix, register it
+                            if any(attr.endswith(suffix) for suffix in ["Service", "Router", "Engine", "Manager", "Panel"]):
+                                service_key = attr.lower()
+                                try:
+                                    if hasattr(services, "register"):
+                                        services.register(service_key, obj)
+                                    elif isinstance(services, dict):
+                                        services[service_key] = obj
+                                except Exception as err:
+                                    logger.warning(f"Could not auto-register {attr}: {err}")
+
+                # Trigger runtime state refresh to broadcast changes across UI
+                if hasattr(self.runtime_core, "refresh_state"):
+                    self.runtime_core.refresh_state()
+
+                wire_status = f"Successfully wired {module_name} into Runtime Kernel!"
+
+            self.file_info_label.setText(
+                f"<font color='#31D158'><b>✓ {wire_status}</b></font>"
+            )
             self.apply_btn.setEnabled(False)
+
         except Exception as exc:
-            self.file_info_label.setText(f"<font color='#FF4D4D'><b>Failed to apply patch:</b> {exc}</font>")
+            logger.exception("Failed to apply patch transaction")
+            self.file_info_label.setText(
+                f"<font color='#FF4D4D'><b>Failed to apply & wire patch:</b> {exc}</font>"
+            )

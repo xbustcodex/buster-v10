@@ -6,6 +6,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional
 
+from buster.agents.python_agent.diff_builder import DiffBuilder
+
+
 from .session.repair_session import (
     RepairSession,
     RepairSessionStage,
@@ -794,7 +797,10 @@ class SelfImprovementService:
             )
 
         return session
-
+        
+        
+        
+        
     # ------------------------------------------------------------------
     # Background execution
     # ------------------------------------------------------------------
