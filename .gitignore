@@ -26,3 +26,41 @@ dist/
 .idea/
 Thumbs.db
 Desktop.ini
+
+# ============================================================
+# Buster local runtime artifacts
+# ============================================================
+
+# Voice recordings
+recordings/
+*.wav
+
+# Backup files
+*.bak
+
+# Local diagnostic dumps
+fulldump.txt
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/
+
+# Local environments
+.venv/
+venv/
+env/
+
+# Build output
+build/
+dist/
+*.spec.bak
+
+# Temporary files
+*.tmp
+*.temp
+
