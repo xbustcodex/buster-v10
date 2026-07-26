@@ -2,18 +2,15 @@ from __future__ import annotations
 
 from typing import Callable, Optional
 
-from PySide6.QtCore import Qt, QTimer, Signal
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
-    QFrame,
     QHBoxLayout,
     QLabel,
     QListWidget,
     QListWidgetItem,
     QPushButton,
-    QScrollArea,
     QSplitter,
     QStackedWidget,
-    QTextEdit,
     QVBoxLayout,
     QWidget,
 )
@@ -21,404 +18,68 @@ from PySide6.QtWidgets import (
 from buster.ui.v9.panels.runtime_panel.runtime_workspace import RuntimeWorkspace
 
 
-class RuntimeSummaryPanel(QFrame):
-    """Compact live runtime intelligence sidebar with self-improvement transaction tracking."""
+class PopoutWindow(QWidget):
+    """Container window for popped-out panels styled with Buster dark theme."""
 
-    # Stage order mapping for percentage & checklist progression
-    PATCH_STAGES = [
-        "PREFLIGHT_PASSED",
-        "BACKUP_COMPLETE",
-        "APPLY_COMPLETE",
-        "COMPILE_PASSED",
-        "VERIFICATION_PASSED",
-        "TESTS_PASSED",
-        "GIT_COMMIT_COMPLETE",
-        "TRANSACTION_COMMITTED",
-    ]
+    window_closed = Signal(QWidget)
 
-    STAGE_LABELS = {
-        "PREFLIGHT_PASSED": "Preflight",
-        "BACKUP_COMPLETE": "Backup",
-        "APPLY_COMPLETE": "Apply",
-        "COMPILE_PASSED": "Compile",
-        "VERIFICATION_PASSED": "Verification",
-        "TESTS_PASSED": "Tests",
-        "GIT_COMMIT_COMPLETE": "Git Commit",
-        "TRANSACTION_COMMITTED": "Committed",
-    }
-
-    def __init__(self, runtime_core=None, parent=None):
-        super().__init__(parent)
-        self.runtime_core = runtime_core
-        self._subscribed = False
-        self._event_count = 0
-        self._error_count = 0
-        self._active_agents: set[str] = set()
-        self._running_jobs: set[str] = set()
-        self._queued_jobs = 0
-
-        # Self-improvement patch tracking state
-        self._active_patch_id: Optional[str] = None
-        self._active_transaction_id: Optional[str] = None
-        self._patch_agent: str = "AI"
-        self._patch_target: str = "None"
-        self._patch_stage: str = "IDLE"
-        self._patch_completed_stages: set[str] = set()
-        self._patch_status: str = "IDLE"  # IDLE, IN_PROGRESS, COMMITTED, ROLLED_BACK
-
-        self.setObjectName("RuntimeSummaryPanel")
-        self.setMinimumWidth(180)
-        self.setMaximumWidth(220)
+    def __init__(self, widget: QWidget, title: str, parent=None):
+        super().__init__(parent, Qt.Window)
+        self.widget = widget
+        self.setWindowTitle(f"Buster - {title}")
+        self.resize(1000, 600)
+        
+        # Apply the matching Buster dark theme style to popout windows
         self.setStyleSheet(
             """
-            QFrame#RuntimeSummaryPanel {
-                background: #07111D;
-                border-left: 1px solid #15324E;
-            }
-
-            QLabel {
-                border: none;
-                background: transparent;
-            }
-
-            QPushButton {
-                background: #0A1D33;
-                color: #DCEBFF;
-                border: 1px solid #175A94;
-                border-radius: 7px;
-                padding: 7px 10px;
-                font-weight: 600;
-            }
-
-            QPushButton:hover {
-                background: #0E2A49;
-                border-color: #23B8FF;
-            }
-            """
-        )
-
-        self._build_ui()
-        self._connect_runtime()
-
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.refresh)
-        self.timer.start(1000)
-        self.refresh()
-
-    def _build_ui(self) -> None:
-        root = QVBoxLayout(self)
-        root.setContentsMargins(14, 14, 14, 14)
-        root.setSpacing(10)
-
-        title = QLabel("RUNTIME INTELLIGENCE")
-        title.setStyleSheet(
-            "color:#23B8FF;font-size:14px;font-weight:800;letter-spacing:1px;"
-        )
-        root.addWidget(title)
-
-        self.dispatcher_label = self._metric("Dispatcher", "Unknown")
-        self.events_label = self._metric("Events", "0")
-        self.agents_label = self._metric("Active Agents", "0")
-        self.jobs_label = self._metric("Running Jobs", "0")
-        self.queue_label = self._metric("Queue", "0")
-        self.errors_label = self._metric("Errors", "0")
-
-        # --- Self-Improvement Transaction Display ---
-        tx_section = QLabel("ACTIVE TRANSACTION")
-        tx_section.setStyleSheet(
-            "color:#7894B5;font-size:10px;font-weight:700;margin-top:4px;"
-        )
-        root.addWidget(tx_section)
-
-        self.patch_box = QLabel("No active patch")
-        self.patch_box.setStyleSheet(
-            """
-            color:#AFC8E6;
-            background:#050B14;
-            border:1px solid #14324F;
-            border-radius:9px;
-            padding:8px;
-            font-family:Consolas;
-            font-size:10px;
-            """
-        )
-        self.patch_box.setWordWrap(True)
-        root.addWidget(self.patch_box)
-
-        # --- Agent Flow Display ---
-        section = QLabel("AGENT FLOW")
-        section.setStyleSheet(
-            "color:#7894B5;font-size:10px;font-weight:700;margin-top:4px;"
-        )
-        root.addWidget(section)
-
-        self.flow_label = QLabel(
-            "Planner\n   ↓\nBuilder\n   ↓\nTester\n   ↓\nReviewer"
-        )
-        self.flow_label.setAlignment(Qt.AlignCenter)
-        self.flow_label.setStyleSheet(
-            """
-            color:#AFC8E6;
-            background:#050B14;
-            border:1px solid #14324F;
-            border-radius:9px;
-            padding:8px;
-            font-family:Consolas;
-            font-size:11px;
-            """
-        )
-        root.addWidget(self.flow_label)
-
-        # --- Activity Log ---
-        section = QLabel("LATEST ACTIVITY")
-        section.setStyleSheet(
-            "color:#7894B5;font-size:10px;font-weight:700;margin-top:4px;"
-        )
-        root.addWidget(section)
-
-        self.activity = QTextEdit()
-        self.activity.setReadOnly(True)
-        self.activity.setMinimumHeight(100)
-        self.activity.setMaximumHeight(200)
-        self.activity.setStyleSheet(
-            """
-            QTextEdit {
+            QWidget {
                 background:#050B14;
+                color:#EAF2FF;
+                font-family:"Segoe UI";
+            }
+            QPushButton {
+                background:#0A1E34;
                 color:#BFD1E7;
-                border:1px solid #14324F;
-                border-radius:8px;
-                padding:6px;
-                font-family:Consolas;
-                font-size:10px;
+                border:1px solid #15324E;
+                border-radius:5px;
+                padding:5px 12px;
+                font-size:11px;
+                font-weight:600;
+            }
+            QPushButton:hover {
+                background:#0E2A49;
+                color:#23B8FF;
             }
             """
         )
-        root.addWidget(self.activity)
-
-        root.addStretch()
-
-        refresh = QPushButton("Refresh Runtime")
-        refresh.setFixedHeight(26)
-        refresh.clicked.connect(self.refresh)
-        root.addWidget(refresh)
-
-    def _metric(self, name: str, value: str) -> QLabel:
-        label = QLabel(f"{name}\n{value}")
-        label.setStyleSheet(
-            """
-            color:#DCEBFF;
-            background:#081827;
-            border:1px solid #14324F;
-            border-radius:8px;
-            padding:6px;
-            font-size:10px;
-            """
-        )
-        self.layout().addWidget(label)
-        return label
-
-    def _connect_runtime(self) -> None:
-        if self._subscribed or self.runtime_core is None:
-            return
-
-        dispatcher = getattr(self.runtime_core, "dispatcher", None)
-        if dispatcher is None:
-            return
-
-        dispatcher.subscribe("*", self._handle_event)
-        self._subscribed = True
-
-    def _handle_event(self, event: dict) -> None:
-        if not isinstance(event, dict):
-            return
-
-        self._event_count += 1
-        event_type = str(event.get("type", event.get("stage", "unknown")))
-        payload = event.get("payload", event) if isinstance(event.get("payload"), dict) else event
-
-        if event_type.endswith(".failed") or event_type in {
-            "error",
-            "runtime.error",
-            "PREFLIGHT_FAILED",
-            "COMPILE_FAILED",
-            "VERIFICATION_FAILED",
-            "TESTS_FAILED",
-        }:
-            self._error_count += 1
-
-        # Agent Tracking
-        if event_type == "agent.started":
-            agent = str(payload.get("agent", "Agent"))
-            self._active_agents.add(agent)
-        elif event_type in {"agent.finished", "agent.failed"}:
-            agent = str(payload.get("agent", "Agent"))
-            self._active_agents.discard(agent)
-
-        # Job Tracking
-        if event_type in {"job.created", "job.queued"}:
-            self._queued_jobs += 1
-        elif event_type == "job.started":
-            job = str(
-                payload.get("job_id")
-                or payload.get("job")
-                or payload.get("title")
-                or "job"
-            )
-            self._running_jobs.add(job)
-            self._queued_jobs = max(0, self._queued_jobs - 1)
-        elif event_type in {"job.finished", "job.failed"}:
-            job = str(
-                payload.get("job_id")
-                or payload.get("job")
-                or payload.get("title")
-                or "job"
-            )
-            self._running_jobs.discard(job)
-
-        # --- Self-Improvement Transaction Pipeline Recognition ---
-        if "patch_id" in payload or event_type in self.PATCH_STAGES or "ROLLBACK" in event_type:
-            self._process_transaction_event(event_type, payload)
-
-        summary = self._event_summary(event_type, payload)
-        self.activity.append(f"{event_type}\n{summary}\n")
-        scrollbar = self.activity.verticalScrollBar()
-        scrollbar.setValue(scrollbar.maximum())
-
-    def _process_transaction_event(self, stage: str, payload: dict) -> None:
-        """Updates internal state for live patch transaction rendering."""
-        patch_id = payload.get("patch_id")
-        if patch_id:
-            if patch_id != self._active_patch_id:
-                self._active_patch_id = patch_id
-                self._patch_completed_stages.clear()
-                self._patch_status = "IN_PROGRESS"
-
-        self._patch_agent = payload.get("agent_id") or payload.get("executor") or self._patch_agent
-        self._patch_target = payload.get("target") or self._patch_target
-        self._patch_stage = stage
-
-        if stage in self.PATCH_STAGES:
-            self._patch_completed_stages.add(stage)
-
-        if stage == "TRANSACTION_COMMITTED":
-            self._patch_status = "COMMITTED"
-        elif "ROLLBACK" in stage or "FAILED" in stage:
-            self._patch_status = "ROLLED_BACK"
-
-        self._update_patch_display()
-
-    def _update_patch_display(self) -> None:
-        if not self._active_patch_id:
-            self.patch_box.setText("No active transaction")
-            return
-
-        lines = [f"<b>{self._active_patch_id}</b>"]
-        lines.append(f"Agent: <font color='#23B8FF'>{self._patch_agent}</font>")
         
-        # Target truncation for sidebar fit
-        target_disp = self._patch_target
-        if len(target_disp) > 22:
-            target_disp = "..." + target_disp[-19:]
-        lines.append(f"Target: <font color='#8EA2C0'>{target_disp}</font>")
-        lines.append("")
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
 
-        # Progress calculation
-        completed_count = len(self._patch_completed_stages)
-        pct = int((completed_count / len(self.PATCH_STAGES)) * 100)
-        lines.append(f"Progress: <b>{pct}%</b>")
+        # Header bar with Re-dock button
+        header = QHBoxLayout()
+        header.setContentsMargins(12, 8, 12, 8)
+        header.addWidget(QLabel(f"<b>{title.upper()}</b>"))
 
-        # Stage Checklist Rendering
-        for stage_key in self.PATCH_STAGES:
-            label = self.STAGE_LABELS[stage_key]
-            if stage_key in self._patch_completed_stages:
-                lines.append(f"<font color='#31D158'>✓ {label}</font>")
-            elif stage_key == self._patch_stage:
-                lines.append(f"<font color='#23B8FF'>➔ {label}</font>")
-            else:
-                lines.append(f"<font color='#4A617C'>○ {label}</font>")
-
-        if self._patch_status == "ROLLED_BACK":
-            lines.append("<br><font color='#FF4D4D'><b>✗ ROLLED BACK</b></font>")
-        elif self._patch_status == "COMMITTED":
-            lines.append("<br><font color='#31D158'><b>✓ COMMITTED</b></font>")
-
-        self.patch_box.setText("<br>".join(lines))
-
-    def _event_summary(self, event_type: str, payload: dict) -> str:
-        for key in (
-            "message",
-            "summary",
-            "request",
-            "title",
-            "agent",
-            "agent_id",
-            "patch_id",
-            "job_id",
-            "status",
-            "error",
-        ):
-            value = payload.get(key)
-            if value not in (None, "", [], {}):
-                return str(value)[:180]
-
-        return str(payload)[:180] if payload else "Event received"
-
-    def refresh(self) -> None:
-        dispatcher_status = "Unavailable"
-        subscribers = 0
-
-        if self.runtime_core is not None:
-            dispatcher = getattr(self.runtime_core, "dispatcher", None)
-            if dispatcher is not None:
-                try:
-                    status = dispatcher.status()
-                    dispatcher_status = "Healthy"
-                    subscribers = sum(
-                        status.get("subscribers", {}).values()
-                    )
-                except Exception:
-                    dispatcher_status = "Degraded"
-
-        self.dispatcher_label.setText(
-            f"Dispatcher\n{dispatcher_status} · {subscribers} subscribers"
+        self.redock_btn = QPushButton("Dock Back ↙")
+        self.redock_btn.setStyleSheet(
+            "background: #10253A; color: #23B8FF; border: 1px solid #15324E; padding: 4px 10px; border-radius: 4px;"
         )
-        self.events_label.setText(f"Events\n{self._event_count}")
-        self.agents_label.setText(
-            f"Active Agents\n{len(self._active_agents)}"
-        )
-        self.jobs_label.setText(
-            f"Running Jobs\n{len(self._running_jobs)}"
-        )
-        self.queue_label.setText(f"Queue\n{self._queued_jobs}")
-        self.errors_label.setText(f"Errors\n{self._error_count}")
+        self.redock_btn.clicked.connect(self.close)
+        header.addStretch()
+        header.addWidget(self.redock_btn)
 
-        stages = []
-        for name in ("Planner", "Builder", "Tester", "Reviewer"):
-            active = any(name.lower() in agent.lower() for agent in self._active_agents)
-            stages.append(f"{'●' if active else '○'} {name}")
+        layout.addLayout(header)
+        layout.addWidget(widget, 1)
 
-        self.flow_label.setText("\n   ↓\n".join(stages))
-
-    def shutdown(self) -> None:
-        if self.timer.isActive():
-            self.timer.stop()
-
-        if not self._subscribed or self.runtime_core is None:
-            return
-
-        dispatcher = getattr(self.runtime_core, "dispatcher", None)
-        if dispatcher is not None:
-            try:
-                dispatcher.unsubscribe("*", self._handle_event)
-            except Exception:
-                pass
-
-        self._subscribed = False
+    def closeEvent(self, event):
+        self.window_closed.emit(self.widget)
+        super().closeEvent(event)
 
 
 class DeveloperMissionControl(QWidget):
     """
-    Unified Buster developer environment.
+    Unified Buster developer environment with pop-out panel capabilities.
     """
 
     def __init__(
@@ -432,9 +93,10 @@ class DeveloperMissionControl(QWidget):
         self.runtime_core = runtime_core
         self.live = live
         self._pages: dict[str, QWidget] = {}
+        self._popouts: dict[str, PopoutWindow] = {}
 
         self.setWindowTitle("Buster Developer Mission Control")
-        self.resize(1100, 700) 
+        self.resize(1200, 800)
         self.setObjectName("DeveloperMissionControl")
         self.setStyleSheet(
             """
@@ -469,6 +131,21 @@ class DeveloperMissionControl(QWidget):
             QSplitter::handle {
                 background:#10253A;
             }
+
+            QPushButton {
+                background:#0A1E34;
+                color:#BFD1E7;
+                border:1px solid #15324E;
+                border-radius:5px;
+                padding:5px 12px;
+                font-size:11px;
+                font-weight:600;
+            }
+
+            QPushButton:hover {
+                background:#0E2A49;
+                color:#23B8FF;
+            }
             """
         )
 
@@ -479,19 +156,15 @@ class DeveloperMissionControl(QWidget):
         root.setContentsMargins(0, 0, 0, 0)
         root.setSpacing(0)
 
+        # Top Header Bar
         header = QHBoxLayout()
         header.setContentsMargins(18, 14, 18, 12)
 
         title_box = QVBoxLayout()
-
         title = QLabel("BUSTER DEVELOPER MISSION CONTROL")
-        title.setStyleSheet(
-            "color:#23B8FF;font-size:20px;font-weight:800;letter-spacing:1px;"
-        )
+        title.setStyleSheet("color:#23B8FF;font-size:20px;font-weight:800;letter-spacing:1px;")
 
-        subtitle = QLabel(
-            "Projects · Runtime · Agents · Plugins · Terminal · Intelligence"
-        )
+        subtitle = QLabel("Projects · Runtime · Agents · Plugins · Terminal · Intelligence · Security")
         subtitle.setStyleSheet("color:#7894B5;font-size:11px;")
 
         title_box.addWidget(title)
@@ -501,13 +174,12 @@ class DeveloperMissionControl(QWidget):
         header.addStretch()
 
         self.status_label = QLabel("● Runtime connected")
-        self.status_label.setStyleSheet(
-            "color:#31D158;font-size:12px;font-weight:700;"
-        )
+        self.status_label.setStyleSheet("color:#31D158;font-size:12px;font-weight:700;")
         header.addWidget(self.status_label)
 
         root.addLayout(header)
 
+        # Horizontal Splitter: Navigation Menu | Main Workspace
         outer_splitter = QSplitter(Qt.Horizontal)
         root.addWidget(outer_splitter, 1)
 
@@ -515,40 +187,78 @@ class DeveloperMissionControl(QWidget):
         self.navigation.setFixedWidth(150)
         outer_splitter.addWidget(self.navigation)
 
-        centre_splitter = QSplitter(Qt.Vertical)
-        outer_splitter.addWidget(centre_splitter)
+        # Vertical Splitter: Active Page | Bottom Terminal Dock
+        self.centre_splitter = QSplitter(Qt.Vertical)
+        outer_splitter.addWidget(self.centre_splitter)
+
+        # Workspace Area Container with Popout Header
+        workspace_container = QWidget()
+        workspace_layout = QVBoxLayout(workspace_container)
+        workspace_layout.setContentsMargins(0, 0, 0, 0)
+        workspace_layout.setSpacing(0)
+
+        ws_header = QHBoxLayout()
+        ws_header.setContentsMargins(8, 4, 12, 4)
+        ws_header.addStretch()
+        self.popout_page_btn = QPushButton("Popout Active View ↗")
+        self.popout_page_btn.clicked.connect(self._popout_active_page)
+        ws_header.addWidget(self.popout_page_btn)
+        workspace_layout.addLayout(ws_header)
 
         self.stack = QStackedWidget()
-        self.stack.setMinimumHeight(350) 
-        centre_splitter.addWidget(self.stack)
+        workspace_layout.addWidget(self.stack, 1)
+        self.centre_splitter.addWidget(workspace_container)
 
-        self.bottom_dock = self._create_tool_page(
+        # Terminal Dock Area Container with Popout Header
+        terminal_container = QWidget()
+        term_layout = QVBoxLayout(terminal_container)
+        term_layout.setContentsMargins(0, 0, 0, 0)
+        term_layout.setSpacing(0)
+
+        term_header = QHBoxLayout()
+        term_header.setContentsMargins(12, 4, 12, 4)
+        term_lbl = QLabel("RUNTIME TERMINAL")
+        term_lbl.setStyleSheet("color:#7894B5;font-size:11px;font-weight:700;")
+        term_header.addWidget(term_lbl)
+        term_header.addStretch()
+
+        self.popout_term_btn = QPushButton("Popout Terminal ↗")
+        self.popout_term_btn.clicked.connect(self._popout_terminal)
+        term_header.addWidget(self.popout_term_btn)
+        term_layout.addLayout(term_header)
+
+        self.terminal_widget = self._create_tool_page(
             "Runtime Terminal",
             "buster.ui.v9.panels.terminal_panel",
             "TerminalPanel",
             fallback_text="Runtime terminal is unavailable.",
         )
-        self.bottom_dock.setMinimumHeight(90)
-        centre_splitter.addWidget(self.bottom_dock)
-        centre_splitter.setSizes([450, 150])
+        term_layout.addWidget(self.terminal_widget, 1)
 
-        self.runtime_summary = RuntimeSummaryPanel(
-            runtime_core=self.runtime_core
-        )
+        self.terminal_container = terminal_container
+        self.centre_splitter.addWidget(self.terminal_container)
+        self.centre_splitter.setSizes([500, 300])
 
-        scroll_sidebar = QScrollArea()
-        scroll_sidebar.setWidgetResizable(True)
-        scroll_sidebar.setWidget(self.runtime_summary)
-        scroll_sidebar.setFrameShape(QFrame.NoFrame)
-        scroll_sidebar.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        scroll_sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        scroll_sidebar.setFixedWidth(210)
-
-        outer_splitter.addWidget(scroll_sidebar)
-        outer_splitter.setSizes([150, 740, 210])
+        outer_splitter.setSizes([150, 1050])
 
         page_specs = [
             ("Runtime", self._create_runtime_page),
+            (
+                "Mission Control",
+                lambda: self._create_tool_page(
+                    "Mission Control",
+                    "buster.ui.v9.panels.mission_control.mission_control_panel",
+                    "MissionControlPanel",
+                ),
+            ),
+            (
+                "Master Security",
+                lambda: self._create_tool_page(
+                    "Master Security",
+                    "buster.ui.v9.panels.master_mission_control.MasterMissionControl",
+                    "MasterMissionControl",
+                ),
+            ),
             (
                 "Projects",
                 lambda: self._create_tool_page(
@@ -621,10 +331,46 @@ class DeveloperMissionControl(QWidget):
             self.stack.addWidget(page)
             self.navigation.addItem(QListWidgetItem(name))
 
-        self.navigation.currentRowChanged.connect(
-            self._change_page
-        )
+        self.navigation.currentRowChanged.connect(self._change_page)
         self.navigation.setCurrentRow(0)
+
+    def _popout_terminal(self) -> None:
+        if "terminal" in self._popouts:
+            self._popouts["terminal"].raise_()
+            return
+
+        self.terminal_container.hide()
+        win = PopoutWindow(self.terminal_widget, "Runtime Terminal", self)
+        win.window_closed.connect(self._redock_terminal)
+        self._popouts["terminal"] = win
+        win.show()
+
+    def _redock_terminal(self, widget: QWidget) -> None:
+        if "terminal" in self._popouts:
+            del self._popouts["terminal"]
+        self.terminal_container.layout().addWidget(widget)
+        self.terminal_container.show()
+
+    def _popout_active_page(self) -> None:
+        current_item = self.navigation.currentItem()
+        if not current_item:
+            return
+        
+        name = current_item.text()
+        page = self._pages.get(name)
+        if not page or name in self._popouts:
+            return
+
+        win = PopoutWindow(page, name, self)
+        win.window_closed.connect(lambda w, n=name: self._redock_active_page(w, n))
+        self._popouts[name] = win
+        win.show()
+
+    def _redock_active_page(self, widget: QWidget, name: str) -> None:
+        if name in self._popouts:
+            del self._popouts[name]
+        self.stack.addWidget(widget)
+        self.stack.setCurrentWidget(widget)
 
     def _create_runtime_page(self) -> QWidget:
         return RuntimeWorkspace(
@@ -648,6 +394,7 @@ class DeveloperMissionControl(QWidget):
                 lambda: cls(self.runtime_core, self.live),
                 lambda: cls(self.live),
                 lambda: cls(self.runtime_core),
+                lambda: cls(parent=self),
                 lambda: cls(),
             ]
 
@@ -681,15 +428,11 @@ class DeveloperMissionControl(QWidget):
         layout.setContentsMargins(24, 24, 24, 24)
 
         heading = QLabel(title.upper())
-        heading.setStyleSheet(
-            "color:#23B8FF;font-size:20px;font-weight:800;"
-        )
+        heading.setStyleSheet("color:#23B8FF;font-size:20px;font-weight:800;")
 
         body = QLabel(message)
         body.setWordWrap(True)
-        body.setStyleSheet(
-            "color:#9FB8D5;font-size:13px;"
-        )
+        body.setStyleSheet("color:#9FB8D5;font-size:13px;")
 
         layout.addWidget(heading)
         layout.addWidget(body)
@@ -699,7 +442,3 @@ class DeveloperMissionControl(QWidget):
     def _change_page(self, index: int) -> None:
         if 0 <= index < self.stack.count():
             self.stack.setCurrentIndex(index)
-
-    def closeEvent(self, event) -> None:
-        self.runtime_summary.shutdown()
-        event.accept()

@@ -1,0 +1,34 @@
+{
+  "hurdles": [
+    {
+      "id": "hrd-1784961798",
+      "timestamp": "2026-07-25T16:43:18.230043",
+      "task": "Load Config File",
+      "error_type": "FileNotFoundError",
+      "error_message": "[Errno 2] No such file or directory: 'non_existent_config.json'",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\xkali\\new_ai\\buster-v10\\buster\\brain\\hurdle_engine.py\", line 118, in <module>\n    open(\"non_existent_config.json\", \"r\")\nFileNotFoundError: [Errno 2] No such file or directory: 'non_existent_config.json'\n",
+      "status": "Resolved in Dream Mode",
+      "proposed_self_upgrade": {
+        "action": "CREATE_UTILITY",
+        "summary": "Build automated path verification and workspace directory fallback in brain/tools/."
+      },
+      "resolved_at": "2026-07-25T16:47:07.963080"
+    },
+    {
+      "id": "hrd-1784962664",
+      "timestamp": "2026-07-25T16:57:44.067887",
+      "task": "Load Config File",
+      "error_type": "FileNotFoundError",
+      "error_message": "[Errno 2] No such file or directory: 'non_existent_config.json'",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\xkali\\new_ai\\buster-v10\\buster\\brain\\hurdle_engine.py\", line 118, in <module>\n    open(\"non_existent_config.json\", \"r\")\nFileNotFoundError: [Errno 2] No such file or directory: 'non_existent_config.json'\n",
+      "status": "Resolved in Dream Mode",
+      "proposed_self_upgrade": {
+        "action": "CREATE_UTILITY",
+        "summary": "Build automated path verification and workspace directory fallback in brain/tools/."
+      },
+      "resolved_at": "2026-07-25T16:57:56.662949"
+    }
+  ],
+  "toolbelt": [],
+  "ambition_backlog": []
+}

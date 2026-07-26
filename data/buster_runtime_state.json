@@ -1,123 +1,110 @@
 {
   "enabled": true,
   "runtime_status": "stopped",
-  "tick_count": 2,
+  "tick_count": 24,
   "mode": "companion",
   "privacy_mode": "companion",
-  "started_at": "2026-07-25T03:15:33+00:00",
-  "last_tick": "2026-07-09T06:02:36+00:00",
+  "started_at": "2026-07-26T07:37:42+00:00",
+  "last_tick": "2026-07-26T07:36:51+00:00",
   "latest_prediction": {
     "intent": "idle",
     "confidence": 0.5,
     "suggested_actions": [],
-    "created_at": "2026-07-09T06:02:36+00:00"
+    "created_at": "2026-07-26T07:36:51+00:00"
   },
   "idle": {
-    "idle_ticks": 6,
+    "idle_ticks": 22,
     "dream_mode_ready": true,
-    "last_activity": "2026-06-29T10:55:55+00:00"
+    "last_activity": "2026-07-17T05:31:49+00:00"
   },
   "last_event": {
+    "id": 1,
     "type": "runtime.tick",
     "source": "runtime",
     "payload": {
       "heartbeat": {
-        "tick": 2,
+        "tick": 24,
         "mode": "companion",
-        "timestamp": "2026-07-09T06:02:36+00:00",
+        "timestamp": "2026-07-26T07:36:51+00:00",
         "interval_seconds": 1.0
       },
       "prediction": {
         "intent": "idle",
         "confidence": 0.5,
         "suggested_actions": [],
-        "created_at": "2026-07-09T06:02:36+00:00"
+        "created_at": "2026-07-26T07:36:51+00:00"
       },
       "observations": [],
       "jobs": [
         {
+          "name": "watchdog_check",
+          "ok": true,
+          "result": {
+            "checked_at": "2026-07-26T07:36:51+00:00",
+            "status": "healthy",
+            "issues": [],
+            "tick": 24
+          },
+          "ran_at": "2026-07-26T07:36:51+00:00"
+        },
+        {
           "name": "mission_control_sync",
           "ok": true,
           "result": {
-            "updated_at": "2026-07-09T06:02:36+00:00",
+            "updated_at": "2026-07-26T07:36:51+00:00",
             "runtime": "running",
-            "tick_count": 2,
+            "tick_count": 24,
             "mode": "companion",
             "privacy_mode": "companion",
             "latest_prediction": {
-              "intent": "android_development",
-              "confidence": 0.88,
-              "suggested_actions": [
-                "prepare_android_plugin",
-                "monitor_logcat",
-                "index_current_project"
-              ],
-              "created_at": "2026-06-29T10:55:55+00:00",
-              "observations": [
-                {
-                  "source": "screen",
-                  "type": "app_opened",
-                  "summary": "Android Studio opened with Pixel connected",
-                  "confidence": 0.95
-                },
-                {
-                  "source": "hardware",
-                  "type": "usb",
-                  "summary": "Pixel device detected",
-                  "confidence": 0.9
-                }
-              ]
+              "intent": "idle",
+              "confidence": 0.5,
+              "suggested_actions": [],
+              "created_at": "2026-07-26T07:36:48+00:00"
             },
             "summary": "Buster runtime heartbeat is active."
           },
-          "ran_at": "2026-07-09T06:02:36+00:00"
+          "ran_at": "2026-07-26T07:36:51+00:00"
         }
       ]
     },
-    "created_at": "2026-07-09T06:02:36+00:00"
+    "created_at": "2026-07-26T07:36:51+00:00"
   },
   "last_jobs": [
+    {
+      "name": "watchdog_check",
+      "ok": true,
+      "result": {
+        "checked_at": "2026-07-26T07:36:51+00:00",
+        "status": "healthy",
+        "issues": [],
+        "tick": 24
+      },
+      "ran_at": "2026-07-26T07:36:51+00:00"
+    },
     {
       "name": "mission_control_sync",
       "ok": true,
       "result": {
-        "updated_at": "2026-07-09T06:02:36+00:00",
+        "updated_at": "2026-07-26T07:36:51+00:00",
         "runtime": "running",
-        "tick_count": 2,
+        "tick_count": 24,
         "mode": "companion",
         "privacy_mode": "companion",
         "latest_prediction": {
-          "intent": "android_development",
-          "confidence": 0.88,
-          "suggested_actions": [
-            "prepare_android_plugin",
-            "monitor_logcat",
-            "index_current_project"
-          ],
-          "created_at": "2026-06-29T10:55:55+00:00",
-          "observations": [
-            {
-              "source": "screen",
-              "type": "app_opened",
-              "summary": "Android Studio opened with Pixel connected",
-              "confidence": 0.95
-            },
-            {
-              "source": "hardware",
-              "type": "usb",
-              "summary": "Pixel device detected",
-              "confidence": 0.9
-            }
-          ]
+          "intent": "idle",
+          "confidence": 0.5,
+          "suggested_actions": [],
+          "created_at": "2026-07-26T07:36:48+00:00"
         },
         "summary": "Buster runtime heartbeat is active."
       },
-      "ran_at": "2026-07-09T06:02:36+00:00"
+      "ran_at": "2026-07-26T07:36:51+00:00"
     }
   ],
   "last_speech": null,
   "coordination": {
-    "last_sync": "2026-07-09T06:02:36+00:00",
+    "last_sync": "2026-07-26T07:36:51+00:00",
     "modules": {
       "perception": "connected",
       "world_model": "connected",
@@ -126,18 +113,18 @@
       "mission_control": "connected"
     },
     "heartbeat": {
-      "tick": 2,
+      "tick": 24,
       "mode": "companion",
-      "timestamp": "2026-07-09T06:02:36+00:00",
+      "timestamp": "2026-07-26T07:36:51+00:00",
       "interval_seconds": 1.0
     },
     "latest_prediction": {
       "intent": "idle",
       "confidence": 0.5,
       "suggested_actions": [],
-      "created_at": "2026-07-09T06:02:36+00:00"
+      "created_at": "2026-07-26T07:36:51+00:00"
     },
     "observation_count": 0
   },
-  "stopped_at": "2026-07-25T03:15:33+00:00"
+  "stopped_at": "2026-07-26T07:37:42+00:00"
 }

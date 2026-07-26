@@ -1,0 +1,48 @@
+{
+  "hurdles": [
+    {
+      "id": "hrd-1784962990",
+      "timestamp": "2026-07-25T17:03:10.598612",
+      "task": "Load Config File",
+      "error_type": "FileNotFoundError",
+      "error_message": "[Errno 2] No such file or directory: 'non_existent_config.json'",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\xkali\\new_ai\\buster-v10\\buster\\brain\\hurdle_engine.py\", line 127, in <module>\n    open(\"non_existent_config.json\", \"r\")\nFileNotFoundError: [Errno 2] No such file or directory: 'non_existent_config.json'\n",
+      "status": "Resolved in Dream Mode",
+      "proposed_self_upgrade": {
+        "action": "CREATE_UTILITY",
+        "summary": "Build automated path verification and workspace directory fallback in brain/tools/."
+      },
+      "resolved_at": "2026-07-25T17:03:23.272449"
+    },
+    {
+      "id": "hrd-1784964720",
+      "timestamp": "2026-07-25T17:32:00.483159",
+      "task": "Load Config File",
+      "error_type": "FileNotFoundError",
+      "error_message": "[Errno 2] No such file or directory: 'non_existent_config.json'",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\xkali\\new_ai\\buster-v10\\buster\\brain\\hurdle_engine.py\", line 127, in <module>\n    open(\"non_existent_config.json\", \"r\")\nFileNotFoundError: [Errno 2] No such file or directory: 'non_existent_config.json'\n",
+      "status": "Resolved in Dream Mode",
+      "proposed_self_upgrade": {
+        "action": "CREATE_UTILITY",
+        "summary": "Build automated path verification and workspace directory fallback in brain/tools/."
+      },
+      "resolved_at": "2026-07-25T17:32:11.647922"
+    }
+  ],
+  "toolbelt": [
+    {
+      "name": "util_hrd_1784964720",
+      "description": "Build automated path verification and workspace directory fallback in brain/tools/.",
+      "path": "brain\\tools\\util_hrd_1784964720.py",
+      "registered_at": "2026-07-25T17:32:11.647922"
+    }
+  ],
+  "ambition_backlog": [
+    {
+      "id": "amb-001",
+      "title": "Establish Autonomous Self-Patching Protocol",
+      "status": "In Progress",
+      "priority": "High"
+    }
+  ]
+}

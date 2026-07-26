@@ -101,9 +101,14 @@ class RuntimeWorkspace(QWidget):
             runtime_core=self.runtime_core,
         )
 
-        self.console_panel = RuntimeConsole()
+        # FIXED: Pass runtime_core to console_panel and live_panel
+        self.console_panel = RuntimeConsole(
+            runtime_core=self.runtime_core,
+        )
 
-        self.live_panel = BusterLiveRuntimeUI()
+        self.live_panel = BusterLiveRuntimeUI(
+            runtime_core=self.runtime_core,
+        )
 
         self.inspector_panel = RuntimeInspectorPanel(
             runtime_core=self.runtime_core,

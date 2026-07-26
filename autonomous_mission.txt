@@ -1,0 +1,1 @@
+Goal: Please write a log and then read it back

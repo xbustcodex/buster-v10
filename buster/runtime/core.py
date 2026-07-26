@@ -34,11 +34,26 @@ from buster.agents.python_agent import AgentRequest, PreviewDiff, PythonAgentWor
 from buster.learning.curiosity_engine import CuriosityEngine, CuriosityScore
 from buster.kernel.circadian import HeartbeatDaemon
 
+# Phase 19.1, 19.2, 19.3 & 19.4 Rhythm Subsystems
+from buster.rhythm.rhythm import BusterRhythm
+from buster.rhythm.rhythm_service import RhythmService
+from buster.rhythm.task_gate import TaskGate
+from buster.rhythm.dlq.dlq_manager import RhythmDLQManager
+from buster.rhythm.dlq.worker import DLQRecoveryWorker
+from buster.learning.curiosity_evaluator import CuriosityEvaluator
+from buster.learning.curiosity_scheduler import CuriosityScheduler
+from buster.learning.curiosity_runner import CuriosityRunner
+
+# Phase 21 Subsystem: Hurdle Engine
+from buster.hurdle.engine import HurdleEngine
+from buster.hurdle.patch_verifier import VerificationResult
+
 # Automation & Workspace Subsystems
 from buster.automation.unified_router import UnifiedAutomationRouter
 from buster.workspace.sandbox_manager import SandboxManager
 
 from buster.autonomy.goals.goal_service import GoalService
+
 
 class BusterRuntimeCore:
     def __init__(
@@ -134,9 +149,38 @@ class BusterRuntimeCore:
             runtime_core=self,
         )
 
+        # Phase 19.1, 19.2 & 19.4: Rhythm Core Engine, Task Gate, DLQ & Recovery Worker
+        self.rhythm = BusterRhythm()
+        self.rhythm_service = RhythmService(
+            rhythm=self.rhythm,
+            blackboard=self.blackboard,
+            event_bus=self.dispatcher,
+        )
+        self.task_gate = TaskGate()
+        self.dlq_manager = RhythmDLQManager(
+            rhythm=self.rhythm,
+            storage_path=self.root / "data" / "dlq_state.json",
+            event_bus=self.dispatcher,
+        )
+        self.dlq_worker = DLQRecoveryWorker(
+            dlq_manager=self.dlq_manager,
+            execution_engine=self.execution_engine,
+        )
+
         self.verification_service = VerificationEngine(
             project_root=self.root,
         )
+        
+        # Initialize Intrinsic Curiosity Engine
+        self.curiosity_evaluator = CuriosityEvaluator(project_root=self.root)
+        self.curiosity_scheduler = CuriosityScheduler(
+            evaluator=self.curiosity_evaluator,
+            rhythm_service=self.rhythm_service,
+        )
+        self.curiosity_runner = CuriosityRunner(project_root=self.root)
+
+        # Phase 21: Hurdle Engine
+        self.hurdle_engine = HurdleEngine(project_root=self.root)
 
         # Unified Automation Router & Sandbox Workspace
         self.automation_router = UnifiedAutomationRouter(
@@ -204,11 +248,15 @@ class BusterRuntimeCore:
             "evolution": self.evolution,
             "experience": self.experience_engine,
             "curiosity": self.curiosity_engine,
+            "rhythm": self.rhythm_service,
+            "dlq": self.dlq_manager,
+            "dlq_worker": self.dlq_worker,
             "verification": self.verification_service,
             "automation_router": self.automation_router,
             "sandbox_manager": self.sandbox_manager,
             "self_improvement": self.self_improvement,
             "health_monitor": self.health_monitor,
+            "hurdle_engine": self.hurdle_engine,
         }
 
         for name, instance in core_services.items():
@@ -216,6 +264,43 @@ class BusterRuntimeCore:
                 self.services.register(name, instance)
             except Exception:
                 pass
+
+    # --------------------------------------------------
+    # Hurdle Exception Handler
+    # --------------------------------------------------
+
+    def handle_hurdle_exception(
+        self,
+        exc: Exception,
+        replacement_code: str | None = None,
+        test_command: list[str] | None = None,
+        file_path: str | None = None,
+        line_number: int | None = None,
+    ) -> VerificationResult:
+        """Processes runtime exceptions through the HurdleEngine and dispatches result events."""
+        result = self.hurdle_engine.process_exception(
+            exc=exc,
+            replacement_code=replacement_code,
+            test_command=test_command,
+            file_path=file_path,
+            line_number=line_number,
+        )
+
+        event_name = "hurdle.resolved" if result.applied else "hurdle.failed"
+        self.dispatcher.publish(
+            event_name,
+            {
+                "candidate_id": result.candidate_id,
+                "target_path": result.target_path,
+                "applied": result.applied,
+                "tests_passed": result.tests_passed,
+                "rollback_performed": result.rollback_performed,
+                "issues": result.issues,
+            },
+            source="runtime_core",
+        )
+
+        return result
 
     # --------------------------------------------------
     # Atomic Runtime Lifecycle Entry Points
@@ -289,8 +374,44 @@ class BusterRuntimeCore:
         self.refresh_state()
         return result
 
-    def tick(self, observations=None) -> Dict[str, Any]:
-        result = self.runtime.tick_once(observations)
+    def tick(
+        self,
+        observations: list[dict[str, Any]] | None = None,
+        now: datetime | None = None,
+    ) -> Dict[str, Any]:
+        # Handle time-sync for rhythm engine and recovery worker
+        self.rhythm_service.tick_sync(now=now)
+
+        # Safely pass observations list to underlying engine
+        engine_obs = observations if isinstance(observations, list) else None
+        result = self.runtime.tick_once(engine_obs)
+
+        # Process ready DLQ recovery items via worker using the explicit timestamp
+        processed_count = self.dlq_worker.process_ready_items(now=now)
+        if processed_count > 0:
+            self.dispatcher.publish(
+                "dlq.recovery_executed",
+                {
+                    "processed_count": processed_count,
+                },
+                source="runtime_core",
+            )
+
+        # Intrinsic Curiosity Exploration Cycle
+        exploration_tasks = self.curiosity_scheduler.schedule_exploration(now=now, limit=1)
+        for exp_task in exploration_tasks:
+            exp_result = self.curiosity_runner.inspect_target(exp_task)
+            self.dispatcher.publish(
+                "curiosity.exploration_completed",
+                {
+                    "task_id": exp_result.task_id,
+                    "target_path": exp_result.target_path,
+                    "success": exp_result.success,
+                    "summary": exp_result.summary,
+                    "issues_found": exp_result.issues_found,
+                },
+                source="runtime_core",
+            )
 
         self.dispatcher.publish(
             "runtime.tick",
@@ -300,6 +421,17 @@ class BusterRuntimeCore:
 
         self.refresh_state()
         return result
+
+    # --------------------------------------------------
+    # Rhythm Enforcement Helper
+    # --------------------------------------------------
+
+    def evaluate_task_gate(self, task_metadata: Dict[str, Any]) -> None:
+        """Evaluates whether a task is allowed under current rhythm state."""
+        rhythm_status = self.rhythm.get_blackboard_status()
+        allowed, reason = self.task_gate.evaluate(task_metadata, rhythm_status)
+        if not allowed:
+            raise PermissionError(f"Task blocked by Rhythm TaskGate: {reason}")
 
     # --------------------------------------------------
     # Dispatch & Execution Wrappers
@@ -400,7 +532,15 @@ class BusterRuntimeCore:
             language="python",
         )
 
-    def run(self, request: str) -> Dict[str, Any]:
+    def run(self, request: str, task_metadata: Dict[str, Any] | None = None) -> Dict[str, Any]:
+        task_meta = task_metadata or {
+            "priority": "normal",
+            "execution_class": "foreground",
+            "allowed_states": ["WORK", "LEISURE", "SLEEP"],
+            "can_override_inhibitor": True,
+        }
+        self.evaluate_task_gate(task_meta)
+
         self.heartbeat_daemon.notify_activity()
         event = {"request": request}
 
@@ -444,7 +584,14 @@ class BusterRuntimeCore:
             self.refresh_state()
             raise
 
-    def run_agent(self, name: str, task=None):
+    def run_agent(self, name: str, task=None, task_metadata: Dict[str, Any] | None = None):
+        task_meta = task_metadata or {
+            "priority": "normal",
+            "execution_class": "foreground",
+            "allowed_states": ["WORK", "LEISURE"],
+        }
+        self.evaluate_task_gate(task_meta)
+
         self.heartbeat_daemon.notify_activity()
         self.dispatcher.publish(
             "agent.started",
@@ -570,6 +717,8 @@ class BusterRuntimeCore:
             "execution": self.execution_engine.status(),
             "curiosity": self.curiosity_engine.status(),
             "circadian": self.heartbeat_daemon.status(),
+            "rhythm": self.rhythm.get_blackboard_status(),
+            "dlq": self.dlq_manager.status(),
             "automation_router": self.automation_router.status(),
             "sandbox_manager": self.sandbox_manager.status(),
             "self_improvement": self.self_improvement.status(),
@@ -641,6 +790,8 @@ class BusterRuntimeCore:
             "execution": self.execution_engine.status(),
             "curiosity": self.curiosity_engine.status(),
             "circadian": self.heartbeat_daemon.status(),
+            "rhythm": self.rhythm.get_blackboard_status(),
+            "dlq": self.dlq_manager.status(),
             "automation_router": self.automation_router.status(),
             "sandbox_manager": self.sandbox_manager.status(),
             "self_improvement": self.self_improvement.status(),
@@ -679,7 +830,7 @@ class BusterRuntimeCore:
         return self.health_monitor.compact()
 
     def repair_workflow_status(self):
-        return self_improvement_runtime_status(self)
+        return self.improvement_runtime_status(self)
 
     def recover_repair_sessions(self):
         return self.self_improvement_service.recover_sessions()

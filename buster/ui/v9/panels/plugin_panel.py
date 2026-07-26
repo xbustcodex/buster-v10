@@ -1,7 +1,6 @@
 """
-Smart Patch Drop Zone Panel for Buster Mission Control
-Allows dragging and dropping python files/patches to hot-update system modules safely,
-dynamically importing modules into sys.modules and registering them with runtime_core.
+Brain & Smart Patch Hub Panel for Buster Mission Control
+Includes the Brain Button and Smart Patch Drop Zone with AST-based auto-routing.
 """
 
 from __future__ import annotations
@@ -12,7 +11,7 @@ import logging
 import os
 import sys
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional
 
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QDragEnterEvent, QDropEvent
@@ -96,8 +95,16 @@ class SmartDropZone(QFrame):
                 content = f.read()
 
             tree = ast.parse(content)
+
+            # Check for Brain / Core components
+            is_brain = any(
+                kw in content
+                for kw in ["Blackboard", "TaskDelegator", "ScheduleManager", "GrowthLedger", "CuriosityEngine"]
+            )
+            if is_brain or "brain" in filename.lower():
+                return f"buster/brain/{filename}"
             
-            # Check for Automation signatures (v10.6)
+            # Check for Automation signatures
             is_automation = any(
                 kw in content
                 for kw in ["playwright", "pyautogui", "pygetwindow", "Browser", "DesktopAutomation", "automation"]
@@ -131,13 +138,13 @@ class SmartDropZone(QFrame):
             pass
 
         # Fallback location
-        return f"buster/ui/v9/panels/{filename}"
+        return f"buster/brain/{filename}"
 
 
 class PluginPanel(QWidget):
     """
-    Plugin Manager Drop Hub.
-    Serves both as the missing PluginPanel and as the Hot-Patch Drag/Drop workspace.
+    Plugin Manager & Brain Hot-Patch Hub.
+    Serves both as the Brain Plugin Panel and as the Hot-Patch Drag/Drop workspace.
     """
 
     def __init__(self, runtime_core=None, live=None, parent=None):
@@ -157,10 +164,10 @@ class PluginPanel(QWidget):
         layout.setSpacing(16)
 
         # Header
-        title = QLabel("PLUGIN MANAGER & HOT-PATCH HUB")
+        title = QLabel("BRAIN & HOT-PATCH HUB")
         title.setStyleSheet("color: #23B8FF; font-size: 20px; font-weight: 800; letter-spacing: 1px;")
         
-        subtitle = QLabel("Drop updated components or plugins here to automatically deploy and wire into the runtime.")
+        subtitle = QLabel("Drop updated components, brain patches, or plugins here to automatically deploy and wire into the runtime.")
         subtitle.setStyleSheet("color: #7894B5; font-size: 12px;")
 
         layout.addWidget(title)
@@ -178,6 +185,7 @@ class PluginPanel(QWidget):
         cat_layout.addWidget(cat_label)
 
         for name, rel_dir in [
+            ("Brain", "buster/brain/"),
             ("Automation", "buster/automation/"),
             ("Kernel", "buster/kernel/"),
             ("UI Panel", "buster/ui/v9/panels/"),
@@ -325,3 +333,34 @@ class PluginPanel(QWidget):
             self.file_info_label.setText(
                 f"<font color='#FF4D4D'><b>Failed to apply & wire patch:</b> {exc}</font>"
             )
+
+
+def create_brain_button(parent=None) -> QPushButton:
+    """Factory function to generate a styled Brain Button for Mission Control's sidebar or navigation bar."""
+    btn = QPushButton("🧠 Brain & Hot-Patch", parent)
+    btn.setFixedHeight(36)
+    btn.setCursor(Qt.PointingHandCursor)
+    btn.setStyleSheet(
+        """
+        QPushButton {
+            background: #081827;
+            color: #23B8FF;
+            border: 1px solid #175A94;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 0 16px;
+            text-align: left;
+        }
+        QPushButton:hover {
+            background: #0E2A49;
+            border-color: #23B8FF;
+            color: #FFFFFF;
+        }
+        QPushButton:pressed {
+            background: #175A94;
+            color: #FFFFFF;
+        }
+        """
+    )
+    return btn

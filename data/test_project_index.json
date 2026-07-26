@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-07-25T13:15:35",
+  "built_at": "2026-07-26T17:37:45",
   "root": "C:\\Users\\xkali\\new_ai\\buster-v10",
   "files": [
     ".gitignore",
@@ -15,9 +15,11 @@
     "add_v10_sdk_runtime_bridge.py",
     "add_v11_live_runtime_ui.py",
     "add_v12_mission_control_3.py",
+    "autonomous_mission.txt",
     "Buster.spec",
     "CONTRIBUTING.md",
     "fix_v9_ui_panels_and_resize.py",
+    "fulldump.txt",
     "generated_file",
     "install_self_improvement_compatibility.py",
     "main.py",
@@ -39,6 +41,8 @@
     "vision_settings.json",
     "voice_settings.json",
     ".github\\pull_request_template.md",
+    "brain\\growth_ledger.json",
+    "buster\\cli.py",
     "buster\\tree.txt",
     "buster\\version.py",
     "buster\\__init__.py",
@@ -77,6 +81,7 @@
     "data\\decision_notifications.json",
     "data\\design_decisions.json",
     "data\\design_patterns.json",
+    "data\\downtime_ideas.json",
     "data\\dream_reflections.json",
     "data\\event_history.json",
     "data\\evolution_state.json",
@@ -95,6 +100,7 @@
     "data\\lifecycle_history.json",
     "data\\live_mission_timeline_state.json",
     "data\\living_os_state.json",
+    "data\\long_term_knowledge.json",
     "data\\mind_state.json",
     "data\\mission_context.json",
     "data\\mission_control_dashboard.json",
@@ -170,6 +176,8 @@
     ".github\\ISSUE_TEMPLATE\\bug_report.md",
     ".github\\ISSUE_TEMPLATE\\feature_request.md",
     ".github\\workflows\\windows-build.yml",
+    "buster\\agent\\core.py",
+    "buster\\agent\\llm_planner.py",
     "buster\\agents\\base.py",
     "buster\\agents\\builder.py",
     "buster\\agents\\context_memory.py",
@@ -208,35 +216,74 @@
     "buster\\automation\\vision_fallback.py",
     "buster\\automation\\__init__.py",
     "buster\\autonomy\\code_review_service.py",
+    "buster\\autonomy\\completion_evaluator.py",
     "buster\\autonomy\\dashboard.py",
     "buster\\autonomy\\engine.py",
     "buster\\autonomy\\execution_engine.py",
+    "buster\\autonomy\\learning_closure.py",
+    "buster\\autonomy\\loop_checkpoint.py",
+    "buster\\autonomy\\loop_orchestrator.py",
+    "buster\\autonomy\\mission_state.py",
     "buster\\autonomy\\next_actions.py",
+    "buster\\autonomy\\next_action_selector.py",
+    "buster\\autonomy\\observation_engine.py",
     "buster\\autonomy\\records.py",
     "buster\\autonomy\\repair_planner.py",
     "buster\\autonomy\\repair_plan_worker.py",
     "buster\\autonomy\\self_improvement_service.py",
     "buster\\autonomy\\__init__.py",
     "buster\\brain\\agent_loop.py",
+    "buster\\brain\\blackboard.py",
+    "buster\\brain\\blackboard_state.json",
+    "buster\\brain\\buster_rhythm.py",
     "buster\\brain\\conversation.py",
     "buster\\brain\\conversation_runtime.py",
+    "buster\\brain\\dlq_manager.py",
+    "buster\\brain\\dlq_state.json",
+    "buster\\brain\\dream_sandbox.py",
     "buster\\brain\\engine.py",
+    "buster\\brain\\growth_ledger.json",
+    "buster\\brain\\growth_ledger.py",
+    "buster\\brain\\growth_ledger_state.json",
+    "buster\\brain\\hurdle_engine.py",
     "buster\\brain\\knowledge_fusion.py",
     "buster\\brain\\orchestrator.py",
     "buster\\brain\\research_engine.py",
     "buster\\brain\\routed_agent_loop.py",
     "buster\\brain\\router_explainer.py",
+    "buster\\brain\\schedule_manager.py",
+    "buster\\brain\\task_delegator.py",
+    "buster\\brain\\task_state_manager.py",
     "buster\\brain\\tool_context.py",
     "buster\\brain\\tool_executor.py",
     "buster\\brain\\tool_router.py",
     "buster\\brain\\types.py",
     "buster\\brain\\unified_agent_loop.py",
+    "buster\\brain\\verify_v10_runtime.py",
     "buster\\brain\\web_brain.py",
     "buster\\builder\\cli.py",
     "buster\\builder\\doctor.py",
     "buster\\builder\\repair.py",
     "buster\\builder\\storage.py",
     "buster\\builder\\__init__.py",
+    "buster\\capabilities\\android_cap.py",
+    "buster\\capabilities\\base.py",
+    "buster\\capabilities\\esp32_cap.py",
+    "buster\\capabilities\\exceptions.py",
+    "buster\\capabilities\\filesystem_cap.py",
+    "buster\\capabilities\\git_cap.py",
+    "buster\\capabilities\\health.py",
+    "buster\\capabilities\\models.py",
+    "buster\\capabilities\\permissions.py",
+    "buster\\capabilities\\playwright_cap.py",
+    "buster\\capabilities\\python_cap.py",
+    "buster\\capabilities\\registry.py",
+    "buster\\capabilities\\terminal_cap.py",
+    "buster\\capabilities\\windows_cap.py",
+    "buster\\capabilities\\__init__.py",
+    "buster\\cognitive\\milestone_reporter.py",
+    "buster\\cognitive\\strategic_planner.py",
+    "buster\\cognitive\\__init__.py",
     "buster\\collaboration\\activity_feed.py",
     "buster\\collaboration\\agent_state.py",
     "buster\\collaboration\\conversation.py",
@@ -273,6 +320,7 @@
     "buster\\core\\state.py",
     "buster\\core\\subscribers.py",
     "buster\\core\\__init__.py",
+    "buster\\daemon\\service_manager.py",
     "buster\\data\\web_cache.json",
     "buster\\diagnostics\\manager.py",
     "buster\\diagnostics\\__init__.py",
@@ -287,6 +335,10 @@
     "buster\\experience\\__init__.py",
     "buster\\hardware\\manager.py",
     "buster\\hardware\\__init__.py",
+    "buster\\hurdle\\classifier.py",
+    "buster\\hurdle\\engine.py",
+    "buster\\hurdle\\spec_evaluator.py",
+    "buster\\hurdle\\__init__.py",
     "buster\\indexer\\project_indexer.py",
     "buster\\indexer\\query_engine.py",
     "buster\\indexer\\__init__.py",
@@ -329,9 +381,13 @@
     "buster\\knowledge\\semantic_graph.py",
     "buster\\knowledge\\__init__.py",
     "buster\\learning\\curiosity_engine.py",
+    "buster\\learning\\curiosity_evaluator.py",
+    "buster\\learning\\curiosity_runner.py",
+    "buster\\learning\\curiosity_scheduler.py",
     "buster\\learning\\engine.py",
     "buster\\learning\\experience.py",
     "buster\\learning\\patterns.py",
+    "buster\\learning\\preference_memory.py",
     "buster\\learning\\strategies.py",
     "buster\\learning\\__init__.py",
     "buster\\lifecycle\\backup.py",
@@ -360,6 +416,7 @@
     "buster\\living_companion\\daily_rhythm.py",
     "buster\\living_companion\\voice_runtime.py",
     "buster\\living_companion\\__init__.py",
+    "buster\\memory\\context_indexer.py",
     "buster\\memory\\engine.py",
     "buster\\memory\\knowledge.py",
     "buster\\memory\\manager.py",
@@ -382,6 +439,10 @@
     "buster\\mind\\working_memory.py",
     "buster\\mind\\work_loop.py",
     "buster\\mind\\__init__.py",
+    "buster\\mission_control\\commands.py",
+    "buster\\mission_control\\health_aggregator.py",
+    "buster\\mission_control\\presenter.py",
+    "buster\\mission_control\\snapshot.py",
     "buster\\mission_runtime\\autonomous_runtime.py",
     "buster\\mission_runtime\\capabilities.py",
     "buster\\mission_runtime\\executor.py",
@@ -396,6 +457,15 @@
     "buster\\multi_agent\\messages.py",
     "buster\\multi_agent\\negotiation.py",
     "buster\\multi_agent\\__init__.py",
+    "buster\\node\\communication_center.py",
+    "buster\\node\\sync_engine.py",
+    "buster\\node\\task_bridge.py",
+    "buster\\orchestration\\context.py",
+    "buster\\orchestration\\models.py",
+    "buster\\orchestration\\planner.py",
+    "buster\\orchestration\\runner.py",
+    "buster\\os_control\\app_controller.py",
+    "buster\\os_control\\system_monitor.py",
     "buster\\os_layer\\approved_folders.py",
     "buster\\os_layer\\filesystem.py",
     "buster\\os_layer\\os_layer.py",
@@ -437,6 +507,12 @@
     "buster\\repository\\project_model.py",
     "buster\\repository\\semantic_graph.py",
     "buster\\repository\\__init__.py",
+    "buster\\rhythm\\rhythm.py",
+    "buster\\rhythm\\rhythm_service.py",
+    "buster\\rhythm\\sleep_handler.py",
+    "buster\\rhythm\\task_gate.py",
+    "buster\\rhythm\\weekend_manager.py",
+    "buster\\rhythm\\__init__.py",
     "buster\\runtime\\agent_memory.py",
     "buster\\runtime\\agent_orchestrator.py",
     "buster\\runtime\\audit_service.py",
@@ -498,8 +574,17 @@
     "buster\\skills\\registry.py",
     "buster\\skills\\skill.py",
     "buster\\skills\\__init__.py",
+    "buster\\social\\social_context.py",
     "buster\\system\\monitor.py",
     "buster\\system\\__init__.py",
+    "buster\\telemetry\\event_logger.py",
+    "buster\\telemetry\\execution_tracker.py",
+    "buster\\telemetry\\health_snapshot.py",
+    "buster\\telemetry\\metrics_registry.py",
+    "buster\\telemetry\\telemetry_service.py",
+    "buster\\telemetry\\trace_context.py",
+    "buster\\telemetry\\__init__.py",
+    "buster\\ui\\dashboard_visualizer.py",
     "buster\\ui\\settings_dialog.py",
     "buster\\ui\\tree.txt",
     "buster\\updater\\github.py",
@@ -610,6 +695,10 @@
     "buster\\agents\\python_agent\\worker.py",
     "buster\\agents\\python_agent\\__init__.py",
     "buster\\api\\routes\\goals.py",
+    "buster\\autonomy\\delegation\\capability_matrix.py",
+    "buster\\autonomy\\delegation\\delegation_planner.py",
+    "buster\\autonomy\\delegation\\worker_pool.py",
+    "buster\\autonomy\\delegation\\__init__.py",
     "buster\\autonomy\\executors\\cleanup_runner.py",
     "buster\\autonomy\\executors\\code_runner.py",
     "buster\\autonomy\\executors\\git_runner.py",
@@ -674,6 +763,10 @@
     "buster\\plugins\\builtin\\__init__.py",
     "buster\\plugins\\sdk\\base_plugin.py",
     "buster\\plugins\\sdk\\__init__.py",
+    "buster\\rhythm\\dlq\\dlq_manager.py",
+    "buster\\rhythm\\dlq\\models.py",
+    "buster\\rhythm\\dlq\\worker.py",
+    "buster\\rhythm\\dlq\\__init__.py",
     "buster\\ui\\os1\\main_window.py",
     "buster\\ui\\os1\\__init__.py",
     "buster\\ui\\themes\\dark.py",
@@ -751,6 +844,15 @@
     "buster\\ui\\v9\\panels\\evolution_panel\\level_card.py",
     "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
     "buster\\ui\\v9\\panels\\evolution_panel\\__init__.py",
+    "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+    "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+    "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+    "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+    "buster\\ui\\v9\\panels\\mission_control\\health_card.py",
+    "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+    "buster\\ui\\v9\\panels\\mission_control\\metrics_card.py",
+    "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+    "buster\\ui\\v9\\panels\\mission_control\\worker_leases_card.py",
     "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
     "buster\\ui\\v9\\panels\\runtime_panel\\event_card.py",
     "buster\\ui\\v9\\panels\\runtime_panel\\event_model.py",
@@ -910,6 +1012,16 @@
       "name": "BusterDoctor",
       "file": "scripts\\buster_doctor.py",
       "line": 39
+    },
+    {
+      "name": "BusterAgent",
+      "file": "buster\\agent\\core.py",
+      "line": 12
+    },
+    {
+      "name": "LLMIntentPlanner",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 12
     },
     {
       "name": "Agent",
@@ -1082,6 +1194,21 @@
       "line": 30
     },
     {
+      "name": "VerificationEvidence",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 14
+    },
+    {
+      "name": "CompletionDecision",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 24
+    },
+    {
+      "name": "CompletionEvaluator",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 30
+    },
+    {
       "name": "AutonomyDashboard",
       "file": "buster\\autonomy\\dashboard.py",
       "line": 8
@@ -1107,9 +1234,64 @@
       "line": 51
     },
     {
+      "name": "MissionExperienceSummary",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 17
+    },
+    {
+      "name": "LearningClosureManager",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 27
+    },
+    {
+      "name": "MissionCheckpoint",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 16
+    },
+    {
+      "name": "MissionCheckpointManager",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 25
+    },
+    {
+      "name": "AutonomousLoopOrchestrator",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 15
+    },
+    {
+      "name": "AutonomyPolicy",
+      "file": "buster\\autonomy\\mission_state.py",
+      "line": 9
+    },
+    {
+      "name": "Mission",
+      "file": "buster\\autonomy\\mission_state.py",
+      "line": 22
+    },
+    {
       "name": "NextActionRecommender",
       "file": "buster\\autonomy\\next_actions.py",
       "line": 6
+    },
+    {
+      "name": "ActionDecision",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 15
+    },
+    {
+      "name": "NextActionSelector",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 22
+    },
+    {
+      "name": "Observation",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 13
+    },
+    {
+      "name": "ObservationEngine",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 24
     },
     {
       "name": "AutonomyDecision",
@@ -1157,6 +1339,21 @@
       "line": 1
     },
     {
+      "name": "SharedBlackboard",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 10
+    },
+    {
+      "name": "LifeState",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 9
+    },
+    {
+      "name": "BusterRhythm",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 16
+    },
+    {
       "name": "ConversationManager",
       "file": "buster\\brain\\conversation.py",
       "line": 1
@@ -1172,8 +1369,28 @@
       "line": 15
     },
     {
+      "name": "DLQManager",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 10
+    },
+    {
+      "name": "DreamSandboxService",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 12
+    },
+    {
       "name": "BrainEngine",
       "file": "buster\\brain\\engine.py",
+      "line": 10
+    },
+    {
+      "name": "GrowthLedgerManager",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 10
+    },
+    {
+      "name": "HurdleEngine",
+      "file": "buster\\brain\\hurdle_engine.py",
       "line": 10
     },
     {
@@ -1205,6 +1422,26 @@
       "name": "RouterExplainer",
       "file": "buster\\brain\\router_explainer.py",
       "line": 6
+    },
+    {
+      "name": "LifeState",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 8
+    },
+    {
+      "name": "ScheduleManager",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 14
+    },
+    {
+      "name": "TaskDelegator",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 12
+    },
+    {
+      "name": "TaskStateManager",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 9
     },
     {
       "name": "ToolContext",
@@ -1260,6 +1497,156 @@
       "name": "BusterRepair",
       "file": "buster\\builder\\repair.py",
       "line": 9
+    },
+    {
+      "name": "AndroidCapability",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 22
+    },
+    {
+      "name": "Capability",
+      "file": "buster\\capabilities\\base.py",
+      "line": 16
+    },
+    {
+      "name": "ESP32Capability",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 22
+    },
+    {
+      "name": "CapabilityError",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 5
+    },
+    {
+      "name": "CapabilityNotFoundError",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 9
+    },
+    {
+      "name": "DuplicateCapabilityError",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 13
+    },
+    {
+      "name": "InvalidCapabilityDescriptorError",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 17
+    },
+    {
+      "name": "ActionNotSupportedError",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 21
+    },
+    {
+      "name": "ActionValidationError",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 25
+    },
+    {
+      "name": "PermissionDeniedError",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 29
+    },
+    {
+      "name": "CapabilityDisabledError",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 33
+    },
+    {
+      "name": "FilesystemCapability",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 22
+    },
+    {
+      "name": "GitCapability",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 23
+    },
+    {
+      "name": "HealthEvaluator",
+      "file": "buster\\capabilities\\health.py",
+      "line": 13
+    },
+    {
+      "name": "ActionDescriptor",
+      "file": "buster\\capabilities\\models.py",
+      "line": 9
+    },
+    {
+      "name": "ResourceRequirements",
+      "file": "buster\\capabilities\\models.py",
+      "line": 21
+    },
+    {
+      "name": "CapabilityDescriptor",
+      "file": "buster\\capabilities\\models.py",
+      "line": 30
+    },
+    {
+      "name": "CapabilityHealth",
+      "file": "buster\\capabilities\\models.py",
+      "line": 44
+    },
+    {
+      "name": "CapabilityExecutionContext",
+      "file": "buster\\capabilities\\models.py",
+      "line": 54
+    },
+    {
+      "name": "CapabilityResult",
+      "file": "buster\\capabilities\\models.py",
+      "line": 65
+    },
+    {
+      "name": "PermissionGate",
+      "file": "buster\\capabilities\\permissions.py",
+      "line": 13
+    },
+    {
+      "name": "PlaywrightCapability",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 21
+    },
+    {
+      "name": "PythonCapability",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 24
+    },
+    {
+      "name": "CapabilityRegistry",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 19
+    },
+    {
+      "name": "TerminalCapability",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 22
+    },
+    {
+      "name": "WindowsAutomationCapability",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 21
+    },
+    {
+      "name": "MilestoneSummary",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 14
+    },
+    {
+      "name": "MilestoneReporter",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 22
+    },
+    {
+      "name": "RoadmapSpecification",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 15
+    },
+    {
+      "name": "StrategicPlanner",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 25
     },
     {
       "name": "AgentActivityFeed",
@@ -1417,6 +1804,16 @@
       "line": 8
     },
     {
+      "name": "DaemonStatus",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 15
+    },
+    {
+      "name": "BusterDaemonManager",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 22
+    },
+    {
       "name": "DiagnosticsManager",
       "file": "buster\\diagnostics\\manager.py",
       "line": 1
@@ -1465,6 +1862,26 @@
       "name": "HardwareManager",
       "file": "buster\\hardware\\manager.py",
       "line": 1
+    },
+    {
+      "name": "Hurdle",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 14
+    },
+    {
+      "name": "HurdleClassifier",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 28
+    },
+    {
+      "name": "HurdleEngine",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 14
+    },
+    {
+      "name": "AutonomousSpecEvaluator",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 14
     },
     {
       "name": "ProjectIndexer",
@@ -1927,6 +2344,36 @@
       "line": 37
     },
     {
+      "name": "CuriosityTarget",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 11
+    },
+    {
+      "name": "CuriosityEvaluator",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 18
+    },
+    {
+      "name": "ExplorationResult",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 15
+    },
+    {
+      "name": "CuriosityRunner",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 24
+    },
+    {
+      "name": "ExplorationTask",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 15
+    },
+    {
+      "name": "CuriosityScheduler",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 24
+    },
+    {
       "name": "LearningEngine",
       "file": "buster\\learning\\engine.py",
       "line": 12
@@ -1940,6 +2387,16 @@
       "name": "DesignPatternStore",
       "file": "buster\\learning\\patterns.py",
       "line": 8
+    },
+    {
+      "name": "InterestItem",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 14
+    },
+    {
+      "name": "PersonalPreferenceMemory",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 22
     },
     {
       "name": "BuildStrategyStore",
@@ -2082,6 +2539,16 @@
       "line": 10
     },
     {
+      "name": "DocumentChunk",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 14
+    },
+    {
+      "name": "LocalRAGIndexer",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 21
+    },
+    {
       "name": "MemoryEngine",
       "file": "buster\\memory\\engine.py",
       "line": 5
@@ -2197,6 +2664,36 @@
       "line": 7
     },
     {
+      "name": "MissionControlEventListener",
+      "file": "buster\\mission_control\\commands.py",
+      "line": 7
+    },
+    {
+      "name": "HealthAggregator",
+      "file": "buster\\mission_control\\health_aggregator.py",
+      "line": 5
+    },
+    {
+      "name": "MissionControlPresenter",
+      "file": "buster\\mission_control\\presenter.py",
+      "line": 15
+    },
+    {
+      "name": "WorkerLeaseSnapshot",
+      "file": "buster\\mission_control\\snapshot.py",
+      "line": 10
+    },
+    {
+      "name": "CircuitSnapshot",
+      "file": "buster\\mission_control\\snapshot.py",
+      "line": 21
+    },
+    {
+      "name": "MissionControlSnapshot",
+      "file": "buster\\mission_control\\snapshot.py",
+      "line": 30
+    },
+    {
       "name": "AutonomousMissionRuntime",
       "file": "buster\\mission_runtime\\autonomous_runtime.py",
       "line": 17
@@ -2282,6 +2779,86 @@
       "line": 5
     },
     {
+      "name": "BusterNodeIdentity",
+      "file": "buster\\node\\communication_center.py",
+      "line": 15
+    },
+    {
+      "name": "NodeMessage",
+      "file": "buster\\node\\communication_center.py",
+      "line": 24
+    },
+    {
+      "name": "BusterCommunicationCenter",
+      "file": "buster\\node\\communication_center.py",
+      "line": 32
+    },
+    {
+      "name": "SharedKnowledgePacket",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 17
+    },
+    {
+      "name": "CollaborativeSyncEngine",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 25
+    },
+    {
+      "name": "TaskPayload",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 15
+    },
+    {
+      "name": "WebSocketTaskBridge",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 25
+    },
+    {
+      "name": "MissionContext",
+      "file": "buster\\orchestration\\context.py",
+      "line": 8
+    },
+    {
+      "name": "TaskDependency",
+      "file": "buster\\orchestration\\models.py",
+      "line": 9
+    },
+    {
+      "name": "MissionTask",
+      "file": "buster\\orchestration\\models.py",
+      "line": 14
+    },
+    {
+      "name": "MissionPlan",
+      "file": "buster\\orchestration\\models.py",
+      "line": 26
+    },
+    {
+      "name": "MissionPlanner",
+      "file": "buster\\orchestration\\planner.py",
+      "line": 10
+    },
+    {
+      "name": "MissionRunner",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 12
+    },
+    {
+      "name": "WindowsAppController",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 12
+    },
+    {
+      "name": "SystemMetrics",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 15
+    },
+    {
+      "name": "WindowsSystemMonitor",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 22
+    },
+    {
       "name": "ApprovedFolders",
       "file": "buster\\os_layer\\approved_folders.py",
       "line": 4
@@ -2304,37 +2881,37 @@
     {
       "name": "AttentionSystem",
       "file": "buster\\perception\\attention.py",
-      "line": 1
+      "line": 7
     },
     {
       "name": "AudioLearning",
       "file": "buster\\perception\\audio_learning.py",
-      "line": 1
+      "line": 11
     },
     {
       "name": "AudioObservation",
       "file": "buster\\perception\\ears.py",
-      "line": 6
+      "line": 11
     },
     {
       "name": "EarSystem",
       "file": "buster\\perception\\ears.py",
-      "line": 21
+      "line": 29
     },
     {
       "name": "PerceptionEngine",
       "file": "buster\\perception\\engine.py",
-      "line": 3
+      "line": 9
     },
     {
       "name": "VisualObservation",
       "file": "buster\\perception\\eyes.py",
-      "line": 6
+      "line": 11
     },
     {
       "name": "EyeSystem",
       "file": "buster\\perception\\eyes.py",
-      "line": 21
+      "line": 29
     },
     {
       "name": "PerceptionMindBridge",
@@ -2364,7 +2941,7 @@
     {
       "name": "ScreenPerceptionFeed",
       "file": "buster\\perception\\screen_feed.py",
-      "line": 13
+      "line": 16
     },
     {
       "name": "PerceptionEngine",
@@ -2487,6 +3064,41 @@
       "line": 20
     },
     {
+      "name": "LifeState",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 8
+    },
+    {
+      "name": "BusterRhythm",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 14
+    },
+    {
+      "name": "RhythmService",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 10
+    },
+    {
+      "name": "SleepResponse",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 12
+    },
+    {
+      "name": "SleepInterruptionHandler",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 19
+    },
+    {
+      "name": "TaskGate",
+      "file": "buster\\rhythm\\task_gate.py",
+      "line": 6
+    },
+    {
+      "name": "WeekendRhythmManager",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 11
+    },
+    {
       "name": "AgentMemory",
       "file": "buster\\runtime\\agent_memory.py",
       "line": 9
@@ -2519,7 +3131,7 @@
     {
       "name": "BusterRuntimeCore",
       "file": "buster\\runtime\\core.py",
-      "line": 43
+      "line": 58
     },
     {
       "name": "RuntimeDeveloperTools",
@@ -2812,9 +3424,54 @@
       "line": 40
     },
     {
+      "name": "SocialState",
+      "file": "buster\\social\\social_context.py",
+      "line": 15
+    },
+    {
+      "name": "SocialContextEngine",
+      "file": "buster\\social\\social_context.py",
+      "line": 23
+    },
+    {
       "name": "SystemMonitor",
       "file": "buster\\system\\monitor.py",
       "line": 4
+    },
+    {
+      "name": "EventLogger",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 12
+    },
+    {
+      "name": "ExecutionTracker",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 10
+    },
+    {
+      "name": "HealthSnapshot",
+      "file": "buster\\telemetry\\health_snapshot.py",
+      "line": 8
+    },
+    {
+      "name": "MetricsRegistry",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 9
+    },
+    {
+      "name": "TelemetryService",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 10
+    },
+    {
+      "name": "TraceContext",
+      "file": "buster\\telemetry\\trace_context.py",
+      "line": 13
+    },
+    {
+      "name": "DashboardVisualizer",
+      "file": "buster\\ui\\dashboard_visualizer.py",
+      "line": 9
     },
     {
       "name": "SettingsDialog",
@@ -3317,6 +3974,36 @@
       "line": 9
     },
     {
+      "name": "WorkerRole",
+      "file": "buster\\autonomy\\delegation\\capability_matrix.py",
+      "line": 7
+    },
+    {
+      "name": "AgentCapabilityMatrix",
+      "file": "buster\\autonomy\\delegation\\capability_matrix.py",
+      "line": 15
+    },
+    {
+      "name": "DelegationPlanner",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 14
+    },
+    {
+      "name": "TaskLeaseExpiredException",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 9
+    },
+    {
+      "name": "TaskLease",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 14
+    },
+    {
+      "name": "WorkerPoolManager",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 34
+    },
+    {
       "name": "WorkspaceCleanupRunner",
       "file": "buster\\autonomy\\executors\\cleanup_runner.py",
       "line": 10
@@ -3667,6 +4354,31 @@
       "line": 1
     },
     {
+      "name": "RhythmDLQManager",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 12
+    },
+    {
+      "name": "DLQStatus",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 10
+    },
+    {
+      "name": "RecoveryStrategy",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 18
+    },
+    {
+      "name": "DeadLetterItem",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 26
+    },
+    {
+      "name": "DLQRecoveryWorker",
+      "file": "buster\\rhythm\\dlq\\worker.py",
+      "line": 10
+    },
+    {
       "name": "OSMetric",
       "file": "buster\\ui\\os1\\main_window.py",
       "line": 14
@@ -3897,14 +4609,14 @@
       "line": 36
     },
     {
-      "name": "RuntimeSummaryPanel",
+      "name": "PopoutWindow",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 24
+      "line": 21
     },
     {
       "name": "DeveloperMissionControl",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 419
+      "line": 56
     },
     {
       "name": "FacePanel",
@@ -3959,12 +4671,12 @@
     {
       "name": "SmartDropZone",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 32
+      "line": 31
     },
     {
       "name": "PluginPanel",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 137
+      "line": 144
     },
     {
       "name": "CommandWorker",
@@ -4050,6 +4762,56 @@
       "name": "SkillsCard",
       "file": "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
       "line": 4
+    },
+    {
+      "name": "CircuitBreakerCard",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 25
+    },
+    {
+      "name": "DelegationTreeCard",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 15
+    },
+    {
+      "name": "DLQCard",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 13
+    },
+    {
+      "name": "GrowthLedgerCard",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 15
+    },
+    {
+      "name": "HealthCard",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\health_card.py",
+      "line": 13
+    },
+    {
+      "name": "LearningInsightsCard",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 17
+    },
+    {
+      "name": "MetricsCard",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\metrics_card.py",
+      "line": 12
+    },
+    {
+      "name": "VitalSignsStrip",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 31
+    },
+    {
+      "name": "MissionControlPanel",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 93
+    },
+    {
+      "name": "WorkerLeasesCard",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\worker_leases_card.py",
+      "line": 14
     },
     {
       "name": "Card",
@@ -4864,6 +5626,16 @@
       "line": 7
     },
     {
+      "name": "create_registry",
+      "file": "buster\\cli.py",
+      "line": 14
+    },
+    {
+      "name": "main",
+      "file": "buster\\cli.py",
+      "line": 20
+    },
+    {
       "name": "main",
       "file": "scripts\\buster_doctor.py",
       "line": 475
@@ -4997,6 +5769,31 @@
       "name": "exit_code",
       "file": "scripts\\buster_doctor.py",
       "line": 471
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\agent\\core.py",
+      "line": 15
+    },
+    {
+      "name": "execute_plan_from_template",
+      "file": "buster\\agent\\core.py",
+      "line": 21
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 15
+    },
+    {
+      "name": "generate_task_definitions_from_goal",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 19
+    },
+    {
+      "name": "run_natural_language_goal",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 66
     },
     {
       "name": "__init__",
@@ -5719,6 +6516,11 @@
       "line": 465
     },
     {
+      "name": "evaluate",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 33
+    },
+    {
       "name": "__init__",
       "file": "buster\\autonomy\\dashboard.py",
       "line": 15
@@ -5889,6 +6691,46 @@
       "line": 410
     },
     {
+      "name": "__init__",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 30
+    },
+    {
+      "name": "record_learning",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 35
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 28
+    },
+    {
+      "name": "save_checkpoint",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 32
+    },
+    {
+      "name": "load_checkpoint",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 54
+    },
+    {
+      "name": "recover_mission",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 66
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 18
+    },
+    {
+      "name": "process_mission_tick",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 23
+    },
+    {
       "name": "recommend",
       "file": "buster\\autonomy\\next_actions.py",
       "line": 13
@@ -5897,6 +6739,31 @@
       "name": "_action",
       "file": "buster\\autonomy\\next_actions.py",
       "line": 77
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 25
+    },
+    {
+      "name": "select_next_action",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 28
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 27
+    },
+    {
+      "name": "create_observation",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 31
+    },
+    {
+      "name": "filter_observations",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 54
     },
     {
       "name": "utc_now",
@@ -6205,6 +7072,71 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 13
+    },
+    {
+      "name": "_ensure_storage",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 19
+    },
+    {
+      "name": "_read_state_unlocked",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 31
+    },
+    {
+      "name": "_write_state_unlocked",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 38
+    },
+    {
+      "name": "set_goal",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 43
+    },
+    {
+      "name": "update_delegation_tree",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 51
+    },
+    {
+      "name": "assign_worker_lease",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 57
+    },
+    {
+      "name": "release_worker_lease",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 68
+    },
+    {
+      "name": "get_snapshot",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 75
+    },
+    {
+      "name": "run_cli_rhythm",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 75
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 26
+    },
+    {
+      "name": "evaluate_state",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 37
+    },
+    {
+      "name": "get_blackboard_status",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 59
+    },
+    {
+      "name": "__init__",
       "file": "buster\\brain\\conversation.py",
       "line": 2
     },
@@ -6250,6 +7182,76 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 13
+    },
+    {
+      "name": "_ensure_storage",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 19
+    },
+    {
+      "name": "_read_state",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 37
+    },
+    {
+      "name": "_write_state",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 47
+    },
+    {
+      "name": "record_failure",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 52
+    },
+    {
+      "name": "record_success",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 80
+    },
+    {
+      "name": "reset_circuit",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 92
+    },
+    {
+      "name": "dismiss_dlq_item",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 101
+    },
+    {
+      "name": "get_snapshot",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 108
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 15
+    },
+    {
+      "name": "process_dream_cycle",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 28
+    },
+    {
+      "name": "_simulate_sandbox_patch",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 78
+    },
+    {
+      "name": "_load_ledger",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 93
+    },
+    {
+      "name": "_save_ledger",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 102
+    },
+    {
+      "name": "__init__",
       "file": "buster\\brain\\engine.py",
       "line": 11
     },
@@ -6267,6 +7269,61 @@
       "name": "build_context",
       "file": "buster\\brain\\engine.py",
       "line": 149
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 13
+    },
+    {
+      "name": "_ensure_storage",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 19
+    },
+    {
+      "name": "_read_state",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 30
+    },
+    {
+      "name": "_write_state",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 40
+    },
+    {
+      "name": "get_snapshot",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 45
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 16
+    },
+    {
+      "name": "_ensure_ledger_exists",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 24
+    },
+    {
+      "name": "handle_hurdle",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 43
+    },
+    {
+      "name": "formulate_upgrade_plan",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 74
+    },
+    {
+      "name": "register_tool",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 97
+    },
+    {
+      "name": "_log_to_ledger",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 107
     },
     {
       "name": "fuse_local_and_web",
@@ -6324,6 +7381,86 @@
       "line": 12
     },
     {
+      "name": "__init__",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 17
+    },
+    {
+      "name": "get_current_time",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 29
+    },
+    {
+      "name": "is_weekend",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 33
+    },
+    {
+      "name": "determine_life_state",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 38
+    },
+    {
+      "name": "handle_user_prompt",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 60
+    },
+    {
+      "name": "get_schedule_status",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 103
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 15
+    },
+    {
+      "name": "_restore_persisted_state",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 32
+    },
+    {
+      "name": "_persist_current_state",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 44
+    },
+    {
+      "name": "decompose_and_delegate",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 53
+    },
+    {
+      "name": "execute_worker_task",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 87
+    },
+    {
+      "name": "_handle_graceful_shutdown",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 129
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 12
+    },
+    {
+      "name": "save_state",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 21
+    },
+    {
+      "name": "load_state",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 40
+    },
+    {
+      "name": "clear_state",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 53
+    },
+    {
       "name": "merged_context",
       "file": "buster\\brain\\tool_context.py",
       "line": 15
@@ -6352,6 +7489,11 @@
       "name": "run",
       "file": "buster\\brain\\unified_agent_loop.py",
       "line": 18
+    },
+    {
+      "name": "run_full_system_verification",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 12
     },
     {
       "name": "__init__",
@@ -6422,6 +7564,266 @@
       "name": "save_json",
       "file": "buster\\builder\\storage.py",
       "line": 18
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 27
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 30
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 53
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 68
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\base.py",
+      "line": 22
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\base.py",
+      "line": 26
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\base.py",
+      "line": 30
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 27
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 30
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 53
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 68
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 27
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 30
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 62
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 77
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 28
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 31
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 62
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 81
+    },
+    {
+      "name": "create_health",
+      "file": "buster\\capabilities\\health.py",
+      "line": 17
+    },
+    {
+      "name": "verify_permissions",
+      "file": "buster\\capabilities\\permissions.py",
+      "line": 17
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 26
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 29
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 52
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 67
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 29
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 32
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 71
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 86
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 22
+    },
+    {
+      "name": "register",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 29
+    },
+    {
+      "name": "unregister",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 52
+    },
+    {
+      "name": "get",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 65
+    },
+    {
+      "name": "is_enabled",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 71
+    },
+    {
+      "name": "set_enabled",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 75
+    },
+    {
+      "name": "find_by_action",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 84
+    },
+    {
+      "name": "list_descriptors",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 93
+    },
+    {
+      "name": "health_snapshot",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 98
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 27
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 30
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 53
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 68
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 26
+    },
+    {
+      "name": "describe",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 29
+    },
+    {
+      "name": "health_check",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 52
+    },
+    {
+      "name": "execute",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 61
+    },
+    {
+      "name": "foreach_window",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 92
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 25
+    },
+    {
+      "name": "generate_report",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 29
+    },
+    {
+      "name": "format_console_log",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 53
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 28
+    },
+    {
+      "name": "generate_spec",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 32
     },
     {
       "name": "utc_now",
@@ -7010,6 +8412,21 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 25
+    },
+    {
+      "name": "run_guarded_loop",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 32
+    },
+    {
+      "name": "generate_winsw_xml_config",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 62
+    },
+    {
+      "name": "__init__",
       "file": "buster\\diagnostics\\manager.py",
       "line": 2
     },
@@ -7247,6 +8664,51 @@
       "name": "status",
       "file": "buster\\hardware\\manager.py",
       "line": 2
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 31
+    },
+    {
+      "name": "classify_exception",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 35
+    },
+    {
+      "name": "_extract_frame_info",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 69
+    },
+    {
+      "name": "_extract_code_context",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 82
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 17
+    },
+    {
+      "name": "process_exception",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 23
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 17
+    },
+    {
+      "name": "evaluate_and_propose_spec",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 25
+    },
+    {
+      "name": "_load_hurdles",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 63
     },
     {
       "name": "__init__",
@@ -8815,6 +10277,46 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 21
+    },
+    {
+      "name": "evaluate_file",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 29
+    },
+    {
+      "name": "scan_project",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 77
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 27
+    },
+    {
+      "name": "inspect_target",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 30
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 37
+    },
+    {
+      "name": "is_exploration_allowed",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 47
+    },
+    {
+      "name": "schedule_exploration",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 78
+    },
+    {
+      "name": "__init__",
       "file": "buster\\learning\\engine.py",
       "line": 19
     },
@@ -8887,6 +10389,31 @@
       "name": "search",
       "file": "buster\\learning\\patterns.py",
       "line": 48
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 25
+    },
+    {
+      "name": "_load",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 30
+    },
+    {
+      "name": "_save",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 41
+    },
+    {
+      "name": "record_exploration",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 48
+    },
+    {
+      "name": "get_top_interests",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 68
     },
     {
       "name": "__init__",
@@ -9422,6 +10949,31 @@
       "name": "_persist",
       "file": "buster\\living_companion\\voice_runtime.py",
       "line": 46
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 24
+    },
+    {
+      "name": "load_index",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 30
+    },
+    {
+      "name": "save_index",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 41
+    },
+    {
+      "name": "add_document",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 46
+    },
+    {
+      "name": "search",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 69
     },
     {
       "name": "__init__",
@@ -10005,6 +11557,36 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\mission_control\\commands.py",
+      "line": 10
+    },
+    {
+      "name": "_subscribe_to_events",
+      "file": "buster\\mission_control\\commands.py",
+      "line": 21
+    },
+    {
+      "name": "_handle_event",
+      "file": "buster\\mission_control\\commands.py",
+      "line": 40
+    },
+    {
+      "name": "calculate",
+      "file": "buster\\mission_control\\health_aggregator.py",
+      "line": 8
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\mission_control\\presenter.py",
+      "line": 18
+    },
+    {
+      "name": "create_snapshot",
+      "file": "buster\\mission_control\\presenter.py",
+      "line": 36
+    },
+    {
+      "name": "__init__",
       "file": "buster\\mission_runtime\\autonomous_runtime.py",
       "line": 18
     },
@@ -10295,6 +11877,176 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\node\\communication_center.py",
+      "line": 35
+    },
+    {
+      "name": "register_node",
+      "file": "buster\\node\\communication_center.py",
+      "line": 41
+    },
+    {
+      "name": "send_message",
+      "file": "buster\\node\\communication_center.py",
+      "line": 62
+    },
+    {
+      "name": "get_messages_for",
+      "file": "buster\\node\\communication_center.py",
+      "line": 83
+    },
+    {
+      "name": "_load",
+      "file": "buster\\node\\communication_center.py",
+      "line": 96
+    },
+    {
+      "name": "_save",
+      "file": "buster\\node\\communication_center.py",
+      "line": 107
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 28
+    },
+    {
+      "name": "publish_knowledge",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 39
+    },
+    {
+      "name": "process_incoming_syncs",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 66
+    },
+    {
+      "name": "_apply_packet",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 85
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 28
+    },
+    {
+      "name": "create_task",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 33
+    },
+    {
+      "name": "execute_task_stream",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 48
+    },
+    {
+      "name": "subscribe",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 67
+    },
+    {
+      "name": "_notify_subscribers",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 71
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\orchestration\\context.py",
+      "line": 11
+    },
+    {
+      "name": "set_output",
+      "file": "buster\\orchestration\\context.py",
+      "line": 17
+    },
+    {
+      "name": "set_error",
+      "file": "buster\\orchestration\\context.py",
+      "line": 20
+    },
+    {
+      "name": "resolve_value",
+      "file": "buster\\orchestration\\context.py",
+      "line": 23
+    },
+    {
+      "name": "_lookup_path",
+      "file": "buster\\orchestration\\context.py",
+      "line": 49
+    },
+    {
+      "name": "replace_match",
+      "file": "buster\\orchestration\\context.py",
+      "line": 36
+    },
+    {
+      "name": "add_task",
+      "file": "buster\\orchestration\\models.py",
+      "line": 32
+    },
+    {
+      "name": "get_task",
+      "file": "buster\\orchestration\\models.py",
+      "line": 35
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\orchestration\\planner.py",
+      "line": 13
+    },
+    {
+      "name": "plan_from_template",
+      "file": "buster\\orchestration\\planner.py",
+      "line": 16
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 15
+    },
+    {
+      "name": "run_mission",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 19
+    },
+    {
+      "name": "_execute_task_with_retries",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 44
+    },
+    {
+      "name": "launch_app",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 15
+    },
+    {
+      "name": "open_web_url",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 29
+    },
+    {
+      "name": "terminate_process_by_name",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 34
+    },
+    {
+      "name": "get_metrics",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 25
+    },
+    {
+      "name": "control_wifi",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 34
+    },
+    {
+      "name": "list_running_apps",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 46
+    },
+    {
+      "name": "__init__",
       "file": "buster\\os_layer\\approved_folders.py",
       "line": 5
     },
@@ -10414,24 +12166,44 @@
       "line": 16
     },
     {
+      "name": "__init__",
+      "file": "buster\\perception\\attention.py",
+      "line": 10
+    },
+    {
       "name": "choose_focus",
       "file": "buster\\perception\\attention.py",
-      "line": 2
+      "line": 17
+    },
+    {
+      "name": "_calculate_boosted_importance",
+      "file": "buster\\perception\\attention.py",
+      "line": 31
     },
     {
       "name": "__init__",
       "file": "buster\\perception\\audio_learning.py",
-      "line": 2
+      "line": 14
+    },
+    {
+      "name": "_load",
+      "file": "buster\\perception\\audio_learning.py",
+      "line": 24
+    },
+    {
+      "name": "_save",
+      "file": "buster\\perception\\audio_learning.py",
+      "line": 32
     },
     {
       "name": "learn_phrase",
       "file": "buster\\perception\\audio_learning.py",
-      "line": 5
+      "line": 41
     },
     {
       "name": "interpret",
       "file": "buster\\perception\\audio_learning.py",
-      "line": 10
+      "line": 61
     },
     {
       "name": "perception_to_cognitive_observations",
@@ -10441,52 +12213,62 @@
     {
       "name": "to_dict",
       "file": "buster\\perception\\ears.py",
-      "line": 15
+      "line": 22
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\perception\\ears.py",
+      "line": 32
     },
     {
       "name": "observe",
       "file": "buster\\perception\\ears.py",
-      "line": 22
+      "line": 44
     },
     {
       "name": "score_importance",
       "file": "buster\\perception\\ears.py",
-      "line": 27
+      "line": 70
     },
     {
       "name": "__init__",
       "file": "buster\\perception\\engine.py",
-      "line": 4
+      "line": 12
     },
     {
       "name": "perceive_text",
       "file": "buster\\perception\\engine.py",
-      "line": 7
+      "line": 21
     },
     {
       "name": "perceive_camera_observation",
       "file": "buster\\perception\\engine.py",
-      "line": 12
+      "line": 34
     },
     {
       "name": "perceive_desktop_observation",
       "file": "buster\\perception\\engine.py",
-      "line": 16
+      "line": 48
     },
     {
       "name": "to_dict",
       "file": "buster\\perception\\eyes.py",
-      "line": 14
+      "line": 21
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\perception\\eyes.py",
+      "line": 32
     },
     {
       "name": "observe",
       "file": "buster\\perception\\eyes.py",
-      "line": 22
+      "line": 44
     },
     {
       "name": "score_importance",
       "file": "buster\\perception\\eyes.py",
-      "line": 27
+      "line": 69
     },
     {
       "name": "__init__",
@@ -10616,32 +12398,32 @@
     {
       "name": "_now",
       "file": "buster\\perception\\screen_feed.py",
-      "line": 9
+      "line": 12
     },
     {
       "name": "__init__",
       "file": "buster\\perception\\screen_feed.py",
-      "line": 14
+      "line": 19
     },
     {
       "name": "observe",
       "file": "buster\\perception\\screen_feed.py",
-      "line": 27
+      "line": 43
     },
     {
       "name": "feed_observation",
       "file": "buster\\perception\\screen_feed.py",
-      "line": 53
+      "line": 76
     },
     {
       "name": "status",
       "file": "buster\\perception\\screen_feed.py",
-      "line": 56
+      "line": 79
     },
     {
       "name": "_persist",
       "file": "buster\\perception\\screen_feed.py",
-      "line": 59
+      "line": 82
     },
     {
       "name": "__init__",
@@ -11070,6 +12852,86 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 17
+    },
+    {
+      "name": "evaluate_state",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 27
+    },
+    {
+      "name": "get_next_transition",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 47
+    },
+    {
+      "name": "get_blackboard_status",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 73
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 13
+    },
+    {
+      "name": "tick_sync",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 28
+    },
+    {
+      "name": "tick",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 56
+    },
+    {
+      "name": "start",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 102
+    },
+    {
+      "name": "_loop",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 107
+    },
+    {
+      "name": "stop",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 112
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 22
+    },
+    {
+      "name": "process_prompt_during_sleep",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 26
+    },
+    {
+      "name": "evaluate",
+      "file": "buster\\rhythm\\task_gate.py",
+      "line": 10
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 14
+    },
+    {
+      "name": "is_weekend",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 18
+    },
+    {
+      "name": "evaluate_weekend_state",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 23
+    },
+    {
+      "name": "__init__",
       "file": "buster\\runtime\\agent_memory.py",
       "line": 10
     },
@@ -11201,142 +13063,152 @@
     {
       "name": "create_runtime_core",
       "file": "buster\\runtime\\core.py",
-      "line": 710
+      "line": 861
     },
     {
       "name": "__init__",
       "file": "buster\\runtime\\core.py",
-      "line": 44
+      "line": 59
     },
     {
       "name": "_register_core_services",
       "file": "buster\\runtime\\core.py",
-      "line": 196
+      "line": 240
+    },
+    {
+      "name": "handle_hurdle_exception",
+      "file": "buster\\runtime\\core.py",
+      "line": 272
     },
     {
       "name": "start",
       "file": "buster\\runtime\\core.py",
-      "line": 224
+      "line": 309
     },
     {
       "name": "stop",
       "file": "buster\\runtime\\core.py",
-      "line": 255
+      "line": 340
     },
     {
       "name": "tick",
       "file": "buster\\runtime\\core.py",
-      "line": 292
+      "line": 377
+    },
+    {
+      "name": "evaluate_task_gate",
+      "file": "buster\\runtime\\core.py",
+      "line": 429
     },
     {
       "name": "run_repair",
       "file": "buster\\runtime\\core.py",
-      "line": 308
+      "line": 440
     },
     {
       "name": "run_python_repair",
       "file": "buster\\runtime\\core.py",
-      "line": 392
+      "line": 524
     },
     {
       "name": "run",
       "file": "buster\\runtime\\core.py",
-      "line": 403
+      "line": 535
     },
     {
       "name": "run_agent",
       "file": "buster\\runtime\\core.py",
-      "line": 447
+      "line": 587
     },
     {
       "name": "create_job",
       "file": "buster\\runtime\\core.py",
-      "line": 488
+      "line": 635
     },
     {
       "name": "run_job",
       "file": "buster\\runtime\\core.py",
-      "line": 504
+      "line": 651
     },
     {
       "name": "service",
       "file": "buster\\runtime\\core.py",
-      "line": 544
+      "line": 691
     },
     {
       "name": "require_service",
       "file": "buster\\runtime\\core.py",
-      "line": 547
+      "line": 694
     },
     {
       "name": "status",
       "file": "buster\\runtime\\core.py",
-      "line": 550
+      "line": 697
     },
     {
       "name": "_ai_status",
       "file": "buster\\runtime\\core.py",
-      "line": 579
+      "line": 728
     },
     {
       "name": "capture_snapshot",
       "file": "buster\\runtime\\core.py",
-      "line": 604
+      "line": 753
     },
     {
       "name": "notify",
       "file": "buster\\runtime\\core.py",
-      "line": 614
+      "line": 763
     },
     {
       "name": "refresh_state",
       "file": "buster\\runtime\\core.py",
-      "line": 625
+      "line": 774
     },
     {
       "name": "run_self_improvement",
       "file": "buster\\runtime\\core.py",
-      "line": 655
+      "line": 806
     },
     {
       "name": "self_improvement_status",
       "file": "buster\\runtime\\core.py",
-      "line": 669
+      "line": 820
     },
     {
       "name": "autonomy_status",
       "file": "buster\\runtime\\core.py",
-      "line": 672
+      "line": 823
     },
     {
       "name": "execution_status",
       "file": "buster\\runtime\\core.py",
-      "line": 675
+      "line": 826
     },
     {
       "name": "health",
       "file": "buster\\runtime\\core.py",
-      "line": 678
+      "line": 829
     },
     {
       "name": "repair_workflow_status",
       "file": "buster\\runtime\\core.py",
-      "line": 681
+      "line": 832
     },
     {
       "name": "recover_repair_sessions",
       "file": "buster\\runtime\\core.py",
-      "line": 684
+      "line": 835
     },
     {
       "name": "active_repair_sessions",
       "file": "buster\\runtime\\core.py",
-      "line": 687
+      "line": 838
     },
     {
       "name": "record_evolution_action",
       "file": "buster\\runtime\\core.py",
-      "line": 690
+      "line": 841
     },
     {
       "name": "__init__",
@@ -12874,6 +14746,26 @@
       "line": 52
     },
     {
+      "name": "__init__",
+      "file": "buster\\social\\social_context.py",
+      "line": 26
+    },
+    {
+      "name": "_load",
+      "file": "buster\\social\\social_context.py",
+      "line": 36
+    },
+    {
+      "name": "_save",
+      "file": "buster\\social\\social_context.py",
+      "line": 46
+    },
+    {
+      "name": "update_context",
+      "file": "buster\\social\\social_context.py",
+      "line": 50
+    },
+    {
       "name": "snapshot",
       "file": "buster\\system\\monitor.py",
       "line": 5
@@ -12882,6 +14774,121 @@
       "name": "summary",
       "file": "buster\\system\\monitor.py",
       "line": 16
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 15
+    },
+    {
+      "name": "log_event",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 26
+    },
+    {
+      "name": "_append_jsonl",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 68
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 13
+    },
+    {
+      "name": "__enter__",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 28
+    },
+    {
+      "name": "__exit__",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 39
+    },
+    {
+      "name": "generate",
+      "file": "buster\\telemetry\\health_snapshot.py",
+      "line": 12
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 12
+    },
+    {
+      "name": "increment",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 19
+    },
+    {
+      "name": "observe_duration",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 24
+    },
+    {
+      "name": "snapshot",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 29
+    },
+    {
+      "name": "save",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 37
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 13
+    },
+    {
+      "name": "track_execution",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 17
+    },
+    {
+      "name": "record_retry",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 32
+    },
+    {
+      "name": "record_circuit_event",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 51
+    },
+    {
+      "name": "get_health",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 61
+    },
+    {
+      "name": "flush",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 65
+    },
+    {
+      "name": "start_trace",
+      "file": "buster\\telemetry\\trace_context.py",
+      "line": 17
+    },
+    {
+      "name": "get_context",
+      "file": "buster\\telemetry\\trace_context.py",
+      "line": 31
+    },
+    {
+      "name": "render_ansi",
+      "file": "buster\\ui\\dashboard_visualizer.py",
+      "line": 12
+    },
+    {
+      "name": "render_html",
+      "file": "buster\\ui\\dashboard_visualizer.py",
+      "line": 53
+    },
+    {
+      "name": "export_json",
+      "file": "buster\\ui\\dashboard_visualizer.py",
+      "line": 95
     },
     {
       "name": "__init__",
@@ -14449,6 +16456,86 @@
       "line": 49
     },
     {
+      "name": "resolve_role_for_task",
+      "file": "buster\\autonomy\\delegation\\capability_matrix.py",
+      "line": 27
+    },
+    {
+      "name": "get_capabilities_for_role",
+      "file": "buster\\autonomy\\delegation\\capability_matrix.py",
+      "line": 44
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 17
+    },
+    {
+      "name": "create_subtask",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 32
+    },
+    {
+      "name": "cancel_task_tree",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 66
+    },
+    {
+      "name": "send_to_dlq",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 90
+    },
+    {
+      "name": "_cancel_node",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 71
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 17
+    },
+    {
+      "name": "is_expired",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 24
+    },
+    {
+      "name": "time_remaining",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 28
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 37
+    },
+    {
+      "name": "acquire_lease",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 44
+    },
+    {
+      "name": "release_lease",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 76
+    },
+    {
+      "name": "validate_lease",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 85
+    },
+    {
+      "name": "_reclaim_expired_leases",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 96
+    },
+    {
+      "name": "active_count",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 103
+    },
+    {
       "name": "purge_artifacts",
       "file": "buster\\autonomy\\executors\\cleanup_runner.py",
       "line": 13
@@ -15292,6 +17379,66 @@
       "name": "status",
       "file": "buster\\plugins\\sdk\\base_plugin.py",
       "line": 4
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 15
+    },
+    {
+      "name": "enqueue",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 28
+    },
+    {
+      "name": "list_items",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 72
+    },
+    {
+      "name": "get_ready_items",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 76
+    },
+    {
+      "name": "mark_resolved",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 104
+    },
+    {
+      "name": "mark_failed",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 109
+    },
+    {
+      "name": "status",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 120
+    },
+    {
+      "name": "_save_to_disk",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 131
+    },
+    {
+      "name": "_load_from_disk",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 138
+    },
+    {
+      "name": "to_dict",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 42
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\rhythm\\dlq\\worker.py",
+      "line": 13
+    },
+    {
+      "name": "process_ready_items",
+      "file": "buster\\rhythm\\dlq\\worker.py",
+      "line": 17
     },
     {
       "name": "__init__",
@@ -16361,87 +18508,62 @@
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 50
-    },
-    {
-      "name": "_build_ui",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 108
-    },
-    {
-      "name": "_metric",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 205
-    },
-    {
-      "name": "_connect_runtime",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 220
-    },
-    {
-      "name": "_handle_event",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 231
-    },
-    {
-      "name": "_process_transaction_event",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 287
-    },
-    {
-      "name": "_update_patch_display",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 310
-    },
-    {
-      "name": "_event_summary",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 347
-    },
-    {
-      "name": "refresh",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 366
-    },
-    {
-      "name": "shutdown",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 402
-    },
-    {
-      "name": "__init__",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 424
-    },
-    {
-      "name": "_build_ui",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 477
-    },
-    {
-      "name": "_create_runtime_page",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 629
-    },
-    {
-      "name": "_create_tool_page",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 635
-    },
-    {
-      "name": "_fallback_page",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 678
-    },
-    {
-      "name": "_change_page",
-      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 699
+      "line": 26
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 703
+      "line": 51
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 61
+    },
+    {
+      "name": "_build_ui",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 130
+    },
+    {
+      "name": "_popout_terminal",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 305
+    },
+    {
+      "name": "_redock_terminal",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 316
+    },
+    {
+      "name": "_popout_active_page",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 322
+    },
+    {
+      "name": "_redock_active_page",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 337
+    },
+    {
+      "name": "_create_runtime_page",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 343
+    },
+    {
+      "name": "_create_tool_page",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 349
+    },
+    {
+      "name": "_fallback_page",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 393
+    },
+    {
+      "name": "_change_page",
+      "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
+      "line": 410
     },
     {
       "name": "__init__",
@@ -16919,59 +19041,64 @@
       "line": 374
     },
     {
+      "name": "create_brain_button",
+      "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
+      "line": 338
+    },
+    {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 37
+      "line": 36
     },
     {
       "name": "dragEnterEvent",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 71
+      "line": 70
     },
     {
       "name": "dropEvent",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 75
+      "line": 74
     },
     {
       "name": "mousePressEvent",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 84
+      "line": 83
     },
     {
       "name": "_analyze_and_route",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 91
+      "line": 90
     },
     {
       "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 143
+      "line": 150
     },
     {
       "name": "_build_ui",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 154
+      "line": 161
     },
     {
       "name": "_on_file_dropped",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 239
+      "line": 247
     },
     {
       "name": "_override_target_dir",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 244
+      "line": 252
     },
     {
       "name": "_update_status_display",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 250
+      "line": 258
     },
     {
       "name": "_apply_patch",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 259
+      "line": 267
     },
     {
       "name": "__init__",
@@ -17610,6 +19737,191 @@
     },
     {
       "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 30
+    },
+    {
+      "name": "_setup_ui",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 38
+    },
+    {
+      "name": "_get_dlq_state_path",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 67
+    },
+    {
+      "name": "refresh_circuits",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 78
+    },
+    {
+      "name": "update_circuits",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 105
+    },
+    {
+      "name": "_on_reset",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 121
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 18
+    },
+    {
+      "name": "_setup_ui",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 25
+    },
+    {
+      "name": "_get_blackboard_path",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 51
+    },
+    {
+      "name": "refresh_tree",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 63
+    },
+    {
+      "name": "update_tree",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 101
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 19
+    },
+    {
+      "name": "update_dlq",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 39
+    },
+    {
+      "name": "_on_retry",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 49
+    },
+    {
+      "name": "_on_dismiss",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 54
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 18
+    },
+    {
+      "name": "_setup_ui",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 25
+    },
+    {
+      "name": "_get_ledger_path",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 37
+    },
+    {
+      "name": "refresh_ledger",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 47
+    },
+    {
+      "name": "update_ledger",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 67
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\health_card.py",
+      "line": 16
+    },
+    {
+      "name": "update_state",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\health_card.py",
+      "line": 48
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 20
+    },
+    {
+      "name": "_setup_ui",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 50
+    },
+    {
+      "name": "refresh_insights",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 63
+    },
+    {
+      "name": "update_insights",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 100
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\metrics_card.py",
+      "line": 15
+    },
+    {
+      "name": "update_metrics",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\metrics_card.py",
+      "line": 31
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 34
+    },
+    {
+      "name": "update_vitals",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 68
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 102
+    },
+    {
+      "name": "_setup_ui",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 124
+    },
+    {
+      "name": "_setup_polling",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 262
+    },
+    {
+      "name": "manual_refresh",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 272
+    },
+    {
+      "name": "update_from_snapshot",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 282
+    },
+    {
+      "name": "__init__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\worker_leases_card.py",
+      "line": 17
+    },
+    {
+      "name": "update_leases",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\worker_leases_card.py",
+      "line": 27
+    },
+    {
+      "name": "__init__",
       "file": "buster\\ui\\v9\\panels\\runtime_panel\\console_panel.py",
       "line": 13
     },
@@ -18026,22 +20338,22 @@
     {
       "name": "tab_changed",
       "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_workspace.py",
-      "line": 148
+      "line": 153
     },
     {
       "name": "refresh",
       "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_workspace.py",
-      "line": 178
+      "line": 183
     },
     {
       "name": "shutdown",
       "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_workspace.py",
-      "line": 201
+      "line": 206
     },
     {
       "name": "closeEvent",
       "file": "buster\\ui\\v9\\panels\\runtime_panel\\runtime_workspace.py",
-      "line": 221
+      "line": 226
     },
     {
       "name": "__init__",
@@ -24052,6 +26364,46 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\cli.py",
+      "line": 2
+    },
+    {
+      "name": "argparse",
+      "file": "buster\\cli.py",
+      "line": 4
+    },
+    {
+      "name": "sys",
+      "file": "buster\\cli.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\cli.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.registry",
+      "file": "buster\\cli.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.filesystem_cap",
+      "file": "buster\\cli.py",
+      "line": 9
+    },
+    {
+      "name": "buster.agent.core",
+      "file": "buster\\cli.py",
+      "line": 10
+    },
+    {
+      "name": "buster.agent.llm_planner",
+      "file": "buster\\cli.py",
+      "line": 11
+    },
+    {
+      "name": "__future__",
       "file": "scripts\\buster_doctor.py",
       "line": 1
     },
@@ -24134,6 +26486,76 @@
       "name": "pathlib",
       "file": "tests\\conftest.py",
       "line": 2
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\agent\\core.py",
+      "line": 2
+    },
+    {
+      "name": "typing",
+      "file": "buster\\agent\\core.py",
+      "line": 4
+    },
+    {
+      "name": "buster.capabilities.registry",
+      "file": "buster\\agent\\core.py",
+      "line": 5
+    },
+    {
+      "name": "buster.orchestration.planner",
+      "file": "buster\\agent\\core.py",
+      "line": 6
+    },
+    {
+      "name": "buster.orchestration.runner",
+      "file": "buster\\agent\\core.py",
+      "line": 7
+    },
+    {
+      "name": "buster.orchestration.context",
+      "file": "buster\\agent\\core.py",
+      "line": 8
+    },
+    {
+      "name": "buster.orchestration.models",
+      "file": "buster\\agent\\core.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 4
+    },
+    {
+      "name": "re",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.registry",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 7
+    },
+    {
+      "name": "buster.agent.core",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 8
+    },
+    {
+      "name": "buster.orchestration.context",
+      "file": "buster\\agent\\llm_planner.py",
+      "line": 9
     },
     {
       "name": "ast",
@@ -24832,6 +27254,31 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 6
+    },
+    {
+      "name": "buster.autonomy.mission_state",
+      "file": "buster\\autonomy\\completion_evaluator.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
       "file": "buster\\autonomy\\dashboard.py",
       "line": 1
     },
@@ -24952,6 +27399,141 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 8
+    },
+    {
+      "name": "buster.autonomy.mission_state",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 10
+    },
+    {
+      "name": "buster.memory.context_indexer",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 11
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\autonomy\\learning_closure.py",
+      "line": 43
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 8
+    },
+    {
+      "name": "buster.autonomy.mission_state",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 10
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\autonomy\\loop_checkpoint.py",
+      "line": 34
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 5
+    },
+    {
+      "name": "buster.autonomy.mission_state",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 7
+    },
+    {
+      "name": "buster.autonomy.observation_engine",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 8
+    },
+    {
+      "name": "buster.autonomy.next_action_selector",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 9
+    },
+    {
+      "name": "buster.memory.context_indexer",
+      "file": "buster\\autonomy\\loop_orchestrator.py",
+      "line": 10
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\autonomy\\mission_state.py",
+      "line": 2
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\autonomy\\mission_state.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\mission_state.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
       "file": "buster\\autonomy\\next_actions.py",
       "line": 1
     },
@@ -24959,6 +27541,61 @@
       "name": "typing",
       "file": "buster\\autonomy\\next_actions.py",
       "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 6
+    },
+    {
+      "name": "buster.autonomy.observation_engine",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 8
+    },
+    {
+      "name": "buster.autonomy.mission_state",
+      "file": "buster\\autonomy\\next_action_selector.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\observation_engine.py",
+      "line": 7
     },
     {
       "name": "__future__",
@@ -25132,6 +27769,61 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 4
+    },
+    {
+      "name": "threading",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\blackboard.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 1
+    },
+    {
+      "name": "asyncio",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 3
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 4
+    },
+    {
+      "name": "enum",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\buster_rhythm.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
       "file": "buster\\brain\\conversation_runtime.py",
       "line": 1
     },
@@ -25149,6 +27841,71 @@
       "name": "buster.brain.unified_agent_loop",
       "file": "buster\\brain\\conversation_runtime.py",
       "line": 6
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 4
+    },
+    {
+      "name": "threading",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\dlq_manager.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 4
+    },
+    {
+      "name": "time",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 7
+    },
+    {
+      "name": "buster.brain.hurdle_engine",
+      "file": "buster\\brain\\dream_sandbox.py",
+      "line": 9
     },
     {
       "name": "buster.brain.planner.planner",
@@ -25189,6 +27946,66 @@
       "name": "buster.ai_state.state",
       "file": "buster\\brain\\engine.py",
       "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 4
+    },
+    {
+      "name": "threading",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\growth_ledger.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 4
+    },
+    {
+      "name": "traceback",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\hurdle_engine.py",
+      "line": 7
     },
     {
       "name": "__future__",
@@ -25251,6 +28068,91 @@
       "line": 3
     },
     {
+      "name": "__future__",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 1
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 3
+    },
+    {
+      "name": "enum",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\schedule_manager.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 1
+    },
+    {
+      "name": "time",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 3
+    },
+    {
+      "name": "signal",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 4
+    },
+    {
+      "name": "sys",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 6
+    },
+    {
+      "name": "buster.brain.blackboard",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 7
+    },
+    {
+      "name": "buster.brain.dlq_manager",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 8
+    },
+    {
+      "name": "buster.brain.task_state_manager",
+      "file": "buster\\brain\\task_delegator.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 4
+    },
+    {
+      "name": "threading",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\brain\\task_state_manager.py",
+      "line": 6
+    },
+    {
       "name": "dataclasses",
       "file": "buster\\brain\\tool_context.py",
       "line": 1
@@ -25299,6 +28201,46 @@
       "name": "buster.brain.orchestrator",
       "file": "buster\\brain\\unified_agent_loop.py",
       "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 4
+    },
+    {
+      "name": "time",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 5
+    },
+    {
+      "name": "buster.brain.blackboard",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 6
+    },
+    {
+      "name": "buster.brain.dlq_manager",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 7
+    },
+    {
+      "name": "buster.brain.task_delegator",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 8
+    },
+    {
+      "name": "buster.brain.growth_ledger",
+      "file": "buster\\brain\\verify_v10_runtime.py",
+      "line": 9
     },
     {
       "name": "buster.web.internet_service",
@@ -25409,6 +28351,631 @@
       "name": "repair",
       "file": "buster\\builder\\__init__.py",
       "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 4
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 9
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 17
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 18
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\android_cap.py",
+      "line": 19
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\base.py",
+      "line": 2
+    },
+    {
+      "name": "abc",
+      "file": "buster\\capabilities\\base.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\base.py",
+      "line": 5
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\base.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 4
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 9
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 17
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 18
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\esp32_cap.py",
+      "line": 19
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\exceptions.py",
+      "line": 2
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 4
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 9
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 17
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 18
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\filesystem_cap.py",
+      "line": 19
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 4
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 5
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 7
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 9
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 10
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 18
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 19
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\git_cap.py",
+      "line": 20
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\health.py",
+      "line": 2
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\capabilities\\health.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\capabilities\\health.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\health.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\health.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\models.py",
+      "line": 2
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\capabilities\\models.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\models.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\permissions.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\capabilities\\permissions.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\permissions.py",
+      "line": 5
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\permissions.py",
+      "line": 7
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\permissions.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 5
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 7
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 16
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 17
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 18
+    },
+    {
+      "name": "playwright",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 55
+    },
+    {
+      "name": "playwright.sync_api",
+      "file": "buster\\capabilities\\playwright_cap.py",
+      "line": 90
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 4
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 5
+    },
+    {
+      "name": "sys",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 6
+    },
+    {
+      "name": "ast",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 10
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 11
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 19
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 20
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\python_cap.py",
+      "line": 21
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 4
+    },
+    {
+      "name": "threading",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 9
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 10
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 104
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\registry.py",
+      "line": 111
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 4
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 9
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 17
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 18
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\terminal_cap.py",
+      "line": 19
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 5
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 7
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 8
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 16
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 17
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 18
+    },
+    {
+      "name": "sys",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 54
+    },
+    {
+      "name": "sys",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 80
+    },
+    {
+      "name": "ctypes",
+      "file": "buster\\capabilities\\windows_cap.py",
+      "line": 84
+    },
+    {
+      "name": "buster.capabilities.base",
+      "file": "buster\\capabilities\\__init__.py",
+      "line": 2
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\capabilities\\__init__.py",
+      "line": 3
+    },
+    {
+      "name": "buster.capabilities.registry",
+      "file": "buster\\capabilities\\__init__.py",
+      "line": 11
+    },
+    {
+      "name": "buster.capabilities.permissions",
+      "file": "buster\\capabilities\\__init__.py",
+      "line": 12
+    },
+    {
+      "name": "buster.capabilities.health",
+      "file": "buster\\capabilities\\__init__.py",
+      "line": 13
+    },
+    {
+      "name": "buster.capabilities.exceptions",
+      "file": "buster\\capabilities\\__init__.py",
+      "line": 14
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 3
+    },
+    {
+      "name": "logging",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\cognitive\\milestone_reporter.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 6
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 7
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 8
+    },
+    {
+      "name": "typing",
+      "file": "buster\\cognitive\\strategic_planner.py",
+      "line": 9
     },
     {
       "name": "__future__",
@@ -26067,6 +29634,41 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 4
+    },
+    {
+      "name": "time",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 6
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 7
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 8
+    },
+    {
+      "name": "typing",
+      "file": "buster\\daemon\\service_manager.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
       "file": "buster\\experience\\design_decisions.py",
       "line": 1
     },
@@ -26324,6 +29926,111 @@
       "name": "user_overrides",
       "file": "buster\\experience\\__init__.py",
       "line": 13
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 1
+    },
+    {
+      "name": "logging",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 3
+    },
+    {
+      "name": "traceback",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\hurdle\\classifier.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 1
+    },
+    {
+      "name": "logging",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 3
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 5
+    },
+    {
+      "name": "buster.hurdle.classifier",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 7
+    },
+    {
+      "name": "buster.hurdle.patch_generator",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 8
+    },
+    {
+      "name": "buster.hurdle.patch_verifier",
+      "file": "buster\\hurdle\\engine.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 8
+    },
+    {
+      "name": "buster.cognitive.strategic_planner",
+      "file": "buster\\hurdle\\spec_evaluator.py",
+      "line": 9
     },
     {
       "name": "ast",
@@ -27377,6 +31084,106 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 1
+    },
+    {
+      "name": "os",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 3
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 4
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 5
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\learning\\curiosity_evaluator.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 1
+    },
+    {
+      "name": "ast",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 3
+    },
+    {
+      "name": "logging",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 5
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 7
+    },
+    {
+      "name": "buster.learning.curiosity_scheduler",
+      "file": "buster\\learning\\curiosity_runner.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 1
+    },
+    {
+      "name": "logging",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 3
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 4
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 6
+    },
+    {
+      "name": "buster.learning.curiosity_evaluator",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 8
+    },
+    {
+      "name": "buster.rhythm.rhythm",
+      "file": "buster\\learning\\curiosity_scheduler.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
       "file": "buster\\learning\\engine.py",
       "line": 1
     },
@@ -27454,6 +31261,41 @@
       "name": "typing",
       "file": "buster\\learning\\patterns.py",
       "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 8
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\learning\\preference_memory.py",
+      "line": 50
     },
     {
       "name": "__future__",
@@ -28096,6 +31938,36 @@
       "line": 3
     },
     {
+      "name": "__future__",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\memory\\context_indexer.py",
+      "line": 8
+    },
+    {
       "name": "sqlite3",
       "file": "buster\\memory\\engine.py",
       "line": 1
@@ -28512,6 +32384,76 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\mission_control\\commands.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\mission_control\\commands.py",
+      "line": 2
+    },
+    {
+      "name": "buster.mission_control.presenter",
+      "file": "buster\\mission_control\\commands.py",
+      "line": 3
+    },
+    {
+      "name": "buster.mission_control.snapshot",
+      "file": "buster\\mission_control\\commands.py",
+      "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\mission_control\\health_aggregator.py",
+      "line": 2
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\mission_control\\presenter.py",
+      "line": 2
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\mission_control\\presenter.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\mission_control\\presenter.py",
+      "line": 5
+    },
+    {
+      "name": "buster.mission_control.snapshot",
+      "file": "buster\\mission_control\\presenter.py",
+      "line": 7
+    },
+    {
+      "name": "buster.mission_control.health_aggregator",
+      "file": "buster\\mission_control\\presenter.py",
+      "line": 12
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\mission_control\\snapshot.py",
+      "line": 2
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\mission_control\\snapshot.py",
+      "line": 4
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\mission_control\\snapshot.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\mission_control\\snapshot.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
       "file": "buster\\mission_runtime\\autonomous_runtime.py",
       "line": 1
     },
@@ -28836,6 +32778,261 @@
       "line": 5
     },
     {
+      "name": "__future__",
+      "file": "buster\\node\\communication_center.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\node\\communication_center.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\node\\communication_center.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\node\\communication_center.py",
+      "line": 6
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\node\\communication_center.py",
+      "line": 7
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\node\\communication_center.py",
+      "line": 8
+    },
+    {
+      "name": "typing",
+      "file": "buster\\node\\communication_center.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 6
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 7
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 8
+    },
+    {
+      "name": "typing",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 9
+    },
+    {
+      "name": "buster.node.communication_center",
+      "file": "buster\\node\\sync_engine.py",
+      "line": 11
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 2
+    },
+    {
+      "name": "asyncio",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 4
+    },
+    {
+      "name": "json",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 5
+    },
+    {
+      "name": "logging",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 6
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 7
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 8
+    },
+    {
+      "name": "typing",
+      "file": "buster\\node\\task_bridge.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\orchestration\\context.py",
+      "line": 2
+    },
+    {
+      "name": "re",
+      "file": "buster\\orchestration\\context.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\orchestration\\context.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\orchestration\\models.py",
+      "line": 2
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\orchestration\\models.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\orchestration\\models.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\orchestration\\planner.py",
+      "line": 2
+    },
+    {
+      "name": "uuid",
+      "file": "buster\\orchestration\\planner.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\orchestration\\planner.py",
+      "line": 5
+    },
+    {
+      "name": "buster.capabilities.registry",
+      "file": "buster\\orchestration\\planner.py",
+      "line": 6
+    },
+    {
+      "name": "buster.orchestration.models",
+      "file": "buster\\orchestration\\planner.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 2
+    },
+    {
+      "name": "time",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 5
+    },
+    {
+      "name": "buster.capabilities.registry",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 6
+    },
+    {
+      "name": "buster.capabilities.models",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 7
+    },
+    {
+      "name": "buster.orchestration.models",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 8
+    },
+    {
+      "name": "buster.orchestration.context",
+      "file": "buster\\orchestration\\runner.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 4
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 5
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\os_control\\app_controller.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 2
+    },
+    {
+      "name": "logging",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 4
+    },
+    {
+      "name": "subprocess",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 7
+    },
+    {
+      "name": "psutil",
+      "file": "buster\\os_control\\system_monitor.py",
+      "line": 9
+    },
+    {
       "name": "json",
       "file": "buster\\os_layer\\approved_folders.py",
       "line": 1
@@ -28887,48 +33084,148 @@
     },
     {
       "name": "__future__",
-      "file": "buster\\perception\\cognitive_loop_bridge.py",
+      "file": "buster\\perception\\attention.py",
       "line": 1
+    },
+    {
+      "name": "platform",
+      "file": "buster\\perception\\attention.py",
+      "line": 3
     },
     {
       "name": "typing",
-      "file": "buster\\perception\\cognitive_loop_bridge.py",
-      "line": 2
+      "file": "buster\\perception\\attention.py",
+      "line": 4
     },
     {
-      "name": "dataclasses",
-      "file": "buster\\perception\\ears.py",
+      "name": "__future__",
+      "file": "buster\\perception\\audio_learning.py",
       "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\perception\\audio_learning.py",
+      "line": 3
+    },
+    {
+      "name": "platform",
+      "file": "buster\\perception\\audio_learning.py",
+      "line": 4
+    },
+    {
+      "name": "sys",
+      "file": "buster\\perception\\audio_learning.py",
+      "line": 5
     },
     {
       "name": "datetime",
-      "file": "buster\\perception\\ears.py",
-      "line": 2
+      "file": "buster\\perception\\audio_learning.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\perception\\audio_learning.py",
+      "line": 7
     },
     {
       "name": "typing",
+      "file": "buster\\perception\\audio_learning.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\perception\\cognitive_loop_bridge.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\perception\\cognitive_loop_bridge.py",
+      "line": 2
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\perception\\ears.py",
+      "line": 1
+    },
+    {
+      "name": "platform",
       "file": "buster\\perception\\ears.py",
       "line": 3
     },
     {
-      "name": "buster.world_model",
+      "name": "sys",
+      "file": "buster\\perception\\ears.py",
+      "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\perception\\ears.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\perception\\ears.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\perception\\ears.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
       "file": "buster\\perception\\engine.py",
       "line": 1
     },
     {
-      "name": "dataclasses",
+      "name": "platform",
+      "file": "buster\\perception\\engine.py",
+      "line": 3
+    },
+    {
+      "name": "sys",
+      "file": "buster\\perception\\engine.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\perception\\engine.py",
+      "line": 5
+    },
+    {
+      "name": "buster.world_model",
+      "file": "buster\\perception\\engine.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
       "file": "buster\\perception\\eyes.py",
       "line": 1
     },
     {
+      "name": "platform",
+      "file": "buster\\perception\\eyes.py",
+      "line": 3
+    },
+    {
+      "name": "sys",
+      "file": "buster\\perception\\eyes.py",
+      "line": 4
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\perception\\eyes.py",
+      "line": 5
+    },
+    {
       "name": "datetime",
       "file": "buster\\perception\\eyes.py",
-      "line": 2
+      "line": 6
     },
     {
       "name": "typing",
       "file": "buster\\perception\\eyes.py",
-      "line": 3
+      "line": 7
     },
     {
       "name": "__future__",
@@ -29021,24 +33318,39 @@
       "line": 1
     },
     {
-      "name": "datetime",
+      "name": "json",
       "file": "buster\\perception\\screen_feed.py",
       "line": 3
     },
     {
-      "name": "pathlib",
+      "name": "os",
       "file": "buster\\perception\\screen_feed.py",
       "line": 4
     },
     {
-      "name": "typing",
+      "name": "platform",
       "file": "buster\\perception\\screen_feed.py",
       "line": 5
     },
     {
-      "name": "json",
+      "name": "sys",
       "file": "buster\\perception\\screen_feed.py",
       "line": 6
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\perception\\screen_feed.py",
+      "line": 7
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\perception\\screen_feed.py",
+      "line": 8
+    },
+    {
+      "name": "typing",
+      "file": "buster\\perception\\screen_feed.py",
+      "line": 9
     },
     {
       "name": "engine",
@@ -29347,6 +33659,111 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 1
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 3
+    },
+    {
+      "name": "enum",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\rhythm\\rhythm.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 1
+    },
+    {
+      "name": "asyncio",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 3
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 5
+    },
+    {
+      "name": "buster.rhythm.rhythm",
+      "file": "buster\\rhythm\\rhythm_service.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 1
+    },
+    {
+      "name": "logging",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 3
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 5
+    },
+    {
+      "name": "buster.rhythm.rhythm",
+      "file": "buster\\rhythm\\sleep_handler.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\rhythm\\task_gate.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\rhythm\\task_gate.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 1
+    },
+    {
+      "name": "logging",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 3
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 5
+    },
+    {
+      "name": "buster.rhythm.rhythm",
+      "file": "buster\\rhythm\\weekend_manager.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
       "file": "buster\\runtime\\agent_memory.py",
       "line": 1
     },
@@ -29556,39 +33973,89 @@
       "line": 35
     },
     {
-      "name": "buster.automation.unified_router",
+      "name": "buster.rhythm.rhythm",
       "file": "buster\\runtime\\core.py",
       "line": 38
     },
     {
-      "name": "buster.workspace.sandbox_manager",
+      "name": "buster.rhythm.rhythm_service",
       "file": "buster\\runtime\\core.py",
       "line": 39
     },
     {
-      "name": "buster.autonomy.goals.goal_service",
+      "name": "buster.rhythm.task_gate",
+      "file": "buster\\runtime\\core.py",
+      "line": 40
+    },
+    {
+      "name": "buster.rhythm.dlq.dlq_manager",
       "file": "buster\\runtime\\core.py",
       "line": 41
     },
     {
+      "name": "buster.rhythm.dlq.worker",
+      "file": "buster\\runtime\\core.py",
+      "line": 42
+    },
+    {
+      "name": "buster.learning.curiosity_evaluator",
+      "file": "buster\\runtime\\core.py",
+      "line": 43
+    },
+    {
+      "name": "buster.learning.curiosity_scheduler",
+      "file": "buster\\runtime\\core.py",
+      "line": 44
+    },
+    {
+      "name": "buster.learning.curiosity_runner",
+      "file": "buster\\runtime\\core.py",
+      "line": 45
+    },
+    {
+      "name": "buster.hurdle.engine",
+      "file": "buster\\runtime\\core.py",
+      "line": 48
+    },
+    {
+      "name": "buster.hurdle.patch_verifier",
+      "file": "buster\\runtime\\core.py",
+      "line": 49
+    },
+    {
+      "name": "buster.automation.unified_router",
+      "file": "buster\\runtime\\core.py",
+      "line": 52
+    },
+    {
+      "name": "buster.workspace.sandbox_manager",
+      "file": "buster\\runtime\\core.py",
+      "line": 53
+    },
+    {
+      "name": "buster.autonomy.goals.goal_service",
+      "file": "buster\\runtime\\core.py",
+      "line": 55
+    },
+    {
       "name": "buster.brain.providers.manager",
       "file": "buster\\runtime\\core.py",
-      "line": 81
+      "line": 96
     },
     {
       "name": "buster.intelligence.health_monitor",
       "file": "buster\\runtime\\core.py",
-      "line": 174
+      "line": 218
     },
     {
       "name": "dev_tools",
       "file": "buster\\runtime\\core.py",
-      "line": 177
+      "line": 221
     },
     {
       "name": "inspector",
       "file": "buster\\runtime\\core.py",
-      "line": 180
+      "line": 224
     },
     {
       "name": "__future__",
@@ -30881,6 +35348,41 @@
       "line": 3
     },
     {
+      "name": "__future__",
+      "file": "buster\\social\\social_context.py",
+      "line": 2
+    },
+    {
+      "name": "json",
+      "file": "buster\\social\\social_context.py",
+      "line": 4
+    },
+    {
+      "name": "logging",
+      "file": "buster\\social\\social_context.py",
+      "line": 5
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\social\\social_context.py",
+      "line": 6
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\social\\social_context.py",
+      "line": 7
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\social\\social_context.py",
+      "line": 8
+    },
+    {
+      "name": "typing",
+      "file": "buster\\social\\social_context.py",
+      "line": 9
+    },
+    {
       "name": "psutil",
       "file": "buster\\system\\monitor.py",
       "line": 1
@@ -30889,6 +35391,221 @@
       "name": "platform",
       "file": "buster\\system\\monitor.py",
       "line": 2
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 1
+    },
+    {
+      "name": "os",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 3
+    },
+    {
+      "name": "json",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 4
+    },
+    {
+      "name": "uuid",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 5
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 6
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 7
+    },
+    {
+      "name": "typing",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 8
+    },
+    {
+      "name": "buster.telemetry.trace_context",
+      "file": "buster\\telemetry\\event_logger.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 1
+    },
+    {
+      "name": "time",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 4
+    },
+    {
+      "name": "buster.telemetry.event_logger",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 5
+    },
+    {
+      "name": "buster.telemetry.metrics_registry",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 6
+    },
+    {
+      "name": "buster.autonomy.recovery.diagnostics",
+      "file": "buster\\telemetry\\execution_tracker.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\telemetry\\health_snapshot.py",
+      "line": 1
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\telemetry\\health_snapshot.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\telemetry\\health_snapshot.py",
+      "line": 4
+    },
+    {
+      "name": "buster.telemetry.metrics_registry",
+      "file": "buster\\telemetry\\health_snapshot.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 3
+    },
+    {
+      "name": "threading",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 4
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\telemetry\\metrics_registry.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 3
+    },
+    {
+      "name": "buster.telemetry.event_logger",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 4
+    },
+    {
+      "name": "buster.telemetry.metrics_registry",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 5
+    },
+    {
+      "name": "buster.telemetry.health_snapshot",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 6
+    },
+    {
+      "name": "buster.telemetry.execution_tracker",
+      "file": "buster\\telemetry\\telemetry_service.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\telemetry\\trace_context.py",
+      "line": 1
+    },
+    {
+      "name": "uuid",
+      "file": "buster\\telemetry\\trace_context.py",
+      "line": 3
+    },
+    {
+      "name": "contextvars",
+      "file": "buster\\telemetry\\trace_context.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\telemetry\\trace_context.py",
+      "line": 5
+    },
+    {
+      "name": "buster.telemetry.trace_context",
+      "file": "buster\\telemetry\\__init__.py",
+      "line": 1
+    },
+    {
+      "name": "buster.telemetry.event_logger",
+      "file": "buster\\telemetry\\__init__.py",
+      "line": 2
+    },
+    {
+      "name": "buster.telemetry.metrics_registry",
+      "file": "buster\\telemetry\\__init__.py",
+      "line": 3
+    },
+    {
+      "name": "buster.telemetry.health_snapshot",
+      "file": "buster\\telemetry\\__init__.py",
+      "line": 4
+    },
+    {
+      "name": "buster.telemetry.execution_tracker",
+      "file": "buster\\telemetry\\__init__.py",
+      "line": 5
+    },
+    {
+      "name": "buster.telemetry.telemetry_service",
+      "file": "buster\\telemetry\\__init__.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\dashboard_visualizer.py",
+      "line": 2
+    },
+    {
+      "name": "html",
+      "file": "buster\\ui\\dashboard_visualizer.py",
+      "line": 4
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\dashboard_visualizer.py",
+      "line": 5
+    },
+    {
+      "name": "buster.mission_control.snapshot",
+      "file": "buster\\ui\\dashboard_visualizer.py",
+      "line": 6
     },
     {
       "name": "PySide6.QtWidgets",
@@ -32687,6 +37404,111 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\autonomy\\delegation\\capability_matrix.py",
+      "line": 1
+    },
+    {
+      "name": "enum",
+      "file": "buster\\autonomy\\delegation\\capability_matrix.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\delegation\\capability_matrix.py",
+      "line": 4
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 3
+    },
+    {
+      "name": "uuid",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 4
+    },
+    {
+      "name": "threading",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 5
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 6
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 7
+    },
+    {
+      "name": "buster.telemetry.trace_context",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 8
+    },
+    {
+      "name": "buster.telemetry.telemetry_service",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 9
+    },
+    {
+      "name": "buster.autonomy.delegation.worker_pool",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 10
+    },
+    {
+      "name": "buster.autonomy.delegation.capability_matrix",
+      "file": "buster\\autonomy\\delegation\\delegation_planner.py",
+      "line": 11
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 1
+    },
+    {
+      "name": "time",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 3
+    },
+    {
+      "name": "uuid",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 4
+    },
+    {
+      "name": "threading",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\autonomy\\delegation\\worker_pool.py",
+      "line": 6
+    },
+    {
+      "name": "buster.autonomy.delegation.worker_pool",
+      "file": "buster\\autonomy\\delegation\\__init__.py",
+      "line": 1
+    },
+    {
+      "name": "buster.autonomy.delegation.capability_matrix",
+      "file": "buster\\autonomy\\delegation\\__init__.py",
+      "line": 2
+    },
+    {
+      "name": "buster.autonomy.delegation.delegation_planner",
+      "file": "buster\\autonomy\\delegation\\__init__.py",
+      "line": 3
+    },
+    {
+      "name": "__future__",
       "file": "buster\\autonomy\\executors\\cleanup_runner.py",
       "line": 1
     },
@@ -33642,6 +38464,91 @@
     },
     {
       "name": "__future__",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 1
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 3
+    },
+    {
+      "name": "json",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 4
+    },
+    {
+      "name": "pathlib",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 6
+    },
+    {
+      "name": "buster.rhythm.dlq.models",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 8
+    },
+    {
+      "name": "buster.rhythm.rhythm",
+      "file": "buster\\rhythm\\dlq\\dlq_manager.py",
+      "line": 9
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 1
+    },
+    {
+      "name": "dataclasses",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 3
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 4
+    },
+    {
+      "name": "enum",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 5
+    },
+    {
+      "name": "typing",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 6
+    },
+    {
+      "name": "uuid",
+      "file": "buster\\rhythm\\dlq\\models.py",
+      "line": 7
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\rhythm\\dlq\\worker.py",
+      "line": 1
+    },
+    {
+      "name": "logging",
+      "file": "buster\\rhythm\\dlq\\worker.py",
+      "line": 3
+    },
+    {
+      "name": "typing",
+      "file": "buster\\rhythm\\dlq\\worker.py",
+      "line": 4
+    },
+    {
+      "name": "datetime",
+      "file": "buster\\rhythm\\dlq\\worker.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
       "file": "buster\\ui\\os1\\main_window.py",
       "line": 1
     },
@@ -34433,7 +39340,7 @@
     {
       "name": "buster.ui.v9.panels.runtime_panel.runtime_workspace",
       "file": "buster\\ui\\v9\\panels\\developer_mission_control.py",
-      "line": 21
+      "line": 18
     },
     {
       "name": "PySide6.QtCore",
@@ -34623,57 +39530,57 @@
     {
       "name": "__future__",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 7
+      "line": 6
     },
     {
       "name": "ast",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 9
+      "line": 8
     },
     {
       "name": "importlib",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 10
+      "line": 9
     },
     {
       "name": "logging",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 11
+      "line": 10
     },
     {
       "name": "os",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 12
+      "line": 11
     },
     {
       "name": "sys",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 13
+      "line": 12
     },
     {
       "name": "pathlib",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 14
+      "line": 13
     },
     {
       "name": "typing",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 15
+      "line": 14
     },
     {
       "name": "PySide6.QtCore",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 17
+      "line": 16
     },
     {
       "name": "PySide6.QtGui",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 18
+      "line": 17
     },
     {
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\panels\\plugin_panel.py",
-      "line": 19
+      "line": 18
     },
     {
       "name": "subprocess",
@@ -35004,6 +39911,256 @@
       "name": "PySide6.QtWidgets",
       "file": "buster\\ui\\v9\\panels\\evolution_panel\\skills_card.py",
       "line": 2
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 5
+    },
+    {
+      "name": "buster.mission_control.snapshot",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 22
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 8
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\circuit_breaker_card.py",
+      "line": 16
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 5
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\delegation_tree.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 2
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 5
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\dlq_card.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 5
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\growth_ledger_card.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\health_card.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\health_card.py",
+      "line": 2
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\health_card.py",
+      "line": 5
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\health_card.py",
+      "line": 6
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 1
+    },
+    {
+      "name": "json",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 3
+    },
+    {
+      "name": "os",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 4
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 5
+    },
+    {
+      "name": "buster.brain.buster_rhythm",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 14
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\learning_insights_card.py",
+      "line": 8
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\metrics_card.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\metrics_card.py",
+      "line": 2
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\metrics_card.py",
+      "line": 5
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 3
+    },
+    {
+      "name": "buster.mission_control.snapshot",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 21
+    },
+    {
+      "name": "health_card",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 22
+    },
+    {
+      "name": "metrics_card",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 23
+    },
+    {
+      "name": "worker_leases_card",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 24
+    },
+    {
+      "name": "circuit_breaker_card",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 25
+    },
+    {
+      "name": "delegation_tree",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 26
+    },
+    {
+      "name": "learning_insights_card",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 27
+    },
+    {
+      "name": "dlq_card",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 28
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 6
+    },
+    {
+      "name": "PySide6.QtCore",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\mission_control_panel.py",
+      "line": 15
+    },
+    {
+      "name": "__future__",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\worker_leases_card.py",
+      "line": 1
+    },
+    {
+      "name": "typing",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\worker_leases_card.py",
+      "line": 2
+    },
+    {
+      "name": "buster.mission_control.snapshot",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\worker_leases_card.py",
+      "line": 11
+    },
+    {
+      "name": "PySide6.QtWidgets",
+      "file": "buster\\ui\\v9\\panels\\mission_control\\worker_leases_card.py",
+      "line": 5
     },
     {
       "name": "__future__",

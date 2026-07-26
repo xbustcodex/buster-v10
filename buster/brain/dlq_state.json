@@ -1,0 +1,93 @@
+{
+  "dlq_items": [
+    {
+      "id": "fail-1",
+      "name": "Execute core module patch 1",
+      "circuit": "code_executor",
+      "error": "SyntaxError: unexpected EOF while parsing",
+      "timestamp": "2026-07-25T18:02:54.932763"
+    },
+    {
+      "id": "fail-2",
+      "name": "Execute core module patch 2",
+      "circuit": "code_executor",
+      "error": "SyntaxError: unexpected EOF while parsing",
+      "timestamp": "2026-07-25T18:02:54.934814"
+    },
+    {
+      "id": "fail-3",
+      "name": "Execute core module patch 3",
+      "circuit": "code_executor",
+      "error": "SyntaxError: unexpected EOF while parsing",
+      "timestamp": "2026-07-25T18:02:54.936795"
+    },
+    {
+      "id": "task-2",
+      "name": "Build unit test framework patch",
+      "circuit": "code_executor",
+      "error": "RuntimeExecutionError: Worker process encountered an unexpected failure.",
+      "timestamp": "2026-07-25T20:53:58.019774"
+    },
+    {
+      "id": "task-2",
+      "name": "Build unit test framework patch",
+      "circuit": "code_executor",
+      "error": "RuntimeExecutionError: Worker process encountered an unexpected failure.",
+      "timestamp": "2026-07-25T20:53:58.527896"
+    },
+    {
+      "id": "task-2",
+      "name": "Build unit test framework patch",
+      "circuit": "code_executor",
+      "error": "RuntimeExecutionError: Worker process encountered an unexpected failure.",
+      "timestamp": "2026-07-25T20:53:59.043737"
+    },
+    {
+      "id": "task-2",
+      "name": "Build unit test framework patch",
+      "circuit": "code_executor",
+      "error": "RuntimeExecutionError: Worker process encountered an unexpected failure.",
+      "timestamp": "2026-07-25T21:08:18.479481"
+    },
+    {
+      "id": "task-2",
+      "name": "Build unit test framework patch",
+      "circuit": "code_executor",
+      "error": "RuntimeExecutionError: Worker process encountered an unexpected failure.",
+      "timestamp": "2026-07-25T21:11:06.118949"
+    },
+    {
+      "id": "task-2",
+      "name": "Build unit test framework patch",
+      "circuit": "code_executor",
+      "error": "RuntimeExecutionError: Worker process encountered an unexpected failure.",
+      "timestamp": "2026-07-25T21:11:06.332886"
+    },
+    {
+      "id": "task-2",
+      "name": "Build unit test framework patch",
+      "circuit": "code_executor",
+      "error": "RuntimeExecutionError: Worker process encountered an unexpected failure.",
+      "timestamp": "2026-07-25T21:11:06.548848"
+    }
+  ],
+  "circuits": {
+    "api_gateway": {
+      "status": "CLOSED",
+      "failure_count": 0
+    },
+    "code_executor": {
+      "status": "OPEN (TRIPPED)",
+      "failure_count": 10
+    },
+    "file_system": {
+      "status": "CLOSED",
+      "failure_count": 0
+    }
+  },
+  "metrics": {
+    "completed_tasks": 4,
+    "failed_tasks": 10,
+    "circuit_trips": 8
+  }
+}

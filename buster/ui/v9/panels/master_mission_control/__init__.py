@@ -1,0 +1,2 @@
+# panel/master_mission_control/__init__.py
+from .MasterMissionControl import MasterMissionControlPanel
