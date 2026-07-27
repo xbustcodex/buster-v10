@@ -1,3 +1,4 @@
+# buster/ui/v9/main_window.py
 from __future__ import annotations
 
 from pathlib import Path
@@ -40,8 +41,6 @@ class V9MainWindow(QMainWindow):
         # --------------------------------------------------
         # Unified Runtime Setup
         # --------------------------------------------------
-        # One runtime core owns command routing, agents, automation,
-        # self-improvement, and repair workers.
         self.runtime_core = create_runtime_core(".")
         self.legacy_runtime_core = self.runtime_core  # compatibility alias
 
@@ -126,12 +125,12 @@ class V9MainWindow(QMainWindow):
         """)
         main_layout.addWidget(title)
 
-        # ChatView receives legacy core so chat commands pass through v9 orchestrator
+        # ChatView receives the single application-owned runtime core
         self.chat = ChatView(
             self.live, 
             self.refresh_live, 
             self.set_face_state,
-            runtime_core=self.legacy_runtime_core
+            runtime_core=self.runtime_core,
         )
         main_layout.addWidget(self.chat, 1)
 
@@ -266,7 +265,7 @@ class V9MainWindow(QMainWindow):
         try:
             from buster.ui.v9.panels.project_panel import ProjectPanel
 
-            window = ProjectPanel(self.live)
+            window = ProjectPanel(self.live, self.runtime_core)
             window.setWindowTitle("Projects")
             window.resize(900, 580)
             window.show()
@@ -353,7 +352,7 @@ class V9MainWindow(QMainWindow):
                 "Settings",
                 lambda: SettingsPanel(
                     live=self.live,
-                    runtime_core=self.legacy_runtime_core
+                    runtime_core=self.runtime_core,
                 ),
                 820,
                 560,
@@ -362,7 +361,6 @@ class V9MainWindow(QMainWindow):
             self._show_message_tool("Settings", f"Settings panel error:\n{e}")
 
     def set_face_state(self, state):
-        print("FACE STATE:", state)
         self.current_face_state = state
 
         if self.face_window is not None:
@@ -462,13 +460,16 @@ class V9MainWindow(QMainWindow):
         self.backend_tools_dlg.activateWindow()
 
     def show_developer_checklist(self):
-        from buster.ui.v9.panels.developer_checklist_panel import DeveloperChecklistPanel
-        self._show_tool_window(
-            "Developer Checklist",
-            lambda: DeveloperChecklistPanel(self.live),
-            720,
-            540,
-        )
+        try:
+            from buster.ui.v9.panels.developer_checklist_panel import DeveloperChecklistPanel
+            self._show_tool_window(
+                "Developer Checklist",
+                lambda: DeveloperChecklistPanel(self.live),
+                720,
+                540,
+            )
+        except Exception as e:
+            self._show_message_tool("Developer Checklist", f"Checklist error:\n{e}")
 
     def closeEvent(self, event):
         if self.timer.isActive():
@@ -564,12 +565,11 @@ class V9MainWindow(QMainWindow):
             )
             
     def show_tasks(self):
-        """Displays the real-time Task & Orchestrator Dashboard panel."""
         try:
             from buster.ui.v9.panels.task_panel import TaskPanel
 
-            orchestrator = getattr(self.runtime_core, "orchestrator", None) or getattr(self.legacy_runtime_core, "orchestrator", None)
-            event_bus = getattr(self.runtime_core, "event_bus", None) or getattr(self.legacy_runtime_core, "event_bus", None)
+            orchestrator = getattr(self.runtime_core, "orchestrator", None)
+            event_bus = getattr(self.runtime_core, "event_bus", None)
 
             self._show_tool_window(
                 "Tasks & Orchestrator Monitor",

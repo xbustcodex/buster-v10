@@ -175,7 +175,8 @@ class MasterMissionControl(QWidget):
         if self.timer.isActive():
             self.timer.stop()
         event.accept()
-
+        
+MasterMissionControlPanel = MasterMissionControl
 
 if __name__ == "__main__":
     import sys
@@ -185,3 +186,5 @@ if __name__ == "__main__":
     panel.resize(1050, 600)
     panel.show()
     sys.exit(app.exec())
+    
+   

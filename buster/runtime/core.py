@@ -53,6 +53,10 @@ from buster.automation.unified_router import UnifiedAutomationRouter
 from buster.workspace.sandbox_manager import SandboxManager
 
 from buster.autonomy.goals.goal_service import GoalService
+from buster.runtime.services.voice_service import VoiceService
+from buster.runtime.services.streaming_stt_service import StreamingSTTService
+from buster.runtime.services.wake_word_service import WakeWordService
+from buster.runtime.services.voice_state_machine import VoiceStateMachine
 
 
 class BusterRuntimeCore:
@@ -192,6 +196,24 @@ class BusterRuntimeCore:
             root_dir=self.root,
         )
 
+        self.voice_service = VoiceService(
+            runtime_core=self,
+            project_root=self.root,
+            whisper_model="base",
+        )
+        self.audio_service = self.voice_service
+        self.voice_state_machine = VoiceStateMachine(
+            runtime_core=self,
+        )
+        self.wake_word_service = WakeWordService(
+            runtime_core=self,
+        )
+        self.streaming_stt_service = StreamingSTTService(
+            runtime_core=self,
+            voice_service=self.voice_service,
+            wake_word_service=self.wake_word_service,
+        )
+
         # Repair & Self-Improvement
         self.self_improvement = SelfImprovementService(
             root=self.root,
@@ -254,6 +276,20 @@ class BusterRuntimeCore:
             "verification": self.verification_service,
             "automation_router": self.automation_router,
             "sandbox_manager": self.sandbox_manager,
+            "voice": self.voice_service,
+            "audio": self.voice_service,
+            "local_stt": self.voice_service,
+            "whisper": self.voice_service,
+            "vad": self.voice_service,
+            "edge_tts": self.voice_service,
+            "streaming_stt": self.streaming_stt_service,
+            "speech_stream": self.streaming_stt_service,
+            "streaming_transcription": self.streaming_stt_service,
+            "wake_word": self.wake_word_service,
+            "wakeword": self.wake_word_service,
+            "hotword": self.wake_word_service,
+            "voice_state": self.voice_state_machine,
+            "voice_state_machine": self.voice_state_machine,
             "self_improvement": self.self_improvement,
             "health_monitor": self.health_monitor,
             "hurdle_engine": self.hurdle_engine,
@@ -316,6 +352,7 @@ class BusterRuntimeCore:
 
         # Start background rhythm
         self.heartbeat_daemon.start()
+        self.voice_service.start()
 
         event = {
             "root": str(self.root),
@@ -344,6 +381,9 @@ class BusterRuntimeCore:
 
         # Stop background rhythm
         self.heartbeat_daemon.stop()
+        self.wake_word_service.disable()
+        self.streaming_stt_service.stop()
+        self.voice_service.stop()
 
         # Teardown self-improvement background processes
         shutdown_self_improvement_runtime(

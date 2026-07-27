@@ -1,0 +1,9 @@
+{
+  "wake_phrases": [
+    "hey buster",
+    "okay buster",
+    "ok buster"
+  ],
+  "command_window_seconds": 8.0,
+  "enabled_by_default": false
+}

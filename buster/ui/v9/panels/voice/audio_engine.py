@@ -63,7 +63,7 @@ class AudioEngine(QThread):
     status_changed = Signal(str)
     error_occurred = Signal(str)
 
-    def __init__(self):
+    def __init__(self, recording_path: str | Path = "recordings"):
         super().__init__()
         self.is_recording = False
         self.is_playing = False
@@ -96,7 +96,7 @@ class AudioEngine(QThread):
         if SPEECH_RECOGNITION_AVAILABLE:
             self.recognizer = sr.Recognizer()
 
-        self.recording_path = Path("recordings")
+        self.recording_path = Path(recording_path).expanduser().resolve()
         self.recording_path.mkdir(exist_ok=True)
 
         self.visualization_data = np.zeros(1024)

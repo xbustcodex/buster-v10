@@ -4,6 +4,7 @@ import json
 import os
 import subprocess
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Optional
 
@@ -25,6 +26,556 @@ from PySide6.QtWidgets import (
 from buster.ui.v9.theme import STYLE
 
 
+class DashboardEvolutionSnapshot:
+    """
+    Lightweight adapter that exposes the same learning state used by the
+    Evolution panel without constructing another UI panel.
+    """
+
+    def __init__(self, live: Any):
+        self.live = live
+        self.runtime_core = (
+            getattr(live, "kernel_core", None)
+            or getattr(live, "runtime_core", None)
+            or getattr(live, "core", None)
+        )
+        self.project_root = self._project_root()
+
+    def collect(self) -> dict[str, Any]:
+        snapshot: dict[str, Any] = {
+            "title": "Level 1 — Operator",
+            "level": 1,
+            "xp": 0,
+            "xp_next": 250,
+            "xp_pct": 0,
+            "trust": 0.0,
+            "permission_rank": "Operator",
+            "permissions": [],
+            "emotion": "Focused / Analytical",
+            "active_goal": "Awaiting active mission state.",
+            "drives_matrix": {},
+            "skills_tree": {},
+            "agents": {},
+            "learning_metrics": {},
+            "sources": [],
+            "updated_at": datetime.now().isoformat(timespec="seconds"),
+        }
+
+        self._merge_runtime_state(snapshot)
+        self._merge_services(snapshot)
+        self._merge_files(snapshot)
+        self._derive(snapshot)
+        return snapshot
+
+    def _merge_runtime_state(self, snapshot: dict[str, Any]) -> None:
+        candidates = [
+            self.runtime_core,
+            getattr(self.runtime_core, "identity", None)
+            if self.runtime_core is not None
+            else None,
+            getattr(self.runtime_core, "evolution_service", None)
+            if self.runtime_core is not None
+            else None,
+            getattr(self.live, "identity", None),
+        ]
+
+        for owner in candidates:
+            if owner is None:
+                continue
+
+            for method_name in (
+                "get_ui_context",
+                "get_evolution_state",
+                "get_identity_state",
+                "get_learning_state",
+                "snapshot",
+                "get_state",
+                "to_dict",
+            ):
+                method = getattr(owner, method_name, None)
+                if not callable(method):
+                    continue
+
+                try:
+                    value = method()
+                except Exception:
+                    continue
+
+                if isinstance(value, dict):
+                    self._deep_merge(snapshot, value)
+                    snapshot["sources"].append(
+                        f"{type(owner).__name__}.{method_name}"
+                    )
+                    break
+
+    def _merge_services(self, snapshot: dict[str, Any]) -> None:
+        for name in (
+            "learning_engine",
+            "learning_memory",
+            "experience_store",
+            "strategy_store",
+            "build_strategies",
+            "design_patterns",
+            "growth_ledger",
+            "evolution_service",
+            "autonomy_service",
+            "repair_history",
+            "rag",
+            "context_index",
+        ):
+            service = self._resolve_service(name)
+            if service is None:
+                continue
+
+            data = self._service_snapshot(service)
+            if not isinstance(data, dict):
+                continue
+
+            self._merge_named_source(snapshot, name, data)
+            snapshot["sources"].append(name)
+
+    def _merge_files(self, snapshot: dict[str, Any]) -> None:
+        data_dir = self.project_root / "data"
+        files = {
+            "learning_memory": data_dir / "learning_memory.json",
+            "build_strategies": data_dir / "build_strategies.json",
+            "design_patterns": data_dir / "design_patterns.json",
+            "agent_memory": data_dir / "agent_memory.json",
+            "autonomy_state": data_dir / "autonomy_state.json",
+            "evolution_state": data_dir / "evolution_state.json",
+            "execution_history": data_dir / "execution_history.json",
+            "code_review_cache": data_dir / "code_review_cache.json",
+        }
+
+        for name, path in files.items():
+            data = self._read_json(path)
+            if data is None:
+                continue
+
+            self._merge_named_source(snapshot, name, data)
+            snapshot["sources"].append(path.name)
+
+    def _merge_named_source(
+        self,
+        snapshot: dict[str, Any],
+        name: str,
+        data: dict[str, Any],
+    ) -> None:
+        metrics = snapshot.setdefault("learning_metrics", {})
+
+        if name == "evolution_state":
+            self._deep_merge(snapshot, data)
+            return
+
+        if name in {"learning_memory", "learning_engine"}:
+            metrics["lessons"] = max(
+                self._number(metrics.get("lessons")),
+                self._collection_size(data),
+            )
+            skills = (
+                data.get("skills")
+                or data.get("skills_tree")
+                or data.get("competencies")
+            )
+            if isinstance(skills, dict):
+                for skill, value in skills.items():
+                    if isinstance(value, dict):
+                        value = (
+                            value.get("percent")
+                            or value.get("score")
+                            or value.get("level")
+                            or 0
+                        )
+                    snapshot.setdefault("skills_tree", {})[str(skill)] = int(
+                        max(0, min(100, self._number(value)))
+                    )
+            return
+
+        if name == "build_strategies":
+            metrics["strategies"] = self._collection_size(data)
+            return
+
+        if name == "design_patterns":
+            metrics["patterns"] = self._collection_size(data)
+            return
+
+        if name in {"execution_history", "repair_history"}:
+            successful, failed = self._count_outcomes(data)
+            metrics["verified_successes"] = max(
+                self._number(metrics.get("verified_successes")),
+                successful,
+            )
+            metrics["failures"] = max(
+                self._number(metrics.get("failures")),
+                failed,
+            )
+            return
+
+        if name == "agent_memory":
+            agents = data.get("agents") if isinstance(
+                data.get("agents"), dict
+            ) else data
+            if isinstance(agents, dict):
+                for key, value in agents.items():
+                    if isinstance(value, dict) and any(
+                        marker in str(key).lower()
+                        for marker in (
+                            "agent",
+                            "builder",
+                            "tester",
+                            "fixer",
+                            "review",
+                            "verifier",
+                        )
+                    ):
+                        snapshot.setdefault("agents", {})[str(key)] = value
+            return
+
+        if name in {"autonomy_state", "autonomy_service"}:
+            snapshot.setdefault("drives_matrix", {})[
+                "autonomy"
+            ] = self._extract_percentage(data)
+            return
+
+        self._deep_merge(snapshot, data)
+
+    def _derive(self, snapshot: dict[str, Any]) -> None:
+        metrics = snapshot.setdefault("learning_metrics", {})
+        verified = int(
+            self._number(
+                metrics.get("verified_successes")
+                or metrics.get("successful_repairs")
+                or metrics.get("success_count")
+            )
+        )
+        failures = int(
+            self._number(
+                metrics.get("failures")
+                or metrics.get("failed_repairs")
+                or metrics.get("failure_count")
+            )
+        )
+        patterns = int(
+            self._number(
+                metrics.get("patterns")
+                or metrics.get("pattern_count")
+            )
+        )
+        strategies = int(
+            self._number(
+                metrics.get("strategies")
+                or metrics.get("strategy_count")
+            )
+        )
+        lessons = int(
+            self._number(
+                metrics.get("lessons")
+                or metrics.get("experience_count")
+            )
+        )
+
+        total = verified + failures
+        trust = snapshot.get("trust") or snapshot.get("trust_factor")
+        if isinstance(trust, str):
+            trust = self._number(trust)
+        if not trust:
+            trust = round((verified / total) * 100, 1) if total else 0.0
+        snapshot["trust"] = float(trust)
+
+        xp = int(
+            snapshot.get("xp")
+            or verified * 12
+            + lessons * 4
+            + patterns * 8
+            + strategies * 10
+        )
+        level = int(snapshot.get("level") or (xp // 250 + 1))
+        level = max(1, level)
+        xp_floor = (level - 1) * 250
+        xp_next = max(level * 250, xp + 1)
+        xp_pct = int(
+            max(
+                0,
+                min(
+                    100,
+                    ((xp - xp_floor) / max(1, xp_next - xp_floor)) * 100,
+                ),
+            )
+        )
+
+        rank = (
+            snapshot.get("permission_rank")
+            or snapshot.get("rank")
+            or self._rank_for_level(level)
+        )
+
+        snapshot["xp"] = xp
+        snapshot["level"] = level
+        snapshot["xp_next"] = xp_next
+        snapshot["xp_pct"] = xp_pct
+        snapshot["permission_rank"] = rank
+
+        title = str(snapshot.get("title") or "")
+        if not title or title == "Level 1 — Operator":
+            snapshot["title"] = f"Level {level} — {rank}"
+
+        metrics.update(
+            {
+                "verified_successes": verified,
+                "failures": failures,
+                "patterns": patterns,
+                "strategies": strategies,
+                "lessons": lessons,
+                "success_rate": round(
+                    verified / total * 100, 1
+                )
+                if total
+                else 0.0,
+            }
+        )
+
+        skills = snapshot.setdefault("skills_tree", {})
+        baseline = {
+            "Coding": min(100, 15 + verified * 2),
+            "Python": min(100, 15 + verified * 2),
+            "PySide6": min(100, 10 + patterns * 3),
+            "Git": min(100, 10 + strategies * 4),
+            "Repair": min(100, 10 + verified * 3),
+            "Testing": min(100, 10 + verified * 2),
+            "Architecture": min(100, patterns * 5 + strategies * 4),
+            "Automation": min(100, lessons * 2 + strategies * 3),
+            "RAG": min(100, lessons * 3),
+            "Planning": min(100, strategies * 5),
+            "Verification": min(100, verified * 3),
+            "Self Improvement": min(
+                100, verified * 2 + patterns * 3
+            ),
+        }
+        for skill, value in baseline.items():
+            skills.setdefault(skill, int(value))
+
+        drives = snapshot.setdefault("drives_matrix", {})
+        drives.setdefault("helping", 75)
+        drives.setdefault("builder", min(100, 40 + strategies * 4))
+        drives.setdefault("learning", min(100, 45 + lessons * 3))
+        drives.setdefault("protection", min(100, 60 + verified * 2))
+        drives.setdefault("curiosity", min(100, 45 + patterns * 3))
+        drives.setdefault("verification", min(100, 55 + verified * 2))
+        drives.setdefault("autonomy", min(100, 20 + trust * 0.7))
+
+    def _resolve_service(self, name: str) -> Any:
+        for owner in (self.runtime_core, self.live):
+            if owner is None:
+                continue
+
+            direct = getattr(owner, name, None)
+            if direct is not None:
+                return direct
+
+            services = getattr(owner, "services", None)
+            if isinstance(services, dict):
+                if name in services:
+                    return services[name]
+            elif services is not None:
+                for method_name in ("get", "resolve", "service"):
+                    method = getattr(services, method_name, None)
+                    if not callable(method):
+                        continue
+                    try:
+                        value = method(name)
+                    except Exception:
+                        continue
+                    if value is not None:
+                        return value
+        return None
+
+    @staticmethod
+    def _service_snapshot(service: Any) -> Optional[dict[str, Any]]:
+        if isinstance(service, dict):
+            return service
+
+        for method_name in (
+            "snapshot",
+            "get_state",
+            "get_status",
+            "get_metrics",
+            "to_dict",
+            "export",
+            "summary",
+        ):
+            method = getattr(service, method_name, None)
+            if not callable(method):
+                continue
+            try:
+                value = method()
+            except Exception:
+                continue
+            if isinstance(value, dict):
+                return value
+
+        state = getattr(service, "state", None)
+        return state if isinstance(state, dict) else None
+
+    def _project_root(self) -> Path:
+        for owner in (
+            self.live,
+            self.runtime_core,
+            getattr(self.live, "core", None),
+        ):
+            if owner is None:
+                continue
+            for name in (
+                "project_root",
+                "workspace_root",
+                "repo_root",
+                "root_path",
+                "root",
+            ):
+                value = getattr(owner, name, None)
+                if value:
+                    try:
+                        path = Path(value).expanduser().resolve()
+                        if path.exists():
+                            return path
+                    except Exception:
+                        continue
+        return Path.cwd().resolve()
+
+    @staticmethod
+    def _read_json(path: Path) -> Any:
+        if not path.exists() or not path.is_file():
+            return None
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            return None
+
+    @staticmethod
+    def _collection_size(data: Any) -> int:
+        if isinstance(data, list):
+            return len(data)
+        if isinstance(data, dict):
+            for key in (
+                "items",
+                "entries",
+                "records",
+                "experiences",
+                "lessons",
+                "patterns",
+                "strategies",
+                "history",
+            ):
+                value = data.get(key)
+                if isinstance(value, (list, dict)):
+                    return len(value)
+            return len(data)
+        return 0
+
+    @staticmethod
+    def _count_outcomes(data: Any) -> tuple[int, int]:
+        if isinstance(data, list):
+            records = data
+        elif isinstance(data, dict):
+            records = []
+            for key in ("history", "records", "entries", "items", "events"):
+                value = data.get(key)
+                if isinstance(value, list):
+                    records = value
+                    break
+            if not records:
+                records = list(data.values())
+        else:
+            records = []
+
+        successful = failed = 0
+        for item in records:
+            if not isinstance(item, dict):
+                continue
+            state = str(
+                item.get("status")
+                or item.get("result")
+                or item.get("outcome")
+                or ""
+            ).lower()
+            if any(
+                word in state
+                for word in (
+                    "success",
+                    "passed",
+                    "complete",
+                    "committed",
+                )
+            ):
+                successful += 1
+            elif any(
+                word in state
+                for word in (
+                    "fail",
+                    "error",
+                    "rollback",
+                    "rejected",
+                )
+            ):
+                failed += 1
+        return successful, failed
+
+    @staticmethod
+    def _extract_percentage(data: dict[str, Any]) -> int:
+        for key in (
+            "autonomy_pct",
+            "readiness",
+            "confidence",
+            "progress",
+            "score",
+        ):
+            if key not in data:
+                continue
+            value = DashboardEvolutionSnapshot._number(data[key])
+            if 0 <= value <= 1:
+                value *= 100
+            return int(max(0, min(100, value)))
+        return 0
+
+    @staticmethod
+    def _deep_merge(
+        target: dict[str, Any],
+        source: dict[str, Any],
+    ) -> None:
+        for key, value in source.items():
+            if (
+                key in target
+                and isinstance(target[key], dict)
+                and isinstance(value, dict)
+            ):
+                DashboardEvolutionSnapshot._deep_merge(
+                    target[key],
+                    value,
+                )
+            elif value is not None:
+                target[key] = value
+
+    @staticmethod
+    def _number(value: Any) -> float:
+        try:
+            if isinstance(value, str):
+                value = value.strip().rstrip("%")
+            return float(value or 0)
+        except (TypeError, ValueError):
+            return 0.0
+
+    @staticmethod
+    def _rank_for_level(level: int) -> str:
+        if level >= 12:
+            return "Systems Architect"
+        if level >= 9:
+            return "Autonomy Engineer"
+        if level >= 6:
+            return "Senior Builder"
+        if level >= 3:
+            return "Developer"
+        return "Operator"
+
+
 class DashboardWindow(QWidget):
     """
     Compact runtime dashboard updated with Evolution Core metrics.
@@ -39,6 +590,9 @@ class DashboardWindow(QWidget):
         super().__init__()
 
         self.live = live
+        self.evolution_snapshot = DashboardEvolutionSnapshot(live)
+        self._event_unsubscribers: list[Callable[[], None]] = []
+        self._last_evolution_state: dict[str, Any] = {}
 
         self.setWindowTitle("Dashboard")
         # Expanded slightly to elegantly contain evolution metrics with system logs
@@ -51,6 +605,7 @@ class DashboardWindow(QWidget):
 
         self._build_ui()
         self._connect_signals()
+        self._connect_evolution_events()
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(
@@ -96,9 +651,9 @@ class DashboardWindow(QWidget):
 
         # Level & Progress Bar
         level_row = QHBoxLayout()
-        self.level_val = QLabel("Level 12 — Engineer")
+        self.level_val = QLabel("Level 1 — Operator")
         self.level_val.setStyleSheet("font-weight: bold;")
-        self.xp_pct_lbl = QLabel("78%")
+        self.xp_pct_lbl = QLabel("0%")
         self.xp_pct_lbl.setStyleSheet("color: #00FFCC;")
         level_row.addWidget(self.level_val)
         level_row.addStretch()
@@ -108,7 +663,7 @@ class DashboardWindow(QWidget):
         self.xp_bar = QProgressBar(self)
         self.xp_bar.setFixedHeight(10)
         self.xp_bar.setRange(0, 100)
-        self.xp_bar.setValue(78)
+        self.xp_bar.setValue(0)
         self.xp_bar.setTextVisible(False)
         self.xp_bar.setStyleSheet("""
             QProgressBar { border: 1px solid #333; background: #151515; border-radius: 3px; }
@@ -117,14 +672,14 @@ class DashboardWindow(QWidget):
         evo_section.addWidget(self.xp_bar)
 
         # Identity Profiles & Capabilities
-        self.permissions_val = QLabel("Permission Level: Local Git, Python Execution, File Refactoring")
+        self.permissions_val = QLabel("Permission Level: awaiting capability state")
         self.permissions_val.setStyleSheet("color: #AAAAAA; font-size: 11px;")
         self.permissions_val.setWordWrap(True)
         
-        self.trust_val = QLabel("Trust by Capability: 94% Core Trust Metric Factor")
+        self.trust_val = QLabel("Trust by Capability: 0.0%")
         self.trust_val.setStyleSheet("color: #AAAAAA; font-size: 11px;")
         
-        self.mood_val = QLabel("Current Emotional State: Focused / Analytical")
+        self.mood_val = QLabel("Current Operational State: Focused / Analytical")
         self.mood_val.setStyleSheet("color: #AA66CC; font-size: 11px; font-weight: 500;")
 
         evo_section.addWidget(self.permissions_val)
@@ -138,7 +693,9 @@ class DashboardWindow(QWidget):
             ("Builder Drive", "builder", "#00C851"),
             ("Learning Drive", "learning", "#AA66CC"),
             ("Protection Drive", "protection", "#FF4444"),
-            ("Curiosity Drive", "curiosity", "#FFBB33")
+            ("Curiosity Drive", "curiosity", "#FFBB33"),
+            ("Verification", "verification", "#23B8FF"),
+            ("Autonomy Ready", "autonomy", "#31D158"),
         ]
         
         drives_layout = QVBoxLayout()
@@ -152,7 +709,7 @@ class DashboardWindow(QWidget):
             pbar = QProgressBar(self)
             pbar.setFixedHeight(6)
             pbar.setRange(0, 100)
-            pbar.setValue(60)
+            pbar.setValue(0)
             pbar.setTextVisible(False)
             pbar.setStyleSheet(f"""
                 QProgressBar {{ background: #151515; border: none; border-radius: 1px; }}
@@ -166,20 +723,39 @@ class DashboardWindow(QWidget):
         evo_section.addLayout(drives_layout)
 
         # Active Goals, Learned Skills & Agent Levels
-        self.goals_val = QLabel("Active Goal: Resolving missing runtime UI components in workspace updates.")
+        self.goals_val = QLabel("Active Goal: Awaiting active mission state.")
         self.goals_val.setStyleSheet("color: #FFBB33; font-size: 11px; font-style: italic;")
         self.goals_val.setWordWrap(True)
         
-        self.skills_val = QLabel("Learned Skills: Python, PySide6, Git Automation, Diagnostics, Sub-agents")
+        self.skills_val = QLabel("Learned Skills: waiting for learning memory")
         self.skills_val.setStyleSheet("color: #888888; font-size: 11px;")
         self.skills_val.setWordWrap(True)
 
-        self.agents_val = QLabel("Agent Levels: Builder Agent Lv.3 | Fixer Agent Lv.2 | Reviewer Agent Lv.1")
+        self.agents_val = QLabel("Agent Levels: waiting for agent memory")
         self.agents_val.setStyleSheet("color: #00C851; font-size: 10px; font-weight: bold;")
 
         evo_section.addWidget(self.goals_val)
         evo_section.addWidget(self.skills_val)
         evo_section.addWidget(self.agents_val)
+
+        self.learning_metrics_val = QLabel(
+            "Learning: 0 lessons · 0 patterns · 0 strategies · "
+            "0 verified outcomes"
+        )
+        self.learning_metrics_val.setWordWrap(True)
+        self.learning_metrics_val.setStyleSheet(
+            "color:#23B8FF;font-size:10px;font-weight:700;"
+        )
+        evo_section.addWidget(self.learning_metrics_val)
+
+        self.evolution_source_val = QLabel(
+            "Evolution sources: waiting for runtime and learning stores"
+        )
+        self.evolution_source_val.setWordWrap(True)
+        self.evolution_source_val.setStyleSheet(
+            "color:#7894B5;font-size:9px;"
+        )
+        evo_section.addWidget(self.evolution_source_val)
 
         layout.addLayout(evo_section)
 
@@ -262,20 +838,7 @@ class DashboardWindow(QWidget):
     # ------------------------------------------------------------------
 
     def refresh(self, *_args) -> None:
-        # Check kernel_core first, then fall back to legacy runtime_core
-        core = getattr(self.live, "kernel_core", None) or getattr(self.live, "runtime_core", None)
-
-        if core and hasattr(core, "identity"):
-            ctx = core.identity.get_ui_context()
-            self.level_val.setText(ctx.get("title", "Level 12 — Engineer"))
-            self.xp_bar.setValue(ctx.get("xp_pct", 78))
-            self.xp_pct_lbl.setText(f"{ctx.get('xp_pct', 78)}%")
-            self.trust_val.setText(f"Trust by Capability: {ctx.get('trust_factor', '94%')}")
-            self.mood_val.setText(f"Current Emotional State: {ctx.get('emotion', 'Focused')}")
-            
-            drives_matrix = ctx.get("drives_matrix", {})
-            for key, bar in self.drive_bars.items():
-                bar.setValue(drives_matrix.get(key, 65))
+        self._refresh_evolution_state()
 
         # Core System Telemetry Loop Refresh
         self._set_row(
@@ -338,6 +901,194 @@ class DashboardWindow(QWidget):
             "Project",
             self._project_root().name,
         )
+
+    def _refresh_evolution_state(self) -> None:
+        try:
+            state = self.evolution_snapshot.collect()
+            self._last_evolution_state = state
+        except Exception:
+            return
+
+        self.level_val.setText(
+            str(state.get("title") or "Level 1 — Operator")
+        )
+
+        xp_pct = int(state.get("xp_pct", 0) or 0)
+        self.xp_bar.setValue(max(0, min(100, xp_pct)))
+        self.xp_pct_lbl.setText(f"{xp_pct}%")
+
+        trust = state.get("trust", 0)
+        try:
+            trust_text = f"{float(str(trust).rstrip('%')):.1f}%"
+        except (TypeError, ValueError):
+            trust_text = str(trust)
+        self.trust_val.setText(
+            f"Trust by Capability: {trust_text}"
+        )
+
+        emotion = (
+            state.get("emotion")
+            or state.get("operational_state")
+            or state.get("mood")
+            or "Focused / Analytical"
+        )
+        self.mood_val.setText(
+            f"Current Operational State: {emotion}"
+        )
+
+        permissions = state.get("permissions", []) or []
+        if isinstance(permissions, str):
+            permission_text = permissions
+        else:
+            permission_text = ", ".join(
+                str(item) for item in permissions
+            )
+        if not permission_text:
+            permission_text = str(
+                state.get("permission_rank")
+                or "Operator"
+            )
+        self.permissions_val.setText(
+            f"Permission Level: {permission_text}"
+        )
+
+        drives = state.get("drives_matrix", {}) or {}
+        for key, bar in self.drive_bars.items():
+            raw = drives.get(key, 0)
+            try:
+                value = float(raw)
+            except (TypeError, ValueError):
+                value = 0
+            if 0 <= value <= 1:
+                value *= 100
+            bar.setValue(int(max(0, min(100, value))))
+
+        goal = (
+            state.get("active_goal")
+            or state.get("goal")
+            or state.get("current_goal")
+            or "Awaiting active mission state."
+        )
+        self.goals_val.setText(f"Active Goal: {goal}")
+
+        skills = state.get("skills_tree", {}) or {}
+        ordered_skills = sorted(
+            skills.items(),
+            key=lambda item: float(
+                item[1].get("score", 0)
+                if isinstance(item[1], dict)
+                else item[1] or 0
+            ),
+            reverse=True,
+        )
+        skill_text = ", ".join(
+            f"{name} {int(float(value.get('score', 0) if isinstance(value, dict) else value or 0))}%"
+            for name, value in ordered_skills[:7]
+        )
+        self.skills_val.setText(
+            "Learned Skills: "
+            + (skill_text or "no learned skills recorded")
+        )
+
+        agents = state.get("agents", {}) or {}
+        agent_parts = []
+        for name, data in list(agents.items())[:5]:
+            if not isinstance(data, dict):
+                continue
+            level = int(data.get("level", 1) or 1)
+            success = float(
+                data.get("success_rate")
+                or data.get("success")
+                or 0
+            )
+            agent_parts.append(
+                f"{name} Lv.{level} ({success:.0f}%)"
+            )
+        self.agents_val.setText(
+            "Agent Levels: "
+            + (" | ".join(agent_parts) or "no agent experience recorded")
+        )
+
+        metrics = state.get("learning_metrics", {}) or {}
+        self.learning_metrics_val.setText(
+            "Learning: "
+            f"{int(metrics.get('lessons', 0) or 0)} lessons · "
+            f"{int(metrics.get('patterns', 0) or 0)} patterns · "
+            f"{int(metrics.get('strategies', 0) or 0)} strategies · "
+            f"{int(metrics.get('verified_successes', 0) or 0)} "
+            "verified outcomes"
+        )
+
+        sources = state.get("sources", []) or []
+        source_text = ", ".join(str(item) for item in sources[:5])
+        if len(sources) > 5:
+            source_text += f" +{len(sources) - 5} more"
+        self.evolution_source_val.setText(
+            "Evolution sources: "
+            + (source_text or "none connected")
+        )
+
+    def _connect_evolution_events(self) -> None:
+        core = (
+            getattr(self.live, "kernel_core", None)
+            or getattr(self.live, "runtime_core", None)
+            or getattr(self.live, "core", None)
+        )
+        if core is None:
+            return
+
+        candidates = [
+            getattr(core, name, None)
+            for name in (
+                "event_bus",
+                "event_router",
+                "dispatcher",
+                "router",
+            )
+        ]
+
+        topics = (
+            "evolution.changed",
+            "level.progressed",
+            "experience.recorded",
+            "learning.recorded",
+            "learning.pattern.created",
+            "learning.strategy.created",
+            "repair.completed",
+            "repair.failed",
+            "verification.completed",
+            "agent.completed",
+            "agent.failed",
+            "integration.transaction.committed",
+            "plugin.hotpatch.applied",
+            "autonomy.changed",
+        )
+
+        for bus in candidates:
+            if bus is None:
+                continue
+
+            for method_name in ("subscribe", "on", "register"):
+                method = getattr(bus, method_name, None)
+                if not callable(method):
+                    continue
+
+                for topic in topics:
+                    try:
+                        unsubscribe = method(
+                            topic,
+                            self._on_evolution_event,
+                        )
+                        if callable(unsubscribe):
+                            self._event_unsubscribers.append(
+                                unsubscribe
+                            )
+                    except Exception:
+                        continue
+                return
+
+    def _on_evolution_event(self, _event: Any) -> None:
+        QTimer.singleShot(50, self._refresh_evolution_state)
 
     def _set_row(
         self,
@@ -635,30 +1386,28 @@ class DashboardWindow(QWidget):
     def _project_root(self) -> Path:
         for owner in (
             self.live,
-            getattr(
-                self.live,
-                "core",
-                None,
-            ),
-            getattr(
-                self.live,
-                "runtime_core",
-                None,
-            ),
+            getattr(self.live, "core", None),
+            getattr(self.live, "kernel_core", None),
+            getattr(self.live, "runtime_core", None),
         ):
-            root = getattr(
-                owner,
-                "root",
-                None,
-            )
+            if owner is None:
+                continue
 
-            if root:
+            for name in (
+                "project_root",
+                "workspace_root",
+                "repo_root",
+                "root_path",
+                "root",
+            ):
+                root = getattr(owner, name, None)
+                if not root:
+                    continue
+
                 try:
-                    return Path(
-                        root
-                    ).resolve()
+                    return Path(root).resolve()
                 except Exception:
-                    pass
+                    continue
 
         return Path.cwd().resolve()
 
@@ -787,6 +1536,14 @@ class DashboardWindow(QWidget):
         event,
     ) -> None:
         self.timer.stop()
+
+        for unsubscribe in self._event_unsubscribers:
+            try:
+                unsubscribe()
+            except Exception:
+                pass
+        self._event_unsubscribers.clear()
+
         super().closeEvent(event)
 
 

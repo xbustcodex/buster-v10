@@ -41,6 +41,9 @@ class VoicePanel(QWidget):
             QMessageBox.warning(self, "Voice Error", f"Voice engine unavailable:\n\n{e}")
             self.audio_engine = None
 
+        self.voice_service = self._resolve_voice_service()
+        self._runtime_subscriptions = []
+
         self.voice_profile = VoiceProfile()
         self.current_state = VoiceState.IDLE
         self.recording_timer = QTimer()
@@ -49,6 +52,7 @@ class VoicePanel(QWidget):
 
         self.setup_ui()
         self.connect_signals()
+        self._connect_runtime_audio_events()
         self.load_settings()
         self.apply_dark_theme()
 
@@ -131,6 +135,26 @@ class VoicePanel(QWidget):
         self.stt_btn.setStyleSheet(self.get_button_style("#569cd6"))
         self.stt_btn.clicked.connect(self.transcribe_audio)
         record_layout.addWidget(self.stt_btn)
+
+        self.live_listen_btn = QPushButton("🎧 Live Listen")
+        self.live_listen_btn.setCheckable(True)
+        self.live_listen_btn.setStyleSheet(
+            self.get_button_style("#dcdcaa")
+        )
+        self.live_listen_btn.clicked.connect(
+            self.toggle_streaming_stt
+        )
+        record_layout.addWidget(self.live_listen_btn)
+
+        self.wake_word_btn = QPushButton("⭐ Hey Buster")
+        self.wake_word_btn.setCheckable(True)
+        self.wake_word_btn.setStyleSheet(
+            self.get_button_style("#c586c0")
+        )
+        self.wake_word_btn.clicked.connect(
+            self.toggle_wake_word
+        )
+        record_layout.addWidget(self.wake_word_btn)
 
         bottom_layout.addLayout(record_layout)
 
@@ -256,6 +280,347 @@ class VoicePanel(QWidget):
         self.error_signal.connect(self.show_error)
         self.voice_finished_signal.connect(self.voice_finished)
 
+
+    def _resolve_voice_service(self):
+        runtime = self.runtime_core
+        if runtime is None:
+            return None
+
+        for name in ("voice_service", "audio_service"):
+            service = getattr(runtime, name, None)
+            if service is not None:
+                return service
+
+        services = getattr(runtime, "services", None)
+        if services is None:
+            return None
+
+        for name in ("voice", "audio"):
+            if isinstance(services, dict):
+                service = services.get(name)
+            else:
+                service = None
+                for method_name in ("get", "resolve", "service"):
+                    method = getattr(services, method_name, None)
+                    if callable(method):
+                        try:
+                            service = method(name)
+                        except Exception:
+                            service = None
+                        if service is not None:
+                            break
+            if service is not None:
+                return service
+
+        return None
+
+    def _connect_runtime_audio_events(self):
+        if not self.runtime_core:
+            return
+
+        dispatcher = getattr(self.runtime_core, "dispatcher", None)
+        subscribe = getattr(dispatcher, "subscribe", None)
+        if not callable(subscribe):
+            return
+
+        handlers = {
+            "audio.transcription.started": self._on_runtime_transcription_started,
+            "audio.transcription.completed": self._on_runtime_transcription_completed,
+            "audio.tts.started": self._on_runtime_tts_started,
+            "audio.tts.completed": self._on_runtime_tts_completed,
+            "audio.error": self._on_runtime_audio_error,
+            "audio.streaming.started": self._on_streaming_started,
+            "audio.streaming.stopped": self._on_streaming_stopped,
+            "audio.streaming.speech_started": self._on_streaming_speech_started,
+            "audio.streaming.transcription_final": self._on_streaming_transcription_final,
+            "audio.streaming.level": self._on_streaming_level,
+            "audio.wake_word.enabled": self._on_wake_word_enabled,
+            "audio.wake_word.disabled": self._on_wake_word_disabled,
+            "audio.wake_word.detected": self._on_wake_word_detected,
+            "audio.wake_word.awaiting_command": self._on_wake_word_awaiting_command,
+            "audio.wake_word.command": self._on_wake_word_command,
+            "audio.wake_word.command_timeout": self._on_wake_word_timeout,
+            "audio.whisper.warmup.started": self._on_whisper_warmup_started,
+            "audio.whisper.warmup.completed": self._on_whisper_warmup_completed,
+            "audio.streaming.transcription_dropped": self._on_streaming_transcription_dropped,
+            "voice.state.changed": self._on_voice_state_changed,
+            "audio.tts.interrupted": self._on_tts_interrupted,
+        }
+
+        for topic, handler in handlers.items():
+            try:
+                unsubscribe = subscribe(topic, handler)
+                if callable(unsubscribe):
+                    self._runtime_subscriptions.append(unsubscribe)
+            except Exception:
+                continue
+
+    @staticmethod
+    def _event_payload(event):
+        if isinstance(event, dict):
+            payload = event.get("payload", event)
+            return payload if isinstance(payload, dict) else {}
+        payload = getattr(event, "payload", None)
+        return payload if isinstance(payload, dict) else {}
+
+    def _publish_audio_request(self, topic: str, payload: dict) -> bool:
+        if not self.runtime_core:
+            return False
+        dispatcher = getattr(self.runtime_core, "dispatcher", None)
+        publish = getattr(dispatcher, "publish", None)
+        if not callable(publish):
+            return False
+        try:
+            publish(topic, payload, source="voice_panel")
+        except TypeError:
+            publish(topic, payload)
+        return True
+
+    def _on_runtime_transcription_started(self, event):
+        payload = self._event_payload(event)
+        filename = payload.get("audio_file", "")
+        self.status_update_signal.emit("Local Whisper transcription started...")
+        self.info_append_signal.emit(
+            f"🧠 Local Whisper processing: {os.path.basename(filename)}"
+        )
+
+    def _on_runtime_transcription_completed(self, event):
+        payload = self._event_payload(event)
+        text = str(payload.get("text", "")).strip()
+        if text:
+            self.text_set_signal.emit(text)
+            self.info_append_signal.emit(
+                f"✅ [{payload.get('backend', 'local-stt')}] {text}"
+            )
+            self.status_update_signal.emit("Transcription complete")
+            self.publish_face_state("speaking", "Voice command understood.")
+        elif payload.get("speech_detected") is False:
+            self.info_append_signal.emit("⚠️ No speech detected in recording.")
+            self.status_update_signal.emit("No speech detected")
+        else:
+            self.info_append_signal.emit("⚠️ Transcription returned no text.")
+            self.status_update_signal.emit("No transcription text")
+
+    def _on_runtime_tts_started(self, event):
+        self.status_update_signal.emit("Speaking...")
+        self.publish_face_state("speaking", "Speaking response.")
+
+    def _on_runtime_tts_completed(self, event):
+        payload = self._event_payload(event)
+        self.status_update_signal.emit("Speech complete")
+        self.info_append_signal.emit(
+            f"✅ TTS complete via {payload.get('backend', 'voice service')}"
+        )
+        self.publish_face_state("idle", "Voice response completed.")
+        self.voice_finished_signal.emit()
+
+    def _on_runtime_audio_error(self, event):
+        payload = self._event_payload(event)
+        self.error_signal.emit(
+            str(payload.get("error") or "Unknown audio service error")
+        )
+
+
+    @Slot()
+    def toggle_streaming_stt(self):
+        topic = (
+            "audio.streaming.stop.requested"
+            if self.live_listen_btn.isChecked() is False
+            else "audio.streaming.start.requested"
+        )
+        if not self._publish_audio_request(topic, {}):
+            self.live_listen_btn.setChecked(False)
+            self.show_error(
+                "Runtime StreamingSTTService is unavailable."
+            )
+
+    def _on_streaming_started(self, event):
+        self.live_listen_btn.setChecked(True)
+        self.live_listen_btn.setText("⏹ Stop Listening")
+        self.status_update_signal.emit("Live listening...")
+        self.info_append_signal.emit(
+            "🎧 Streaming STT started."
+        )
+        self.publish_face_state(
+            "listening",
+            "Buster is listening continuously.",
+        )
+
+    def _on_streaming_stopped(self, event):
+        self.live_listen_btn.setChecked(False)
+        self.live_listen_btn.setText("🎧 Live Listen")
+        self.status_update_signal.emit("Ready")
+        self.info_append_signal.emit(
+            "⏹ Streaming STT stopped."
+        )
+        self.publish_face_state(
+            "idle",
+            "Continuous listening stopped.",
+        )
+
+    def _on_streaming_speech_started(self, event):
+        self.status_update_signal.emit("Speech detected...")
+        self.publish_face_state(
+            "listening",
+            "Speech detected.",
+        )
+
+    def _on_streaming_transcription_final(self, event):
+        payload = self._event_payload(event)
+        text = str(payload.get("text", "")).strip()
+        if not text:
+            return
+
+        self.text_set_signal.emit(text)
+        self.info_append_signal.emit(
+            f"🎧 {text}"
+        )
+        self.status_update_signal.emit(
+            "Live transcription complete"
+        )
+
+    def _on_streaming_level(self, event):
+        payload = self._event_payload(event)
+        samples = payload.get("samples")
+        if not samples:
+            return
+        try:
+            import numpy as np
+            self.visualizer.update_data(
+                np.asarray(samples, dtype=np.int16)
+            )
+        except Exception:
+            pass
+
+
+    @Slot()
+    def toggle_wake_word(self):
+        enabled = self.wake_word_btn.isChecked()
+        topic = (
+            "audio.wake_word.enable.requested"
+            if enabled
+            else "audio.wake_word.disable.requested"
+        )
+        if not self._publish_audio_request(topic, {}):
+            self.wake_word_btn.setChecked(False)
+            self.show_error("Runtime WakeWordService is unavailable.")
+            return
+
+        if enabled and not self.live_listen_btn.isChecked():
+            self.live_listen_btn.setChecked(True)
+            self.toggle_streaming_stt()
+
+    def _on_wake_word_enabled(self, event):
+        payload = self._event_payload(event)
+        phrases = payload.get("wake_phrases") or ["hey buster"]
+        phrase = phrases[0]
+        self.wake_word_btn.setChecked(True)
+        self.wake_word_btn.setText("⭐ Wake Word On")
+        self.status_update_signal.emit(f'Waiting for "{phrase}"...')
+        self.info_append_signal.emit(f'⭐ Wake word enabled: "{phrase}"')
+        self.publish_face_state("listening", f'Waiting for "{phrase}".')
+
+    def _on_wake_word_disabled(self, event):
+        self.wake_word_btn.setChecked(False)
+        self.wake_word_btn.setText("⭐ Hey Buster")
+        self.status_update_signal.emit("Wake word off")
+        self.info_append_signal.emit("Wake word disabled.")
+
+    def _on_wake_word_detected(self, event):
+        payload = self._event_payload(event)
+        phrase = payload.get("wake_phrase", "hey buster")
+        self.status_update_signal.emit("Wake word detected")
+        self.info_append_signal.emit(f'⭐ Detected: "{phrase}"')
+        self.publish_face_state("attention", "Wake word detected.")
+
+    def _on_wake_word_awaiting_command(self, event):
+        self.status_update_signal.emit("Listening for command...")
+        self.info_append_signal.emit("🎤 Listening for your command.")
+        self.publish_face_state("listening", "Listening for command.")
+
+    def _on_wake_word_command(self, event):
+        payload = self._event_payload(event)
+        command = str(
+            payload.get("command")
+            or payload.get("text")
+            or ""
+        ).strip()
+        if not command:
+            return
+
+        self.text_set_signal.emit(command)
+        self.info_append_signal.emit(f"⭐ Command: {command}")
+        self.status_update_signal.emit("Wake command received")
+        self.publish_face_state("thinking", "Processing voice command.")
+
+    def _on_wake_word_timeout(self, event):
+        self.status_update_signal.emit('Waiting for "Hey Buster"...')
+        self.info_append_signal.emit("Wake command timed out.")
+        self.publish_face_state("idle", "Wake command timed out.")
+
+
+    def _on_whisper_warmup_started(self, event):
+        self.info_append_signal.emit(
+            "🧠 Loading local Whisper model in the background..."
+        )
+
+    def _on_whisper_warmup_completed(self, event):
+        payload = self._event_payload(event)
+        backend = payload.get("backend") or "local Whisper"
+        self.info_append_signal.emit(
+            f"✅ {backend} is warmed up and ready."
+        )
+
+    def _on_streaming_transcription_dropped(self, event):
+        self.info_append_signal.emit(
+            "⚠️ Voice command skipped because transcription was busy."
+        )
+
+
+    def _on_voice_state_changed(self, event):
+        payload = self._event_payload(event)
+        state = str(payload.get("state", "idle"))
+
+        labels = {
+            "idle": "Ready",
+            "listening": "Listening...",
+            "wake_detected": "Wake word detected",
+            "thinking": "Thinking...",
+            "speaking": "Speaking...",
+            "interrupted": "Interrupted",
+            "error": "Voice error",
+        }
+
+        label = labels.get(
+            state,
+            state.replace("_", " ").title(),
+        )
+        self.status_update_signal.emit(label)
+
+        face_states = {
+            "idle": "idle",
+            "listening": "listening",
+            "wake_detected": "attention",
+            "thinking": "thinking",
+            "speaking": "speaking",
+            "interrupted": "listening",
+            "error": "error",
+        }
+
+        self.publish_face_state(
+            face_states.get(state, "idle"),
+            label,
+        )
+
+
+    def _on_tts_interrupted(self, event):
+        self.info_append_signal.emit(
+            "⏸ Speech playback stopped."
+        )
+        self.status_update_signal.emit(
+            "Interrupted"
+        )
+
     def apply_dark_theme(self):
         """Apply Buster global dark stylesheet"""
         self.setStyleSheet("""
@@ -350,24 +715,45 @@ class VoicePanel(QWidget):
         self.recording_time_label.setText(f"{minutes:02d}:{seconds:02d}")
 
     @Slot()
+    @Slot()
     def speak_text(self):
         text = self.text_input.toPlainText().strip()
         if not text:
             text = self.info_text.toPlainText().strip()
-            if not text:
-                self.show_error("No text to speak")
+        if not text:
+            self.show_error("No text to speak")
+            return
+
+        payload = {
+            "text": text,
+            "rate": self.voice_profile.rate,
+            "volume": self.voice_profile.volume,
+            "voice": None if self.voice_profile.voice == "default" else self.voice_profile.voice,
+            "prefer_edge": True,
+        }
+
+        if self._publish_audio_request("audio.tts.requested", payload):
+            self.current_state = VoiceState.PLAYING
+            self.status_update_signal.emit("TTS request sent...")
+            self.info_append_signal.emit(
+                "🔊 Sent speech request to runtime VoiceService."
+            )
+            return
+
+        if self.voice_service is not None:
+            try:
+                self.voice_service.speak_async(text, **payload)
+                return
+            except Exception as exc:
+                self.show_error(str(exc))
                 return
 
-        self.tts_btn.setEnabled(False)
-        self.record_btn.setEnabled(False)
-        self.stt_btn.setEnabled(False)
-        self.current_state = VoiceState.PLAYING
-        self.update_status("Speaking...")
-
-        self.publish_voice_status("speaking", text=text[:120])
-        self.publish_face_state("speaking", "Buster is speaking.")
-
-        threading.Thread(target=self._speak_thread, args=(text,), daemon=True).start()
+        if self.audio_engine:
+            threading.Thread(
+                target=self.audio_engine.synthesize_speech,
+                args=(text, self.voice_profile),
+                daemon=True,
+            ).start()
 
     def _speak_thread(self, text: str):
         if not self.audio_engine:
@@ -393,13 +779,53 @@ class VoicePanel(QWidget):
         self.publish_face_state("idle", "Buster is ready.")
 
     @Slot()
-    def transcribe_audio(self, audio_file: str = None):
-        self.current_state = VoiceState.PROCESSING
-        self.update_status("Transcribing...")
-        self.publish_voice_status("processing")
-        self.publish_face_state("thinking", "Transcribing recorded speech.")
+    @Slot()
+    def transcribe_audio(self):
+        recordings_dir = Path("recordings")
+        recordings = sorted(
+            recordings_dir.glob("*.wav"),
+            key=lambda path: path.stat().st_mtime,
+            reverse=True,
+        )
+        if not recordings:
+            self.show_error(
+                "No recording found. Record audio before transcribing."
+            )
+            return
 
-        threading.Thread(target=self._transcribe_thread, args=(audio_file,), daemon=True).start()
+        latest = recordings[0]
+        payload = {
+            "audio_file": str(latest.resolve()),
+            "language": self.voice_profile.language,
+            "require_speech": True,
+        }
+
+        if self._publish_audio_request(
+            "audio.transcribe.requested",
+            payload,
+        ):
+            self.current_state = VoiceState.PROCESSING
+            self.status_update_signal.emit(
+                "Local Whisper request sent..."
+            )
+            return
+
+        if self.voice_service is not None:
+            try:
+                self.voice_service.transcribe_async(
+                    latest,
+                    language=self.voice_profile.language,
+                    require_speech=True,
+                )
+                return
+            except Exception as exc:
+                self.show_error(str(exc))
+                return
+
+        self.show_error(
+            "Runtime VoiceService is unavailable. Restart Buster after "
+            "installing the audio runtime upgrade."
+        )
 
     def _transcribe_thread(self, audio_file: str = None):
         if not self.audio_engine:
@@ -507,6 +933,12 @@ class VoicePanel(QWidget):
             print(f"Error saving settings: {e}")
 
     def closeEvent(self, event):
+        for unsubscribe in getattr(self, "_runtime_subscriptions", []):
+            try:
+                unsubscribe()
+            except Exception:
+                pass
+        self._runtime_subscriptions = []
         self.save_settings()
         self.recording_timer.stop()
         if self.audio_engine:
